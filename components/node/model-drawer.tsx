@@ -23,11 +23,11 @@ const ModelDrawerComponent = ({ type, models, value, onChange }: ModelDrawerProp
         </Button>
       </SheetTrigger>
       <SheetContent
-        className="h-[80vh]"
+        className="h-[80vh] overflow-y-auto"
         side="bottom"
         onContextMenu={(e) => e.preventDefault()}
       >
-        <div className="mx-auto w-full py-4 px-32 overflow-y-scroll">
+        <div className="mx-auto w-full py-4 px-32">
           <div className="relative w-full overflow-hidden bg-background flex flex-col justify-start pt-20 pb-14">
             <div
               className="absolute inset-0 w-full h-full bg-background z-20 pointer-events-none"
