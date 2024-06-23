@@ -65,6 +65,7 @@ const NodeHandle = ({
         ) : null}
         <h5
           className="mb-1 text-sm"
+          style={{ color: 'silver'}}
           title={Array.isArray(slotType) ? "STRING" : slotType}
         >
           {startCase(label.toLowerCase?.())}
