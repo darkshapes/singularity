@@ -69,7 +69,7 @@ const ModelDrawerComponent = ({ type, models, value, onChange }: ModelDrawerProp
         </div>
         {models.length > 0 && (
           <div className="-mt-10">
-            <div className="grid grid-cols-4 gap-1">
+            <div className="grid grid-cols-2 gap-1">
               {models.map((model, index) => 
                 <Button key={index} 
                   variant="ghost" 
