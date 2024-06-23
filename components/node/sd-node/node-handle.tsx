@@ -64,7 +64,7 @@ const NodeHandle = ({
           />
         ) : null}
         <h5
-          className="mb-1 text-sm" color="deemphasis"
+          className="mb-1 text-sm"
           title={Array.isArray(slotType) ? "STRING" : slotType}
         >
           {startCase(label.toLowerCase?.())}
