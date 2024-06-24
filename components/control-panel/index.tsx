@@ -125,17 +125,7 @@ const ControlPanel = () => {
             <WorkflowPage />
           </SheetContent>
         </Sheet>
-        <TooltipButton content="Recalculate node positions">
-          <Button
-            onClick={() => {}}
-            className="relative rounded-3xl shadow-lg hover:bg-background hover:rounded-lg transition-all duration-200 h-12 w-12"
-            variant="outline"
-          >
-            <MoveIcon />
-          </Button>
-        </TooltipButton>
-
-        <TooltipButton content="Toggle parameter dropdowns">
+        <TooltipButton content="Show/hide node controls">
           <Button
             onClick={() => handleExpand()}
             className="relative rounded-3xl shadow-lg hover:bg-background hover:rounded-lg transition-all duration-200 h-12 w-12"
