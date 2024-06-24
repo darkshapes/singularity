@@ -126,7 +126,7 @@ const ControlPanel = () => {
           </SheetContent>
         </Sheet>
 
-        <TooltipButton content="Show/Hide Controls">
+        <TooltipButton content="Show/hide controls">
           <Button
             onClick={() => handleExpand()}
             className="relative rounded-3xl shadow-lg hover:bg-background hover:rounded-lg transition-all duration-200 h-12 w-12"
