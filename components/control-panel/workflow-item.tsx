@@ -72,7 +72,7 @@ const WorkflowItem: React.FC<WorkflowItemProps> = ({
   return (
     <TooltipProvider delayDuration={0}>
       <ul className="list-none p-0 m-0">
-        <li key={item.id} className="border-b border-gray-200 last:border-b-0">
+        <li key={item.id} className="last:border-b-0">
           <div className="flex flex-col justify-between">
             <div className="flex justify-between">
               <div>
