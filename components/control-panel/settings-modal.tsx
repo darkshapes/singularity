@@ -113,7 +113,6 @@ export const SettingsModal = ({ open, setOpen }: any) => {
                         <TooltipTrigger asChild>
                             <div className="flex flex-col gap-2 my-4" style={{ float: 'right' }} title="Recalculate Node Positions">
                                 <Button
-                                    onClick={() => instance.fitView()}
                                     className="relative rounded-3xl shadow-lg hover:bg-background hover:rounded-lg transition-all duration-200 h-12 w-12"
                                     variant="outline"
                                 >
