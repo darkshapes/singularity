@@ -46,11 +46,13 @@ const NodePickerGroup = ({
 
   return (
     // a nested menu inside the main context menu
-    <ContextMenuSub>
-      <ContextMenuSubTrigger className="text-xs text-center py-0 my-0 px-1 w-full">
-        {category}
-      </ContextMenuSubTrigger>
-      <ContextMenuSubContent className="p-2">
+    //  EXDYSA - if checkbox, then
+    // <ContextMenuSub>
+    //  <ContextMenuSubTrigger className="text-xs text-center py-0 my-0 px-1 w-full">
+    //   {category}
+    //  </ContextMenuSubTrigger>
+    //  <ContextMenuSubContent className="p-2">
+    // EXDYSA - else {
         <div className="flex flex-col items-baseline justify-start">
           {Object.entries(items.subcategories).map(([subCat, subItems]) => (
             <NodePickerGroup
@@ -63,7 +65,9 @@ const NodePickerGroup = ({
               setExpandedItems={setExpandedItems}
             />
           ))}
-          {Object.values(items.subcategories).length > 0 && items.widgets.length > 0 && <ContextMenuSeparator />}
+          {Object.values(items.subcategories).length > 0 && items.widgets.length > 0 
+          // && <ContextMenuSeparator />
+          }
           {items.widgets.map((i: Widget, index: number) => (
             <button
               key={i.name}
@@ -84,8 +88,9 @@ const NodePickerGroup = ({
             </button>
           ))}
         </div>
-      </ContextMenuSubContent>
-    </ContextMenuSub>
+    // EXDYSA - matching if then condition, end cap
+    //  </ContextMenuSubContent>
+  //  </ContextMenuSub>
   );
 };
 
