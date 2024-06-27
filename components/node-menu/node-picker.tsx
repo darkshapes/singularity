@@ -58,13 +58,13 @@ const NodePickerComponent = ({ setActiveItem }: any) => {
   );
 
   return (
-    <div className="flex flex-col">
-      <div className="flex px-2">
-        <div className="relative w-full">
+    <div className="flex flex-col max-w-[15rem] overflow-hidden">
+      <div className="flex px-2 w-[15rem] overflow-hidden">
+        <div className="relative w-full max-w-[15rem]">
           <input
             name="search"
             type="text"
-            className="px-9 flex h-6 w-full rounded-md border border-input bg-transparent text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+            className="px-9 flex h-6 w-max rounded-md border border-input bg-transparent text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
             placeholder="Search..."
             onChange={handleKeywordsChange}
             onKeyDown={e => e.stopPropagation()}
@@ -82,7 +82,7 @@ const NodePickerComponent = ({ setActiveItem }: any) => {
 
       <ContextMenuSeparator />
 
-      <div className="flex flex-col">
+      <div className="flex flex-row flex-col t-0 l-0 w-[15.95rem] overflow-y-scroll" style={{ maxHeight: '14rem' }}>
         {Object.entries(category).map(([cat, items], index) => (
           <motion.div
             key={cat}
