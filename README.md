@@ -30,10 +30,8 @@ Lets create a more inviting and visually-pleasing ComfyUI Frontend using Typescr
 <summary>Windows
 </summary>
 
-
-  <p style="color:red;">
   > ##### We suggest Windows users install [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install-manual#downloading-distributions/) rather than perform manual installation.
-</p>
+
 <details>
 <summary> Installation with WSL </summary>
 
