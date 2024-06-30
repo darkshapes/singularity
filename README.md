@@ -28,8 +28,9 @@
 > [!TIP]
 >
 > ##### For best results, we recommend using SabreUI with 3D graphics cards. Please ensure you have the current driver installed for your card. [NVIDIA.](https://www.nvidia.com/Download/index.aspx) [AMD.](https://www.amd.com/en/support/download/drivers.html)
-##
 <a name="windows">
+  
+##
 <details><summary>
 
   ## Windows<hr></summary>
