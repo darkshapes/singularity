@@ -130,7 +130,7 @@
 
 > [!NOTE]
 >
-> We recommend running this command from an easy to remember location while avoiding /home, /Program Files, /Windows, and other protected directories.
+> We recommend running this command from an easy to remember location while avoiding `/home`, `/Program Files`, `/Windows`, and other protected directories.
 
 ```
 python3 -m venv .venv
