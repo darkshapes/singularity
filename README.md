@@ -103,7 +103,7 @@
 
 > 1. ###### Install [Xcode]https://apps.apple.com/us/app/xcode/id497799835
 >   
-> 2. ###### Follow Apple's Instructions [Pytorch Install Instructions](https://developer.apple.com/metal/pytorch/)
+> 2. ###### Follow Apple's instructions [Pytorch Install Instructions](https://developer.apple.com/metal/pytorch/)
 >
 > 3. ###### Follow the [Linux instructions](#linux)
 </details></details>
@@ -140,7 +140,7 @@
 python3 -m venv .venv
 ```
 ##
-3. ### Activate the Environment
+3. ### Activate the environment
 ```
 source .venv/bin/activate
 ```
@@ -154,10 +154,6 @@ pip install packaging wheel ninja
 ###### - NVIDIA: 
 ```
 pip3 install torch==2.3.0+cu121 torchvision --index-url=https://download.pytorch.org/whl/cuda121
-```
-###### - AMD WSL:
-```
-pip install torch-directml
 ```
 ###### - AMD LINUX: 
 ```
@@ -227,6 +223,11 @@ python ComfyUI\main.py --output-directory /YOUR_FOLDER_NAME --input-directory /Y
 >> ###### The remainder of the installation instructions are the same, but to activate your .venv use this command in the directory you run the `python -m venv .venv` command in
 > ```
 > .venv/Scripts/activate
+> ```
+>
+> ###### - AMD users installing this way should be sure to install DirectML:
+> ```
+> pip install torch-directml
 > ```
 </details>
 
