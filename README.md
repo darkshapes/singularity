@@ -109,8 +109,9 @@
 ## Linux<hr>
 </summary></details>
 
-1. ### Update your repository and install upgrades
 ##
+1. ### Update your repository and install upgrades
+
 ###### - ***WSL***/Ubuntu/Debian:
 >  ```
 > sudo apt-get -y update & sudo apt-get -y upgrade
@@ -125,29 +126,28 @@
 >   ```
 >  sudo pacman -Syu
 > ```
-
-2. ### Create a virtual environment in your current directory
 ##
+2. ### Create a virtual environment in your current directory
+
 > [!NOTE]
 >
 > We recommend running this command from an easy to remember location while avoiding `/home`, `/Program Files`, `/Windows`, and other protected directories.
-
+##
 ```
 python3 -m venv .venv
 ```
-3. ### Activate the Environment
 ##
+3. ### Activate the Environment
 ```
 source .venv/bin/activate
 ```
-4. ### Install prerequisites
 ##
+4. ### Install prerequisites
 ```
 pip install packaging wheel ninja
 ```
-
-5. ### Install PyTorch
 ##
+5. ### Install PyTorch
 ###### - NVIDIA: 
 ```
 pip3 install torch==2.3.0+cu121 torchvision --index-url=https://download.pytorch.org/whl/cuda121
@@ -156,45 +156,47 @@ pip3 install torch==2.3.0+cu121 torchvision --index-url=https://download.pytorch
 ```
 pip3 install torch==2.3.0+cu121 torchvision --index-url=https://download.pytorch.org/whl/cuda121
 ```
-
-6. ### Install XFORMERS (Unavailable for Windows MANUAL Installation)
 ##
+6. ### Install XFORMERS (Unavailable for Windows MANUAL Installation)
+
 ```
 pip install xformers==0.0.26.post1
 ```
-7. ### Install Flash-attention (Unavailable for Windows MANUAL Installation)
 ##
+7. ### Install Flash-attention (Unavailable for Windows MANUAL Installation)
 ```
 pip install flash-attn --no-build-isolation
 ```
-
+##
 <a name="sabre" />
 
-## SabreUI
+### SabreUI
 
 ### Once PyTorch and Friends are installed, run this command to install Sabre to your current directory.
 > ```
 >  git clone https://github.com/MaxTretikov/ComfyUI.git
 >  ```
 ##### Extended functionality of [ComfyUI](https://github.com/comfyanonymous/ComfyUI) will also allow you to run SabreUI from command line.
-
-8. ### Install the last requirements
 ##
+8. ### Install the last requirements
 ```
 cd ComfyUI
 pip install -r requirements.txt
 ```
-
-9. ### Launch Sabre
 ##
+9. ### Launch SabreUI
 ```
 python ComfyUI\main.py --output-directory /yourfoldernamehere --input-directory /yourfoldernamehere/input
 ```
+##
 10. ### Open your browser to [127.0.0.1:8188](https://127.0.0.1:8188) and Choose SabreUI from the settings menu 
+
+# Done!
+
 
 <details><summary>
 
- #### Windows Manual Installation </summary>
+ #### Legacy Windows Manual Installation </summary>
 
 > ##### Many back-end features are unavailable for Windows devices when using [manual installation](#manual). We highly recommend using *[Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install-manual#downloading-distributions/) (WSL)* unless otherwise prevented.
 > 1. ###### Download [Python](https://www.python.org/downloads/windows/)
