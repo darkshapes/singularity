@@ -155,7 +155,7 @@ pip install packaging wheel ninja
 ```
 pip3 install torch==2.3.0+cu121 torchvision --index-url=https://download.pytorch.org/whl/cuda121
 ```
-###### - AMD LINUX: 
+###### - AMD: 
 ```
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm6.0
 ```
