@@ -163,29 +163,28 @@ pip install flash-attn --no-build-isolation
 
 <a name="sabre" />
 
-8. ### SabreUI
-##
+## SabreUI
+
 ##### Once PyTorch and Friends are installed, run this command to install Sabre to your current directory.
 > ```
 >  git clone https://github.com/MaxTretikov/ComfyUI.git
 >  ```
 > ##### Extended functionality of [ComfyUI](https://github.com/comfyanonymous/ComfyUI) will also allow you to run SabreUI from command line.
 
-9. ##### Install the last requirements
+8. ##### Install the last requirements
 ```
 cd ComfyUI
 pip install -r requirements.txt
 ```
 
-10. ##### Launch Sabre
+9. ##### Launch Sabre
 ```
 python ComfyUI\main.py --output-directory /yourfoldernamehere --input-directory /yourfoldernamehere/input
 ```
-11. ##### Open your browser to [127.0.0.1:8188](https://127.0.0.1:8188)
-12. ##### Choose SabreUI from the settings menu 
+10. ##### Open your browser to [127.0.0.1:8188](https://127.0.0.1:8188) and Choose SabreUI from the settings menu 
 
 <details><summary>
-  
+
  #### Windows Manual Installation </summary>
 
 > ##### Many back-end features are unavailable for Windows devices when using [manual installation](#manual). We highly recommend using *[Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install-manual#downloading-distributions/) (WSL)* unless otherwise prevented.
