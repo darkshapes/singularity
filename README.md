@@ -30,7 +30,7 @@
 
   ## Windows<hr></summary>
   
- ### Installing WSL (Windows Subsystem for Linux)
+ #### Installing WSL (Windows Subsystem for Linux)
 > 1. ######  Allow WSL through your firewall using Powershell with the following command in CMD:
 > ```
 > powershell New-NetFirewallRule -Program “%SystemRoot%\System32\wsl.exe” -Action Allow -Profile Domain, Private -DisplayName “Allow WSL” > -Description “Allow WSL” -Direction Outbound
@@ -56,7 +56,7 @@
 > ###### Next, follow the steps by choosing your graphics card type below
 > <details><summary>
 > 
-> ## NVIDIA </summary>
+>### NVIDIA </summary>
 > 1. ###### a. Get NVIDIA keys
 >  ```
 > wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-keyring_1.1-1_all.deb
@@ -78,17 +78,17 @@
 > </details>
 > <details><summary>
 >
-> ## AMD </summary>
+> ### AMD </summary>
 > 
-> 1. #######
+> 1. ###### 
 > </details>
->
+
 > ##
 > Please continue your installation by following the [linux instructions](#linux)*
 > ##
-> </details>
 
 </details>
+
 <details><summary>
 <a name="macos" />   
 
@@ -112,23 +112,24 @@
 1. ###### Update your repository and install upgrades
 
 ###### - ***WSL***/Ubuntu/Debian:
-```
-sudo apt-get -y update & sudo apt-get -y upgrade
-```
+>  ```
+> sudo apt-get -y update & sudo apt-get -y upgrade
+> ```
 
 ###### - Redhat/Fedora:
-```
-sudo dnf update & sudo dnf upgrade
-```
+>  ```
+>  sudo dnf update & sudo dnf upgrade
+>  ```
 
 ###### - Arch:
-```
-sudo pacman -Syu
-```
+>   ```
+>  sudo pacman -Syu
+> ```
 
 2. ###### Create a virtual environment in your current directory
 
-> ![Note]
+> [!NOTE]
+>
 > We recommend running this command from an easy to remember location while avoiding /home, /Program Files, /Windows, and other protected directories.
 
 ```
@@ -159,12 +160,11 @@ pip install flash-attn --no-build-isolation
 ```
 </details>
 </details>
-<details>
-<summary>
 
 <a name="sabre" />
 
 8. ### SabreUI
+##
 ##### Once PyTorch and Friends are installed, run this command to install Sabre to your current directory.
 > ```
 >  git clone https://github.com/MaxTretikov/ComfyUI.git
@@ -183,8 +183,6 @@ python ComfyUI\main.py --output-directory /yourfoldernamehere --input-directory 
 ```
 11. ##### Open your browser to [127.0.0.1:8188](https://127.0.0.1:8188)
 12. ##### Choose SabreUI from the settings menu 
-
-</details>
 
 <details><summary>
   
