@@ -10,7 +10,7 @@
  
 #### Our Design Principles  </div>
 ##
-> ##### I. Insight is an essential right and paves the way for safeguarding others' rights.
+> ##### I. Insight is an essential right and paves the way for safeguarding others' rights. </span>
 > ##### II. Our task is to dissolve obstacles, inviting self-realization, connection, and understanding.
 > ##### III. Let the transcendence of manual tasks give way to exploration, inspiration and creativity.
 > ##### IV. Together, today, we refine our world with the systematic and spontaneous.
@@ -23,7 +23,7 @@
 
 > [!TIP]
 >
-> ##### For best results, we recommend using SabreUI with 3D graphics cards. Please ensure you have the current driver installed for your card. [NVIDIA.](https://www.nvidia.com/Download/index.aspx) [AMD.](https://www.amd.com/en/support/download/drivers.html)
+> ##### For best results, we recommend using SabreUI with 3D graphics cards. Please ensure you have the current driver installed for your card. <a href="https://www.nvidia.com/Download/index.aspx" target="_blank">NVIDIA.</a> <a href="https://www.amd.com/en/support/download/drivers.html" target="_blank">AMD.</a>
 ##
 <a name="windows">
 <details><summary>
@@ -225,3 +225,4 @@ python ComfyUI\main.py --output-directory /yourfoldernamehere --input-directory 
   <img width="1481" alt="image (2)" src="https://github.com/exdysa/SabreUI/assets/91800957/fbacfdb4-3941-4da5-aa3c-79787a3f4d22">
 
 <div align="right"> <sub> Lets create a more inviting and visually-pleasing ComfyUI Frontend using Typescript and React!</sub></div>
+</div>
