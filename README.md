@@ -193,7 +193,7 @@ pip install -r requirements.txt
 ##
 9. ### Launch SabreUI
 ```
-python ComfyUI\main.py --output-directory /yourfoldernamehere --input-directory /yourfoldernamehere/input
+python ComfyUI\main.py --output-directory /YOUR_FOLDER_NAME --input-directory /YOUR_FOLDER_NAME/input
 ```
 ##
 10. ### Open your browser to [127.0.0.1:8188](https://127.0.0.1:8188) and Choose SabreUI from the settings menu 
