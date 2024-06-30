@@ -18,12 +18,16 @@
 
 ##
 
+![A screenshot of the UI showing a black graph and labeled boxes, which are nodes spread across the graph. The boxes are organized in a creative and flowing manner](https://github.com/MaxTretikov/SabreUI/assets/91800957/d842e05c-a903-4579-8259-9e29b117c0a4)
 
+</div>
+
+  
 ##
 
 > [!TIP]
 >
-> ##### For best results, we recommend using SabreUI with 3D graphics cards. Please ensure you have the current driver installed for your card. <a href="https://www.nvidia.com/Download/index.aspx" target="_blank">NVIDIA.</a> <a href="https://www.amd.com/en/support/download/drivers.html" target="_blank">AMD.</a>
+> ##### For best results, we recommend using SabreUI with 3D graphics cards. Please ensure you have the current driver installed for your card. [NVIDIA.](https://www.nvidia.com/Download/index.aspx) [AMD.](https://www.amd.com/en/support/download/drivers.html)
 ##
 <a name="windows">
 <details><summary>
@@ -53,7 +57,9 @@
 > ```
 > sudo apt-get -y install python3 python3-venv python3-pip git
 > ```
-> ###### Next, follow the steps by choosing your graphics card type below
+> 6. ##### Dedicate more system RAM by making a .wslconfig file. Follow [these instructions from Microsoft](https://learn.microsoft.com/en-us/windows/wsl/wsl-config#example-wslconfig-file)
+> 
+> ###### Next, choosing your graphics card type below
 > <details><summary>
 > 
 >### NVIDIA </summary>
@@ -80,11 +86,11 @@
 >
 > ### AMD </summary>
 > 
-> 1. ###### 
+> - ###### Please bear with us, We have yet to test this. If you would like to discuss this documentation, add an Issue at the top menu of the page.
 > </details>
-
+>
 > ##
-> Please continue your installation by following the [linux instructions](#linux)*
+> Please continue your Windows Subsystem for Linux installation by following the *[linux instructions](#linux)*
 > ##
 
 </details>
@@ -93,7 +99,6 @@
 <a name="macos" />   
 
 ## MacOS <hr></summary>
-##
 
 > 1. ###### Install [Xcode]https://apps.apple.com/us/app/xcode/id497799835
 >   
@@ -102,14 +107,11 @@
 > 3. ###### Follow the [Linux instructions](#linux)
 </details></details>
 
-<details open><summary>
+<summary>
 
 <a name="linux " />
 
-## Linux<hr>
-</summary></details>
-
-##
+## Linux<hr></summary>
 1. ### Update your repository and install upgrades
 
 ###### - ***WSL***/Ubuntu/Debian:
@@ -152,18 +154,22 @@ pip install packaging wheel ninja
 ```
 pip3 install torch==2.3.0+cu121 torchvision --index-url=https://download.pytorch.org/whl/cuda121
 ```
-###### - AMD: 
+###### - AMD WSL:
 ```
-pip3 install torch==2.3.0+cu121 torchvision --index-url=https://download.pytorch.org/whl/cuda121
+pip install torch-directml
+```
+###### - AMD LINUX: 
+```
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm6.0
 ```
 ##
-6. ### Install XFORMERS (Unavailable for Windows MANUAL Installation)
+6. ### Install XFORMERS (Unavaiable for Legacy Windows Install)
 
 ```
 pip install xformers==0.0.26.post1
 ```
 ##
-7. ### Install Flash-attention (Unavailable for Windows MANUAL Installation)
+7. ### Install Flash-attention (Unavailable for Legacy Windows Install)
 ```
 pip install flash-attn --no-build-isolation
 ```
@@ -195,8 +201,8 @@ python ComfyUI\main.py --output-directory /yourfoldernamehere --input-directory 
 
 
 <details><summary>
-
- #### Legacy Windows Manual Installation </summary>
+ 
+  #### Legacy Windows Manual Installation </summary>
 
 > ##### Many back-end features are unavailable for Windows devices when using [manual installation](#manual). We highly recommend using *[Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install-manual#downloading-distributions/) (WSL)* unless otherwise prevented.
 > 1. ###### Download [Python](https://www.python.org/downloads/windows/)
@@ -222,7 +228,6 @@ python ComfyUI\main.py --output-directory /yourfoldernamehere --input-directory 
 > .venv/Scripts/activate
 > ```
 </details>
-  <img width="1481" alt="image (2)" src="https://github.com/exdysa/SabreUI/assets/91800957/fbacfdb4-3941-4da5-aa3c-79787a3f4d22">
 
-<div align="right"> <sub> Lets create a more inviting and visually-pleasing ComfyUI Frontend using Typescript and React!</sub></div>
-</div>
+<div align="right">
+<sub>Lets create a more inviting and visually-pleasing ComfyUI Frontend using Typescript and ReactFlow!</sub></div>
