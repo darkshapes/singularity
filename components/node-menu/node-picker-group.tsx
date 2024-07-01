@@ -20,7 +20,7 @@ interface NodePickerGroupProps {
   setExpandedItems: (items: string[]) => void;
 }
 
-const NodePickerGroup = ({
+const NodePickerGroupComponent = ({
   category,
   items,
   setActiveItem,
@@ -46,13 +46,11 @@ const NodePickerGroup = ({
 
   return (
     // a nested menu inside the main context menu
-    //  EXDYSA - if checkbox, then
-    // <ContextMenuSub>
-    //  <ContextMenuSubTrigger className="text-xs text-center py-0 my-0 px-1 w-full">
-    //   {category}
-    //  </ContextMenuSubTrigger>
-    //  <ContextMenuSubContent className="p-2">
-    // EXDYSA - else {
+    <ContextMenuSub>
+      <ContextMenuSubTrigger className="text-xs text-center py-0 my-0 px-1 w-full">
+        {category}
+      </ContextMenuSubTrigger>
+      <ContextMenuSubContent className="p-2">
         <div className="flex flex-col items-baseline justify-start">
           {Object.entries(items.subcategories).map(([subCat, subItems]) => (
             <NodePickerGroup
@@ -65,9 +63,7 @@ const NodePickerGroup = ({
               setExpandedItems={setExpandedItems}
             />
           ))}
-          {Object.values(items.subcategories).length > 0 && items.widgets.length > 0 
-          // && <ContextMenuSeparator />
-          }
+          {Object.values(items.subcategories).length > 0 && items.widgets.length > 0 && <ContextMenuSeparator />}
           {items.widgets.map((i: Widget, index: number) => (
             <button
               key={i.name}
@@ -88,10 +84,9 @@ const NodePickerGroup = ({
             </button>
           ))}
         </div>
-    // EXDYSA - matching if then condition, end cap
-    //  </ContextMenuSubContent>
-  //  </ContextMenuSub>
+      </ContextMenuSubContent>
+    </ContextMenuSub>
   );
 };
 
-export default React.memo(NodePickerGroup);
+export const NodePickerGroup = React.memo(NodePickerGroupComponent);

@@ -1,9 +1,8 @@
-import { useAppStore } from "@/store";
-import { Connection } from "reactflow";
-import { isArray, startCase } from "lodash-es";
 import React, { useCallback } from "react";
-import { Handle, HandleType, Position } from "reactflow";
+import { Connection, Handle, HandleType, Position } from "reactflow";
+import { isArray, startCase } from "lodash-es";
 import { useShallow } from "zustand/react/shallow";
+import { useAppStore } from "@/store";
 import { Slot } from "../style";
 import { cn } from "@/lib/utils";
 
@@ -18,7 +17,7 @@ interface NodeHandleProps {
   onClick?: () => void;
 }
 
-const NodeHandle = ({
+export const NodeHandle = ({
   label,
   type,
   position,
@@ -55,7 +54,12 @@ const NodeHandle = ({
 
   return (
     <>
-      <Slot position={position} isRequired={isRequired ? 1 : 0}>
+      <Slot 
+        position={position} 
+        isRequired={isRequired ? 1 : 0} 
+        className={cn("group", clickable && "cursor-pointer")} 
+        onClick={onClick}
+      >
         {isRequired ? (
           <Handle
             id={label}
@@ -75,7 +79,7 @@ const NodeHandle = ({
         <a
           className={cn(
             "mb-1 text-sm text-muted-foreground",
-            clickable && "cursor-pointer hover:underline hover:text-white transition duration-200 ease-in-out",
+            clickable && "group-hover:underline group-hover:text-white transition duration-200 ease-in-out",
           )}
           title={Array.isArray(slotType) ? "STRING" : slotType}
           onClick={onClick}
@@ -86,5 +90,3 @@ const NodeHandle = ({
     </>
   );
 };
-
-export default NodeHandle;
