@@ -6,7 +6,7 @@ import { debounce } from "lodash-es";
 import React, { useMemo } from "react";
 import { useShallow } from "zustand/react/shallow";
 import { SelectUploadInput } from "./select-upload-input";
-import { SliderInput } from "./slider-input";
+import { SliderInput } from "../../controls/slider-input";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ModelDrawer } from "../model-drawer";
@@ -106,6 +106,22 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
       />
     );
   }
+
+  /* if (checkInput.is2dFloat(input)) {
+    return (
+      <SliderInput
+        name={name.toLowerCase()}
+        style={{ width: "100%" }}
+        step={0.01}
+        value={Number(value !== null ? value : input[1].default)}
+        max={Number(input[1].max)}
+        min={Number(input[1].min)}
+        onChange={(val) =>
+          onChange(Number(val?.target?.value ? val.target.value : val))
+        }
+      />
+    );
+  } */
 
   if (checkInput.isString(input)) {
     const args = input[1];

@@ -6,7 +6,7 @@ import { NodeContextMenu } from "@/components/node-menu";
 import { ControlPanel } from "@/components/control-panel";
 import { FlowEditor } from "@/components/flow-editor";
 import { Toaster } from "@/components/toaster";
-import XYGrid from "@/components/omni/xy";
+import XYGrid from "@/components/controls/omni/xyinput";
 
 export default function Home() {
   return (
