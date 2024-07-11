@@ -6,4 +6,4 @@
     src: url(/app/fonts/KodeMono-VariableFont_wght.ttf) format("truetype")
 }
 
-.keytime { font-family: "Kode Mono"; }
+.keytime { font-family: "Kode Mono", ui-monospace,  "FMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace; }

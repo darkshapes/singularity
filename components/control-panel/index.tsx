@@ -13,6 +13,7 @@ import { useAppStore } from "@/store";
 import { useShallow } from "zustand/react/shallow";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import KeyTimeCode from "@/components/controls/omni/timecode";
 
 const nodes = [
   {
@@ -75,7 +76,7 @@ const QueuePromptButtonComponent = () => {
           className={cn(
             "relative h-12 w-12 rounded-3xl shadow-lg bg-gradient-to-b text-white dark:text-black dark:from-white dark:to-blue-50 ring-2 ring-blue-50 ring-opacity-60",
             "from-slate-800 to-slate-700 ring-slate-400",
-            "hover:rounded-lg transition-all duration-200"
+            "hover:rounded-lg transition-all duration-200 ml-[50%]"
           )}
           onClick={handleRun}
         >
@@ -109,14 +110,15 @@ const ControlPanelComponent = () => {
 
   return (
     <TooltipProvider delayDuration={0}>
-      <div className="fixed right-4 top-4 flex flex-col gap-3 m-2">
-        <QueuePromptButton />
+      <div className="fixed right-4 top-0 flex flex-col gap-3 m-2">
+        <KeyTimeCode />
+        <QueuePromptButton /> 
         <Sheet modal={true} open={isSheetOpen} onOpenChange={setIsSheetOpen}>
               <TooltipButton content="Save/load workflows">
                 <SheetTrigger asChild>
                   <Button
                     onClick={() => setIsSheetOpen(!isSheetOpen)}
-                    className="relative rounded-3xl shadow-lg hover:bg-background hover:rounded-lg transition-all duration-200 h-12 w-12"
+                    className="relative rounded-3xl shadow-lg hover:bg-background hover:rounded-lg transition-all duration-200 h-12 w-12 ml-[50%]"
                     variant="outline"
                   >
                     <FilePlusIcon />
@@ -131,7 +133,7 @@ const ControlPanelComponent = () => {
         <TooltipButton content="Show/hide controls">
           <Button
             onClick={() => handleExpand()}
-            className="relative rounded-3xl shadow-lg hover:bg-background hover:rounded-lg transition-all duration-200 h-12 w-12"
+            className="relative rounded-3xl shadow-lg hover:bg-background hover:rounded-lg transition-all duration-200 h-12 w-12 ml-[50%]"
             variant="outline"
           >
             {isExpanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
@@ -142,7 +144,7 @@ const ControlPanelComponent = () => {
             <DialogTrigger asChild>
               <Button
                 onClick={() => setIsClearDialogOpen(true)}
-                className="relative rounded-3xl shadow-lg hover:bg-background hover:rounded-lg transition-all duration-200 h-12 w-12"
+                className="relative rounded-3xl shadow-lg hover:bg-background hover:rounded-lg transition-all duration-200 h-12 w-12 ml-[50%]"
                 variant="outline"
               >
                 <TrashIcon />
@@ -156,7 +158,7 @@ const ControlPanelComponent = () => {
             <DialogTrigger asChild>
               <Button
                 onClick={() => {}}
-                className="relative rounded-3xl shadow-lg hover:bg-background hover:rounded-lg transition-all duration-200 h-12 w-12"
+                className="relative rounded-3xl shadow-lg hover:bg-background hover:rounded-lg transition-all duration-200 h-12 w-12  ml-[50%]"
                 variant="outline"
               >
                 <GearIcon />
