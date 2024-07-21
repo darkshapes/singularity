@@ -266,9 +266,8 @@
    > ```
    > ##
 
-6. > ### *[07/16/24 Hotfix]* Remove `/comfy/web` folder, then place these folders inside the `/sdbx` root directory  [singularity-20240716.zip](https://github.com/user-attachments/files/16257537/singularity-20240716.zip)
+6. > ### *[07/16/24 Hotfix]* Remove `/comfy/web` folder, then place these folders inside the `/sdbx` root directory [singularity072124.zip](https://github.com/user-attachments/files/16326317/singularity072124.zip)
 
-   
 7. ### Launch Shadowbox
    > ```
    > python main.py --output-directory /YOUR_FOLDER_NAME --input-directory /YOUR_FOLDER_NAME/input
