@@ -19,7 +19,7 @@ export interface BoolProps {
 export type Parameter<K extends keyof InputType> = [K, InputType[K][1]];
 
 export interface InputType {
-  BOOL: [boolean, BoolProps];
+  BOOLEAN: [boolean, BoolProps];
   INT: [number, NumberProps<number>];
   FLOAT: [number, NumberProps<number>];
   STRING: [string, StringProps];
