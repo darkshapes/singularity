@@ -1,0 +1,74 @@
+name: Bug
+description: "You receive an error or difficulty that no one - not even the creators - have ever seen while using our software."
+labels: [ "Bug" ]
+body:
+    - type: markdown
+      attributes:
+        value: |
+
+          <detail><summary>
+          请确保：
+          </summary>
+
+          1。 > 您正在运行最新版本的软件。
+          
+          2。 > 从工作流程中删除自定义节点
+          
+          3。 > 您搜索了网络。
+
+          4。 > 您搜索了现有问题。
+
+          如果您有任何疑问，请访问*[矩阵上的影框室]（https://matrix.to/#/%23sdbx:matrix.org）。
+
+          <detail><summary>
+          يرجى التأكد من:
+          </summary>
+
+          1. > أنت تقوم بتشغيل أحدث إصدار من البرنامج.
+          2。 > تتم إزالة العقد المخصصة من سير العمل
+          3. > لقد بحثت في الويب.
+
+          4. > لقد بحثت في المشكلات الحالية.
+
+          إذا كانت لديك أسئلة، تفضل بزيارتنا في *[غرفة الظل على ماتريكس] (https://matrix.to/#/%23sdbx:matrix.org).
+
+          <detail><summary>
+          Please Ensure:
+          </summary>
+
+          1. > You are running the latest version of the software.
+          3. > You searched the web.
+          4. > You searched the existing issues.
+
+              If you have questions, visit us in the *[Shadowbox room on Matrix](https://matrix.to/#/%23sdbx:matrix.org).
+    - type: textarea
+      attributes:
+            label: 预期行为السلوك المتوقعОжидаемое поведение Expected Behavior
+            description: ""
+      validations:
+            required: true
+    - type: textarea
+      attributes:
+                label: 后果 نتيجة Результат, следствие Result 
+                description: "如果可能，请附上屏幕截图。قم بتضمين لقطات شاشة إن أمكن. Include screenshots if possible. "
+      validations:
+                required: true
+    - type: textarea
+      attributes:
+                label: 重新创建的步骤 خطوات إعادة الإنشاءSteps to Recreate
+                description: "描述如何再次触发问题。 如果可能，请附上工作流程。صف كيفية تشغيل المشكلة مرة أخرى. أرفق سير عمل إن أمكن. Describe how to trigger the issue again. Attach a workflow if possible."
+      validations:
+                required: true
+    - type: textarea
+      attributes:
+                label: Logs
+                description: "请在这里粘贴控制台中的文本。يرجى لصق النص من وحدة التحكم الخاصة بك هنا. Please paste text from your console here."
+                render: powershell
+      validations:
+                required: true
+    - type: textarea
+      attributes:
+                label: Other
+                description: "任何其他有用或相关信息。أي معلومات أخرى مفيدة أو ذات صلة.Any other helpful or related information."
+      validations:
+                required: false
