@@ -3,9 +3,9 @@ import { isArray } from "lodash-es";
 
 // Function for checking input parameters
 class CheckInputClass {
-  isBool(i: InputData): i is Parameter<"BOOL"> {
+  isBool(i: InputData): i is Parameter<"BOOLEAN"> {
     if (!isArray(i)) return false;
-    return i[0] === "BOOL";
+    return i[0] === "BOOLEAN";
   }
 
   isInt(i: InputData): i is Parameter<"INT"> {

@@ -122,7 +122,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
     return (
       <Input
         style={{ width: "100%" }}
-        defaultValue={value}
+        defaultValue={null? value : ''}
         onChange={onChange}
         onKeyDown={(e) => e.stopPropagation()}
       />
