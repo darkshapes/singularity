@@ -12,8 +12,8 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: "SabreUI",
-  description: "A complete redesign of the ComfyUI interface.",
+  title: "Shadowbox",
+  description: "Darkshapes. Future-proof ML engineering. Singularity UI v0.1.0 sdbx v",
 };
 
 export default function RootLayout({

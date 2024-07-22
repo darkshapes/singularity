@@ -51,7 +51,7 @@ export const SettingsModal = ({ open, setOpen }: any) => {
             item: (options: string[]) => 
                 <Select onValueChange={async () => onUpdateFrontend()}>
                     <SelectTrigger className="w-32">
-                        <SelectValue placeholder="sabre" />
+                        <SelectValue placeholder="singularity" />
                     </SelectTrigger>
                     <SelectContent>
                         {options.map((option) => (
@@ -61,7 +61,7 @@ export const SettingsModal = ({ open, setOpen }: any) => {
                         ))}
                     </SelectContent>
                 </Select>,
-            options: ['classic', 'sabre'],
+            options: ['classic', 'singularity'],
         },
         {
             label: 'Edge Type',

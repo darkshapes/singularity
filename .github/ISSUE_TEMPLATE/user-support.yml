@@ -1,0 +1,34 @@
+name: Support
+description: "如果您对使用我们的软件有任何疑问，请向我们提出。Пожалуйста, задавайте нам любые вопросы об использовании нашего программного обеспечения. Please ask us any questions you have about using our software."
+labels: [ "Support" ]
+body:
+    - type: markdown
+      attributes:
+        value: |
+           - [ ] 令人困惑 Сбивает с толку  مربك Confusing
+           - [ ] 可能坏了 Может быть сломан قد يكون مكسورا Might be broken
+           - [ ] 不可靠 Ненадежный  غير موثوق به Unreliable
+           - [ ] 操作方法 Как Howto
+           - [ ] 文件 Документация  الوثائق Documentation
+           - [ ] 软件 Программное обеспечение البرمجيات Software
+           - [ ] 别的东西 Что-то еще شيء آخر Something else 
+                      
+    - type: textarea
+      attributes:
+            label: Your question
+            description: "请在这里发布一个详细的问题。يرجى نشر سؤال مفصل هنا. Please post a detailed question here."
+      validations:
+            required: true
+    - type: textarea
+      attributes:
+                label: Logs
+                description: "请在这里粘贴任何日志。يرجى لصق أي سجلات هنا. Please paste any logs here."
+                render: powershell
+      validations:
+                required: false
+    - type: textarea
+      attributes:
+                label: Other
+                description: "请将任何其他相关信息放在这里。 يرجى وضع أي معلومات أخرى ذات صلة هنا. Please put any other related information here."
+      validations:
+                required: false
