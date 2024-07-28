@@ -145,7 +145,7 @@ const NodeComponent = (node: NodeProps<Widget>) => {
         <ContextMenuSub key="colors">
           <ContextMenuSubTrigger className="gap-2 text-xs">
             <ShadowIcon />
-            Colors
+            Color
           </ContextMenuSubTrigger>
           <ContextMenuSubContent>
             {ColorMenu.map((child, index) => (

@@ -40,8 +40,7 @@ const movingMap: Record<Direction, string> = {
     "radial-gradient(16.2% 41.199999999999996% at 100% 50%, hsl(0, 0%, 100%) 0%, rgba(255, 255, 255, 0) 100%)",
 };
 
-const highlight =
-  "radial-gradient(75% 181.15942028985506% at 50% 50%, #3275F8 0%, rgba(255, 255, 255, 0) 100%)";
+const highlight = "radial-gradient(75% 181.15942028985506% at 50% 50%, #45A970 0%, rgba(255, 255, 255, 0) 100%)";
 
 const NodeCardComponent = ({
   active,
@@ -86,7 +85,7 @@ const NodeCardComponent = ({
           borderTopRightRadius: "0.75rem",
           zIndex: 10,
           transition: "all 200ms",
-          overflow: "visible",
+          overflow: "hidden",
         }}
       >
         {path !== "" && <div className="text-xs text-neutral-400 pb-1">{path}</div>}

@@ -87,7 +87,7 @@ export const Dropzone = ({ onUpload }: DropzoneProps) => {
               )}
             />
             <p className="font-semibold">
-              Load a workspace or drag & drop it here
+              Load a workflow or drag & drop it here
             </p>
             <p className="text-neutral-500 text-sm">
               Only JSON files.

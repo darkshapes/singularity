@@ -64,7 +64,7 @@ export const SettingsModal = ({ open, setOpen }: any) => {
             options: ['classic', 'singularity'],
         },
         {
-            label: 'Edge Type',
+            label: 'Wire Type',
             item: (options: EdgeType[]) =>
                 <Select value={edgeType.name} onValueChange={n => onEdgesType(edgeTypeList.find(e => e.name === n) as EdgeType)}>
                     <SelectTrigger className="w-32">
