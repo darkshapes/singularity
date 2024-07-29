@@ -11,8 +11,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ModelDrawer } from "../model-drawer";
 
-import { inspect } from 'util'
-
 interface InputParamsProps {
   id: NodeId;
   name: string;
@@ -30,9 +28,13 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
   const value = graph[id]?.fields[name];
   const onChange = useMemo(
     () =>
-      debounce((e: any) => onPropChange(id, name, e.target.value), 100),
+      debounce((v: any) => {
+        onPropChange(id, name, v)
+      }, 100),
     [id, name, onPropChange]
   );
+
+  const handleChange = (e: any) => onChange(e.target.value)
 
   if (checkInput.isList(input)) {
     if (name === "ckpt_name" || name === "lora_name") {
@@ -40,7 +42,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
         value={value}
         models={input.flat()} 
         type={name} 
-        onChange={onChange} 
+        onChange={handleChange} 
       />;
     }
 
@@ -49,7 +51,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
         value={value}
         name={name}
         input={input}
-        onChange={onChange}
+        onChange={handleChange}
       />
     );
   }
@@ -60,7 +62,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
         value={value}
         name={name}
         input={input}
-        onChange={onChange}
+        onChange={handleChange}
       />
     );
   }
@@ -70,7 +72,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
       <Checkbox
         value={value}
         defaultChecked={input[1].default}
-        onChange={onChange}
+        onChange={handleChange}
       />
     );
   }
@@ -83,9 +85,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
         value={Number(value !== null ? value : input[1].default)}
         max={Number(input[1].max)}
         min={Number(input[1].min)}
-        onChange={(val) =>
-          onChange(Number(val?.target?.value ? val.target.value : val))
-        }
+        onChange={(v: Number) => onChange(v)}
       />
     );
   }
@@ -99,9 +99,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
         value={Number(value !== null ? value : input[1].default)}
         max={Number(input[1].max)}
         min={Number(input[1].min)}
-        onChange={(val) =>
-          onChange(Number(val?.target?.value ? val.target.value : val))
-        }
+        onChange={(v: Number) => onChange(v)}
       />
     );
   }
@@ -113,7 +111,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
         <Textarea
           style={{ height: 128, width: "100%" }}
           defaultValue={value}
-          onBlur={onChange}
+          onBlur={handleChange}
           onKeyDown={(e) => e.stopPropagation()}
         />
       );
@@ -122,7 +120,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
       <Input
         style={{ width: "100%" }}
         defaultValue={value}
-        onChange={onChange}
+        onChange={handleChange}
         onKeyDown={(e) => e.stopPropagation()}
       />
     );

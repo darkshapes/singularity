@@ -63,20 +63,35 @@ const SliderInputComponent: React.FC<SliderInputProps> = ({
     (e: React.ChangeEvent<HTMLInputElement> | any) => {
       e.stopPropagation();
 
-      const newValue = e.target.value;
-      const val = Number(newValue);
-      if (!isNaN(val)) {
-        setInputValue(val);
-        onChange(val);
+      const v = e.target.value
+      if (v) {
+        const n = Number(v);
+        setInputValue(n);
+        onChange(n);
+      } else {
+        setInputValue(v);
+        onChange(v)
       }
-    },
-    [onChange]
+    }, [onChange]
   );
 
   const handleCheckboxChange = useCallback((e: any) => {
     setIsRandom(e.target.checked);
     console.log(e.target.checked);
   }, []);
+
+  const onBlur = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement> | any) => {
+      e.stopPropagation();
+
+      const v = e.target.value
+      if (!isNaN(v)) {
+        const n = Number(v);
+        setInputValue(n);
+        onChange(n);
+      }
+    }, [onChange]
+  );
 
   useEffect(() => {
     if (!isSeed || !isRandom) return;
@@ -91,9 +106,9 @@ const SliderInputComponent: React.FC<SliderInputProps> = ({
           min={iMin}
           max={iMax}
           step={iStep}
-          value={Number(inputValue)}
-          onChange={(e) => handleChange(e)}
-          onBlur={(e) => handleChange(e)}
+          value={inputValue}
+          onChange={handleChange}
+          onBlur={onBlur}
           className="nodrag min-w-[100px] text-muted-foreground focus:text-accent-foreground"
         />
       </div>
