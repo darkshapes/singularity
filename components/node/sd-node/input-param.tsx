@@ -11,6 +11,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ModelDrawer } from "../model-drawer";
 
+import { inspect } from 'util'
+
 interface InputParamsProps {
   id: NodeId;
   name: string;
@@ -28,10 +30,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
   const value = graph[id]?.fields[name];
   const onChange = useMemo(
     () =>
-      debounce((val: any) => {
-        const newValue = val?.target?.value ? val.target.value : val;
-        onPropChange(id, name, newValue);
-      }, 100),
+      debounce((e: any) => onPropChange(id, name, e.target.value), 100),
     [id, name, onPropChange]
   );
 
@@ -122,7 +121,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
     return (
       <Input
         style={{ width: "100%" }}
-        defaultValue={null? value : ''}
+        defaultValue={value}
         onChange={onChange}
         onKeyDown={(e) => e.stopPropagation()}
       />
