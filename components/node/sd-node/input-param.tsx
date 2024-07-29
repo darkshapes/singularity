@@ -51,18 +51,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
         value={value}
         name={name}
         input={input}
-        onChange={handleChange}
-      />
-    );
-  }
-
-  if (checkInput.isList(input)) {
-    return (
-      <SelectUploadInput
-        value={value}
-        name={name}
-        input={input}
-        onChange={handleChange}
+        onChange={(v: string) => onChange(v)}
       />
     );
   }
@@ -85,7 +74,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
         value={Number(value !== null ? value : input[1].default)}
         max={Number(input[1].max)}
         min={Number(input[1].min)}
-        onChange={(v: Number) => onChange(v)}
+        onChange={(v: number) => onChange(v)}
       />
     );
   }
@@ -99,7 +88,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
         value={Number(value !== null ? value : input[1].default)}
         max={Number(input[1].max)}
         min={Number(input[1].min)}
-        onChange={(v: Number) => onChange(v)}
+        onChange={(v: number) => onChange(v)}
       />
     );
   }
