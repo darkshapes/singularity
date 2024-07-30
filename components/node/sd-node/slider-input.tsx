@@ -10,6 +10,7 @@ import React, {
   useState,
 } from "react";
 import { useShallow } from "zustand/react/shallow";
+import { Dices } from 'lucide-react';
 
 interface SliderInputProps {
   name: string;
@@ -63,20 +64,34 @@ const SliderInputComponent: React.FC<SliderInputProps> = ({
     (e: React.ChangeEvent<HTMLInputElement> | any) => {
       e.stopPropagation();
 
-      const newValue = e.target.value;
-      const val = Number(newValue);
-      if (!isNaN(val)) {
-        setInputValue(val);
-        onChange(val);
+      const v = e.target.value
+      if (v) {
+        const n = Number(v);
+        setInputValue(n);
+        onChange(n);
+      } else {
+        setInputValue(v);
+        onChange(v)
       }
-    },
-    [onChange]
+    }, [onChange]
   );
 
-  const handleCheckboxChange = useCallback((e: any) => {
-    setIsRandom(e.target.checked);
-    console.log(e.target.checked);
+  const onCheckedChange = useCallback((b: any) => {
+    setIsRandom(b);
   }, []);
+
+  const onBlur = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement> | any) => {
+      e.stopPropagation();
+
+      const v = e.target.value
+      if (!isNaN(v)) {
+        const n = Number(v);
+        setInputValue(n);
+        onChange(n);
+      }
+    }, [onChange]
+  );
 
   useEffect(() => {
     if (!isSeed || !isRandom) return;
@@ -85,22 +100,24 @@ const SliderInputComponent: React.FC<SliderInputProps> = ({
 
   return (
     <div style={style}>
-      <div className={`flex items-center`}>
+      <div className={`flex flex-row items-center justify-between`}>
         <Input
           type="number"
           min={iMin}
           max={iMax}
           step={iStep}
-          value={Number(inputValue)}
-          onChange={(e) => handleChange(e)}
-          onBlur={(e) => handleChange(e)}
-          className="nodrag min-w-[100px] text-muted-foreground focus:text-accent-foreground"
+          value={inputValue}
+          onChange={handleChange}
+          onBlur={onBlur}
+          className="nodrag min-w-[50px] text-muted-foreground focus:text-accent-foreground"
         />
-      </div>
 
-      {/* {isSeed && (
-        <Checkbox checked={isRandom} onChange={handleCheckboxChange} />
-      )} */}
+        {isSeed && (
+          <Checkbox checked={isRandom} onCheckedChange={onCheckedChange} className="m-1 w-6 h-6">
+            <Dices strokeWidth={1} />
+          </Checkbox>
+        )}
+      </div>
     </div>
   );
 };
