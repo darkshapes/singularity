@@ -8,7 +8,7 @@
 
 <div align="center"> 
   
- ### [ [Windows](https://github.com/darkshapes/sdbx/wiki/Windows-Manual-Installation) | [MacOS](https://github.com/darkshapes/sdbx/wiki-MacOS-Manual-Installation) | [Linux](https://github.com/darkshapes/sdbx/wiki/Linux-Manual-Installation) ]
+ ### [ [Windows](https://github.com/darkshapes/sdbx/wiki/Manual-Installation-%E2%80%90-Windows) | [MacOS](https://github.com/darkshapes/sdbx/wiki-Manual-Installation-%E2%80%90-MacOS) | [Linux](https://github.com/darkshapes/sdbx/wiki/Manual-Installation-%E2%80%90-Linux) ]
 
 <hr>
 
