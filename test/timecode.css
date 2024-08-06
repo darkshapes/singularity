@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "Kode Mono";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(/app/fonts/KodeMono-VariableFont_wght.ttf) format("truetype")
+}
+
+.keytime { font-family: "Kode Mono", ui-monospace,  "FMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace; }
