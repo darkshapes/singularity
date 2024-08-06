@@ -1,6 +1,6 @@
 
 
-# [Singularity](#singularity) - A UI for [Shadowbox](https://github.com/darkshapes/sdbx)
+# [Singularity](#singularity) - A UI for [Shadowbox](https://github.com/darkshapes/sdbx/wiki/)
 
 ![A logo declaring the project name with an icon beside it. On the left is a vector drawing of 'The anomaly', which is a strange shape, sort of like a black hole, that creates a 4-dimensional box from the empty space within it. Thin and modern lettering spells "SHADOWBOX' to the right.](https://github.com/user-attachments/assets/7ca16a7b-0826-4e1d-b6ac-e00c443d4777)
 
@@ -8,7 +8,7 @@
 
 <div align="center"> 
   
- ### [ [Windows](https://github.com/darkshapes/sdbx/wiki/Manual-Installation-%E2%80%90-Windows) | [MacOS](https://github.com/darkshapes/sdbx/wiki-Manual-Installation-%E2%80%90-MacOS) | [Linux](https://github.com/darkshapes/sdbx/wiki/Manual-Installation-%E2%80%90-Linux) ]
+ ### [ [Windows](https://github.com/darkshapes/sdbx/wiki/Manual-Installation-%E2%80%90-Windows) | [MacOS](https://github.com/darkshapes/sdbx/wiki/Manual-Installation-%E2%80%90-MacOS) | [Linux](https://github.com/darkshapes/sdbx/wiki/Manual-Installation-%E2%80%90-Linux) ]
 
 <hr>
 
