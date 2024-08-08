@@ -2,10 +2,8 @@ import {
   readyServer,
   createPrompt,
   deleteFromQueue,
-  getSettings,
   getWidgetLibrary as getWidgets,
   sendPrompt,
-  sendSetting,
 } from "@/app/client";
 import type { Connection, PersistedGraph } from "@/types";
 import { edgeTypeList } from "@/types";
@@ -71,7 +69,6 @@ export const useAppStore = create<AppState>()(
       await readyServer(); // Wait for mock
 
       setInterval(() => get().onPersistTemp(), 5000);
-      const settings = await getSettings();
 
       const widgets = await getWidgets();
       set({ widgets: { ...customWidgets, ...widgets } }, false, "onInit");
@@ -81,8 +78,8 @@ export const useAppStore = create<AppState>()(
       );
 
       // Initialize settings
-      const edgeType = edgeTypeList[parseInt(settings["Comfy.LinkRenderMode"])];
-      get().onEdgesType(edgeType, false);
+      // const edgeType = edgeTypeList[parseInt(settings["Comfy.LinkRenderMode"])];
+      // get().onEdgesType(edgeType, false);
     },
 
     /******************************************************
@@ -400,7 +397,7 @@ export const useAppStore = create<AppState>()(
      ******************************************************/
 
     onUpdateFrontend: async () => {
-      await sendSetting("Comfy.Frontend", "classic");
+      // await sendSetting("Comfy.Frontend", "classic");
       window.location.reload();
     },
 
@@ -414,7 +411,7 @@ export const useAppStore = create<AppState>()(
         false,
         "onEdgesType"
       );
-      if (send) await sendSetting("Comfy.LinkRenderMode", edgeTypeList.indexOf(edgeType));
+      // if (send) await sendSetting("Comfy.LinkRenderMode", edgeTypeList.indexOf(edgeType));
     },
 
     /******************************************************

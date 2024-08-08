@@ -4,7 +4,6 @@ import history from "./data/history.json";
 import image from "./data/image.png";
 import objectInfo from "./data/object_info.json";
 import queue from "./data/queue.json";
-import settings from "./data/settings.json";
 
 export default {
   "GET /object_info": objectInfo,
@@ -16,6 +15,4 @@ export default {
   "POST /prompt": { result: "true" },
   "POST /upload/image": { name: "mock.png" },
   "GET /view": image,
-  "GET /settings": settings,
-  "POST /settings": {},
 };
