@@ -2,11 +2,11 @@ import embeddings from "./data/embeddings.json";
 import extensions from "./data/extensions.json";
 import history from "./data/history.json";
 import image from "./data/image.png";
-import objectInfo from "./data/object_info.json";
+import nodes from "./data/nodes.json";
 import queue from "./data/queue.json";
 
 export default {
-  "GET /object_info": objectInfo,
+  "GET /nodes": nodes,
   "GET /queue": queue,
   "GET /embeddings": embeddings,
   "GET /history": history,

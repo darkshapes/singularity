@@ -15,7 +15,7 @@ export const readyServer = async () => {
 }
 
 export const getWidgetLibrary = async (): Promise<any> =>
-  (await fetch(getBackendUrl("/object_info"))).json();
+  (await fetch(getBackendUrl("/nodes"))).json();
 
 export const getQueue = async (): Promise<Queue> =>
   (await fetch(getBackendUrl("/queue"))).json();
