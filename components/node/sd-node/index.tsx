@@ -62,7 +62,7 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<Widget>) => {
       <div className="flex items-stretch justify-stretch w-full space-x-6">
         <div className="flex-1">
           <NodeInputs data={data.inputs.required} selected={selected} />
-          <NodeSwappedParams data={swappedParams} selected={selected} swapItem={swapItem} />
+          {/* <NodeSwappedParams data={swappedParams} selected={selected} swapItem={swapItem} /> */}
         </div>
         <NodeOutputs data={data.outputs} selected={selected} />
       </div>

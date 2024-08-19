@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useShallow } from "zustand/react/shallow";
+import Fuse from "fuse.js";
 
 import { useAppStore } from "@/store";
 import type { Widget } from "@/types";
@@ -43,13 +44,24 @@ const NodePickerComponent = ({ setActiveItem, setShowPath }: any) => {
       });
     };
 
-    let matchedWidgets = Object.keys(widgets).reduce((acc: Record<string, Widget>, name: string) => {
-      if (name.toLowerCase().includes(keywords.toLowerCase())) {
-        acc[name] = widgets[name];
-      }
+    let matchedWidgets: Record<string, Widget>;
 
-      return acc;
-    }, {});
+    if (keywords) {
+      const fuse = new Fuse(Object.entries(widgets), {
+        keys: ["0"], // Search by widget name (keys are the names of widgets)
+        threshold: 0.4, // Adjust to fine-tune fuzzy search sensitivity
+      });
+
+      matchedWidgets = fuse
+        .search(keywords)
+        .reduce((acc: Record<string, Widget>, result) => {
+          const [name, widget] = result.item;
+          acc[name] = widget;
+          return acc;
+        }, {});
+    } else {
+      matchedWidgets = { ...widgets };
+    }
 
     for (const [name, widget] of Object.entries(matchedWidgets)) {
       const categoryPath = widget.path.split("/");
