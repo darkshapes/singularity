@@ -1,6 +1,7 @@
 import { useAppStore } from "@/store";
 import React, { useCallback, useEffect, useState } from "react";
 import { useShallow } from "zustand/react/shallow";
+import { InputDataLiteral } from "@/types";
 import {
   Select,
   SelectContent,
@@ -14,7 +15,7 @@ import { Label } from "@/components/ui/label";
 
 interface SelectUploadInputProps {
   value: string;
-  input: any[][];
+  input: any[];
   onChange: (val: any) => void;
   name: string;
 }
@@ -34,9 +35,8 @@ const SelectUploadInputComponent: React.FC<SelectUploadInputProps> = ({
   );
 
   useEffect(() => {
-    const { LoadImage } = widgets;
     const data: any =
-      name === "image" ? LoadImage?.input?.required?.image?.[0] : input?.[0];
+      name === "image" ? (widgets["Load Image"].inputs.required.input as InputDataLiteral).choices : input?.[0];
     const flatData =
       data
         ?.filter((o: string) => !o.includes("\\"))

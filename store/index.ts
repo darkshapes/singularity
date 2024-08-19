@@ -222,6 +222,7 @@ export const useAppStore = create<AppState>()(
             : undefined;
           const nodeData = {
             widget: widgets[item.widget],
+            name: item.widget,
             node: item,
             position: moved,
             ...(node?.width && { width: node.width }),
