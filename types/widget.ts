@@ -1,11 +1,13 @@
 import { SDNodeModify } from "@/types/node";
-import { PropertyKey, WidgetKey } from "./base";
+import { PropertyKey } from "./base";
 import { InputData } from "./input";
 import { OutputData } from "./output";
 
+export type WidgetInputNecessity = Record<PropertyKey, InputData>
+
 export type WidgetInputs = {
-  required: Record<PropertyKey, InputData>,
-  optional: Record<PropertyKey, InputData>,
+  required: WidgetInputNecessity,
+  optional: WidgetInputNecessity,
 }
 
 export type WidgetOutputs = Record<PropertyKey, OutputData>;

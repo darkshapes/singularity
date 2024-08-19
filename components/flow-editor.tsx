@@ -122,9 +122,10 @@ export const FlowEditor = ({ strength = -1000, distance = 1000 }) => {
         reactFlowRef,
         reactFlowInstance
       );
+      const name = Object.keys(widgets).find(key => widgets[key] === widget) ?? ""; // i hate this so much AUUUGHGNANSDFHAEJHN <- me screaming
       // 👇 make adding nodes undoable
       takeSnapshot();
-      onAddNode({ widget, position });
+      onAddNode({ widget, name, position });
     },
     [reactFlowInstance, onAddNode, takeSnapshot]
   );

@@ -2,7 +2,7 @@ import { Widget, WidgetKey } from "@/types";
 
 const customWidgets: Record<WidgetKey, Widget> = {
   Group: {
-    path: "utils/",
+    path: "utils",
     fname: "", // not sent to server
     inputs: {
       required: {},
@@ -11,14 +11,16 @@ const customWidgets: Record<WidgetKey, Widget> = {
     outputs: {}
   },
   Reroute: {
-    path: "utils/",
+    path: "utils",
     fname: "", // not sent to server
     inputs: {
       required: {},
       optional: {}
     },
     outputs: {
-      Output: "Any"
+      Output: {
+        type: "Any"
+      }
     }
   },
 };

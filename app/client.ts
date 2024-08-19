@@ -102,13 +102,13 @@ export const createPrompt = ({
   connections.forEach((edge) => {
     const source = graph.data[edge.source];
     if (!source) return;
-    const outputIndex = widgets[source.value.widget].outputs.findIndex(
-      (f: any) => f === edge.sourceHandle
-    );
+    // const outputs = widgets[source.value.widget].outputs
+    // const outputName = Object.keys(outputs).find(
+    //   key => outputs[key] === edge.sourceHandle
+    // );
     if (prompt[edge.target]) {
       prompt[edge.target].inputs[edge.targetHandle] = [
         edge.source,
-        outputIndex,
       ];
     }
   });

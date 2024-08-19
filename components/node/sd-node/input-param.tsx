@@ -1,12 +1,20 @@
 import { useAppStore } from "@/store";
-import { InputData, NodeId } from "@/types";
+import {
+  InputDataStr,
+  InputDataNumerical,
+  InputDataSlider,
+  InputDataLiteral,
+  InputDataGeneric,
+  InputData,
+  
+  NodeId
+} from "@/types";
 import { Checkbox } from "@/components/ui/checkbox";
 import { debounce } from "lodash-es";
 import React, { useMemo } from "react";
 import { useShallow } from "zustand/react/shallow";
 import { SelectUploadInput } from "./select-upload-input";
 import { SliderInput } from "./slider-input";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ModelDrawer } from "../model-drawer";
 
@@ -36,10 +44,10 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
   const handleChange = (e: any) => onChange(e.target.value)
 
   if (input.type === "OneOf") {
-    if (name === "ckpt_name" || name === "lora_name") {
+    if (input.fname === "ckpt_name" || input.fname === "lora_name") {
       return <ModelDrawer 
         value={value}
-        models={input.flat()} 
+        models={(input as InputDataLiteral).choices}
         type={name} 
         onChange={handleChange} 
       />;
@@ -49,7 +57,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
       <SelectUploadInput
         value={value}
         name={name}
-        input={input}
+        input={(input as InputDataLiteral).choices}
         onChange={(v: string) => onChange(v)}
       />
     );
@@ -59,56 +67,45 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
     return (
       <Checkbox
         value={value}
-        defaultChecked={input[1].default}
+        defaultChecked={(input as InputDataGeneric<boolean>).default}
         onChange={handleChange}
       />
     );
   }
 
-  if (input.type == "Int") {
-    return (
-      <SliderInput
-        name={name.toLowerCase()}
-        style={{ width: "100%" }}
-        value={Number(value !== null ? value : input[1].default)}
-        max={Number(input[1].max)}
-        min={Number(input[1].min)}
-        onChange={(v: number) => onChange(v)}
-      />
-    );
-  }
-
-  if (input.type == "Float") {
-    return (
-      <SliderInput
-        name={name.toLowerCase()}
-        style={{ width: "100%" }}
-        step={0.01}
-        value={Number(value !== null ? value : input[1].default)}
-        max={Number(input[1].max)}
-        min={Number(input[1].min)}
-        onChange={(v: number) => onChange(v)}
-      />
-    );
-  }
-
-  if (input.type = "Str") {
-    const args = input[1];
-    if (args.multiline === true) {
+  if (input.type == "Int" || input.type == "Float") {
+    if ((input as InputDataNumerical | InputDataSlider).display == "numerical") {
+      return ( 
+        <SliderInput // TODO: numerical input
+          name={name.toLowerCase()}
+          style={{ width: "100%" }}
+          value={Number(value !== null ? value : (input as InputDataNumerical).default)}
+          max={Number((input as InputDataNumerical).constraints?.max)}
+          min={Number((input as InputDataNumerical).constraints?.min)}
+          onChange={(v: number) => onChange(v)}
+        />
+      );
+    } else if ((input as InputDataNumerical | InputDataSlider).display == "slider") {
       return (
-        <Textarea
-          style={{ height: 128, width: "100%" }}
-          defaultValue={value}
-          onBlur={handleChange}
-          onKeyDown={(e) => e.stopPropagation()}
+        <SliderInput
+          name={name.toLowerCase()}
+          style={{ width: "100%" }}
+          value={Number(value !== null ? value : (input as InputDataSlider).default)}
+          max={Number((input as InputDataSlider).constraints?.max)}
+          min={Number((input as InputDataSlider).constraints?.min)}
+          onChange={(v: number) => onChange(v)}
         />
       );
     }
+  }
+
+  if (input.type = "Str") {
     return (
-      <Input
+      <Textarea
         style={{ width: "100%" }}
+        multiline={(input as InputDataStr).constraints?.multiline ?? false}
         defaultValue={value}
-        onChange={handleChange}
+        onBlur={handleChange}
         onKeyDown={(e) => e.stopPropagation()}
       />
     );

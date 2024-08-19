@@ -49,8 +49,6 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<Widget>) => {
     updateNodeInternals(id);
   }
 
-  const params: any = [];
-
   const { expanded, onExpand } = useAppStore((state) => ({
     expanded: state.expanded,
     onExpand: state.onExpand,
@@ -63,12 +61,11 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<Widget>) => {
     <>
       <div className="flex items-stretch justify-stretch w-full space-x-6">
         <div className="flex-1">
-          <NodeInputs data={data.inputs} selected={selected} />
+          <NodeInputs data={data.inputs.required} selected={selected} />
           <NodeSwappedParams data={swappedParams} selected={selected} swapItem={swapItem} />
         </div>
         <NodeOutputs data={data.outputs} selected={selected} />
       </div>
-      {params.length > 0 && (
         <Accordion
           type="multiple"
           value={isExpanded ? [id] : []}
@@ -77,11 +74,10 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<Widget>) => {
           <AccordionItem value={id}>
             <AccordionTrigger />
             <AccordionContent className="m-0.5">
-              <NodeParams data={params} nodeId={id} selected={selected} swapItem={swapItem} />
+              <NodeParams data={data.inputs.optional} nodeId={id} selected={selected} swapItem={swapItem} />
             </AccordionContent>
           </AccordionItem>
         </Accordion>
-      )}
       <NodeImgPreview data={imagePreviews || inputImgPreviews} />
     </>
   );

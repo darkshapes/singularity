@@ -1,45 +1,40 @@
 import React from "react";
+import { WidgetInputNecessity } from "@/types";
 import { NodeHandle } from "@/components/node/sd-node/node-handle";
 import { Position } from "reactflow";
 import { InputParams } from "./input-param";
 
 interface NodeParamsProps {
   nodeId: string;
-  data: {
-    name: string;
-    type: string;
-    input: string;
-  }[];
+  data: WidgetInputNecessity;
   selected: boolean;
   swapItem: (item: any) => void;
 }
 
 const NodeSwappedParamsComponent = ({ data, selected, swapItem }: Omit<NodeParamsProps, 'nodeId'>) => {
   return (
-    <>
-      {data.map(({ name, type, input }, i) => (
+      Object.entries(data).map(([ name, input ], i) => (
         <NodeHandle
           key={i}
-          slotType={type}
+          slotType={input.type}
           label={name}
           type="target"
           position={Position.Left}
           required
           selected={selected}
           clickable={true}
-          onClick={() => swapItem({ name, type, input })}
+          onClick={() => swapItem({ name, input })}
         />
-      ))}
-    </>
+      ))
   )
 };
 
 const NodeSwappedParams = React.memo(NodeSwappedParamsComponent);
 
 const NodeParamsComponent = ({ data, nodeId, selected, swapItem }: NodeParamsProps) => {
-  return (!data?.length) ? null : (
+  return (
     <div className="space-y-2">
-      {data.map(({ name, type, input }, i) => (
+      {Object.entries(data).map(([ name, input ], i) => (
         <div
           key={i}
           className={`text-muted-foreground focus:text-accent-foreground grid ${
@@ -49,14 +44,14 @@ const NodeParamsComponent = ({ data, nodeId, selected, swapItem }: NodeParamsPro
           {name !== "text" && (
             <NodeHandle
               key={i}
-              slotType={type}
+              slotType={input.type}
               label={name}
               type="target"
               position={Position.Left}
               required={false}
               selected={selected}
               clickable={true}
-              onClick={() => swapItem({ name, type, input })}
+              onClick={() => swapItem({ name, input })}
             />
           )}
           <InputParams name={name} id={nodeId} input={input} />

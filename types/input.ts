@@ -17,37 +17,36 @@ export interface TextProps {
 }
 
 export interface DependentProps {
-  on: string;
+  on: string; // will be fname of the variable it depends on
   when: any;
 }
 
 // Type constraint types
 
 export interface StringConstraint {
-  type: "Str";
-  constraints: TextProps;
+  constraints?: TextProps;
 }
 
 export interface NumericalConstraint {
   constraints?: NumericalProps<number>;
-  display?: "numerical";
+  display: "numerical";
 }
 
 export interface SliderConstraint {
   constraints?: SliderProps<number>;
-  display?: "slider";
+  display: "slider";
 }
 
 // Input types
 
 export interface InputBase<A> {
+  fname: string; // true name of variable
   default?: A;
   dependent?: DependentProps;
 }
 
-export interface InputDataStr extends InputBase<string> {
+export interface InputDataStr extends InputBase<string>, StringConstraint {
   type: "Str";
-  constraints?: StringConstraint;
 }
 
 export interface InputDataNumerical extends InputBase<number>, NumericalConstraint {
@@ -58,8 +57,13 @@ export interface InputDataSlider extends InputBase<number>, SliderConstraint {
   type: "Int" | "Float";
 }
 
-export interface InputDataAny extends InputBase<any> {
+export interface InputDataLiteral extends InputBase<any> {
+  type: "OneOf";
+  choices: any[];
+}
+
+export interface InputDataGeneric<A> extends InputBase<A> {
   type: string;
 }
 
-export type InputData = InputDataStr | InputDataNumerical | InputDataSlider | InputDataAny;
+export type InputData = InputDataStr | InputDataNumerical | InputDataSlider | InputDataLiteral | InputDataGeneric<any>;

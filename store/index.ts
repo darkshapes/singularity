@@ -104,6 +104,7 @@ export const useAppStore = create<AppState>()(
 
       const newGroupNode = {
         widget: customWidgets.Group,
+        name: "Group",
         position: { x: left - 40, y: top - 60 },
         width: right - left + 80,
         height: bottom - top + 100,

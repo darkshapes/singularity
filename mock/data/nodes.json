@@ -1,11 +1,12 @@
 {
-    "EmptyImage": {
+    "Empty Image": {
       "path": "generate",
       "fname": "empty_image",
       "inputs": {
         "required": {},
         "optional": {
-          "width": {
+          "Width": {
+            "fname": "width",
             "default": 512,
             "type": "Int",
             "constraints": {
@@ -17,7 +18,8 @@
             },
             "display": "numerical"
           },
-          "height": {
+          "Height": {
+            "fname": "height",
             "default": 512,
             "type": "Int",
             "constraints": {
@@ -29,7 +31,8 @@
             },
             "display": "numerical"
           },
-          "batch_size": {
+          "Batch Size": {
+            "fname": "batch_size",
             "default": 1,
             "type": "Int",
             "constraints": {
@@ -41,7 +44,8 @@
             },
             "display": "numerical"
           },
-          "color": {
+          "Color": {
+            "fname": "color",
             "default": 0,
             "type": "Int",
             "constraints": {
@@ -61,13 +65,14 @@
         }
       }
     },
-    "EmptyLatentAudio": {
+    "Empty Latent Audio": {
       "path": "generate",
       "fname": "empty_latent_audio",
       "inputs": {
         "required": {},
         "optional": {
-          "seconds": {
+          "Seconds": {
+            "fname": "seconds",
             "default": 47.6,
             "type": "Float",
             "constraints": {
@@ -79,7 +84,8 @@
             },
             "display": "numerical"
           },
-          "batch_size": {
+          "Batch Size": {
+            "fname": "batch_size",
             "default": 1,
             "type": "Int",
             "constraints": {
@@ -99,13 +105,14 @@
         }
       }
     },
-    "EmptyLatentImage": {
+    "Empty Latent Image": {
       "path": "generate",
       "fname": "empty_latent_image",
       "inputs": {
         "required": {},
         "optional": {
-          "width": {
+          "Width": {
+            "fname": "width",
             "default": 512,
             "type": "Int",
             "constraints": {
@@ -117,7 +124,8 @@
             },
             "display": "numerical"
           },
-          "height": {
+          "Height": {
+            "fname": "height",
             "default": 512,
             "type": "Int",
             "constraints": {
@@ -129,7 +137,8 @@
             },
             "display": "numerical"
           },
-          "batch_size": {
+          "Batch Size": {
+            "fname": "batch_size",
             "default": 1,
             "type": "Int",
             "constraints": {
@@ -149,24 +158,29 @@
         }
       }
     },
-    "KSampler": {
+    "K Sampler": {
       "path": "generate",
       "fname": "k_sampler",
       "inputs": {
         "required": {
-          "model": {
+          "Model": {
+            "fname": "model",
             "type": "Model"
           },
-          "positive": {
+          "Positive": {
+            "fname": "positive",
             "type": "Conditioning"
           },
-          "negative": {
+          "Negative": {
+            "fname": "negative",
             "type": "Conditioning"
           },
-          "latent": {
+          "Latent": {
+            "fname": "latent",
             "type": "Latent"
           },
-          "sampler_name": {
+          "Sampler Name": {
+            "fname": "sampler_name",
             "type": "OneOf",
             "choices": [
               "euler",
@@ -193,7 +207,8 @@
               "uni_pc_bh2"
             ]
           },
-          "scheduler": {
+          "Scheduler": {
+            "fname": "scheduler",
             "type": "OneOf",
             "choices": [
               "normal",
@@ -206,7 +221,8 @@
           }
         },
         "optional": {
-          "seed": {
+          "Seed": {
+            "fname": "seed",
             "default": 0,
             "type": "Int",
             "constraints": {
@@ -218,7 +234,8 @@
             },
             "display": "numerical"
           },
-          "steps": {
+          "Steps": {
+            "fname": "steps",
             "default": 20,
             "type": "Int",
             "constraints": {
@@ -230,7 +247,8 @@
             },
             "display": "numerical"
           },
-          "cfg": {
+          "Cfg": {
+            "fname": "cfg",
             "default": 8.0,
             "type": "Float",
             "constraints": {
@@ -241,7 +259,8 @@
             },
             "display": "slider"
           },
-          "denoise": {
+          "Denoise": {
+            "fname": "denoise",
             "default": 1.0,
             "type": "Float",
             "constraints": {
@@ -252,11 +271,13 @@
             },
             "display": "slider"
           },
-          "advanced_options": {
+          "Advanced Options": {
+            "fname": "advanced_options",
             "default": false,
             "type": "Bool"
           },
-          "disable_noising": {
+          "Disable Noising": {
+            "fname": "disable_noising",
             "default": false,
             "type": "Bool",
             "dependent": {
@@ -264,7 +285,8 @@
               "when": true
             }
           },
-          "force_full_denoise": {
+          "Force Full Denoise": {
+            "fname": "force_full_denoise",
             "default": false,
             "type": "Bool",
             "dependent": {
@@ -272,7 +294,8 @@
               "when": true
             }
           },
-          "start_step": {
+          "Start Step": {
+            "fname": "start_step",
             "default": null,
             "type": "Int",
             "constraints": {
@@ -288,7 +311,8 @@
               "when": true
             }
           },
-          "last_step": {
+          "Last Step": {
+            "fname": "last_step",
             "default": null,
             "type": "Int",
             "constraints": {
@@ -304,7 +328,8 @@
               "when": true
             }
           },
-          "noise_types": {
+          "Noise Types": {
+            "fname": "noise_types",
             "default": "cpu",
             "type": "Literal",
             "dependent": {
@@ -320,20 +345,23 @@
         }
       }
     },
-    "LlmSampler": {
+    "Llm Sampler": {
       "path": "generate",
       "fname": "llm_sampler",
       "inputs": {
         "required": {
-          "model": {
+          "Model": {
+            "fname": "model",
             "type": "Model"
           },
-          "prompt": {
+          "Prompt": {
+            "fname": "prompt",
             "type": "Str"
           }
         },
         "optional": {
-          "system_msg": {
+          "System Msg": {
+            "fname": "system_msg",
             "default": "The following instruction describes a task and is paired with an input that provides further context. Write a response that appropriately completes the request.",
             "type": "Str",
             "constraints": {
@@ -341,7 +369,8 @@
               "dynamic_prompts": false
             }
           },
-          "max_tokens": {
+          "Max Tokens": {
+            "fname": "max_tokens",
             "default": 512,
             "type": "Int",
             "constraints": {
@@ -353,7 +382,8 @@
             },
             "display": "numerical"
           },
-          "temperature": {
+          "Temperature": {
+            "fname": "temperature",
             "default": 0.2,
             "type": "Float",
             "constraints": {
@@ -365,7 +395,8 @@
             },
             "display": "numerical"
           },
-          "top_p": {
+          "Top P": {
+            "fname": "top_p",
             "default": 0.95,
             "type": "Float",
             "constraints": {
@@ -376,7 +407,8 @@
             },
             "display": "slider"
           },
-          "top_k": {
+          "Top K": {
+            "fname": "top_k",
             "default": 40,
             "type": "Int",
             "constraints": {
@@ -387,7 +419,8 @@
             },
             "display": "slider"
           },
-          "frequency_penalty": {
+          "Frequency Penalty": {
+            "fname": "frequency_penalty",
             "default": 0,
             "type": "Float",
             "constraints": {
@@ -399,7 +432,8 @@
             },
             "display": "numerical"
           },
-          "presence_penalty": {
+          "Presence Penalty": {
+            "fname": "presence_penalty",
             "default": 0,
             "type": "Float",
             "constraints": {
@@ -411,7 +445,8 @@
             },
             "display": "numerical"
           },
-          "repeat_penalty": {
+          "Repeat Penalty": {
+            "fname": "repeat_penalty",
             "default": 1.1,
             "type": "Float",
             "constraints": {
@@ -423,7 +458,8 @@
             },
             "display": "numerical"
           },
-          "seed": {
+          "Seed": {
+            "fname": "seed",
             "default": 0,
             "type": "Int",
             "constraints": {
@@ -443,15 +479,17 @@
         }
       }
     },
-    "VaeDecode": {
+    "Vae Decode": {
       "path": "vae",
       "fname": "vae_decode",
       "inputs": {
         "required": {
-          "vae": {
+          "Vae": {
+            "fname": "vae",
             "type": "Vae"
           },
-          "samples": {
+          "Samples": {
+            "fname": "samples",
             "type": "Latent"
           }
         },
@@ -463,15 +501,17 @@
         }
       }
     },
-    "VaeDecodeAudio": {
+    "Vae Decode Audio": {
       "path": "generate",
       "fname": "vae_decode_audio",
       "inputs": {
         "required": {
-          "samples": {
+          "Samples": {
+            "fname": "samples",
             "type": "Latent"
           },
-          "vae": {
+          "Vae": {
+            "fname": "vae",
             "type": "Vae"
           }
         },
@@ -483,20 +523,23 @@
         }
       }
     },
-    "VaeDecodeTiled": {
+    "Vae Decode Tiled": {
       "path": "vae",
       "fname": "vae_decode_tiled",
       "inputs": {
         "required": {
-          "vae": {
+          "Vae": {
+            "fname": "vae",
             "type": "Vae"
           },
-          "samples": {
+          "Samples": {
+            "fname": "samples",
             "type": "Latent"
           }
         },
         "optional": {
-          "tile_size": {
+          "Tile Size": {
+            "fname": "tile_size",
             "default": 512,
             "type": "Int",
             "constraints": {
@@ -516,15 +559,17 @@
         }
       }
     },
-    "VaeEncode": {
+    "Vae Encode": {
       "path": "vae",
       "fname": "vae_encode",
       "inputs": {
         "required": {
-          "vae": {
+          "Vae": {
+            "fname": "vae",
             "type": "Vae"
           },
-          "pixels": {
+          "Pixels": {
+            "fname": "pixels",
             "type": "Image"
           }
         },
@@ -536,15 +581,17 @@
         }
       }
     },
-    "VaeEncodeAudio": {
+    "Vae Encode Audio": {
       "path": "generate",
       "fname": "vae_encode_audio",
       "inputs": {
         "required": {
-          "audio": {
+          "Audio": {
+            "fname": "audio",
             "type": "Audio"
           },
-          "vae": {
+          "Vae": {
+            "fname": "vae",
             "type": "Vae"
           }
         },
@@ -556,23 +603,27 @@
         }
       }
     },
-    "VaeEncodeForInpaint": {
-      "path": "inpaint/",
+    "Vae Encode For Inpaint": {
+      "path": "inpaint",
       "fname": "vae_encode_for_inpaint",
       "inputs": {
         "required": {
-          "vae": {
+          "Vae": {
+            "fname": "vae",
             "type": "Vae"
           },
-          "pixels": {
+          "Pixels": {
+            "fname": "pixels",
             "type": "Image"
           },
-          "mask": {
+          "Mask": {
+            "fname": "mask",
             "type": "Mask"
           }
         },
         "optional": {
-          "grow_mask_by": {
+          "Grow Mask By": {
+            "fname": "grow_mask_by",
             "default": 6,
             "type": "Int",
             "constraints": {
@@ -592,20 +643,23 @@
         }
       }
     },
-    "VaeEncodeTiled": {
+    "Vae Encode Tiled": {
       "path": "vae",
       "fname": "vae_encode_tiled",
       "inputs": {
         "required": {
-          "vae": {
+          "Vae": {
+            "fname": "vae",
             "type": "Vae"
           },
-          "pixels": {
+          "Pixels": {
+            "fname": "pixels",
             "type": "Image"
           }
         },
         "optional": {
-          "tile_size": {
+          "Tile Size": {
+            "fname": "tile_size",
             "default": 512,
             "type": "Int",
             "constraints": {
@@ -625,12 +679,13 @@
         }
       }
     },
-    "LoadLatent": {
+    "Load Latent": {
       "path": "load",
       "fname": "load_latent",
       "inputs": {
         "required": {
-          "latent": {
+          "Latent": {
+            "fname": "latent",
             "type": "OneOf",
             "choices": []
           }
@@ -643,37 +698,42 @@
         }
       }
     },
-    "SaveLatent": {
+    "Save Latent": {
       "path": "save",
       "fname": "save_latent",
       "inputs": {
         "required": {
-          "samples": {
+          "Samples": {
+            "fname": "samples",
             "type": "Latent"
           }
         },
         "optional": {
-          "filename_prefix": {
+          "Filename Prefix": {
+            "fname": "filename_prefix",
             "default": "sdbx",
             "type": "Str"
           },
-          "prompt": {
+          "Prompt": {
+            "fname": "prompt",
             "default": null,
             "type": "Str"
           },
-          "extra_pnginfo": {
+          "Extra Pnginfo": {
+            "fname": "extra_pnginfo",
             "default": null
           }
         }
       },
       "outputs": {}
     },
-    "CheckpointLoader": {
-      "path": "advanced/",
+    "Checkpoint Loader": {
+      "path": "advanced",
       "fname": "checkpoint_loader",
       "inputs": {
         "required": {
-          "ckpt_name": {
+          "Checkpoint Name": {
+            "fname": "checkpoint_name",
             "type": "OneOf",
             "choices": [
               "Anything-V3.0.ckpt",
@@ -715,20 +775,21 @@
         "Model": {
           "type": "Model"
         },
-        "Clip": {
+        "CLIP": {
           "type": "Clip"
         },
-        "Vae": {
+        "VAE": {
           "type": "Vae"
         }
       }
     },
-    "ClipLoader": {
+    "Clip Loader": {
       "path": "load",
       "fname": "clip_loader",
       "inputs": {
         "required": {
-          "clip_name": {
+          "Clip Name": {
+            "fname": "clip_name",
             "type": "OneOf",
             "choices": [
               "clip_g.safetensors",
@@ -739,7 +800,8 @@
           }
         },
         "optional": {
-          "type": {
+          "Type": {
+            "fname": "type",
             "default": "stable_diffusion",
             "type": "OneOf",
             "choices": [
@@ -752,17 +814,18 @@
         }
       },
       "outputs": {
-        "Clip": {
+        "CLIP": {
           "type": "Clip"
         }
       }
     },
-    "ClipVisionLoader": {
+    "Clip Vision Loader": {
       "path": "load",
       "fname": "clip_vision_loader",
       "inputs": {
         "required": {
-          "clip_name": {
+          "Clip Name": {
+            "fname": "clip_name",
             "type": "OneOf",
             "choices": [
               "clip_vision_g.safetensors"
@@ -772,17 +835,18 @@
         "optional": {}
       },
       "outputs": {
-        "Clipvision": {
+        "CLIPVision": {
           "type": "Clipvision"
         }
       }
     },
-    "ControlnetLoader": {
+    "Controlnet Loader": {
       "path": "loaders",
       "fname": "controlnet_loader",
       "inputs": {
         "required": {
-          "control_net_name": {
+          "Control Net Name": {
+            "fname": "control_net_name",
             "type": "OneOf",
             "choices": [
               "ControlNet-Plus-Plus_sd15_ade20k_seg.safetensors",
@@ -878,20 +942,22 @@
         "optional": {}
       },
       "outputs": {
-        "Controlnet": {
+        "ControlNet": {
           "type": "Controlnet"
         }
       }
     },
-    "DiffControlnetLoader": {
+    "Diff Controlnet Loader": {
       "path": "loaders",
       "fname": "diff_controlnet_loader",
       "inputs": {
         "required": {
-          "model": {
+          "Model": {
+            "fname": "model",
             "type": "Model"
           },
-          "control_net_name": {
+          "Control Net Name": {
+            "fname": "control_net_name",
             "type": "OneOf",
             "choices": [
               "diff_control_sd15_canny_fp16.safetensors",
@@ -908,23 +974,24 @@
         "optional": {}
       },
       "outputs": {
-        "Controlnet": {
+        "ControlNet": {
           "type": "Controlnet"
         }
       }
     },
-    "DiffusersLoader": {
-      "path": "advanced/",
+    "Diffusers Loader": {
+      "path": "advanced",
       "fname": "diffusers_loader",
       "inputs": {
         "required": {
-          "model_path": {
+          "Model Path": {
+            "fname": "model_path",
             "type": "OneOf",
             "choices": [
               "JingyeChen22/textdiffuser2_layout_planner",
               "microsoft/Phi-3-mini-4k-instruct",
-              "llava-hf/llava-v1.6-mistral-7b-hf",
-              "JingyeChen22/textdiffuser2-full-ft"
+              "JingyeChen22/textdiffuser2-full-ft",
+              "llava-hf/llava-v1.6-mistral-7b-hf"
             ]
           }
         },
@@ -934,28 +1001,31 @@
         "Model": {
           "type": "Model"
         },
-        "Clip": {
+        "CLIP": {
           "type": "Clip"
         },
-        "Vae": {
+        "VAE": {
           "type": "Vae"
         }
       }
     },
-    "DualClipLoader": {
+    "Dual Clip Loader": {
       "path": "load",
       "fname": "dual_clip_loader",
       "inputs": {
         "required": {
-          "clip_name1": {
+          "Clip Name1": {
+            "fname": "clip_name1",
             "type": "OneOf",
             "choices": []
           },
-          "clip_name2": {
+          "Clip Name2": {
+            "fname": "clip_name2",
             "type": "OneOf",
             "choices": []
           },
-          "type": {
+          "Type": {
+            "fname": "type",
             "type": "OneOf",
             "choices": [
               "sdxl",
@@ -966,40 +1036,43 @@
         "optional": {}
       },
       "outputs": {
-        "Clip": {
+        "CLIP": {
           "type": "Clip"
         }
       }
     },
-    "GligenLoader": {
+    "Gligen Loader": {
       "path": "loaders",
       "fname": "gligen_loader",
       "inputs": {
         "required": {
-          "gligen_name": {
+          "Gligen Name": {
+            "fname": "gligen_name",
             "type": "Str"
           }
         },
         "optional": {}
       },
       "outputs": {
-        "Gligen": {
+        "GLIGen": {
           "type": "Gligen"
         }
       }
     },
-    "LlmLoader": {
+    "Llm Loader": {
       "path": "load",
       "fname": "llm_loader",
       "inputs": {
         "required": {
-          "ckpt_name": {
+          "Ckpt Name": {
+            "fname": "ckpt_name",
             "type": "OneOf",
             "choices": []
           }
         },
         "optional": {
-          "max_ctx": {
+          "Max Ctx": {
+            "fname": "max_ctx",
             "default": 2048,
             "type": "Int",
             "constraints": {
@@ -1011,7 +1084,8 @@
             },
             "display": "numerical"
           },
-          "gpu_layers": {
+          "Gpu Layers": {
+            "fname": "gpu_layers",
             "default": 27,
             "type": "Int",
             "constraints": {
@@ -1022,7 +1096,8 @@
             },
             "display": "slider"
           },
-          "n_threads": {
+          "N Threads": {
+            "fname": "n_threads",
             "default": 8,
             "type": "Int",
             "constraints": {
@@ -1041,18 +1116,20 @@
         }
       }
     },
-    "LoadAudio": {
+    "Load Audio": {
       "path": "load",
       "fname": "load_audio",
       "inputs": {
         "required": {
-          "audio": {
+          "Audio": {
+            "fname": "audio",
             "type": "OneOf",
             "choices": []
           }
         },
         "optional": {
-          "audio_upload": {
+          "Audio Upload": {
+            "fname": "audio_upload",
             "default": true,
             "type": "Bool"
           }
@@ -1064,18 +1141,20 @@
         }
       }
     },
-    "LoadImage": {
+    "Load Image": {
       "path": "load",
       "fname": "load_image",
       "inputs": {
         "required": {
-          "image": {
+          "Image": {
+            "fname": "image",
             "type": "OneOf",
             "choices": []
           }
         },
         "optional": {
-          "image_upload": {
+          "Image Upload": {
+            "fname": "image_upload",
             "default": true,
             "type": "Bool"
           }
@@ -1090,22 +1169,25 @@
         }
       }
     },
-    "LoadImageMask": {
+    "Load Image Mask": {
       "path": "load",
       "fname": "load_image_mask",
       "inputs": {
         "required": {
-          "image": {
+          "Image": {
+            "fname": "image",
             "type": "OneOf",
             "choices": []
           }
         },
         "optional": {
-          "image_upload": {
+          "Image Upload": {
+            "fname": "image_upload",
             "default": true,
             "type": "Bool"
           },
-          "channel": {
+          "Channel": {
+            "fname": "channel",
             "default": "alpha",
             "type": "OneOf",
             "choices": [
@@ -1123,21 +1205,25 @@
         }
       }
     },
-    "LoadLora": {
+    "Load Lora": {
       "path": "loaders",
       "fname": "load_lora",
       "inputs": {
         "required": {
-          "self": {
+          "Self": {
+            "fname": "self",
             "type": "_empty"
           },
-          "model": {
+          "Model": {
+            "fname": "model",
             "type": "Model"
           },
-          "clip": {
+          "Clip": {
+            "fname": "clip",
             "type": "Clip"
           },
-          "lora_name": {
+          "Lora Name": {
+            "fname": "lora_name",
             "type": "OneOf",
             "choices": [
               "GoodHands-beta2.safetensors",
@@ -1149,7 +1235,8 @@
           }
         },
         "optional": {
-          "strength_model": {
+          "Strength Model": {
+            "fname": "strength_model",
             "default": 1.0,
             "type": "Float",
             "constraints": {
@@ -1161,7 +1248,8 @@
             },
             "display": "numerical"
           },
-          "strength_clip": {
+          "Strength Clip": {
+            "fname": "strength_clip",
             "default": 1.0,
             "type": "Float",
             "constraints": {
@@ -1179,26 +1267,29 @@
         "Model": {
           "type": "Model"
         },
-        "Clip": {
+        "CLIP": {
           "type": "Clip"
         }
       }
     },
-    "LoraLoaderModelOnly": {
+    "Lora Loader Model Only": {
       "path": "loaders",
       "fname": "lora_loader_model_only",
       "inputs": {
         "required": {
-          "model": {
+          "Model": {
+            "fname": "model",
             "type": "Model"
           },
-          "lora_name": {
+          "Lora Name": {
+            "fname": "lora_name",
             "type": "OneOf",
             "choices": []
           }
         },
         "optional": {
-          "strength_model": {
+          "Strength Model": {
+            "fname": "strength_model",
             "default": 1.0,
             "type": "Float",
             "constraints": {
@@ -1218,12 +1309,13 @@
         }
       }
     },
-    "StyleModelLoader": {
+    "Style Model Loader": {
       "path": "load",
       "fname": "style_model_loader",
       "inputs": {
         "required": {
-          "style_model_name": {
+          "Style Model Name": {
+            "fname": "style_model_name",
             "type": "OneOf",
             "choices": []
           }
@@ -1231,17 +1323,18 @@
         "optional": {}
       },
       "outputs": {
-        "Stylemodel": {
+        "StyleModel": {
           "type": "Stylemodel"
         }
       }
     },
-    "UnclipCheckpointLoader": {
+    "Unclip Checkpoint Loader": {
       "path": "loaders",
       "fname": "unclip_checkpoint_loader",
       "inputs": {
         "required": {
-          "ckpt_name": {
+          "Ckpt Name": {
+            "fname": "ckpt_name",
             "type": "OneOf",
             "choices": [
               "sd21-unclip-h.ckpt",
@@ -1256,23 +1349,24 @@
         "Model": {
           "type": "Model"
         },
-        "Clip": {
+        "CLIP": {
           "type": "Clip"
         },
-        "Vae": {
+        "VAE": {
           "type": "Vae"
         },
-        "Clipvision": {
+        "CLIPVision": {
           "type": "Clipvision"
         }
       }
     },
-    "UnetLoader": {
+    "Unet Loader": {
       "path": "loaders",
       "fname": "unet_loader",
       "inputs": {
         "required": {
-          "unet_name": {
+          "Unet Name": {
+            "fname": "unet_name",
             "type": "Str"
           }
         },
@@ -1284,12 +1378,13 @@
         }
       }
     },
-    "CheckpointLoaderSimple": {
+    "Checkpoint Loader Simple": {
       "path": "loaders",
       "fname": "checkpoint_loader_simple",
       "inputs": {
         "required": {
-          "ckpt_name": {
+          "Checkpoint Name": {
+            "fname": "checkpoint_name",
             "type": "OneOf",
             "choices": [
               "Anything-V3.0.ckpt",
@@ -1331,20 +1426,21 @@
         "Model": {
           "type": "Model"
         },
-        "Clip": {
+        "CLIP": {
           "type": "Clip"
         },
-        "Vae": {
+        "VAE": {
           "type": "Vae"
         }
       }
     },
-    "VaeLoader": {
+    "Vae Loader": {
       "path": "loaders",
       "fname": "vae_loader",
       "inputs": {
         "required": {
-          "vae_name": {
+          "Vae Name": {
+            "fname": "vae_name",
             "type": "OneOf",
             "choices": [
               "sdxl_vae.safetensors",
@@ -1355,18 +1451,19 @@
         "optional": {}
       },
       "outputs": {
-        "Vae": {
+        "VAE": {
           "type": "Vae"
         }
       }
     },
-    "AddText": {
+    "Add Text": {
       "path": "prompt",
       "fname": "add_text",
       "inputs": {
         "required": {},
         "optional": {
-          "input_text": {
+          "Input Text": {
+            "fname": "input_text",
             "default": "",
             "type": "Str",
             "constraints": {
@@ -1382,17 +1479,19 @@
         }
       }
     },
-    "ClipSetLastLayer": {
+    "Clip Set Last Layer": {
       "path": "prompt",
       "fname": "clip_set_last_layer",
       "inputs": {
         "required": {
-          "clip": {
+          "Clip": {
+            "fname": "clip",
             "type": "Clip"
           }
         },
         "optional": {
-          "stop_at_clip_layer": {
+          "Stop At Clip Layer": {
+            "fname": "stop_at_clip_layer",
             "default": -1,
             "type": "Int",
             "constraints": {
@@ -1406,20 +1505,22 @@
         }
       },
       "outputs": {
-        "Clip": {
+        "CLIP": {
           "type": "Clip"
         }
       }
     },
-    "ClipTextEncode": {
+    "Clip Text Encode": {
       "path": "prompt",
       "fname": "clip_text_encode",
       "inputs": {
         "required": {
-          "clip": {
+          "Clip": {
+            "fname": "clip",
             "type": "Clip"
           },
-          "text": {
+          "Text": {
+            "fname": "text",
             "type": "Str",
             "constraints": {
               "multiline": true,
@@ -1435,40 +1536,45 @@
         }
       }
     },
-    "ClipVisionEncode": {
+    "Clip Vision Encode": {
       "path": "prompt",
       "fname": "clip_vision_encode",
       "inputs": {
         "required": {
-          "clip_vision": {
+          "Clip Vision": {
+            "fname": "clip_vision",
             "type": "Clipvision"
           },
-          "pixels": {
+          "Pixels": {
+            "fname": "pixels",
             "type": "Image"
           }
         },
         "optional": {}
       },
       "outputs": {
-        "Clipvisionoutput": {
+        "CLIPVisionOutput": {
           "type": "Clipvisionoutput"
         }
       }
     },
-    "ConditioningAverage": {
+    "Conditioning Average": {
       "path": "prompt",
       "fname": "conditioning_average",
       "inputs": {
         "required": {
           "To": {
+            "fname": "conditioning_to",
             "type": "Conditioning"
           },
           "From": {
+            "fname": "conditioning_from",
             "type": "Conditioning"
           }
         },
         "optional": {
-          "to_strength": {
+          "To Strength": {
+            "fname": "to_strength",
             "default": 1.0,
             "type": "Float",
             "constraints": {
@@ -1487,15 +1593,17 @@
         }
       }
     },
-    "ConditioningCombine": {
+    "Conditioning Combine": {
       "path": "prompt",
       "fname": "conditioning_combine",
       "inputs": {
         "required": {
-          "a": {
+          "A": {
+            "fname": "a",
             "type": "Conditioning"
           },
-          "b": {
+          "B": {
+            "fname": "b",
             "type": "Conditioning"
           }
         },
@@ -1507,15 +1615,17 @@
         }
       }
     },
-    "ConditioningConcat": {
+    "Conditioning Concat": {
       "path": "prompt",
       "fname": "conditioning_concat",
       "inputs": {
         "required": {
           "To": {
+            "fname": "conditioning_to",
             "type": "Conditioning"
           },
           "From": {
+            "fname": "conditioning_from",
             "type": "Conditioning"
           }
         },
@@ -1527,17 +1637,19 @@
         }
       }
     },
-    "ConditioningSetArea": {
+    "Conditioning Set Area": {
       "path": "prompt",
       "fname": "conditioning_set_area",
       "inputs": {
         "required": {
-          "conditioning": {
+          "Conditioning": {
+            "fname": "conditioning",
             "type": "Conditioning"
           }
         },
         "optional": {
-          "width": {
+          "Width": {
+            "fname": "width",
             "default": 64,
             "type": "Int",
             "constraints": {
@@ -1549,7 +1661,8 @@
             },
             "display": "numerical"
           },
-          "height": {
+          "Height": {
+            "fname": "height",
             "default": 64,
             "type": "Int",
             "constraints": {
@@ -1561,7 +1674,8 @@
             },
             "display": "numerical"
           },
-          "x": {
+          "X": {
+            "fname": "x",
             "default": 0.0,
             "type": "Int",
             "constraints": {
@@ -1573,7 +1687,8 @@
             },
             "display": "numerical"
           },
-          "y": {
+          "Y": {
+            "fname": "y",
             "default": 0.0,
             "type": "Int",
             "constraints": {
@@ -1585,7 +1700,8 @@
             },
             "display": "numerical"
           },
-          "strength": {
+          "Strength": {
+            "fname": "strength",
             "default": 1.0,
             "type": "Float",
             "constraints": {
@@ -1605,17 +1721,19 @@
         }
       }
     },
-    "ConditioningSetAreaPercentage": {
+    "Conditioning Set Area Percentage": {
       "path": "prompt",
       "fname": "conditioning_set_area_percentage",
       "inputs": {
         "required": {
-          "conditioning": {
+          "Conditioning": {
+            "fname": "conditioning",
             "type": "Conditioning"
           }
         },
         "optional": {
-          "width": {
+          "Width": {
+            "fname": "width",
             "default": 1.0,
             "type": "Float",
             "constraints": {
@@ -1626,7 +1744,8 @@
             },
             "display": "slider"
           },
-          "height": {
+          "Height": {
+            "fname": "height",
             "default": 1.0,
             "type": "Float",
             "constraints": {
@@ -1637,7 +1756,8 @@
             },
             "display": "slider"
           },
-          "x": {
+          "X": {
+            "fname": "x",
             "default": 0.0,
             "type": "Float",
             "constraints": {
@@ -1649,7 +1769,8 @@
             },
             "display": "numerical"
           },
-          "y": {
+          "Y": {
+            "fname": "y",
             "default": 0.0,
             "type": "Float",
             "constraints": {
@@ -1661,7 +1782,8 @@
             },
             "display": "numerical"
           },
-          "strength": {
+          "Strength": {
+            "fname": "strength",
             "default": 1.0,
             "type": "Float",
             "constraints": {
@@ -1681,17 +1803,19 @@
         }
       }
     },
-    "ConditioningSetAreaStrength": {
+    "Conditioning Set Area Strength": {
       "path": "prompt",
       "fname": "conditioning_set_area_strength",
       "inputs": {
         "required": {
-          "conditioning": {
+          "Conditioning": {
+            "fname": "conditioning",
             "type": "Conditioning"
           }
         },
         "optional": {
-          "strength": {
+          "Strength": {
+            "fname": "strength",
             "default": 1.0,
             "type": "Float",
             "constraints": {
@@ -1711,20 +1835,23 @@
         }
       }
     },
-    "ConditioningSetMask": {
+    "Conditioning Set Mask": {
       "path": "prompt",
       "fname": "conditioning_set_mask",
       "inputs": {
         "required": {
-          "conditioning": {
+          "Conditioning": {
+            "fname": "conditioning",
             "type": "Conditioning"
           },
-          "mask": {
+          "Mask": {
+            "fname": "mask",
             "type": "Mask"
           }
         },
         "optional": {
-          "set_cond_area": {
+          "Set Cond Area": {
+            "fname": "set_cond_area",
             "default": "default",
             "type": "OneOf",
             "choices": [
@@ -1732,7 +1859,8 @@
               "mask bounds"
             ]
           },
-          "strength": {
+          "Strength": {
+            "fname": "strength",
             "default": 1.0,
             "type": "Float",
             "constraints": {
@@ -1752,17 +1880,19 @@
         }
       }
     },
-    "ConditioningSetTimestepRange": {
-      "path": "advanced/",
+    "Conditioning Set Timestep Range": {
+      "path": "advanced",
       "fname": "conditioning_set_timestep_range",
       "inputs": {
         "required": {
-          "conditioning": {
+          "Conditioning": {
+            "fname": "conditioning",
             "type": "Conditioning"
           }
         },
         "optional": {
-          "start": {
+          "Start": {
+            "fname": "start",
             "default": 0.0,
             "type": "Float",
             "constraints": {
@@ -1774,7 +1904,8 @@
             },
             "display": "numerical"
           },
-          "end": {
+          "End": {
+            "fname": "end",
             "default": 1.0,
             "type": "Float",
             "constraints": {
@@ -1794,12 +1925,13 @@
         }
       }
     },
-    "ConditioningZeroOut": {
-      "path": "advanced/",
+    "Conditioning Zero Out": {
+      "path": "advanced",
       "fname": "conditioning_zero_out",
       "inputs": {
         "required": {
-          "conditioning": {
+          "Conditioning": {
+            "fname": "conditioning",
             "type": "Conditioning"
           }
         },
@@ -1811,23 +1943,27 @@
         }
       }
     },
-    "ControlnetApply": {
+    "Controlnet Apply": {
       "path": "prompt",
       "fname": "controlnet_apply",
       "inputs": {
         "required": {
-          "conditioning": {
+          "Conditioning": {
+            "fname": "conditioning",
             "type": "Conditioning"
           },
-          "control_net": {
+          "Control Net": {
+            "fname": "control_net",
             "type": "Any"
           },
-          "image": {
+          "Image": {
+            "fname": "image",
             "type": "Image"
           }
         },
         "optional": {
-          "strength": {
+          "Strength": {
+            "fname": "strength",
             "default": 1.0,
             "type": "Float",
             "constraints": {
@@ -1847,26 +1983,31 @@
         }
       }
     },
-    "ControlnetApplyAdvanced": {
+    "Controlnet Apply Advanced": {
       "path": "prompt",
       "fname": "controlnet_apply_advanced",
       "inputs": {
         "required": {
-          "positive": {
+          "Positive": {
+            "fname": "positive",
             "type": "Conditioning"
           },
-          "negative": {
+          "Negative": {
+            "fname": "negative",
             "type": "Conditioning"
           },
-          "control_net": {
+          "Control Net": {
+            "fname": "control_net",
             "type": "Controlnet"
           },
-          "image": {
+          "Image": {
+            "fname": "image",
             "type": "Image"
           }
         },
         "optional": {
-          "strength": {
+          "Strength": {
+            "fname": "strength",
             "default": 1.0,
             "type": "Float",
             "constraints": {
@@ -1878,7 +2019,8 @@
             },
             "display": "numerical"
           },
-          "start_percent": {
+          "Start Percent": {
+            "fname": "start_percent",
             "default": 0.0,
             "type": "Float",
             "constraints": {
@@ -1890,7 +2032,8 @@
             },
             "display": "numerical"
           },
-          "end_percent": {
+          "End Percent": {
+            "fname": "end_percent",
             "default": 1.0,
             "type": "Float",
             "constraints": {
@@ -1902,7 +2045,8 @@
             },
             "display": "numerical"
           },
-          "vae": {
+          "Vae": {
+            "fname": "vae",
             "default": null,
             "type": "Vae"
           }
@@ -1914,21 +2058,25 @@
         }
       }
     },
-    "GligenTextboxApply": {
+    "Gligen Textbox Apply": {
       "path": "prompt",
       "fname": "gligen_textbox_apply",
       "inputs": {
         "required": {
-          "conditioning_to": {
+          "Conditioning To": {
+            "fname": "conditioning_to",
             "type": "Conditioning"
           },
-          "clip": {
+          "Clip": {
+            "fname": "clip",
             "type": "Clip"
           },
-          "gligen_textbox_model": {
+          "Gligen Textbox Model": {
+            "fname": "gligen_textbox_model",
             "type": "Gligen"
           },
-          "text": {
+          "Text": {
+            "fname": "text",
             "type": "Str",
             "constraints": {
               "multiline": true,
@@ -1937,7 +2085,8 @@
           }
         },
         "optional": {
-          "width": {
+          "Width": {
+            "fname": "width",
             "default": 64,
             "type": "Int",
             "constraints": {
@@ -1949,7 +2098,8 @@
             },
             "display": "numerical"
           },
-          "height": {
+          "Height": {
+            "fname": "height",
             "default": 64,
             "type": "Int",
             "constraints": {
@@ -1961,7 +2111,8 @@
             },
             "display": "numerical"
           },
-          "x": {
+          "X": {
+            "fname": "x",
             "default": 0,
             "type": "Int",
             "constraints": {
@@ -1973,7 +2124,8 @@
             },
             "display": "numerical"
           },
-          "y": {
+          "Y": {
+            "fname": "y",
             "default": 0,
             "type": "Int",
             "constraints": {
@@ -1993,24 +2145,29 @@
         }
       }
     },
-    "InpaintModelConditioning": {
-      "path": "inpaint/",
+    "Inpaint Model Conditioning": {
+      "path": "inpaint",
       "fname": "inpaint_model_conditioning",
       "inputs": {
         "required": {
-          "positive": {
+          "Positive": {
+            "fname": "positive",
             "type": "Conditioning"
           },
-          "negative": {
+          "Negative": {
+            "fname": "negative",
             "type": "Conditioning"
           },
-          "vae": {
+          "Vae": {
+            "fname": "vae",
             "type": "Vae"
           },
-          "pixels": {
+          "Pixels": {
+            "fname": "pixels",
             "type": "Image"
           },
-          "mask": {
+          "Mask": {
+            "fname": "mask",
             "type": "Mask"
           }
         },
@@ -2025,18 +2182,21 @@
         }
       }
     },
-    "StyleModelApply": {
+    "Style Model Apply": {
       "path": "prompt",
       "fname": "style_model_apply",
       "inputs": {
         "required": {
-          "conditioning": {
+          "Conditioning": {
+            "fname": "conditioning",
             "type": "Conditioning"
           },
-          "style_model": {
+          "Style Model": {
+            "fname": "style_model",
             "type": "Stylemodel"
           },
-          "clip_vision_output": {
+          "Clip Vision Output": {
+            "fname": "clip_vision_output",
             "type": "Clipvisionoutput"
           }
         },
@@ -2048,20 +2208,23 @@
         }
       }
     },
-    "UnclipConditioning": {
+    "Unclip Conditioning": {
       "path": "prompt",
       "fname": "unclip_conditioning",
       "inputs": {
         "required": {
-          "conditioning": {
+          "Conditioning": {
+            "fname": "conditioning",
             "type": "Conditioning"
           },
-          "clip_vision_output": {
+          "Clip Vision Output": {
+            "fname": "clip_vision_output",
             "type": "Clipvisionoutput"
           }
         },
         "optional": {
-          "strength": {
+          "Strength": {
+            "fname": "strength",
             "default": 1.0,
             "type": "Float",
             "constraints": {
@@ -2073,7 +2236,8 @@
             },
             "display": "numerical"
           },
-          "noise_augmentation": {
+          "Noise Augmentation": {
+            "fname": "noise_augmentation",
             "default": 0,
             "type": "Float",
             "constraints": {
@@ -2092,38 +2256,43 @@
         }
       }
     },
-    "PreviewImage": {
+    "Preview Image": {
       "path": "save",
       "fname": "preview_image",
       "inputs": {
         "required": {
-          "pixels": {
+          "Pixels": {
+            "fname": "pixels",
             "type": "Image"
           }
         },
         "optional": {
-          "prompt": {
+          "Prompt": {
+            "fname": "prompt",
             "default": null,
             "type": "Str"
           },
-          "extra_pnginfo": {
+          "Extra Pnginfo": {
+            "fname": "extra_pnginfo",
             "default": null
           }
         }
       },
       "outputs": {}
     },
-    "SaveAudio": {
+    "Save Audio": {
       "path": "save",
       "fname": "save_audio",
       "inputs": {
         "required": {
-          "audio": {
+          "Audio": {
+            "fname": "audio",
             "type": "Audio"
           }
         },
         "optional": {
-          "filename_prefix": {
+          "Filename Prefix": {
+            "fname": "filename_prefix",
             "default": "audio/sdbx_",
             "type": "Str",
             "constraints": {
@@ -2131,28 +2300,32 @@
               "dynamic_prompts": false
             }
           },
-          "prompt": {
+          "Prompt": {
+            "fname": "prompt",
             "default": null,
             "type": "Str"
           },
-          "extra_pnginfo": {
+          "Extra Pnginfo": {
+            "fname": "extra_pnginfo",
             "default": null
           }
         }
       },
       "outputs": {}
     },
-    "SaveImage": {
+    "Save Image": {
       "path": "save",
       "fname": "save_image",
       "inputs": {
         "required": {
-          "pixels": {
+          "Pixels": {
+            "fname": "pixels",
             "type": "Image"
           }
         },
         "optional": {
-          "filename_prefix": {
+          "Filename Prefix": {
+            "fname": "filename_prefix",
             "default": "sdbx",
             "type": "Str",
             "constraints": {
@@ -2160,26 +2333,30 @@
               "dynamic_prompts": false
             }
           },
-          "prompt": {
+          "Prompt": {
+            "fname": "prompt",
             "default": null,
             "type": "Str"
           },
-          "extra_pnginfo": {
+          "Extra Pnginfo": {
+            "fname": "extra_pnginfo",
             "default": null
           }
         }
       },
       "outputs": {}
     },
-    "ImageBatch": {
+    "Image Batch": {
       "path": "transform",
       "fname": "image_batch",
       "inputs": {
         "required": {
-          "image1": {
+          "Image1": {
+            "fname": "image1",
             "type": "Image"
           },
-          "image2": {
+          "Image2": {
+            "fname": "image2",
             "type": "Image"
           }
         },
@@ -2191,12 +2368,13 @@
         }
       }
     },
-    "ImageInvert": {
+    "Image Invert": {
       "path": "transform",
       "fname": "image_invert",
       "inputs": {
         "required": {
-          "image": {
+          "Image": {
+            "fname": "image",
             "type": "Image"
           }
         },
@@ -2208,17 +2386,19 @@
         }
       }
     },
-    "ImagePadForOutpaint": {
+    "Image Pad For Outpaint": {
       "path": "transform",
       "fname": "image_pad_for_outpaint",
       "inputs": {
         "required": {
-          "pixels": {
+          "Pixels": {
+            "fname": "pixels",
             "type": "Image"
           }
         },
         "optional": {
-          "left": {
+          "Left": {
+            "fname": "left",
             "default": 0,
             "type": "Int",
             "constraints": {
@@ -2230,7 +2410,8 @@
             },
             "display": "numerical"
           },
-          "top": {
+          "Top": {
+            "fname": "top",
             "default": 0,
             "type": "Int",
             "constraints": {
@@ -2242,7 +2423,8 @@
             },
             "display": "numerical"
           },
-          "right": {
+          "Right": {
+            "fname": "right",
             "default": 0,
             "type": "Int",
             "constraints": {
@@ -2254,7 +2436,8 @@
             },
             "display": "numerical"
           },
-          "bottom": {
+          "Bottom": {
+            "fname": "bottom",
             "default": 0,
             "type": "Int",
             "constraints": {
@@ -2266,7 +2449,8 @@
             },
             "display": "numerical"
           },
-          "feathering": {
+          "Feathering": {
+            "fname": "feathering",
             "default": 40,
             "type": "Int",
             "constraints": {
@@ -2289,15 +2473,17 @@
         }
       }
     },
-    "ImageScale": {
+    "Image Scale": {
       "path": "transform",
       "fname": "image_scale",
       "inputs": {
         "required": {
-          "pixels": {
+          "Pixels": {
+            "fname": "pixels",
             "type": "Image"
           },
-          "upscale_method": {
+          "Upscale Method": {
+            "fname": "upscale_method",
             "type": "OneOf",
             "choices": [
               "nearest-exact",
@@ -2307,7 +2493,8 @@
               "lanczos"
             ]
           },
-          "crop": {
+          "Crop": {
+            "fname": "crop",
             "type": "OneOf",
             "choices": [
               "disabled",
@@ -2316,7 +2503,8 @@
           }
         },
         "optional": {
-          "width": {
+          "Width": {
+            "fname": "width",
             "default": 512,
             "type": "Int",
             "constraints": {
@@ -2328,7 +2516,8 @@
             },
             "display": "numerical"
           },
-          "height": {
+          "Height": {
+            "fname": "height",
             "default": 512,
             "type": "Int",
             "constraints": {
@@ -2348,15 +2537,17 @@
         }
       }
     },
-    "ImageScaleBy": {
+    "Image Scale By": {
       "path": "transform",
       "fname": "image_scale_by",
       "inputs": {
         "required": {
-          "pixels": {
+          "Pixels": {
+            "fname": "pixels",
             "type": "Image"
           },
-          "upscale_method": {
+          "Upscale Method": {
+            "fname": "upscale_method",
             "type": "OneOf",
             "choices": [
               "nearest-exact",
@@ -2368,7 +2559,8 @@
           }
         },
         "optional": {
-          "scale_by": {
+          "Scale By": {
+            "fname": "scale_by",
             "default": 1.0,
             "type": "Float",
             "constraints": {
@@ -2388,20 +2580,23 @@
         }
       }
     },
-    "LatentBlend": {
+    "Latent Blend": {
       "path": "transform",
       "fname": "latent_blend",
       "inputs": {
         "required": {
-          "samples1": {
+          "Samples1": {
+            "fname": "samples1",
             "type": "Latent"
           },
-          "samples2": {
+          "Samples2": {
+            "fname": "samples2",
             "type": "Latent"
           }
         },
         "optional": {
-          "blend_factor": {
+          "Blend Factor": {
+            "fname": "blend_factor",
             "default": 0.5,
             "type": "Float",
             "constraints": {
@@ -2421,20 +2616,23 @@
         }
       }
     },
-    "LatentComposite": {
+    "Latent Composite": {
       "path": "transform",
       "fname": "latent_composite",
       "inputs": {
         "required": {
-          "samples_to": {
+          "Samples To": {
+            "fname": "samples_to",
             "type": "Latent"
           },
-          "samples_from": {
+          "Samples From": {
+            "fname": "samples_from",
             "type": "Latent"
           }
         },
         "optional": {
-          "x": {
+          "X": {
+            "fname": "x",
             "default": 0,
             "type": "Int",
             "constraints": {
@@ -2446,7 +2644,8 @@
             },
             "display": "numerical"
           },
-          "y": {
+          "Y": {
+            "fname": "y",
             "default": 0,
             "type": "Int",
             "constraints": {
@@ -2458,7 +2657,8 @@
             },
             "display": "numerical"
           },
-          "feather": {
+          "Feather": {
+            "fname": "feather",
             "default": 0,
             "type": "Int",
             "constraints": {
@@ -2478,17 +2678,19 @@
         }
       }
     },
-    "LatentCrop": {
+    "Latent Crop": {
       "path": "transform",
       "fname": "latent_crop",
       "inputs": {
         "required": {
-          "samples": {
+          "Samples": {
+            "fname": "samples",
             "type": "Latent"
           }
         },
         "optional": {
-          "width": {
+          "Width": {
+            "fname": "width",
             "default": 64,
             "type": "Int",
             "constraints": {
@@ -2500,7 +2702,8 @@
             },
             "display": "numerical"
           },
-          "height": {
+          "Height": {
+            "fname": "height",
             "default": 64,
             "type": "Int",
             "constraints": {
@@ -2512,7 +2715,8 @@
             },
             "display": "numerical"
           },
-          "x": {
+          "X": {
+            "fname": "x",
             "default": 0,
             "type": "Int",
             "constraints": {
@@ -2524,7 +2728,8 @@
             },
             "display": "numerical"
           },
-          "y": {
+          "Y": {
+            "fname": "y",
             "default": 0,
             "type": "Int",
             "constraints": {
@@ -2544,15 +2749,17 @@
         }
       }
     },
-    "LatentFlip": {
+    "Latent Flip": {
       "path": "transform",
       "fname": "latent_flip",
       "inputs": {
         "required": {
-          "samples": {
+          "Samples": {
+            "fname": "samples",
             "type": "Latent"
           },
-          "flip_method": {
+          "Flip Method": {
+            "fname": "flip_method",
             "type": "OneOf",
             "choices": [
               "x-axis: vertically",
@@ -2568,17 +2775,19 @@
         }
       }
     },
-    "LatentFromBatch": {
+    "Latent From Batch": {
       "path": "transform",
       "fname": "latent_from_batch",
       "inputs": {
         "required": {
-          "samples": {
+          "Samples": {
+            "fname": "samples",
             "type": "Latent"
           }
         },
         "optional": {
-          "batch_index": {
+          "Batch Index": {
+            "fname": "batch_index",
             "default": 0,
             "type": "Int",
             "constraints": {
@@ -2590,7 +2799,8 @@
             },
             "display": "numerical"
           },
-          "length": {
+          "Length": {
+            "fname": "length",
             "default": 1,
             "type": "Int",
             "constraints": {
@@ -2610,15 +2820,17 @@
         }
       }
     },
-    "LatentRotate": {
+    "Latent Rotate": {
       "path": "transform",
       "fname": "latent_rotate",
       "inputs": {
         "required": {
-          "samples": {
+          "Samples": {
+            "fname": "samples",
             "type": "Latent"
           },
-          "rotation": {
+          "Rotation": {
+            "fname": "rotation",
             "type": "OneOf",
             "choices": [
               "none",
@@ -2636,15 +2848,17 @@
         }
       }
     },
-    "LatentUpscale": {
+    "Latent Upscale": {
       "path": "transform",
       "fname": "latent_upscale",
       "inputs": {
         "required": {
-          "samples": {
+          "Samples": {
+            "fname": "samples",
             "type": "Latent"
           },
-          "upscale_method": {
+          "Upscale Method": {
+            "fname": "upscale_method",
             "type": "OneOf",
             "choices": [
               "nearest-exact",
@@ -2656,7 +2870,8 @@
           }
         },
         "optional": {
-          "width": {
+          "Width": {
+            "fname": "width",
             "default": 512,
             "type": "Int",
             "constraints": {
@@ -2668,7 +2883,8 @@
             },
             "display": "numerical"
           },
-          "height": {
+          "Height": {
+            "fname": "height",
             "default": 512,
             "type": "Int",
             "constraints": {
@@ -2680,7 +2896,8 @@
             },
             "display": "numerical"
           },
-          "crop": {
+          "Crop": {
+            "fname": "crop",
             "default": "disabled",
             "type": "OneOf",
             "choices": [
@@ -2696,15 +2913,17 @@
         }
       }
     },
-    "LatentUpscaleBy": {
+    "Latent Upscale By": {
       "path": "transform",
       "fname": "latent_upscale_by",
       "inputs": {
         "required": {
-          "samples": {
+          "Samples": {
+            "fname": "samples",
             "type": "Latent"
           },
-          "upscale_method": {
+          "Upscale Method": {
+            "fname": "upscale_method",
             "type": "OneOf",
             "choices": [
               "nearest-exact",
@@ -2716,7 +2935,8 @@
           }
         },
         "optional": {
-          "scale_by": {
+          "Scale By": {
+            "fname": "scale_by",
             "default": 1.5,
             "type": "Float",
             "constraints": {
@@ -2736,17 +2956,19 @@
         }
       }
     },
-    "RepeatLatentBatch": {
+    "Repeat Latent Batch": {
       "path": "transform",
       "fname": "repeat_latent_batch",
       "inputs": {
         "required": {
-          "samples": {
+          "Samples": {
+            "fname": "samples",
             "type": "Latent"
           }
         },
         "optional": {
-          "amount": {
+          "Amount": {
+            "fname": "amount",
             "default": 1,
             "type": "Int",
             "constraints": {
@@ -2766,15 +2988,17 @@
         }
       }
     },
-    "SetLatentNoiseMask": {
+    "Set Latent Noise Mask": {
       "path": "transform",
       "fname": "set_latent_noise_mask",
       "inputs": {
         "required": {
-          "samples": {
+          "Samples": {
+            "fname": "samples",
             "type": "Latent"
           },
-          "mask": {
+          "Mask": {
+            "fname": "mask",
             "type": "Mask"
           }
         },
@@ -2786,4 +3010,4 @@
         }
       }
     }
-  }
+}
