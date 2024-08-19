@@ -32,7 +32,6 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
     }))
   );
 
-  const value = graph[id]?.fields[name];
   const onChange = useMemo(
     () =>
       debounce((v: any) => {
@@ -44,10 +43,12 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
   const handleChange = (e: any) => onChange(e.target.value)
 
   if (input.type === "OneOf") {
+    const i = input as InputDataLiteral;
+
     if (input.fname === "ckpt_name" || input.fname === "lora_name") {
       return <ModelDrawer 
-        value={value}
-        models={(input as InputDataLiteral).choices}
+        value={i.default}
+        models={i.choices}
         type={name} 
         onChange={handleChange} 
       />;
@@ -55,44 +56,51 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
 
     return (
       <SelectUploadInput
-        value={value}
+        value={i.default}
         name={name}
-        input={(input as InputDataLiteral).choices}
+        input={i.choices}
         onChange={(v: string) => onChange(v)}
       />
     );
   }
 
   if (input.type === "Bool") {
+    const i = input as InputDataGeneric<boolean>;
+
     return (
       <Checkbox
-        value={value}
-        defaultChecked={(input as InputDataGeneric<boolean>).default}
-        onChange={handleChange}
+        checked={i.default}
+        onCheckedChange={handleChange}
       />
     );
   }
 
   if (input.type == "Int" || input.type == "Float") {
-    if ((input as InputDataNumerical | InputDataSlider).display == "numerical") {
+    const usi = input as InputDataNumerical | InputDataSlider;
+
+    if (usi.display == "numerical") {
+      const i = input as InputDataNumerical;
+
       return ( 
         <SliderInput // TODO: numerical input
           name={name.toLowerCase()}
           style={{ width: "100%" }}
-          value={Number(value !== null ? value : (input as InputDataNumerical).default)}
-          max={Number((input as InputDataNumerical).constraints?.max)}
-          min={Number((input as InputDataNumerical).constraints?.min)}
+          value={Number(i.default)}
+          max={Number(i.constraints?.max)}
+          min={Number(i.constraints?.min)}
           onChange={(v: number) => onChange(v)}
         />
       );
-    } else if ((input as InputDataNumerical | InputDataSlider).display == "slider") {
+    } else if (usi.display == "slider") {
+      const i = input as InputDataSlider
+
       return (
         <SliderInput
           name={name.toLowerCase()}
           style={{ width: "100%" }}
-          value={Number(value !== null ? value : (input as InputDataSlider).default)}
-          max={Number((input as InputDataSlider).constraints?.max)}
-          min={Number((input as InputDataSlider).constraints?.min)}
+          value={Number(i.default)}
+          max={Number(i.constraints?.max)}
+          min={Number(i.constraints?.min)}
           onChange={(v: number) => onChange(v)}
         />
       );
@@ -100,11 +108,13 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
   }
 
   if (input.type = "Str") {
+    const i = input as InputDataStr;
+
     return (
       <Textarea
         style={{ width: "100%" }}
-        multiline={(input as InputDataStr).constraints?.multiline ?? false}
-        defaultValue={value}
+        multiline={i.constraints?.multiline}
+        defaultValue={i.default}
         onBlur={handleChange}
         onKeyDown={(e) => e.stopPropagation()}
       />
