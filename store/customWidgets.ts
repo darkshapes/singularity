@@ -2,20 +2,24 @@ import { Widget, WidgetKey } from "@/types";
 
 const customWidgets: Record<WidgetKey, Widget> = {
   Group: {
-    input: {
+    path: "utils/",
+    fname: "", // not sent to server
+    inputs: {
       required: {},
+      optional: {}
     },
-    output: [],
-    output_name: [],
-    name: "Group",
-    category: "utils",
+    outputs: {}
   },
   Reroute: {
-    input: { required: { ["*"]: ["*"] } },
-    output: ["*"],
-    output_name: [],
-    name: "Reroute",
-    category: "utils",
+    path: "utils/",
+    fname: "", // not sent to server
+    inputs: {
+      required: {},
+      optional: {}
+    },
+    outputs: {
+      Output: "Any"
+    }
   },
 };
 

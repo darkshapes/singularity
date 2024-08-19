@@ -1,29 +1,25 @@
 import React from "react";
 import { Position } from "reactflow";
+import { WidgetOutputs } from "@/types";
 import { NodeHandle } from "./node-handle";
 
-interface Output {
-  name: string;
-  type: string;
-}
-
 interface NodeOutputsProps {
-  data: Output[];
+  data: WidgetOutputs;
   selected: boolean;
 }
 
 const NodeOutputsComponent = ({ data, selected }: NodeOutputsProps) => {
-  if (!data?.length) return <div />;
+  if (!Object.keys(data).length) return <div />;
   return (
     <div className="flex-1">
-      {data.map(({ name, type }, i) => (
+      {Object.entries(data).map(([ name, { type } ], i) => (
         <NodeHandle
           key={i}
           slotType={type}
           label={name}
           type="source"
           position={Position.Right}
-          isRequired
+          required
           selected={selected}
         />
       ))}

@@ -3,7 +3,7 @@ import config from "@/app/config";
 import type { NodeId, PersistedGraph, PersistedNode, Widget } from "@/types";
 import { Connection } from "@/types";
 import { Node, PromptRequest, PromptResponse, Queue } from "@/types/client";
-import { checkInput, getBackendUrl } from "@/utils";
+import { getBackendUrl } from "@/utils";
 
 import initMocks from "@/mock";
 
@@ -81,10 +81,10 @@ export const createPrompt = ({
     if (customWidgets.includes(node.value.widget)) return;
     const fields = { ...node.value.fields };
     Object.entries(fields).forEach(([property, value]) => {
-      const input = widgets[node.value.widget].input.required[property];
-      if (checkInput.isInt(input) && input[1].randomizable && value === -1) {
-        fields[property] = Math.trunc(Math.random() * Number.MAX_SAFE_INTEGER);
-      }
+      const input = widgets[node.value.widget].inputs.required?.[property];
+      // if (input.randomizable && value === -1) {
+        // fields[property] = Math.trunc(Math.random() * Number.MAX_SAFE_INTEGER);
+      // }
     });
     data[id] = {
       position: node.position,
@@ -102,8 +102,8 @@ export const createPrompt = ({
   connections.forEach((edge) => {
     const source = graph.data[edge.source];
     if (!source) return;
-    const outputIndex = widgets[source.value.widget].output.findIndex(
-      (f) => f === edge.sourceHandle
+    const outputIndex = widgets[source.value.widget].outputs.findIndex(
+      (f: any) => f === edge.sourceHandle
     );
     if (prompt[edge.target]) {
       prompt[edge.target].inputs[edge.targetHandle] = [

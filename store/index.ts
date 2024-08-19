@@ -333,6 +333,7 @@ export const useAppStore = create<AppState>()(
             if (widget) {
               return addNode(state, {
                 widget,
+                name: node.value.widget,
                 node: node.value,
                 position: node.position,
                 width: node.width,
@@ -541,6 +542,7 @@ export const useAppStore = create<AppState>()(
               if (widget) {
                 state = addNode(state, {
                   widget,
+                  name: node.value.widget,
                   node: node.value,
                   position: node.position,
                   width: node.width,

@@ -2,18 +2,17 @@ import React, { useMemo } from "react";
 import { startCase } from "lodash-es";
 import { motion } from "framer-motion";
 import { type Widget } from "@/types";
-import { checkInput } from "@/utils";
 import { NodeCard } from "./node-card";
 
 interface SlotProps {
-  isRequired: 1 | 0;
+  required: 1 | 0;
   position: "left" | "right";
 }
 
-const Slot = ({ isRequired, position }: SlotProps) => (
+const Slot = ({ required, position }: SlotProps) => (
   <div
     className={`mt-1.5 react-flow__handle ${
-      isRequired ? "bg-primary" : "bg-border"
+      required ? "bg-primary" : "bg-border"
     } ${position === "left" ? "mr-2" : "ml-2"}`}
     style={{
       width: "12px",
@@ -25,29 +24,14 @@ const Slot = ({ isRequired, position }: SlotProps) => (
 );
 
 interface PreviewNodeProps {
+  name: string; 
   data: Widget;
   showPath?: boolean;
   flipPath?: boolean;
 }
 
-const PreviewNodeComponent = ({ data, showPath }: PreviewNodeProps) => {
-  const { outputs, params, inputs } = useMemo(() => {
-    const outputs = data.output.map((o) => ({ name: o, type: o }));
-    const params: any[] = [];
-    const inputs: any[] = [];
-
-    Object.entries({...data.input.required, ...data.input.optional}).forEach(([property, input]) => {
-      if (checkInput.isParameterOrList(input)) {
-        params.push({ name: property, type: input[0], input });
-      } else {
-        inputs.push({ name: property, type: input[0] });
-      }
-    });
-
-    return { outputs, params, inputs };
-  }, [data]);
-
-  const path = (data.category + "/").replaceAll("/", " › ");
+const PreviewNodeComponent = ({ name, data, showPath }: PreviewNodeProps) => {
+  const path = (data.path + "/").replaceAll("/", " › ");
 
   return (
     <motion.div
@@ -62,29 +46,29 @@ const PreviewNodeComponent = ({ data, showPath }: PreviewNodeProps) => {
       }}
       className="w-[350px]"
     >
-      <NodeCard title={data.name} path={showPath ? path : ""} active={false} preview={true}>
+      <NodeCard title={name} path={showPath ? path : ""} active={false} preview={true}>
         <div className="flex w-full items-stretch justify-between space-x-6">
           <div className="flex-1">
-            {inputs.map((item, index) => (
+            {Object.keys(data.inputs.required).map((name, index) => (
               <div key={index} className="flex items-center">
-                <Slot position="left" isRequired={1} />
-                <span className="text-sm">{startCase(item.name)}</span>
+                <Slot position="left" required={1} />
+                <span className="text-sm">{startCase(name)}</span>
               </div>
             ))}
           </div>
           <div className="flex-1 text-right">
-            {outputs.map((item, index) => (
+            {Object.keys(data.outputs).map((name, index) => (
               <div key={index} className="flex items-center justify-end">
-                <span className="text-sm">{startCase(item.name)}</span>
-                <Slot position="right" isRequired={1} />
+                <span className="text-sm">{startCase(name)}</span>
+                <Slot position="right" required={1} />
               </div>
             ))}
           </div>
         </div>
         <div className="mt-4">
-          {params.map((item, index) => (
+          {Object.keys(data.inputs.optional).map((name, index) => (
             <div key={index} className="flex items-center">
-              <span className="text-sm">{startCase(item.name)}</span>
+              <span className="text-sm">{startCase(name)}</span>
             </div>
           ))}
         </div>

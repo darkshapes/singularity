@@ -23,7 +23,7 @@ export const NodeContextMenu = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [activeItem, setActiveItem] = useState<Widget | null>(null);
+  const [activeItem, setActiveItem] = useState<{name: string; w: Widget} | null>(null);
   const [showPath, setShowPath] = useState<boolean>(false);
   const [previewPosition, setPreviewPosition] = useState<{x: string, y: string}>({x: 'right', y: 'bottom'});
   const [flipPath, setFlipPath] = useState<boolean>(false);
@@ -56,7 +56,7 @@ export const NodeContextMenu = ({
     </ContextMenu>
     { activeItem !== null && 
       <div className={`fixed z-[60] ${previewPosition.x}-0 ${previewPosition.y}-0 text-accent-foreground bg-muted/50 p-8 rounded-lg border backdrop-blur-sm`}>
-        <PreviewNode data={activeItem} showPath={showPath} flipPath={flipPath} />
+        <PreviewNode name={activeItem.name} data={activeItem.w} showPath={showPath} flipPath={flipPath} />
       </div>
     }
   </>

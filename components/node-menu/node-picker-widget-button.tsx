@@ -1,16 +1,24 @@
 import React, { useCallback } from 'react';
 import { startCase } from "lodash-es";
+import { useShallow } from "zustand/react/shallow";
 
+import { useAppStore } from "@/store";
 import { NodeItem, Widget } from "@/types";
 import { cn } from "@/lib/utils";
 
 type NodePickerWidgetButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     w: Widget;
-    onAddNode: (nodeItem: NodeItem) => void;
-    setActiveItem: (nodeItem: Widget | null) => void;
+    name: string;
+    setActiveItem: (nodeItem: {name: string; w: Widget} | null) => void;
 };
 
-export const NodePickerWidgetButton: React.FC<NodePickerWidgetButtonProps> = ({ w, onAddNode, setActiveItem, ...props }) => {
+export const NodePickerWidgetButton = ({ w, name, setActiveItem, ...props }: NodePickerWidgetButtonProps) => {
+    const { onAddNode } = useAppStore(
+        useShallow((st) => ({
+          onAddNode: st.onAddNode,
+        }))
+    );
+
     const handleDrag = useCallback(
         (event: React.DragEvent<HTMLButtonElement>, i: Widget) => {
           event.dataTransfer.setData("application/reactflow", JSON.stringify(w));
@@ -19,7 +27,7 @@ export const NodePickerWidgetButton: React.FC<NodePickerWidgetButtonProps> = ({ 
     );
 
     const handleMouseEnter = () => {
-        setActiveItem(w);
+        setActiveItem({w, name});
     };
     
     const handleMouseLeave = () => {
@@ -34,7 +42,7 @@ export const NodePickerWidgetButton: React.FC<NodePickerWidgetButtonProps> = ({ 
             )}
             onClick={(e) => {
                 e.preventDefault();
-                onAddNode({ widget: w });
+                onAddNode({ widget: w, name });
             }}
             draggable
             onDragStart={(event) => handleDrag(event, w)}
@@ -42,7 +50,7 @@ export const NodePickerWidgetButton: React.FC<NodePickerWidgetButtonProps> = ({ 
             onMouseLeave={handleMouseLeave}
             {...props}
         >
-            {startCase(w.name)}
+            {startCase(name)}
         </button>
     );
 };

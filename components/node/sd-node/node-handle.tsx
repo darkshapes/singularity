@@ -11,7 +11,7 @@ interface NodeHandleProps {
   type: HandleType;
   position: Position;
   slotType?: string;
-  isRequired?: boolean;
+  required?: boolean;
   selected?: boolean;
   clickable?: boolean;
   onClick?: () => void;
@@ -22,12 +22,12 @@ export const NodeHandle = ({
   type,
   position,
   slotType,
-  isRequired,
+  required,
   selected = false,
   clickable = false,
   onClick,
 }: NodeHandleProps) => {
-  const nodes = useAppStore(useShallow((state) => state.nodes));
+  const nodes = useAppStore(useShallow((st) => st.nodes));
 
   const handleValidCheck = useCallback(
     (connection: Connection) => {
@@ -62,11 +62,11 @@ export const NodeHandle = ({
     <>
       <Slot 
         position={position} 
-        isRequired={isRequired ? 1 : 0} 
+        required={required ? 1 : 0} 
         className={cn("group", clickable && "cursor-pointer")} 
         onClick={onClick}
       >
-        {isRequired ? (
+        {required ? (
           <Handle
             id={label}
             type={type}

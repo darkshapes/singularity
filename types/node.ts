@@ -38,6 +38,7 @@ export interface SDNode {
 /**
  * Node object
  * @property widget - Widget object
+ * @property name - Name
  * @property node - SDNode object
  * @property position - Node position
  * @property key - Node key
@@ -47,6 +48,7 @@ export interface SDNode {
  */
 export interface NodeItem {
   widget: Widget;
+  name: string;
   node?: SDNode;
   position?: XYPosition;
   key?: string;

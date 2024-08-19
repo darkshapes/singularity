@@ -18,9 +18,10 @@ const NodePickerComponent = ({ setActiveItem, setShowPath }: any) => {
       onAddNode: state.onAddNode,
     }))
   );
+
   const [category, setCategory] = useState<any>({});
   const [keywords, setKeywords] = useState<string>("");
-  const [widgetList, setWidgetList] = useState<Widget[]>([]);
+  const [widgetList, setWidgetList] = useState<Record<string, Widget>>({});
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
   useEffect(() => {
@@ -28,33 +29,34 @@ const NodePickerComponent = ({ setActiveItem, setShowPath }: any) => {
 
     setShowPath(keywords !== ""); // show path in node preview when searching
 
-    const addWidgetToCategory = (categoryPath: string[], widget: Widget) => {
+    const addWidgetToCategory = (categoryPath: string[], name: string, widget: Widget) => {
       let currentLevel = byCategory;
 
       categoryPath.forEach((category, index) => {
         if (!currentLevel[category]) {
-          currentLevel[category] = { widgets: [], subcategories: {} };
+          currentLevel[category] = { widgets: {}, subcategories: {} };
         }
         if (index === categoryPath.length - 1) {
-          currentLevel[category].widgets.push(widget);
+          currentLevel[category].widgets[name] = widget
         }
         currentLevel = currentLevel[category].subcategories;
       });
     };
 
-    let widgetsValues = Object.values(widgets);
-    if (keywords) {
-      widgetsValues = widgetsValues.filter((widget) =>
-        widget.name.toLowerCase().includes(keywords.toLowerCase())
-      );
+    let matchedWidgets = Object.keys(widgets).reduce((acc: Record<string, Widget>, name: string) => {
+      if (name.toLowerCase().includes(keywords.toLowerCase())) {
+        acc[name] = widgets[name];
+      }
+
+      return acc;
+    }, {});
+
+    for (const [name, widget] of Object.entries(matchedWidgets)) {
+      const categoryPath = widget.path.split("/");
+      addWidgetToCategory(categoryPath, name, widget);
     }
 
-    for (const widget of widgetsValues) {
-      const categoryPath = widget.category.split("/");
-      addWidgetToCategory(categoryPath, widget);
-    }
-
-    setWidgetList(widgetsValues);
+    setWidgetList(matchedWidgets);
     setCategory(byCategory);
   }, [widgets, keywords]);
 
@@ -93,7 +95,7 @@ const NodePickerComponent = ({ setActiveItem, setShowPath }: any) => {
       <div className="nodeMenu flex flex-col overflow-y-scroll" style={{ maxHeight: '14rem', scrollbarWidth: 'none' }} >
         {
           (keywords === "") ?
-            Object.entries(category).map(([cat, items], index) => (
+            Object.entries(category).map(([cat, items]: any, index) => (
               <motion.div
                 key={cat}
                 initial={{ opacity: 0, y: 20 }}
@@ -108,17 +110,16 @@ const NodePickerComponent = ({ setActiveItem, setShowPath }: any) => {
                   category={cat}
                   items={items}
                   setActiveItem={setActiveItem}
-                  onAddNode={onAddNode}
                   expandedItems={expandedItems}
                   setExpandedItems={setExpandedItems}
                 />
               </motion.div>
             )) :
-            Object.values(widgetList).map((w: Widget) => (
+            Object.entries(widgetList).map(([name, w]: [string, Widget]) => (
               <NodePickerWidgetButton
-                key={w.name}
+                key={name}
                 w={w}
-                onAddNode={onAddNode}
+                name={name}
                 setActiveItem={setActiveItem}
               />
             ))

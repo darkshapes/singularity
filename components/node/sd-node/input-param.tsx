@@ -1,6 +1,5 @@
 import { useAppStore } from "@/store";
 import { InputData, NodeId } from "@/types";
-import { checkInput } from "@/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { debounce } from "lodash-es";
 import React, { useMemo } from "react";
@@ -36,7 +35,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
 
   const handleChange = (e: any) => onChange(e.target.value)
 
-  if (checkInput.isList(input)) {
+  if (input.type === "OneOf") {
     if (name === "ckpt_name" || name === "lora_name") {
       return <ModelDrawer 
         value={value}
@@ -56,7 +55,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
     );
   }
 
-  if (checkInput.isBool(input)) {
+  if (input.type === "Bool") {
     return (
       <Checkbox
         value={value}
@@ -66,7 +65,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
     );
   }
 
-  if (checkInput.isInt(input)) {
+  if (input.type == "Int") {
     return (
       <SliderInput
         name={name.toLowerCase()}
@@ -79,7 +78,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
     );
   }
 
-  if (checkInput.isFloat(input)) {
+  if (input.type == "Float") {
     return (
       <SliderInput
         name={name.toLowerCase()}
@@ -93,7 +92,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
     );
   }
 
-  if (checkInput.isString(input)) {
+  if (input.type = "Str") {
     const args = input[1];
     if (args.multiline === true) {
       return (
