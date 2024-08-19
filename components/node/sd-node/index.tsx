@@ -16,9 +16,8 @@ import {
 
 import { useAppStore } from "@/store";
 import { Widget } from "@/types";
-import { checkInput, updateNode } from "@/utils";
 
-const SdNodeComponent = ({ id, data: { input, output, output_name }, selected }: NodeProps<Widget>) => {
+const SdNodeComponent = ({ id, data, selected }: NodeProps<Widget>) => {
   const updateNodeInternals = useUpdateNodeInternals();
   const { imagePreviews, inputImgPreviews, nodes, graph } = useAppStore(
     useShallow((st) => ({
@@ -50,40 +49,7 @@ const SdNodeComponent = ({ id, data: { input, output, output_name }, selected }:
     updateNodeInternals(id);
   }
 
-  const params = useMemo(() => {
-    const paramsList: any[] = [];
-    Object.entries({...input.required, ...input.optional}).forEach(([property, inputType]) => {
-      if (checkInput.isParameterOrList(inputType) && !swappedParams.some(p => p.name === property)) {
-        paramsList.push({
-          name: property,
-          type: inputType[0],
-          input: inputType,
-        });
-      }
-    });
-    return paramsList;
-  }, [input, swappedParams]);
-
-  const inputs = useMemo(() => {
-    const makeInputList = (data: Record<string, any> | undefined) => {
-      const inputList: any[] = [];
-      Object.entries(data ?? []).forEach(([property, inputType]) => {
-        if (!checkInput.isParameterOrList(inputType)) {
-          inputList.push({ name: property, type: inputType[0] });
-        }
-      });
-      return inputList;
-    };
-    return {
-      required: makeInputList(input.required),
-      optional: makeInputList(input.optional),
-      // swappedParams:
-    };
-  }, [input]);
-
-  const outputs = useMemo(() => {
-    return output.map((o, i) => ({ name: output_name[i], type: o }));
-  }, [output, output_name])
+  const params: any = [];
 
   const { expanded, onExpand } = useAppStore((state) => ({
     expanded: state.expanded,
@@ -97,10 +63,10 @@ const SdNodeComponent = ({ id, data: { input, output, output_name }, selected }:
     <>
       <div className="flex items-stretch justify-stretch w-full space-x-6">
         <div className="flex-1">
-          <NodeInputs data={inputs} selected={selected} />
+          <NodeInputs data={data.inputs} selected={selected} />
           <NodeSwappedParams data={swappedParams} selected={selected} swapItem={swapItem} />
         </div>
-        <NodeOutputs data={outputs} selected={selected} />
+        <NodeOutputs data={data.outputs} selected={selected} />
       </div>
       {params.length > 0 && (
         <Accordion

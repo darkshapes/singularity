@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useCallback, useState, useEffect } from "react";
-import { startCase } from "lodash-es";
+import React from "react";
 
-import { NodeItem, Widget } from "@/types";
+import { Widget } from "@/types";
 import { NodePickerWidgetButton } from "./node-picker-widget-button";
 import {
   ContextMenuSeparator,
@@ -13,11 +12,15 @@ import {
 } from "@/components/ui/context-menu";
 import { cn } from "@/lib/utils";
 
+interface NodePickerGroupItems {
+  widgets: Record<string, Widget>;
+  subcategories: NodePickerGroupItems[];
+}
+
 interface NodePickerGroupProps {
   category: string;
-  items: any;
-  setActiveItem: (nodeItem: Widget | null) => void;
-  onAddNode: (nodeItem: NodeItem) => void;
+  items: NodePickerGroupItems;
+  setActiveItem: (nodeItem: {name: string; w: Widget} | null) => void;
   expandedItems: string[];
   setExpandedItems: (items: string[]) => void;
 }
@@ -26,7 +29,6 @@ const NodePickerGroupComponent = ({
   category,
   items,
   setActiveItem,
-  onAddNode,
   expandedItems,
   setExpandedItems,
 }: NodePickerGroupProps) => {
@@ -44,17 +46,16 @@ const NodePickerGroupComponent = ({
               category={subCat}
               items={subItems}
               setActiveItem={setActiveItem}
-              onAddNode={onAddNode}
               expandedItems={expandedItems}
               setExpandedItems={setExpandedItems}
             />
           ))}
-          {Object.values(items.subcategories).length > 0 && items.widgets.length > 0 && <ContextMenuSeparator />}
-          {items.widgets.map((e: Widget) => (
+          {Object.values(items.subcategories).length > 0 && Object.values(items.widgets).length > 0 && <ContextMenuSeparator />}
+          {Object.entries(items.widgets).map(([name, e]) => (
             <NodePickerWidgetButton 
-              key={e.name}
+              key={name}
+              name={name}
               w={e}
-              onAddNode={onAddNode}
               setActiveItem={setActiveItem}
             />
           ))}

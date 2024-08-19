@@ -1,6 +1,5 @@
 import React from "react";
 import { NodeHandle } from "@/components/node/sd-node/node-handle";
-import { Flow } from "@/types";
 import { Position } from "reactflow";
 import { InputParams } from "./input-param";
 
@@ -9,7 +8,7 @@ interface NodeParamsProps {
   data: {
     name: string;
     type: string;
-    input: [Flow];
+    input: string;
   }[];
   selected: boolean;
   swapItem: (item: any) => void;
@@ -25,7 +24,7 @@ const NodeSwappedParamsComponent = ({ data, selected, swapItem }: Omit<NodeParam
           label={name}
           type="target"
           position={Position.Left}
-          isRequired
+          required
           selected={selected}
           clickable={true}
           onClick={() => swapItem({ name, type, input })}
@@ -54,7 +53,7 @@ const NodeParamsComponent = ({ data, nodeId, selected, swapItem }: NodeParamsPro
               label={name}
               type="target"
               position={Position.Left}
-              isRequired={false}
+              required={false}
               selected={selected}
               clickable={true}
               onClick={() => swapItem({ name, type, input })}

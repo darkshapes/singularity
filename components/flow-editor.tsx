@@ -15,12 +15,13 @@ import ReactFlow, {
   Edge,
   MiniMap,
   NodeDragHandler,
+  NodeProps,
 } from "reactflow";
 import { debounce } from "lodash-es";
 import { useShallow } from "zustand/react/shallow";
 import { useTheme } from "next-themes";
 
-import { Node, NODE_IDENTIFIER } from "@/components/node";
+import { Node } from "@/components/node";
 import { getPostion, getPostionCenter } from "@/utils";
 import useUndoRedo from "@/hooks/use-undo-redo";
 import { useAppStore } from "@/store";
@@ -29,7 +30,6 @@ import "reactflow/dist/style.css";
 import useForceLayout from "@/hooks/use-force-layout";
 
 export const FlowEditor = ({ strength = -1000, distance = 1000 }) => {
-  const nodeTypes = useMemo(() => ({ [NODE_IDENTIFIER]: Node }), []);
   const { theme } = useTheme();
   const reactFlowRef = useRef<HTMLDivElement>(null);
   const edgeUpdateSuccessful = useRef(true);
@@ -41,6 +41,7 @@ export const FlowEditor = ({ strength = -1000, distance = 1000 }) => {
   const {
     nodes,
     edges,
+    widgets,
     onInit,
     onNodesChange,
     onEdgesChange,
@@ -56,6 +57,7 @@ export const FlowEditor = ({ strength = -1000, distance = 1000 }) => {
     useShallow((st) => ({
       nodes: st.nodes,
       edges: st.edges,
+      widgets: st.widgets,
       onInit: st.onInit,
       onNodesChange: debounce(st.onNodesChange, 1),
       onEdgesChange: debounce(st.onEdgesChange, 1),
@@ -69,6 +71,13 @@ export const FlowEditor = ({ strength = -1000, distance = 1000 }) => {
       onCreateGroup: st.onCreateGroup,
     }))
   );
+
+  const nodeTypes = useMemo(() => 
+    Object.keys(widgets).reduce((acc, name) => {
+      acc[name] = Node;
+      return acc;
+    }, {} as Record<string, React.FC<NodeProps>>), 
+  [widgets])
 
   const onEdgeUpdateStart = useCallback(() => {
     edgeUpdateSuccessful.current = false;

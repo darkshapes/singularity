@@ -1,14 +1,13 @@
-import { NODE_IDENTIFIER } from "@/components/node";
 import { AppState } from "@/store";
-import { NodeItem, NodePosition, PersistedGraph } from "@/types";
+import { NodeItem, NodePosition, PersistedGraph, SDNode } from "@/types";
 import { Node, applyNodeChanges } from "reactflow";
 import { v4 as uuid } from "uuid";
-import { fromWidget } from "./widget";
 
 /**
  * @title Add Node
  * @param state - Application state object
  * @param widget - Component
+ * @param name - Name
  * @param node - Node
  * @param position - Node position
  * @param width - Node width
@@ -21,6 +20,7 @@ export const addNode = (
   state: AppState,
   {
     widget,
+    name,
     node,
     position = { x: 0, y: 0 },
     width,
@@ -41,7 +41,7 @@ export const addNode = (
   // Construct the node object
   const item: Node = {
     id,
-    type: NODE_IDENTIFIER,
+    type: name,
     data: { ...widget, ...(node?.modify ?? {}) },
     dragHandle: ".drag-handle",
     position,
@@ -52,11 +52,16 @@ export const addNode = (
     style: { width, height },
   };
 
+  const widgetNode: SDNode = {
+    widget: name,
+    fields: {},
+  }
+
   // Update the application state object
   return {
     ...state,
     nodes: applyNodeChanges([{ type: "add", item }], state.nodes),
-    graph: { ...state.graph, [id]: node ?? fromWidget(widget) },
+    graph: { ...state.graph, [id]: node ?? widgetNode },
   };
 };
 

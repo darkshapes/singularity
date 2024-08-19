@@ -1,2789 +1,2789 @@
 {
-  "EmptyImage": {
+    "EmptyImage": {
       "path": "generate",
       "fname": "empty_image",
       "inputs": {
-          "required": {},
-          "optional": {
-              "width": {
-                  "default": 512,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 1,
-                      "max": 16384,
-                      "step": 1,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "height": {
-                  "default": 512,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 1,
-                      "max": 16384,
-                      "step": 1,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "batch_size": {
-                  "default": 1,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 1,
-                      "max": 4096,
-                      "step": 1.0,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "color": {
-                  "default": 0,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 16777215,
-                      "step": 1,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+        "required": {},
+        "optional": {
+          "width": {
+            "default": 512,
+            "type": "Int",
+            "constraints": {
+              "min": 1,
+              "max": 16384,
+              "step": 1,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "height": {
+            "default": 512,
+            "type": "Int",
+            "constraints": {
+              "min": 1,
+              "max": 16384,
+              "step": 1,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "batch_size": {
+            "default": 1,
+            "type": "Int",
+            "constraints": {
+              "min": 1,
+              "max": 4096,
+              "step": 1.0,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "color": {
+            "default": 0,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 16777215,
+              "step": 1,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
           }
+        }
       },
       "outputs": {
-          "Image": {
-              "type": "Image"
-          }
+        "Image": {
+          "type": "Image"
+        }
       }
-  },
-  "EmptyLatentAudio": {
+    },
+    "EmptyLatentAudio": {
       "path": "generate",
       "fname": "empty_latent_audio",
       "inputs": {
-          "required": {},
-          "optional": {
-              "seconds": {
-                  "default": 47.6,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 1.0,
-                      "max": 1000.0,
-                      "step": 0.1,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "batch_size": {
-                  "default": 1,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 1,
-                      "max": 16,
-                      "step": 1,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+        "required": {},
+        "optional": {
+          "seconds": {
+            "default": 47.6,
+            "type": "Float",
+            "constraints": {
+              "min": 1.0,
+              "max": 1000.0,
+              "step": 0.1,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "batch_size": {
+            "default": 1,
+            "type": "Int",
+            "constraints": {
+              "min": 1,
+              "max": 16,
+              "step": 1,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
           }
+        }
       },
       "outputs": {
-          "Latent": {
-              "type": "Latent"
-          }
+        "Latent": {
+          "type": "Latent"
+        }
       }
-  },
-  "EmptyLatentImage": {
+    },
+    "EmptyLatentImage": {
       "path": "generate",
       "fname": "empty_latent_image",
       "inputs": {
-          "required": {},
-          "optional": {
-              "width": {
-                  "default": 512,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 16,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "height": {
-                  "default": 512,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 16,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "batch_size": {
-                  "default": 1,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 1,
-                      "max": 4096,
-                      "step": 1512,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+        "required": {},
+        "optional": {
+          "width": {
+            "default": 512,
+            "type": "Int",
+            "constraints": {
+              "min": 16,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "height": {
+            "default": 512,
+            "type": "Int",
+            "constraints": {
+              "min": 16,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "batch_size": {
+            "default": 1,
+            "type": "Int",
+            "constraints": {
+              "min": 1,
+              "max": 4096,
+              "step": 1512,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
           }
+        }
       },
       "outputs": {
-          "Latent": {
-              "type": "Latent"
-          }
+        "Latent": {
+          "type": "Latent"
+        }
       }
-  },
-  "KSampler": {
+    },
+    "KSampler": {
       "path": "generate",
       "fname": "k_sampler",
       "inputs": {
-          "required": {
-              "model": {
-                  "type": "Model"
-              },
-              "positive": {
-                  "type": "Conditioning"
-              },
-              "negative": {
-                  "type": "Conditioning"
-              },
-              "latent": {
-                  "type": "Latent"
-              },
-              "sampler_name": {
-                  "type": "oneof",
-                  "choices": [
-                      "euler",
-                      "euler_ancestral",
-                      "heun",
-                      "heunpp2",
-                      "dpm_2",
-                      "dpm_2_ancestral",
-                      "lms",
-                      "dpm_fast",
-                      "dpm_adaptive",
-                      "dpmpp_2s_ancestral",
-                      "dpmpp_sde",
-                      "dpmpp_sde_gpu",
-                      "dpmpp_2m",
-                      "dpmpp_2m_sde",
-                      "dpmpp_2m_sde_gpu",
-                      "dpmpp_3m_sde",
-                      "dpmpp_3m_sde_gpu",
-                      "ddpm",
-                      "lcm",
-                      "ddim",
-                      "uni_pc",
-                      "uni_pc_bh2"
-                  ]
-              },
-              "scheduler": {
-                  "type": "oneof",
-                  "choices": [
-                      "normal",
-                      "karras",
-                      "exponential",
-                      "sgm_uniform",
-                      "simple",
-                      "ddim_uniform"
-                  ]
-              }
+        "required": {
+          "model": {
+            "type": "Model"
           },
-          "optional": {
-              "seed": {
-                  "default": 0,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 18446744073709551615,
-                      "step": 1,
-                      "round": false,
-                      "randomizable": true,
-                      "display": "numerical"
-                  }
-              },
-              "steps": {
-                  "default": 20,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 1,
-                      "max": 10000,
-                      "step": 1,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "cfg": {
-                  "default": 8.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.0,
-                      "max": 100.0,
-                      "step": 0.01,
-                      "round": false,
-                      "display": "slider"
-                  }
-              },
-              "denoise": {
-                  "default": 1.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.0,
-                      "max": 1.0,
-                      "step": 0.01,
-                      "round": false,
-                      "display": "slider"
-                  }
-              },
-              "advanced_options": {
-                  "default": false,
-                  "type": "bool"
-              },
-              "disable_noising": {
-                  "default": false,
-                  "type": "Bool",
-                  "dependent": {
-                      "on": "advanced_options",
-                      "when": true
-                  }
-              },
-              "force_full_denoise": {
-                  "default": false,
-                  "type": "Bool",
-                  "dependent": {
-                      "on": "advanced_options",
-                      "when": true
-                  }
-              },
-              "start_step": {
-                  "default": null,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 10000,
-                      "step": 1,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  },
-                  "dependent": {
-                      "on": "advanced_options",
-                      "when": true
-                  }
-              },
-              "last_step": {
-                  "default": null,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 10000,
-                      "step": 1,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  },
-                  "dependent": {
-                      "on": "advanced_options",
-                      "when": true
-                  }
-              },
-              "noise_types": {
-                  "default": "cpu",
-                  "type": "Literal",
-                  "dependent": {
-                      "on": "advanced_options",
-                      "when": true
-                  }
-              }
+          "positive": {
+            "type": "Conditioning"
+          },
+          "negative": {
+            "type": "Conditioning"
+          },
+          "latent": {
+            "type": "Latent"
+          },
+          "sampler_name": {
+            "type": "OneOf",
+            "choices": [
+              "euler",
+              "euler_ancestral",
+              "heun",
+              "heunpp2",
+              "dpm_2",
+              "dpm_2_ancestral",
+              "lms",
+              "dpm_fast",
+              "dpm_adaptive",
+              "dpmpp_2s_ancestral",
+              "dpmpp_sde",
+              "dpmpp_sde_gpu",
+              "dpmpp_2m",
+              "dpmpp_2m_sde",
+              "dpmpp_2m_sde_gpu",
+              "dpmpp_3m_sde",
+              "dpmpp_3m_sde_gpu",
+              "ddpm",
+              "lcm",
+              "ddim",
+              "uni_pc",
+              "uni_pc_bh2"
+            ]
+          },
+          "scheduler": {
+            "type": "OneOf",
+            "choices": [
+              "normal",
+              "karras",
+              "exponential",
+              "sgm_uniform",
+              "simple",
+              "ddim_uniform"
+            ]
           }
+        },
+        "optional": {
+          "seed": {
+            "default": 0,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 18446744073709551615,
+              "step": 1,
+              "round": false,
+              "randomizable": true
+            },
+            "display": "numerical"
+          },
+          "steps": {
+            "default": 20,
+            "type": "Int",
+            "constraints": {
+              "min": 1,
+              "max": 10000,
+              "step": 1,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "cfg": {
+            "default": 8.0,
+            "type": "Float",
+            "constraints": {
+              "min": 0.0,
+              "max": 100.0,
+              "step": 0.01,
+              "round": false
+            },
+            "display": "slider"
+          },
+          "denoise": {
+            "default": 1.0,
+            "type": "Float",
+            "constraints": {
+              "min": 0.0,
+              "max": 1.0,
+              "step": 0.01,
+              "round": false
+            },
+            "display": "slider"
+          },
+          "advanced_options": {
+            "default": false,
+            "type": "Bool"
+          },
+          "disable_noising": {
+            "default": false,
+            "type": "Bool",
+            "dependent": {
+              "on": "advanced_options",
+              "when": true
+            }
+          },
+          "force_full_denoise": {
+            "default": false,
+            "type": "Bool",
+            "dependent": {
+              "on": "advanced_options",
+              "when": true
+            }
+          },
+          "start_step": {
+            "default": null,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 10000,
+              "step": 1,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical",
+            "dependent": {
+              "on": "advanced_options",
+              "when": true
+            }
+          },
+          "last_step": {
+            "default": null,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 10000,
+              "step": 1,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical",
+            "dependent": {
+              "on": "advanced_options",
+              "when": true
+            }
+          },
+          "noise_types": {
+            "default": "cpu",
+            "type": "Literal",
+            "dependent": {
+              "on": "advanced_options",
+              "when": true
+            }
+          }
+        }
       },
       "outputs": {
-          "Latent": {
-              "type": "Latent"
-          }
+        "Latent": {
+          "type": "Latent"
+        }
       }
-  },
-  "LlmSampler": {
+    },
+    "LlmSampler": {
       "path": "generate",
       "fname": "llm_sampler",
       "inputs": {
-          "required": {
-              "model": {
-                  "type": "Model"
-              },
-              "prompt": {
-                  "type": "str"
-              }
+        "required": {
+          "model": {
+            "type": "Model"
           },
-          "optional": {
-              "system_msg": {
-                  "default": "The following instruction describes a task and is paired with an input that provides further context. Write a response that appropriately completes the request.",
-                  "type": "Str",
-                  "constraints": {
-                      "multiline": true,
-                      "dynamic_prompts": false
-                  }
-              },
-              "max_tokens": {
-                  "default": 512,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 1,
-                      "max": 2048,
-                      "step": 1,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "temperature": {
-                  "default": 0.2,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.01,
-                      "max": 2.0,
-                      "step": 0.01,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "top_p": {
-                  "default": 0.95,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.1,
-                      "max": 1.0,
-                      "step": 0.01,
-                      "round": false,
-                      "display": "slider"
-                  }
-              },
-              "top_k": {
-                  "default": 40,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 100,
-                      "step": 1,
-                      "round": false,
-                      "display": "slider"
-                  }
-              },
-              "frequency_penalty": {
-                  "default": 0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": -2.0,
-                      "max": 2.0,
-                      "step": 0.01,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "presence_penalty": {
-                  "default": 0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": -2.0,
-                      "max": 2.0,
-                      "step": 0.01,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "repeat_penalty": {
-                  "default": 1.1,
-                  "type": "Float",
-                  "constraints": {
-                      "min": -2.0,
-                      "max": 2.0,
-                      "step": 0.01,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "seed": {
-                  "default": 0,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 18446744073709551615,
-                      "step": 1,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+          "prompt": {
+            "type": "Str"
           }
+        },
+        "optional": {
+          "system_msg": {
+            "default": "The following instruction describes a task and is paired with an input that provides further context. Write a response that appropriately completes the request.",
+            "type": "Str",
+            "constraints": {
+              "multiline": true,
+              "dynamic_prompts": false
+            }
+          },
+          "max_tokens": {
+            "default": 512,
+            "type": "Int",
+            "constraints": {
+              "min": 1,
+              "max": 2048,
+              "step": 1,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "temperature": {
+            "default": 0.2,
+            "type": "Float",
+            "constraints": {
+              "min": 0.01,
+              "max": 2.0,
+              "step": 0.01,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "top_p": {
+            "default": 0.95,
+            "type": "Float",
+            "constraints": {
+              "min": 0.1,
+              "max": 1.0,
+              "step": 0.01,
+              "round": false
+            },
+            "display": "slider"
+          },
+          "top_k": {
+            "default": 40,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 100,
+              "step": 1,
+              "round": false
+            },
+            "display": "slider"
+          },
+          "frequency_penalty": {
+            "default": 0,
+            "type": "Float",
+            "constraints": {
+              "min": -2.0,
+              "max": 2.0,
+              "step": 0.01,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "presence_penalty": {
+            "default": 0,
+            "type": "Float",
+            "constraints": {
+              "min": -2.0,
+              "max": 2.0,
+              "step": 0.01,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "repeat_penalty": {
+            "default": 1.1,
+            "type": "Float",
+            "constraints": {
+              "min": -2.0,
+              "max": 2.0,
+              "step": 0.01,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "seed": {
+            "default": 0,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 18446744073709551615,
+              "step": 1,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "str": {
-              "type": "str"
-          }
+        "Str": {
+          "type": "Str"
+        }
       }
-  },
-  "VaeDecode": {
+    },
+    "VaeDecode": {
       "path": "vae",
       "fname": "vae_decode",
       "inputs": {
-          "required": {
-              "vae": {
-                  "type": "VAE"
-              },
-              "samples": {
-                  "type": "Latent"
-              }
+        "required": {
+          "vae": {
+            "type": "Vae"
           },
-          "optional": {}
+          "samples": {
+            "type": "Latent"
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Image": {
-              "type": "Image"
-          }
+        "Image": {
+          "type": "Image"
+        }
       }
-  },
-  "VaeDecodeAudio": {
+    },
+    "VaeDecodeAudio": {
       "path": "generate",
       "fname": "vae_decode_audio",
       "inputs": {
-          "required": {
-              "samples": {
-                  "type": "Latent"
-              },
-              "vae": {
-                  "type": "VAE"
-              }
+        "required": {
+          "samples": {
+            "type": "Latent"
           },
-          "optional": {}
+          "vae": {
+            "type": "Vae"
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Audio": {
-              "type": "Audio"
-          }
+        "Audio": {
+          "type": "Audio"
+        }
       }
-  },
-  "VaeDecodeTiled": {
+    },
+    "VaeDecodeTiled": {
       "path": "vae",
       "fname": "vae_decode_tiled",
       "inputs": {
-          "required": {
-              "vae": {
-                  "type": "VAE"
-              },
-              "samples": {
-                  "type": "Latent"
-              }
+        "required": {
+          "vae": {
+            "type": "Vae"
           },
-          "optional": {
-              "tile_size": {
-                  "default": 512,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 320,
-                      "max": 4096,
-                      "step": 64,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+          "samples": {
+            "type": "Latent"
           }
+        },
+        "optional": {
+          "tile_size": {
+            "default": 512,
+            "type": "Int",
+            "constraints": {
+              "min": 320,
+              "max": 4096,
+              "step": 64,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Image": {
-              "type": "Image"
-          }
+        "Image": {
+          "type": "Image"
+        }
       }
-  },
-  "VaeEncode": {
+    },
+    "VaeEncode": {
       "path": "vae",
       "fname": "vae_encode",
       "inputs": {
-          "required": {
-              "vae": {
-                  "type": "VAE"
-              },
-              "pixels": {
-                  "type": "Image"
-              }
+        "required": {
+          "vae": {
+            "type": "Vae"
           },
-          "optional": {}
+          "pixels": {
+            "type": "Image"
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Latent": {
-              "type": "Latent"
-          }
+        "Latent": {
+          "type": "Latent"
+        }
       }
-  },
-  "VaeEncodeAudio": {
+    },
+    "VaeEncodeAudio": {
       "path": "generate",
       "fname": "vae_encode_audio",
       "inputs": {
-          "required": {
-              "audio": {
-                  "type": "Audio"
-              },
-              "vae": {
-                  "type": "VAE"
-              }
+        "required": {
+          "audio": {
+            "type": "Audio"
           },
-          "optional": {}
+          "vae": {
+            "type": "Vae"
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Latent": {
-              "type": "Latent"
-          }
+        "Latent": {
+          "type": "Latent"
+        }
       }
-  },
-  "VaeEncodeForInpaint": {
+    },
+    "VaeEncodeForInpaint": {
       "path": "inpaint/",
       "fname": "vae_encode_for_inpaint",
       "inputs": {
-          "required": {
-              "vae": {
-                  "type": "VAE"
-              },
-              "pixels": {
-                  "type": "Image"
-              },
-              "mask": {
-                  "type": "Mask"
-              }
+        "required": {
+          "vae": {
+            "type": "Vae"
           },
-          "optional": {
-              "grow_mask_by": {
-                  "default": 6,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 64,
-                      "step": 1,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+          "pixels": {
+            "type": "Image"
+          },
+          "mask": {
+            "type": "Mask"
           }
+        },
+        "optional": {
+          "grow_mask_by": {
+            "default": 6,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 64,
+              "step": 1,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Latent": {
-              "type": "Latent"
-          }
+        "Latent": {
+          "type": "Latent"
+        }
       }
-  },
-  "VaeEncodeTiled": {
+    },
+    "VaeEncodeTiled": {
       "path": "vae",
       "fname": "vae_encode_tiled",
       "inputs": {
-          "required": {
-              "vae": {
-                  "type": "VAE"
-              },
-              "pixels": {
-                  "type": "Image"
-              }
+        "required": {
+          "vae": {
+            "type": "Vae"
           },
-          "optional": {
-              "tile_size": {
-                  "default": 512,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 320,
-                      "max": 4096,
-                      "step": 64,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+          "pixels": {
+            "type": "Image"
           }
+        },
+        "optional": {
+          "tile_size": {
+            "default": 512,
+            "type": "Int",
+            "constraints": {
+              "min": 320,
+              "max": 4096,
+              "step": 64,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Latent": {
-              "type": "Latent"
-          }
+        "Latent": {
+          "type": "Latent"
+        }
       }
-  },
-  "LoadLatent": {
+    },
+    "LoadLatent": {
       "path": "load",
       "fname": "load_latent",
       "inputs": {
-          "required": {
-              "latent": {
-                  "type": "oneof",
-                  "choices": []
-              }
-          },
-          "optional": {}
+        "required": {
+          "latent": {
+            "type": "OneOf",
+            "choices": []
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Latent": {
-              "type": "Latent"
-          }
+        "Latent": {
+          "type": "Latent"
+        }
       }
-  },
-  "SaveLatent": {
+    },
+    "SaveLatent": {
       "path": "save",
       "fname": "save_latent",
       "inputs": {
-          "required": {
-              "samples": {
-                  "type": "Latent"
-              }
-          },
-          "optional": {
-              "filename_prefix": {
-                  "default": "sdbx",
-                  "type": "str"
-              },
-              "prompt": {
-                  "default": null,
-                  "type": "str"
-              },
-              "extra_pnginfo": {
-                  "default": null
-              }
+        "required": {
+          "samples": {
+            "type": "Latent"
           }
+        },
+        "optional": {
+          "filename_prefix": {
+            "default": "sdbx",
+            "type": "Str"
+          },
+          "prompt": {
+            "default": null,
+            "type": "Str"
+          },
+          "extra_pnginfo": {
+            "default": null
+          }
+        }
       },
       "outputs": {}
-  },
-  "CheckpointLoader": {
+    },
+    "CheckpointLoader": {
       "path": "advanced/",
       "fname": "checkpoint_loader",
       "inputs": {
-          "required": {
-              "ckpt_name": {
-                  "type": "oneof",
-                  "choices": [
-                      "Anything-V3.0.ckpt",
-                      "Realistic_Vision_V5.1_fp16-no-ema.safetensors",
-                      "Realistic_Vision_V6.0_NV_B1_fp16.safetensors",
-                      "anyloraCheckpoint_bakedvaeBlessedFp16.safetensors",
-                      "cardosAnime_v10.safetensors",
-                      "cosxl.safetensors",
-                      "cosxl_edit.safetensors",
-                      "counterfeitV30_v30.safetensors",
-                      "dreamshaperXL_v21TurboDPMSDE.safetensors",
-                      "dreamshaper_8.safetensors",
-                      "juggernautXL_v9Rundiffusionphoto2.safetensors",
-                      "picxReal_10.safetensors",
-                      "realvisxlV40_v40Bakedvae.safetensors",
-                      "revAnimated_v2Rebirth.safetensors",
-                      "sd3_medium.safetensors",
-                      "sd3_medium_incl_clips.safetensors",
-                      "sd3_medium_incl_clips_t5xxlfp8.safetensors",
-                      "sd_xl_base_1.0.safetensors",
-                      "sd_xl_refiner_1.0.safetensors",
-                      "sd_xl_turbo_1.0.safetensors",
-                      "sd_xl_turbo_1.0_fp16.safetensors",
-                      "stable_cascade_stage_b.safetensors",
-                      "stable_cascade_stage_c.safetensors",
-                      "stage_a.safetensors",
-                      "v1-5-pruned-emaonly.ckpt",
-                      "v1-5-pruned-emaonly.safetensors",
-                      "v1-5-pruned.ckpt",
-                      "v1-5-pruned.safetensors",
-                      "v2-1_768-ema-pruned.ckpt",
-                      "wd-illusion-fp16.safetensors"
-                  ]
-              }
-          },
-          "optional": {}
+        "required": {
+          "ckpt_name": {
+            "type": "OneOf",
+            "choices": [
+              "Anything-V3.0.ckpt",
+              "Realistic_Vision_V5.1_fp16-no-ema.safetensors",
+              "Realistic_Vision_V6.0_NV_B1_fp16.safetensors",
+              "anyloraCheckpoint_bakedvaeBlessedFp16.safetensors",
+              "cardosAnime_v10.safetensors",
+              "cosxl.safetensors",
+              "cosxl_edit.safetensors",
+              "counterfeitV30_v30.safetensors",
+              "dreamshaperXL_v21TurboDPMSDE.safetensors",
+              "dreamshaper_8.safetensors",
+              "juggernautXL_v9Rundiffusionphoto2.safetensors",
+              "picxReal_10.safetensors",
+              "realvisxlV40_v40Bakedvae.safetensors",
+              "revAnimated_v2Rebirth.safetensors",
+              "sd3_medium.safetensors",
+              "sd3_medium_incl_clips.safetensors",
+              "sd3_medium_incl_clips_t5xxlfp8.safetensors",
+              "sd_xl_base_1.0.safetensors",
+              "sd_xl_refiner_1.0.safetensors",
+              "sd_xl_turbo_1.0.safetensors",
+              "sd_xl_turbo_1.0_fp16.safetensors",
+              "stable_cascade_stage_b.safetensors",
+              "stable_cascade_stage_c.safetensors",
+              "stage_a.safetensors",
+              "v1-5-pruned-emaonly.ckpt",
+              "v1-5-pruned-emaonly.safetensors",
+              "v1-5-pruned.ckpt",
+              "v1-5-pruned.safetensors",
+              "v2-1_768-ema-pruned.ckpt",
+              "wd-illusion-fp16.safetensors"
+            ]
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Model": {
-              "type": "Model"
-          },
-          "CLIP": {
-              "type": "CLIP"
-          },
-          "VAE": {
-              "type": "VAE"
-          }
+        "Model": {
+          "type": "Model"
+        },
+        "Clip": {
+          "type": "Clip"
+        },
+        "Vae": {
+          "type": "Vae"
+        }
       }
-  },
-  "ClipLoader": {
+    },
+    "ClipLoader": {
       "path": "load",
       "fname": "clip_loader",
       "inputs": {
-          "required": {
-              "clip_name": {
-                  "type": "oneof",
-                  "choices": [
-                      "clip_g.safetensors",
-                      "clip_l.safetensors",
-                      "t5xxl_fp16.safetensors",
-                      "t5xxl_fp8_e4m3fn.safetensors"
-                  ]
-              }
-          },
-          "optional": {
-              "type": {
-                  "default": "stable_diffusion",
-                  "type": "oneof",
-                  "choices": [
-                      "stable_diffusion",
-                      "stable_cascade",
-                      "sd3",
-                      "stable_audio"
-                  ]
-              }
+        "required": {
+          "clip_name": {
+            "type": "OneOf",
+            "choices": [
+              "clip_g.safetensors",
+              "clip_l.safetensors",
+              "t5xxl_fp16.safetensors",
+              "t5xxl_fp8_e4m3fn.safetensors"
+            ]
           }
+        },
+        "optional": {
+          "type": {
+            "default": "stable_diffusion",
+            "type": "OneOf",
+            "choices": [
+              "stable_diffusion",
+              "stable_cascade",
+              "sd3",
+              "stable_audio"
+            ]
+          }
+        }
       },
       "outputs": {
-          "CLIP": {
-              "type": "CLIP"
-          }
+        "Clip": {
+          "type": "Clip"
+        }
       }
-  },
-  "ClipVisionLoader": {
+    },
+    "ClipVisionLoader": {
       "path": "load",
       "fname": "clip_vision_loader",
       "inputs": {
-          "required": {
-              "clip_name": {
-                  "type": "oneof",
-                  "choices": [
-                      "clip_vision_g.safetensors"
-                  ]
-              }
-          },
-          "optional": {}
+        "required": {
+          "clip_name": {
+            "type": "OneOf",
+            "choices": [
+              "clip_vision_g.safetensors"
+            ]
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "CLIPVision": {
-              "type": "CLIPVision"
-          }
+        "Clipvision": {
+          "type": "Clipvision"
+        }
       }
-  },
-  "ControlnetLoader": {
+    },
+    "ControlnetLoader": {
       "path": "loaders",
       "fname": "controlnet_loader",
       "inputs": {
-          "required": {
-              "control_net_name": {
-                  "type": "oneof",
-                  "choices": [
-                      "ControlNet-Plus-Plus_sd15_ade20k_seg.safetensors",
-                      "ControlNet-Plus-Plus_sd15_canny.safetensors",
-                      "ControlNet-Plus-Plus_sd15_grayscale_depth.safetensors",
-                      "ControlNet-Plus-Plus_sd15_hed.bin",
-                      "ControlNet-Plus-Plus_sd15_lineart.bin",
-                      "OpenPoseXL2.safetensors",
-                      "control-lora-openposeXL2-rank256.safetensors",
-                      "control_lora_rank128_v11e_sd15_ip2p_fp16.safetensors",
-                      "control_lora_rank128_v11e_sd15_shuffle_fp16.safetensors",
-                      "control_lora_rank128_v11f1e_sd15_tile_fp16.safetensors",
-                      "control_lora_rank128_v11f1p_sd15_depth_fp16.safetensors",
-                      "control_lora_rank128_v11p_sd15_canny_fp16.safetensors",
-                      "control_lora_rank128_v11p_sd15_inpaint_fp16.safetensors",
-                      "control_lora_rank128_v11p_sd15_lineart_fp16.safetensors",
-                      "control_lora_rank128_v11p_sd15_mlsd_fp16.safetensors",
-                      "control_lora_rank128_v11p_sd15_normalbae_fp16.safetensors",
-                      "control_lora_rank128_v11p_sd15_openpose_fp16.safetensors",
-                      "control_lora_rank128_v11p_sd15_scribble_fp16.safetensors",
-                      "control_lora_rank128_v11p_sd15_seg_fp16.safetensors",
-                      "control_lora_rank128_v11p_sd15_softedge_fp16.safetensors",
-                      "control_lora_rank128_v11p_sd15s2_lineart_anime_fp16.safetensors",
-                      "control_v11e_sd15_ip2p_fp16.safetensors",
-                      "control_v11e_sd15_shuffle_fp16.safetensors",
-                      "control_v11f1e_sd15_tile_fp16.safetensors",
-                      "control_v11f1p_sd15_depth_fp16.safetensors",
-                      "control_v11p_sd15_canny_fp16.safetensors",
-                      "control_v11p_sd15_inpaint_fp16.safetensors",
-                      "control_v11p_sd15_lineart_fp16.safetensors",
-                      "control_v11p_sd15_mlsd_fp16.safetensors",
-                      "control_v11p_sd15_normalbae_fp16.safetensors",
-                      "control_v11p_sd15_openpose_fp16.safetensors",
-                      "control_v11p_sd15_scribble_fp16.safetensors",
-                      "control_v11p_sd15_seg_fp16.safetensors",
-                      "control_v11p_sd15_softedge_fp16.safetensors",
-                      "control_v11p_sd15s2_lineart_anime_fp16.safetensors",
-                      "control_v11u_sd15_tile_fp16.safetensors",
-                      "controlnet-densepose-sdxl.safetensors",
-                      "depth-zoe-xl-v1.0-controlnet.safetensors",
-                      "diffusers_xl_canny_full.safetensors",
-                      "diffusers_xl_canny_mid.safetensors",
-                      "diffusers_xl_canny_small.safetensors",
-                      "diffusers_xl_depth_full.safetensors",
-                      "diffusers_xl_depth_mid.safetensors",
-                      "diffusers_xl_depth_small.safetensors",
-                      "ioclab_sd15_recolor.safetensors",
-                      "kohya_controllllite_xl_blur.safetensors",
-                      "kohya_controllllite_xl_blur_anime.safetensors",
-                      "kohya_controllllite_xl_blur_anime_beta.safetensors",
-                      "kohya_controllllite_xl_canny.safetensors",
-                      "kohya_controllllite_xl_canny_anime.safetensors",
-                      "kohya_controllllite_xl_depth.safetensors",
-                      "kohya_controllllite_xl_depth_anime.safetensors",
-                      "kohya_controllllite_xl_openpose_anime.safetensors",
-                      "kohya_controllllite_xl_openpose_anime_v2.safetensors",
-                      "kohya_controllllite_xl_scribble_anime.safetensors",
-                      "mistoLine_rank256.safetensors",
-                      "sai_xl_canny_128lora.safetensors",
-                      "sai_xl_canny_256lora.safetensors",
-                      "sai_xl_depth_128lora.safetensors",
-                      "sai_xl_depth_256lora.safetensors",
-                      "sai_xl_recolor_128lora.safetensors",
-                      "sai_xl_recolor_256lora.safetensors",
-                      "sai_xl_sketch_128lora.safetensors",
-                      "sai_xl_sketch_256lora.safetensors",
-                      "sargezt_xl_depth.safetensors",
-                      "sargezt_xl_depth_faid_vidit.safetensors",
-                      "sargezt_xl_depth_zeed.safetensors",
-                      "sargezt_xl_softedge.safetensors",
-                      "stable_cascade_canny.safetensors",
-                      "stable_cascade_inpainting.safetensors",
-                      "stable_cascade_super_resolution.safetensors",
-                      "t2i-adapter_diffusers_xl_canny.safetensors",
-                      "t2i-adapter_diffusers_xl_depth_midas.safetensors",
-                      "t2i-adapter_diffusers_xl_depth_zoe.safetensors",
-                      "t2i-adapter_diffusers_xl_lineart.safetensors",
-                      "t2i-adapter_diffusers_xl_openpose.safetensors",
-                      "t2i-adapter_diffusers_xl_sketch.safetensors",
-                      "t2i-adapter_xl_canny.safetensors",
-                      "t2i-adapter_xl_openpose.safetensors",
-                      "t2i-adapter_xl_sketch.safetensors",
-                      "thibaud_xl_openpose.safetensors",
-                      "thibaud_xl_openpose_256lora.safetensors",
-                      "xinsir-anime-painter-scribble-sdxl-1.0.safetensors",
-                      "xinsir-controlnet-canny-sdxl-1.0.safetensors",
-                      "xinsir-controlnet-canny-sdxl-1.0_V2.safetensors",
-                      "xinsir-controlnet-openpose-sdxl-1.0.safetensors",
-                      "xinsir-controlnet-scribble-sdxl-1.0.safetensors"
-                  ]
-              }
-          },
-          "optional": {}
+        "required": {
+          "control_net_name": {
+            "type": "OneOf",
+            "choices": [
+              "ControlNet-Plus-Plus_sd15_ade20k_seg.safetensors",
+              "ControlNet-Plus-Plus_sd15_canny.safetensors",
+              "ControlNet-Plus-Plus_sd15_grayscale_depth.safetensors",
+              "ControlNet-Plus-Plus_sd15_hed.bin",
+              "ControlNet-Plus-Plus_sd15_lineart.bin",
+              "OpenPoseXL2.safetensors",
+              "control-lora-openposeXL2-rank256.safetensors",
+              "control_lora_rank128_v11e_sd15_ip2p_fp16.safetensors",
+              "control_lora_rank128_v11e_sd15_shuffle_fp16.safetensors",
+              "control_lora_rank128_v11f1e_sd15_tile_fp16.safetensors",
+              "control_lora_rank128_v11f1p_sd15_depth_fp16.safetensors",
+              "control_lora_rank128_v11p_sd15_canny_fp16.safetensors",
+              "control_lora_rank128_v11p_sd15_inpaint_fp16.safetensors",
+              "control_lora_rank128_v11p_sd15_lineart_fp16.safetensors",
+              "control_lora_rank128_v11p_sd15_mlsd_fp16.safetensors",
+              "control_lora_rank128_v11p_sd15_normalbae_fp16.safetensors",
+              "control_lora_rank128_v11p_sd15_openpose_fp16.safetensors",
+              "control_lora_rank128_v11p_sd15_scribble_fp16.safetensors",
+              "control_lora_rank128_v11p_sd15_seg_fp16.safetensors",
+              "control_lora_rank128_v11p_sd15_softedge_fp16.safetensors",
+              "control_lora_rank128_v11p_sd15s2_lineart_anime_fp16.safetensors",
+              "control_v11e_sd15_ip2p_fp16.safetensors",
+              "control_v11e_sd15_shuffle_fp16.safetensors",
+              "control_v11f1e_sd15_tile_fp16.safetensors",
+              "control_v11f1p_sd15_depth_fp16.safetensors",
+              "control_v11p_sd15_canny_fp16.safetensors",
+              "control_v11p_sd15_inpaint_fp16.safetensors",
+              "control_v11p_sd15_lineart_fp16.safetensors",
+              "control_v11p_sd15_mlsd_fp16.safetensors",
+              "control_v11p_sd15_normalbae_fp16.safetensors",
+              "control_v11p_sd15_openpose_fp16.safetensors",
+              "control_v11p_sd15_scribble_fp16.safetensors",
+              "control_v11p_sd15_seg_fp16.safetensors",
+              "control_v11p_sd15_softedge_fp16.safetensors",
+              "control_v11p_sd15s2_lineart_anime_fp16.safetensors",
+              "control_v11u_sd15_tile_fp16.safetensors",
+              "controlnet-densepose-sdxl.safetensors",
+              "depth-zoe-xl-v1.0-controlnet.safetensors",
+              "diffusers_xl_canny_full.safetensors",
+              "diffusers_xl_canny_mid.safetensors",
+              "diffusers_xl_canny_small.safetensors",
+              "diffusers_xl_depth_full.safetensors",
+              "diffusers_xl_depth_mid.safetensors",
+              "diffusers_xl_depth_small.safetensors",
+              "ioclab_sd15_recolor.safetensors",
+              "kohya_controllllite_xl_blur.safetensors",
+              "kohya_controllllite_xl_blur_anime.safetensors",
+              "kohya_controllllite_xl_blur_anime_beta.safetensors",
+              "kohya_controllllite_xl_canny.safetensors",
+              "kohya_controllllite_xl_canny_anime.safetensors",
+              "kohya_controllllite_xl_depth.safetensors",
+              "kohya_controllllite_xl_depth_anime.safetensors",
+              "kohya_controllllite_xl_openpose_anime.safetensors",
+              "kohya_controllllite_xl_openpose_anime_v2.safetensors",
+              "kohya_controllllite_xl_scribble_anime.safetensors",
+              "mistoLine_rank256.safetensors",
+              "sai_xl_canny_128lora.safetensors",
+              "sai_xl_canny_256lora.safetensors",
+              "sai_xl_depth_128lora.safetensors",
+              "sai_xl_depth_256lora.safetensors",
+              "sai_xl_recolor_128lora.safetensors",
+              "sai_xl_recolor_256lora.safetensors",
+              "sai_xl_sketch_128lora.safetensors",
+              "sai_xl_sketch_256lora.safetensors",
+              "sargezt_xl_depth.safetensors",
+              "sargezt_xl_depth_faid_vidit.safetensors",
+              "sargezt_xl_depth_zeed.safetensors",
+              "sargezt_xl_softedge.safetensors",
+              "stable_cascade_canny.safetensors",
+              "stable_cascade_inpainting.safetensors",
+              "stable_cascade_super_resolution.safetensors",
+              "t2i-adapter_diffusers_xl_canny.safetensors",
+              "t2i-adapter_diffusers_xl_depth_midas.safetensors",
+              "t2i-adapter_diffusers_xl_depth_zoe.safetensors",
+              "t2i-adapter_diffusers_xl_lineart.safetensors",
+              "t2i-adapter_diffusers_xl_openpose.safetensors",
+              "t2i-adapter_diffusers_xl_sketch.safetensors",
+              "t2i-adapter_xl_canny.safetensors",
+              "t2i-adapter_xl_openpose.safetensors",
+              "t2i-adapter_xl_sketch.safetensors",
+              "thibaud_xl_openpose.safetensors",
+              "thibaud_xl_openpose_256lora.safetensors",
+              "xinsir-anime-painter-scribble-sdxl-1.0.safetensors",
+              "xinsir-controlnet-canny-sdxl-1.0.safetensors",
+              "xinsir-controlnet-canny-sdxl-1.0_V2.safetensors",
+              "xinsir-controlnet-openpose-sdxl-1.0.safetensors",
+              "xinsir-controlnet-scribble-sdxl-1.0.safetensors"
+            ]
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "ControlNet": {
-              "type": "ControlNet"
-          }
+        "Controlnet": {
+          "type": "Controlnet"
+        }
       }
-  },
-  "DiffControlnetLoader": {
+    },
+    "DiffControlnetLoader": {
       "path": "loaders",
       "fname": "diff_controlnet_loader",
       "inputs": {
-          "required": {
-              "model": {
-                  "type": "Model"
-              },
-              "control_net_name": {
-                  "type": "oneof",
-                  "choices": [
-                      "diff_control_sd15_canny_fp16.safetensors",
-                      "diff_control_sd15_depth_fp16.safetensors",
-                      "diff_control_sd15_hed_fp16.safetensors",
-                      "diff_control_sd15_mlsd_fp16.safetensors",
-                      "diff_control_sd15_normal_fp16.safetensors",
-                      "diff_control_sd15_openpose_fp16.safetensors",
-                      "diff_control_sd15_scribble_fp16.safetensors",
-                      "diff_control_sd15_seg_fp16.safetensors"
-                  ]
-              }
+        "required": {
+          "model": {
+            "type": "Model"
           },
-          "optional": {}
+          "control_net_name": {
+            "type": "OneOf",
+            "choices": [
+              "diff_control_sd15_canny_fp16.safetensors",
+              "diff_control_sd15_depth_fp16.safetensors",
+              "diff_control_sd15_hed_fp16.safetensors",
+              "diff_control_sd15_mlsd_fp16.safetensors",
+              "diff_control_sd15_normal_fp16.safetensors",
+              "diff_control_sd15_openpose_fp16.safetensors",
+              "diff_control_sd15_scribble_fp16.safetensors",
+              "diff_control_sd15_seg_fp16.safetensors"
+            ]
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "ControlNet": {
-              "type": "ControlNet"
-          }
+        "Controlnet": {
+          "type": "Controlnet"
+        }
       }
-  },
-  "DiffusersLoader": {
+    },
+    "DiffusersLoader": {
       "path": "advanced/",
       "fname": "diffusers_loader",
       "inputs": {
-          "required": {
-              "model_path": {
-                  "type": "oneof",
-                  "choices": [
-                      "JingyeChen22/textdiffuser2_layout_planner",
-                      "JingyeChen22/textdiffuser2-full-ft",
-                      "microsoft/Phi-3-mini-4k-instruct",
-                      "llava-hf/llava-v1.6-mistral-7b-hf"
-                  ]
-              }
-          },
-          "optional": {}
+        "required": {
+          "model_path": {
+            "type": "OneOf",
+            "choices": [
+              "JingyeChen22/textdiffuser2_layout_planner",
+              "microsoft/Phi-3-mini-4k-instruct",
+              "llava-hf/llava-v1.6-mistral-7b-hf",
+              "JingyeChen22/textdiffuser2-full-ft"
+            ]
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Model": {
-              "type": "Model"
-          },
-          "CLIP": {
-              "type": "CLIP"
-          },
-          "VAE": {
-              "type": "VAE"
-          }
+        "Model": {
+          "type": "Model"
+        },
+        "Clip": {
+          "type": "Clip"
+        },
+        "Vae": {
+          "type": "Vae"
+        }
       }
-  },
-  "DualClipLoader": {
+    },
+    "DualClipLoader": {
       "path": "load",
       "fname": "dual_clip_loader",
       "inputs": {
-          "required": {
-              "clip_name1": {
-                  "type": "oneof",
-                  "choices": []
-              },
-              "clip_name2": {
-                  "type": "oneof",
-                  "choices": []
-              },
-              "type": {
-                  "type": "oneof",
-                  "choices": [
-                      "sdxl",
-                      "sd3"
-                  ]
-              }
+        "required": {
+          "clip_name1": {
+            "type": "OneOf",
+            "choices": []
           },
-          "optional": {}
+          "clip_name2": {
+            "type": "OneOf",
+            "choices": []
+          },
+          "type": {
+            "type": "OneOf",
+            "choices": [
+              "sdxl",
+              "sd3"
+            ]
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "CLIP": {
-              "type": "CLIP"
-          }
+        "Clip": {
+          "type": "Clip"
+        }
       }
-  },
-  "GligenLoader": {
+    },
+    "GligenLoader": {
       "path": "loaders",
       "fname": "gligen_loader",
       "inputs": {
-          "required": {
-              "gligen_name": {
-                  "type": "str"
-              }
-          },
-          "optional": {}
+        "required": {
+          "gligen_name": {
+            "type": "Str"
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "GLIGen": {
-              "type": "GLIGen"
-          }
+        "Gligen": {
+          "type": "Gligen"
+        }
       }
-  },
-  "LlmLoader": {
+    },
+    "LlmLoader": {
       "path": "load",
       "fname": "llm_loader",
       "inputs": {
-          "required": {
-              "ckpt_name": {
-                  "type": "oneof",
-                  "choices": []
-              }
-          },
-          "optional": {
-              "max_ctx": {
-                  "default": 2048,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 128,
-                      "max": 128000,
-                      "step": 64,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "gpu_layers": {
-                  "default": 27,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 100,
-                      "step": 1,
-                      "round": false,
-                      "display": "slider"
-                  }
-              },
-              "n_threads": {
-                  "default": 8,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 1,
-                      "max": 100,
-                      "step": 1,
-                      "round": false,
-                      "display": "slider"
-                  }
-              }
+        "required": {
+          "ckpt_name": {
+            "type": "OneOf",
+            "choices": []
           }
+        },
+        "optional": {
+          "max_ctx": {
+            "default": 2048,
+            "type": "Int",
+            "constraints": {
+              "min": 128,
+              "max": 128000,
+              "step": 64,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "gpu_layers": {
+            "default": 27,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 100,
+              "step": 1,
+              "round": false
+            },
+            "display": "slider"
+          },
+          "n_threads": {
+            "default": 8,
+            "type": "Int",
+            "constraints": {
+              "min": 1,
+              "max": 100,
+              "step": 1,
+              "round": false
+            },
+            "display": "slider"
+          }
+        }
       },
       "outputs": {
-          "Model": {
-              "type": "Model"
-          }
+        "Model": {
+          "type": "Model"
+        }
       }
-  },
-  "LoadAudio": {
+    },
+    "LoadAudio": {
       "path": "load",
       "fname": "load_audio",
       "inputs": {
-          "required": {
-              "audio": {
-                  "type": "oneof",
-                  "choices": []
-              }
-          },
-          "optional": {
-              "audio_upload": {
-                  "default": true,
-                  "type": "bool"
-              }
+        "required": {
+          "audio": {
+            "type": "OneOf",
+            "choices": []
           }
+        },
+        "optional": {
+          "audio_upload": {
+            "default": true,
+            "type": "Bool"
+          }
+        }
       },
       "outputs": {
-          "Audio": {
-              "type": "Audio"
-          }
+        "Audio": {
+          "type": "Audio"
+        }
       }
-  },
-  "LoadImage": {
+    },
+    "LoadImage": {
       "path": "load",
       "fname": "load_image",
       "inputs": {
-          "required": {
-              "image": {
-                  "type": "oneof",
-                  "choices": []
-              }
-          },
-          "optional": {
-              "image_upload": {
-                  "default": true,
-                  "type": "bool"
-              }
+        "required": {
+          "image": {
+            "type": "OneOf",
+            "choices": []
           }
+        },
+        "optional": {
+          "image_upload": {
+            "default": true,
+            "type": "Bool"
+          }
+        }
       },
       "outputs": {
-          "Image": {
-              "type": "Image"
-          },
-          "Mask": {
-              "type": "Mask"
-          }
+        "Image": {
+          "type": "Image"
+        },
+        "Mask": {
+          "type": "Mask"
+        }
       }
-  },
-  "LoadImageMask": {
+    },
+    "LoadImageMask": {
       "path": "load",
       "fname": "load_image_mask",
       "inputs": {
-          "required": {
-              "image": {
-                  "type": "oneof",
-                  "choices": []
-              }
-          },
-          "optional": {
-              "image_upload": {
-                  "default": true,
-                  "type": "bool"
-              },
-              "channel": {
-                  "default": "alpha",
-                  "type": "oneof",
-                  "choices": [
-                      "alpha",
-                      "red",
-                      "green",
-                      "blue"
-                  ]
-              }
+        "required": {
+          "image": {
+            "type": "OneOf",
+            "choices": []
           }
+        },
+        "optional": {
+          "image_upload": {
+            "default": true,
+            "type": "Bool"
+          },
+          "channel": {
+            "default": "alpha",
+            "type": "OneOf",
+            "choices": [
+              "alpha",
+              "red",
+              "green",
+              "blue"
+            ]
+          }
+        }
       },
       "outputs": {
-          "Mask": {
-              "type": "Mask"
-          }
+        "Mask": {
+          "type": "Mask"
+        }
       }
-  },
-  "LoadLora": {
+    },
+    "LoadLora": {
       "path": "loaders",
       "fname": "load_lora",
       "inputs": {
-          "required": {
-              "self": {
-                  "type": "_empty"
-              },
-              "model": {
-                  "type": "Model"
-              },
-              "clip": {
-                  "type": "CLIP"
-              },
-              "lora_name": {
-                  "type": "oneof",
-                  "choices": [
-                      "GoodHands-beta2.safetensors",
-                      "Hyper-SD15-12steps-CFG-lora.safetensors",
-                      "Hyper-SDXL-12steps-CFG-lora.safetensors",
-                      "blur_control_xl_v1.safetensors",
-                      "openxl_handsfix.safetensors"
-                  ]
-              }
+        "required": {
+          "self": {
+            "type": "_empty"
           },
-          "optional": {
-              "strength_model": {
-                  "default": 1.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": -100.0,
-                      "max": 100.0,
-                      "step": 0.01,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "strength_clip": {
-                  "default": 1.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": -100.0,
-                      "max": 100.0,
-                      "step": 0.01,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+          "model": {
+            "type": "Model"
+          },
+          "clip": {
+            "type": "Clip"
+          },
+          "lora_name": {
+            "type": "OneOf",
+            "choices": [
+              "GoodHands-beta2.safetensors",
+              "Hyper-SD15-12steps-CFG-lora.safetensors",
+              "Hyper-SDXL-12steps-CFG-lora.safetensors",
+              "blur_control_xl_v1.safetensors",
+              "openxl_handsfix.safetensors"
+            ]
           }
+        },
+        "optional": {
+          "strength_model": {
+            "default": 1.0,
+            "type": "Float",
+            "constraints": {
+              "min": -100.0,
+              "max": 100.0,
+              "step": 0.01,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "strength_clip": {
+            "default": 1.0,
+            "type": "Float",
+            "constraints": {
+              "min": -100.0,
+              "max": 100.0,
+              "step": 0.01,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Model": {
-              "type": "Model"
-          },
-          "CLIP": {
-              "type": "CLIP"
-          }
+        "Model": {
+          "type": "Model"
+        },
+        "Clip": {
+          "type": "Clip"
+        }
       }
-  },
-  "LoraLoaderModelOnly": {
+    },
+    "LoraLoaderModelOnly": {
       "path": "loaders",
       "fname": "lora_loader_model_only",
       "inputs": {
-          "required": {
-              "model": {
-                  "type": "Model"
-              },
-              "lora_name": {
-                  "type": "oneof",
-                  "choices": []
-              }
+        "required": {
+          "model": {
+            "type": "Model"
           },
-          "optional": {
-              "strength_model": {
-                  "default": 1.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": -100.0,
-                      "max": 100.0,
-                      "step": 0.01,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+          "lora_name": {
+            "type": "OneOf",
+            "choices": []
           }
+        },
+        "optional": {
+          "strength_model": {
+            "default": 1.0,
+            "type": "Float",
+            "constraints": {
+              "min": -100.0,
+              "max": 100.0,
+              "step": 0.01,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Model": {
-              "type": "Model"
-          }
+        "Model": {
+          "type": "Model"
+        }
       }
-  },
-  "StyleModelLoader": {
+    },
+    "StyleModelLoader": {
       "path": "load",
       "fname": "style_model_loader",
       "inputs": {
-          "required": {
-              "style_model_name": {
-                  "type": "oneof",
-                  "choices": []
-              }
-          },
-          "optional": {}
+        "required": {
+          "style_model_name": {
+            "type": "OneOf",
+            "choices": []
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "StyleModel": {
-              "type": "StyleModel"
-          }
+        "Stylemodel": {
+          "type": "Stylemodel"
+        }
       }
-  },
-  "UnclipCheckpointLoader": {
+    },
+    "UnclipCheckpointLoader": {
       "path": "loaders",
       "fname": "unclip_checkpoint_loader",
       "inputs": {
-          "required": {
-              "ckpt_name": {
-                  "type": "oneof",
-                  "choices": [
-                      "sd21-unclip-h.ckpt",
-                      "sd21-unclip-l.ckpt",
-                      "stable_cascade_stage_c.safetensors"
-                  ]
-              }
-          },
-          "optional": {}
+        "required": {
+          "ckpt_name": {
+            "type": "OneOf",
+            "choices": [
+              "sd21-unclip-h.ckpt",
+              "sd21-unclip-l.ckpt",
+              "stable_cascade_stage_c.safetensors"
+            ]
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Model": {
-              "type": "Model"
-          },
-          "CLIP": {
-              "type": "CLIP"
-          },
-          "VAE": {
-              "type": "VAE"
-          },
-          "CLIPVision": {
-              "type": "CLIPVision"
-          }
+        "Model": {
+          "type": "Model"
+        },
+        "Clip": {
+          "type": "Clip"
+        },
+        "Vae": {
+          "type": "Vae"
+        },
+        "Clipvision": {
+          "type": "Clipvision"
+        }
       }
-  },
-  "UnetLoader": {
+    },
+    "UnetLoader": {
       "path": "loaders",
       "fname": "unet_loader",
       "inputs": {
-          "required": {
-              "unet_name": {
-                  "type": "str"
-              }
-          },
-          "optional": {}
+        "required": {
+          "unet_name": {
+            "type": "Str"
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Any": {
-              "type": "Any"
-          }
+        "Any": {
+          "type": "Any"
+        }
       }
-  },
-  "CheckpointLoaderSimple": {
+    },
+    "CheckpointLoaderSimple": {
       "path": "loaders",
       "fname": "checkpoint_loader_simple",
       "inputs": {
-          "required": {
-              "ckpt_name": {
-                  "type": "oneof",
-                  "choices": [
-                      "Anything-V3.0.ckpt",
-                      "Realistic_Vision_V5.1_fp16-no-ema.safetensors",
-                      "Realistic_Vision_V6.0_NV_B1_fp16.safetensors",
-                      "anyloraCheckpoint_bakedvaeBlessedFp16.safetensors",
-                      "cardosAnime_v10.safetensors",
-                      "cosxl.safetensors",
-                      "cosxl_edit.safetensors",
-                      "counterfeitV30_v30.safetensors",
-                      "dreamshaperXL_v21TurboDPMSDE.safetensors",
-                      "dreamshaper_8.safetensors",
-                      "juggernautXL_v9Rundiffusionphoto2.safetensors",
-                      "picxReal_10.safetensors",
-                      "realvisxlV40_v40Bakedvae.safetensors",
-                      "revAnimated_v2Rebirth.safetensors",
-                      "sd3_medium.safetensors",
-                      "sd3_medium_incl_clips.safetensors",
-                      "sd3_medium_incl_clips_t5xxlfp8.safetensors",
-                      "sd_xl_base_1.0.safetensors",
-                      "sd_xl_refiner_1.0.safetensors",
-                      "sd_xl_turbo_1.0.safetensors",
-                      "sd_xl_turbo_1.0_fp16.safetensors",
-                      "stable_cascade_stage_b.safetensors",
-                      "stable_cascade_stage_c.safetensors",
-                      "stage_a.safetensors",
-                      "v1-5-pruned-emaonly.ckpt",
-                      "v1-5-pruned-emaonly.safetensors",
-                      "v1-5-pruned.ckpt",
-                      "v1-5-pruned.safetensors",
-                      "v2-1_768-ema-pruned.ckpt",
-                      "wd-illusion-fp16.safetensors"
-                  ]
-              }
-          },
-          "optional": {}
+        "required": {
+          "ckpt_name": {
+            "type": "OneOf",
+            "choices": [
+              "Anything-V3.0.ckpt",
+              "Realistic_Vision_V5.1_fp16-no-ema.safetensors",
+              "Realistic_Vision_V6.0_NV_B1_fp16.safetensors",
+              "anyloraCheckpoint_bakedvaeBlessedFp16.safetensors",
+              "cardosAnime_v10.safetensors",
+              "cosxl.safetensors",
+              "cosxl_edit.safetensors",
+              "counterfeitV30_v30.safetensors",
+              "dreamshaperXL_v21TurboDPMSDE.safetensors",
+              "dreamshaper_8.safetensors",
+              "juggernautXL_v9Rundiffusionphoto2.safetensors",
+              "picxReal_10.safetensors",
+              "realvisxlV40_v40Bakedvae.safetensors",
+              "revAnimated_v2Rebirth.safetensors",
+              "sd3_medium.safetensors",
+              "sd3_medium_incl_clips.safetensors",
+              "sd3_medium_incl_clips_t5xxlfp8.safetensors",
+              "sd_xl_base_1.0.safetensors",
+              "sd_xl_refiner_1.0.safetensors",
+              "sd_xl_turbo_1.0.safetensors",
+              "sd_xl_turbo_1.0_fp16.safetensors",
+              "stable_cascade_stage_b.safetensors",
+              "stable_cascade_stage_c.safetensors",
+              "stage_a.safetensors",
+              "v1-5-pruned-emaonly.ckpt",
+              "v1-5-pruned-emaonly.safetensors",
+              "v1-5-pruned.ckpt",
+              "v1-5-pruned.safetensors",
+              "v2-1_768-ema-pruned.ckpt",
+              "wd-illusion-fp16.safetensors"
+            ]
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Model": {
-              "type": "Model"
-          },
-          "CLIP": {
-              "type": "CLIP"
-          },
-          "VAE": {
-              "type": "VAE"
-          }
+        "Model": {
+          "type": "Model"
+        },
+        "Clip": {
+          "type": "Clip"
+        },
+        "Vae": {
+          "type": "Vae"
+        }
       }
-  },
-  "VaeLoader": {
+    },
+    "VaeLoader": {
       "path": "loaders",
       "fname": "vae_loader",
       "inputs": {
-          "required": {
-              "vae_name": {
-                  "type": "oneof",
-                  "choices": [
-                      "sdxl_vae.safetensors",
-                      "vae-ft-mse-840000-ema-pruned.safetensors"
-                  ]
-              }
-          },
-          "optional": {}
+        "required": {
+          "vae_name": {
+            "type": "OneOf",
+            "choices": [
+              "sdxl_vae.safetensors",
+              "vae-ft-mse-840000-ema-pruned.safetensors"
+            ]
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "VAE": {
-              "type": "VAE"
-          }
+        "Vae": {
+          "type": "Vae"
+        }
       }
-  },
-  "AddText": {
+    },
+    "AddText": {
       "path": "prompt",
       "fname": "add_text",
       "inputs": {
-          "required": {},
-          "optional": {
-              "input_text": {
-                  "default": "",
-                  "type": "Str",
-                  "constraints": {
-                      "multiline": true,
-                      "dynamic_prompts": true
-                  }
-              }
+        "required": {},
+        "optional": {
+          "input_text": {
+            "default": "",
+            "type": "Str",
+            "constraints": {
+              "multiline": true,
+              "dynamic_prompts": true
+            }
           }
+        }
       },
       "outputs": {
-          "str": {
-              "type": "str"
-          }
+        "Str": {
+          "type": "Str"
+        }
       }
-  },
-  "ClipSetLastLayer": {
+    },
+    "ClipSetLastLayer": {
       "path": "prompt",
       "fname": "clip_set_last_layer",
       "inputs": {
-          "required": {
-              "clip": {
-                  "type": "CLIP"
-              }
-          },
-          "optional": {
-              "stop_at_clip_layer": {
-                  "default": -1,
-                  "type": "Int",
-                  "constraints": {
-                      "min": -24,
-                      "max": -1,
-                      "step": 1,
-                      "round": false,
-                      "display": "slider"
-                  }
-              }
+        "required": {
+          "clip": {
+            "type": "Clip"
           }
+        },
+        "optional": {
+          "stop_at_clip_layer": {
+            "default": -1,
+            "type": "Int",
+            "constraints": {
+              "min": -24,
+              "max": -1,
+              "step": 1,
+              "round": false
+            },
+            "display": "slider"
+          }
+        }
       },
       "outputs": {
-          "CLIP": {
-              "type": "CLIP"
-          }
+        "Clip": {
+          "type": "Clip"
+        }
       }
-  },
-  "ClipTextEncode": {
+    },
+    "ClipTextEncode": {
       "path": "prompt",
       "fname": "clip_text_encode",
       "inputs": {
-          "required": {
-              "clip": {
-                  "type": "CLIP"
-              },
-              "text": {
-                  "type": "Str",
-                  "constraints": {
-                      "multiline": true,
-                      "dynamic_prompts": true
-                  }
-              }
+        "required": {
+          "clip": {
+            "type": "Clip"
           },
-          "optional": {}
+          "text": {
+            "type": "Str",
+            "constraints": {
+              "multiline": true,
+              "dynamic_prompts": true
+            }
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Conditioning": {
-              "type": "Conditioning"
-          }
+        "Conditioning": {
+          "type": "Conditioning"
+        }
       }
-  },
-  "ClipVisionEncode": {
+    },
+    "ClipVisionEncode": {
       "path": "prompt",
       "fname": "clip_vision_encode",
       "inputs": {
-          "required": {
-              "clip_vision": {
-                  "type": "CLIPVision"
-              },
-              "pixels": {
-                  "type": "Image"
-              }
+        "required": {
+          "clip_vision": {
+            "type": "Clipvision"
           },
-          "optional": {}
+          "pixels": {
+            "type": "Image"
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "CLIPVisionOutput": {
-              "type": "CLIPVisionOutput"
-          }
+        "Clipvisionoutput": {
+          "type": "Clipvisionoutput"
+        }
       }
-  },
-  "ConditioningAverage": {
+    },
+    "ConditioningAverage": {
       "path": "prompt",
       "fname": "conditioning_average",
       "inputs": {
-          "required": {
-              "To": {
-                  "type": "Conditioning"
-              },
-              "From": {
-                  "type": "Conditioning"
-              }
+        "required": {
+          "To": {
+            "type": "Conditioning"
           },
-          "optional": {
-              "to_strength": {
-                  "default": 1.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0,
-                      "max": 1,
-                      "step": 0.01,
-                      "round": false,
-                      "display": "slider"
-                  }
-              }
+          "From": {
+            "type": "Conditioning"
           }
+        },
+        "optional": {
+          "to_strength": {
+            "default": 1.0,
+            "type": "Float",
+            "constraints": {
+              "min": 0,
+              "max": 1,
+              "step": 0.01,
+              "round": false
+            },
+            "display": "slider"
+          }
+        }
       },
       "outputs": {
-          "Conditioning": {
-              "type": "Conditioning"
-          }
+        "Conditioning": {
+          "type": "Conditioning"
+        }
       }
-  },
-  "ConditioningCombine": {
+    },
+    "ConditioningCombine": {
       "path": "prompt",
       "fname": "conditioning_combine",
       "inputs": {
-          "required": {
-              "a": {
-                  "type": "Conditioning"
-              },
-              "b": {
-                  "type": "Conditioning"
-              }
+        "required": {
+          "a": {
+            "type": "Conditioning"
           },
-          "optional": {}
+          "b": {
+            "type": "Conditioning"
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Conditioning": {
-              "type": "Conditioning"
-          }
+        "Conditioning": {
+          "type": "Conditioning"
+        }
       }
-  },
-  "ConditioningConcat": {
+    },
+    "ConditioningConcat": {
       "path": "prompt",
       "fname": "conditioning_concat",
       "inputs": {
-          "required": {
-              "To": {
-                  "type": "Conditioning"
-              },
-              "From": {
-                  "type": "Conditioning"
-              }
+        "required": {
+          "To": {
+            "type": "Conditioning"
           },
-          "optional": {}
+          "From": {
+            "type": "Conditioning"
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Conditioning": {
-              "type": "Conditioning"
-          }
+        "Conditioning": {
+          "type": "Conditioning"
+        }
       }
-  },
-  "ConditioningSetArea": {
+    },
+    "ConditioningSetArea": {
       "path": "prompt",
       "fname": "conditioning_set_area",
       "inputs": {
-          "required": {
-              "conditioning": {
-                  "type": "Conditioning"
-              }
-          },
-          "optional": {
-              "width": {
-                  "default": 64,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 64,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "height": {
-                  "default": 64,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 64,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "x": {
-                  "default": 0.0,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "y": {
-                  "default": 0.0,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "strength": {
-                  "default": 1.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.0,
-                      "max": 10.0,
-                      "step": 0.01,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+        "required": {
+          "conditioning": {
+            "type": "Conditioning"
           }
+        },
+        "optional": {
+          "width": {
+            "default": 64,
+            "type": "Int",
+            "constraints": {
+              "min": 64,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "height": {
+            "default": 64,
+            "type": "Int",
+            "constraints": {
+              "min": 64,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "x": {
+            "default": 0.0,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "y": {
+            "default": 0.0,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "strength": {
+            "default": 1.0,
+            "type": "Float",
+            "constraints": {
+              "min": 0.0,
+              "max": 10.0,
+              "step": 0.01,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Conditioning": {
-              "type": "Conditioning"
-          }
+        "Conditioning": {
+          "type": "Conditioning"
+        }
       }
-  },
-  "ConditioningSetAreaPercentage": {
+    },
+    "ConditioningSetAreaPercentage": {
       "path": "prompt",
       "fname": "conditioning_set_area_percentage",
       "inputs": {
-          "required": {
-              "conditioning": {
-                  "type": "Conditioning"
-              }
-          },
-          "optional": {
-              "width": {
-                  "default": 1.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.0,
-                      "max": 1.0,
-                      "step": 0.01,
-                      "round": false,
-                      "display": "slider"
-                  }
-              },
-              "height": {
-                  "default": 1.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.0,
-                      "max": 1.0,
-                      "step": 0.01,
-                      "round": false,
-                      "display": "slider"
-                  }
-              },
-              "x": {
-                  "default": 0.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.0,
-                      "max": 1.0,
-                      "step": 0.01,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "y": {
-                  "default": 0.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.0,
-                      "max": 1.0,
-                      "step": 0.01,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "strength": {
-                  "default": 1.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.0,
-                      "max": 10.0,
-                      "step": 0.01,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+        "required": {
+          "conditioning": {
+            "type": "Conditioning"
           }
+        },
+        "optional": {
+          "width": {
+            "default": 1.0,
+            "type": "Float",
+            "constraints": {
+              "min": 0.0,
+              "max": 1.0,
+              "step": 0.01,
+              "round": false
+            },
+            "display": "slider"
+          },
+          "height": {
+            "default": 1.0,
+            "type": "Float",
+            "constraints": {
+              "min": 0.0,
+              "max": 1.0,
+              "step": 0.01,
+              "round": false
+            },
+            "display": "slider"
+          },
+          "x": {
+            "default": 0.0,
+            "type": "Float",
+            "constraints": {
+              "min": 0.0,
+              "max": 1.0,
+              "step": 0.01,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "y": {
+            "default": 0.0,
+            "type": "Float",
+            "constraints": {
+              "min": 0.0,
+              "max": 1.0,
+              "step": 0.01,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "strength": {
+            "default": 1.0,
+            "type": "Float",
+            "constraints": {
+              "min": 0.0,
+              "max": 10.0,
+              "step": 0.01,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Conditioning": {
-              "type": "Conditioning"
-          }
+        "Conditioning": {
+          "type": "Conditioning"
+        }
       }
-  },
-  "ConditioningSetAreaStrength": {
+    },
+    "ConditioningSetAreaStrength": {
       "path": "prompt",
       "fname": "conditioning_set_area_strength",
       "inputs": {
-          "required": {
-              "conditioning": {
-                  "type": "Conditioning"
-              }
-          },
-          "optional": {
-              "strength": {
-                  "default": 1.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.0,
-                      "max": 10.0,
-                      "step": 0.01,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+        "required": {
+          "conditioning": {
+            "type": "Conditioning"
           }
+        },
+        "optional": {
+          "strength": {
+            "default": 1.0,
+            "type": "Float",
+            "constraints": {
+              "min": 0.0,
+              "max": 10.0,
+              "step": 0.01,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Conditioning": {
-              "type": "Conditioning"
-          }
+        "Conditioning": {
+          "type": "Conditioning"
+        }
       }
-  },
-  "ConditioningSetMask": {
+    },
+    "ConditioningSetMask": {
       "path": "prompt",
       "fname": "conditioning_set_mask",
       "inputs": {
-          "required": {
-              "conditioning": {
-                  "type": "Conditioning"
-              },
-              "mask": {
-                  "type": "Mask"
-              }
+        "required": {
+          "conditioning": {
+            "type": "Conditioning"
           },
-          "optional": {
-              "set_cond_area": {
-                  "default": "default",
-                  "type": "oneof",
-                  "choices": [
-                      "default",
-                      "mask bounds"
-                  ]
-              },
-              "strength": {
-                  "default": 1.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.0,
-                      "max": 10.0,
-                      "step": 0.01,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+          "mask": {
+            "type": "Mask"
           }
+        },
+        "optional": {
+          "set_cond_area": {
+            "default": "default",
+            "type": "OneOf",
+            "choices": [
+              "default",
+              "mask bounds"
+            ]
+          },
+          "strength": {
+            "default": 1.0,
+            "type": "Float",
+            "constraints": {
+              "min": 0.0,
+              "max": 10.0,
+              "step": 0.01,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Conditioning": {
-              "type": "Conditioning"
-          }
+        "Conditioning": {
+          "type": "Conditioning"
+        }
       }
-  },
-  "ConditioningSetTimestepRange": {
+    },
+    "ConditioningSetTimestepRange": {
       "path": "advanced/",
       "fname": "conditioning_set_timestep_range",
       "inputs": {
-          "required": {
-              "conditioning": {
-                  "type": "Conditioning"
-              }
-          },
-          "optional": {
-              "start": {
-                  "default": 0.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.0,
-                      "max": 1.0,
-                      "step": 0.001,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "end": {
-                  "default": 1.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.0,
-                      "max": 1.0,
-                      "step": 0.001,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+        "required": {
+          "conditioning": {
+            "type": "Conditioning"
           }
+        },
+        "optional": {
+          "start": {
+            "default": 0.0,
+            "type": "Float",
+            "constraints": {
+              "min": 0.0,
+              "max": 1.0,
+              "step": 0.001,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "end": {
+            "default": 1.0,
+            "type": "Float",
+            "constraints": {
+              "min": 0.0,
+              "max": 1.0,
+              "step": 0.001,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Conditioning": {
-              "type": "Conditioning"
-          }
+        "Conditioning": {
+          "type": "Conditioning"
+        }
       }
-  },
-  "ConditioningZeroOut": {
+    },
+    "ConditioningZeroOut": {
       "path": "advanced/",
       "fname": "conditioning_zero_out",
       "inputs": {
-          "required": {
-              "conditioning": {
-                  "type": "Conditioning"
-              }
-          },
-          "optional": {}
+        "required": {
+          "conditioning": {
+            "type": "Conditioning"
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Conditioning": {
-              "type": "Conditioning"
-          }
+        "Conditioning": {
+          "type": "Conditioning"
+        }
       }
-  },
-  "ControlnetApply": {
+    },
+    "ControlnetApply": {
       "path": "prompt",
       "fname": "controlnet_apply",
       "inputs": {
-          "required": {
-              "conditioning": {
-                  "type": "Conditioning"
-              },
-              "control_net": {
-                  "type": "Any"
-              },
-              "image": {
-                  "type": "Image"
-              }
+        "required": {
+          "conditioning": {
+            "type": "Conditioning"
           },
-          "optional": {
-              "strength": {
-                  "default": 1.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.0,
-                      "max": 10.0,
-                      "step": 0.01,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+          "control_net": {
+            "type": "Any"
+          },
+          "image": {
+            "type": "Image"
           }
+        },
+        "optional": {
+          "strength": {
+            "default": 1.0,
+            "type": "Float",
+            "constraints": {
+              "min": 0.0,
+              "max": 10.0,
+              "step": 0.01,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Conditioning": {
-              "type": "Conditioning"
-          }
+        "Conditioning": {
+          "type": "Conditioning"
+        }
       }
-  },
-  "ControlnetApplyAdvanced": {
+    },
+    "ControlnetApplyAdvanced": {
       "path": "prompt",
       "fname": "controlnet_apply_advanced",
       "inputs": {
-          "required": {
-              "positive": {
-                  "type": "Conditioning"
-              },
-              "negative": {
-                  "type": "Conditioning"
-              },
-              "control_net": {
-                  "type": "ControlNet"
-              },
-              "image": {
-                  "type": "Image"
-              }
+        "required": {
+          "positive": {
+            "type": "Conditioning"
           },
-          "optional": {
-              "strength": {
-                  "default": 1.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.0,
-                      "max": 10.0,
-                      "step": 0.01,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "start_percent": {
-                  "default": 0.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.0,
-                      "max": 1.0,
-                      "step": 0.001,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "end_percent": {
-                  "default": 1.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.0,
-                      "max": 1.0,
-                      "step": 0.001,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "vae": {
-                  "default": null,
-                  "type": "VAE"
-              }
+          "negative": {
+            "type": "Conditioning"
+          },
+          "control_net": {
+            "type": "Controlnet"
+          },
+          "image": {
+            "type": "Image"
           }
+        },
+        "optional": {
+          "strength": {
+            "default": 1.0,
+            "type": "Float",
+            "constraints": {
+              "min": 0.0,
+              "max": 10.0,
+              "step": 0.01,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "start_percent": {
+            "default": 0.0,
+            "type": "Float",
+            "constraints": {
+              "min": 0.0,
+              "max": 1.0,
+              "step": 0.001,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "end_percent": {
+            "default": 1.0,
+            "type": "Float",
+            "constraints": {
+              "min": 0.0,
+              "max": 1.0,
+              "step": 0.001,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "vae": {
+            "default": null,
+            "type": "Vae"
+          }
+        }
       },
       "outputs": {
-          "Conditioning": {
-              "type": "Conditioning"
-          }
+        "Conditioning": {
+          "type": "Conditioning"
+        }
       }
-  },
-  "GligenTextboxApply": {
+    },
+    "GligenTextboxApply": {
       "path": "prompt",
       "fname": "gligen_textbox_apply",
       "inputs": {
-          "required": {
-              "conditioning_to": {
-                  "type": "Conditioning"
-              },
-              "clip": {
-                  "type": "CLIP"
-              },
-              "gligen_textbox_model": {
-                  "type": "GLIGen"
-              },
-              "text": {
-                  "type": "Str",
-                  "constraints": {
-                      "multiline": true,
-                      "dynamic_prompts": true
-                  }
-              }
+        "required": {
+          "conditioning_to": {
+            "type": "Conditioning"
           },
-          "optional": {
-              "width": {
-                  "default": 64,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 8,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "height": {
-                  "default": 64,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 8,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "x": {
-                  "default": 0,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "y": {
-                  "default": 0,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+          "clip": {
+            "type": "Clip"
+          },
+          "gligen_textbox_model": {
+            "type": "Gligen"
+          },
+          "text": {
+            "type": "Str",
+            "constraints": {
+              "multiline": true,
+              "dynamic_prompts": true
+            }
           }
+        },
+        "optional": {
+          "width": {
+            "default": 64,
+            "type": "Int",
+            "constraints": {
+              "min": 8,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "height": {
+            "default": 64,
+            "type": "Int",
+            "constraints": {
+              "min": 8,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "x": {
+            "default": 0,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "y": {
+            "default": 0,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Conditioning": {
-              "type": "Conditioning"
-          }
+        "Conditioning": {
+          "type": "Conditioning"
+        }
       }
-  },
-  "InpaintModelConditioning": {
+    },
+    "InpaintModelConditioning": {
       "path": "inpaint/",
       "fname": "inpaint_model_conditioning",
       "inputs": {
-          "required": {
-              "positive": {
-                  "type": "Conditioning"
-              },
-              "negative": {
-                  "type": "Conditioning"
-              },
-              "vae": {
-                  "type": "VAE"
-              },
-              "pixels": {
-                  "type": "Image"
-              },
-              "mask": {
-                  "type": "Mask"
-              }
+        "required": {
+          "positive": {
+            "type": "Conditioning"
           },
-          "optional": {}
+          "negative": {
+            "type": "Conditioning"
+          },
+          "vae": {
+            "type": "Vae"
+          },
+          "pixels": {
+            "type": "Image"
+          },
+          "mask": {
+            "type": "Mask"
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Conditioning": {
-              "type": "Conditioning"
-          },
-          "Latent": {
-              "type": "Latent"
-          }
+        "Conditioning": {
+          "type": "Conditioning"
+        },
+        "Latent": {
+          "type": "Latent"
+        }
       }
-  },
-  "StyleModelApply": {
+    },
+    "StyleModelApply": {
       "path": "prompt",
       "fname": "style_model_apply",
       "inputs": {
-          "required": {
-              "conditioning": {
-                  "type": "Conditioning"
-              },
-              "style_model": {
-                  "type": "StyleModel"
-              },
-              "clip_vision_output": {
-                  "type": "CLIPVisionOutput"
-              }
+        "required": {
+          "conditioning": {
+            "type": "Conditioning"
           },
-          "optional": {}
+          "style_model": {
+            "type": "Stylemodel"
+          },
+          "clip_vision_output": {
+            "type": "Clipvisionoutput"
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Conditioning": {
-              "type": "Conditioning"
-          }
+        "Conditioning": {
+          "type": "Conditioning"
+        }
       }
-  },
-  "UnclipConditioning": {
+    },
+    "UnclipConditioning": {
       "path": "prompt",
       "fname": "unclip_conditioning",
       "inputs": {
-          "required": {
-              "conditioning": {
-                  "type": "Conditioning"
-              },
-              "clip_vision_output": {
-                  "type": "CLIPVisionOutput"
-              }
+        "required": {
+          "conditioning": {
+            "type": "Conditioning"
           },
-          "optional": {
-              "strength": {
-                  "default": 1.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": -10.0,
-                      "max": 10.0,
-                      "step": 0.01,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "noise_augmentation": {
-                  "default": 0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.0,
-                      "max": 1.0,
-                      "step": 0.01,
-                      "round": false,
-                      "display": "slider"
-                  }
-              }
+          "clip_vision_output": {
+            "type": "Clipvisionoutput"
           }
+        },
+        "optional": {
+          "strength": {
+            "default": 1.0,
+            "type": "Float",
+            "constraints": {
+              "min": -10.0,
+              "max": 10.0,
+              "step": 0.01,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "noise_augmentation": {
+            "default": 0,
+            "type": "Float",
+            "constraints": {
+              "min": 0.0,
+              "max": 1.0,
+              "step": 0.01,
+              "round": false
+            },
+            "display": "slider"
+          }
+        }
       },
       "outputs": {
-          "Conditioning": {
-              "type": "Conditioning"
-          }
+        "Conditioning": {
+          "type": "Conditioning"
+        }
       }
-  },
-  "PreviewImage": {
+    },
+    "PreviewImage": {
       "path": "save",
       "fname": "preview_image",
       "inputs": {
-          "required": {
-              "pixels": {
-                  "type": "Image"
-              }
-          },
-          "optional": {
-              "prompt": {
-                  "default": null,
-                  "type": "str"
-              },
-              "extra_pnginfo": {
-                  "default": null
-              }
+        "required": {
+          "pixels": {
+            "type": "Image"
           }
+        },
+        "optional": {
+          "prompt": {
+            "default": null,
+            "type": "Str"
+          },
+          "extra_pnginfo": {
+            "default": null
+          }
+        }
       },
       "outputs": {}
-  },
-  "SaveAudio": {
+    },
+    "SaveAudio": {
       "path": "save",
       "fname": "save_audio",
       "inputs": {
-          "required": {
-              "audio": {
-                  "type": "Audio"
-              }
-          },
-          "optional": {
-              "filename_prefix": {
-                  "default": "audio/sdbx_",
-                  "type": "Str",
-                  "constraints": {
-                      "multiline": false,
-                      "dynamic_prompts": false
-                  }
-              },
-              "prompt": {
-                  "default": null,
-                  "type": "str"
-              },
-              "extra_pnginfo": {
-                  "default": null
-              }
+        "required": {
+          "audio": {
+            "type": "Audio"
           }
+        },
+        "optional": {
+          "filename_prefix": {
+            "default": "audio/sdbx_",
+            "type": "Str",
+            "constraints": {
+              "multiline": false,
+              "dynamic_prompts": false
+            }
+          },
+          "prompt": {
+            "default": null,
+            "type": "Str"
+          },
+          "extra_pnginfo": {
+            "default": null
+          }
+        }
       },
       "outputs": {}
-  },
-  "SaveImage": {
+    },
+    "SaveImage": {
       "path": "save",
       "fname": "save_image",
       "inputs": {
-          "required": {
-              "pixels": {
-                  "type": "Image"
-              }
-          },
-          "optional": {
-              "filename_prefix": {
-                  "default": "sdbx",
-                  "type": "Str",
-                  "constraints": {
-                      "multiline": false,
-                      "dynamic_prompts": false
-                  }
-              },
-              "prompt": {
-                  "default": null,
-                  "type": "str"
-              },
-              "extra_pnginfo": {
-                  "default": null
-              }
+        "required": {
+          "pixels": {
+            "type": "Image"
           }
+        },
+        "optional": {
+          "filename_prefix": {
+            "default": "sdbx",
+            "type": "Str",
+            "constraints": {
+              "multiline": false,
+              "dynamic_prompts": false
+            }
+          },
+          "prompt": {
+            "default": null,
+            "type": "Str"
+          },
+          "extra_pnginfo": {
+            "default": null
+          }
+        }
       },
       "outputs": {}
-  },
-  "ImageBatch": {
+    },
+    "ImageBatch": {
       "path": "transform",
       "fname": "image_batch",
       "inputs": {
-          "required": {
-              "image1": {
-                  "type": "Image"
-              },
-              "image2": {
-                  "type": "Image"
-              }
+        "required": {
+          "image1": {
+            "type": "Image"
           },
-          "optional": {}
+          "image2": {
+            "type": "Image"
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Image": {
-              "type": "Image"
-          }
+        "Image": {
+          "type": "Image"
+        }
       }
-  },
-  "ImageInvert": {
+    },
+    "ImageInvert": {
       "path": "transform",
       "fname": "image_invert",
       "inputs": {
-          "required": {
-              "image": {
-                  "type": "Image"
-              }
-          },
-          "optional": {}
+        "required": {
+          "image": {
+            "type": "Image"
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Image": {
-              "type": "Image"
-          }
+        "Image": {
+          "type": "Image"
+        }
       }
-  },
-  "ImagePadForOutpaint": {
+    },
+    "ImagePadForOutpaint": {
       "path": "transform",
       "fname": "image_pad_for_outpaint",
       "inputs": {
-          "required": {
-              "pixels": {
-                  "type": "Image"
-              }
-          },
-          "optional": {
-              "left": {
-                  "default": 0,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "top": {
-                  "default": 0,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "right": {
-                  "default": 0,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "bottom": {
-                  "default": 0,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "feathering": {
-                  "default": 40,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 16384,
-                      "step": 1,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+        "required": {
+          "pixels": {
+            "type": "Image"
           }
+        },
+        "optional": {
+          "left": {
+            "default": 0,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "top": {
+            "default": 0,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "right": {
+            "default": 0,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "bottom": {
+            "default": 0,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "feathering": {
+            "default": 40,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 16384,
+              "step": 1,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Image": {
-              "type": "Image"
-          },
-          "Mask": {
-              "type": "Mask"
-          }
+        "Image": {
+          "type": "Image"
+        },
+        "Mask": {
+          "type": "Mask"
+        }
       }
-  },
-  "ImageScale": {
+    },
+    "ImageScale": {
       "path": "transform",
       "fname": "image_scale",
       "inputs": {
-          "required": {
-              "pixels": {
-                  "type": "Image"
-              },
-              "upscale_method": {
-                  "type": "oneof",
-                  "choices": [
-                      "nearest-exact",
-                      "bilinear",
-                      "area",
-                      "bicubic",
-                      "lanczos"
-                  ]
-              },
-              "crop": {
-                  "type": "oneof",
-                  "choices": [
-                      "disabled",
-                      "center"
-                  ]
-              }
+        "required": {
+          "pixels": {
+            "type": "Image"
           },
-          "optional": {
-              "width": {
-                  "default": 512,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 16384,
-                      "step": 1,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "height": {
-                  "default": 512,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 16384,
-                      "step": 1,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+          "upscale_method": {
+            "type": "OneOf",
+            "choices": [
+              "nearest-exact",
+              "bilinear",
+              "area",
+              "bicubic",
+              "lanczos"
+            ]
+          },
+          "crop": {
+            "type": "OneOf",
+            "choices": [
+              "disabled",
+              "center"
+            ]
           }
+        },
+        "optional": {
+          "width": {
+            "default": 512,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 16384,
+              "step": 1,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "height": {
+            "default": 512,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 16384,
+              "step": 1,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Image": {
-              "type": "Image"
-          }
+        "Image": {
+          "type": "Image"
+        }
       }
-  },
-  "ImageScaleBy": {
+    },
+    "ImageScaleBy": {
       "path": "transform",
       "fname": "image_scale_by",
       "inputs": {
-          "required": {
-              "pixels": {
-                  "type": "Image"
-              },
-              "upscale_method": {
-                  "type": "oneof",
-                  "choices": [
-                      "nearest-exact",
-                      "bilinear",
-                      "area",
-                      "bicubic",
-                      "lanczos"
-                  ]
-              }
+        "required": {
+          "pixels": {
+            "type": "Image"
           },
-          "optional": {
-              "scale_by": {
-                  "default": 1.0,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.01,
-                      "max": 8.0,
-                      "step": 0.01,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+          "upscale_method": {
+            "type": "OneOf",
+            "choices": [
+              "nearest-exact",
+              "bilinear",
+              "area",
+              "bicubic",
+              "lanczos"
+            ]
           }
+        },
+        "optional": {
+          "scale_by": {
+            "default": 1.0,
+            "type": "Float",
+            "constraints": {
+              "min": 0.01,
+              "max": 8.0,
+              "step": 0.01,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Image": {
-              "type": "Image"
-          }
+        "Image": {
+          "type": "Image"
+        }
       }
-  },
-  "LatentBlend": {
+    },
+    "LatentBlend": {
       "path": "transform",
       "fname": "latent_blend",
       "inputs": {
-          "required": {
-              "samples1": {
-                  "type": "Latent"
-              },
-              "samples2": {
-                  "type": "Latent"
-              }
+        "required": {
+          "samples1": {
+            "type": "Latent"
           },
-          "optional": {
-              "blend_factor": {
-                  "default": 0.5,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0,
-                      "max": 1.0,
-                      "step": 0.01,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+          "samples2": {
+            "type": "Latent"
           }
+        },
+        "optional": {
+          "blend_factor": {
+            "default": 0.5,
+            "type": "Float",
+            "constraints": {
+              "min": 0,
+              "max": 1.0,
+              "step": 0.01,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Latent": {
-              "type": "Latent"
-          }
+        "Latent": {
+          "type": "Latent"
+        }
       }
-  },
-  "LatentComposite": {
+    },
+    "LatentComposite": {
       "path": "transform",
       "fname": "latent_composite",
       "inputs": {
-          "required": {
-              "samples_to": {
-                  "type": "Latent"
-              },
-              "samples_from": {
-                  "type": "Latent"
-              }
+        "required": {
+          "samples_to": {
+            "type": "Latent"
           },
-          "optional": {
-              "x": {
-                  "default": 0,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "y": {
-                  "default": 0,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "feather": {
-                  "default": 0,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+          "samples_from": {
+            "type": "Latent"
           }
+        },
+        "optional": {
+          "x": {
+            "default": 0,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "y": {
+            "default": 0,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "feather": {
+            "default": 0,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Latent": {
-              "type": "Latent"
-          }
+        "Latent": {
+          "type": "Latent"
+        }
       }
-  },
-  "LatentCrop": {
+    },
+    "LatentCrop": {
       "path": "transform",
       "fname": "latent_crop",
       "inputs": {
-          "required": {
-              "samples": {
-                  "type": "Latent"
-              }
-          },
-          "optional": {
-              "width": {
-                  "default": 64,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 64,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "height": {
-                  "default": 64,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 64,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "x": {
-                  "default": 0,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "y": {
-                  "default": 0,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+        "required": {
+          "samples": {
+            "type": "Latent"
           }
+        },
+        "optional": {
+          "width": {
+            "default": 64,
+            "type": "Int",
+            "constraints": {
+              "min": 64,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "height": {
+            "default": 64,
+            "type": "Int",
+            "constraints": {
+              "min": 64,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "x": {
+            "default": 0,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "y": {
+            "default": 0,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Latent": {
-              "type": "Latent"
-          }
+        "Latent": {
+          "type": "Latent"
+        }
       }
-  },
-  "LatentFlip": {
+    },
+    "LatentFlip": {
       "path": "transform",
       "fname": "latent_flip",
       "inputs": {
-          "required": {
-              "samples": {
-                  "type": "Latent"
-              },
-              "flip_method": {
-                  "type": "oneof",
-                  "choices": [
-                      "x-axis: vertically",
-                      "y-axis: horizontally"
-                  ]
-              }
+        "required": {
+          "samples": {
+            "type": "Latent"
           },
-          "optional": {}
+          "flip_method": {
+            "type": "OneOf",
+            "choices": [
+              "x-axis: vertically",
+              "y-axis: horizontally"
+            ]
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Latent": {
-              "type": "Latent"
-          }
+        "Latent": {
+          "type": "Latent"
+        }
       }
-  },
-  "LatentFromBatch": {
+    },
+    "LatentFromBatch": {
       "path": "transform",
       "fname": "latent_from_batch",
       "inputs": {
-          "required": {
-              "samples": {
-                  "type": "Latent"
-              }
-          },
-          "optional": {
-              "batch_index": {
-                  "default": 0,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 63,
-                      "step": 1,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "length": {
-                  "default": 1,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 1,
-                      "max": 64,
-                      "step": 1,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+        "required": {
+          "samples": {
+            "type": "Latent"
           }
+        },
+        "optional": {
+          "batch_index": {
+            "default": 0,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 63,
+              "step": 1,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "length": {
+            "default": 1,
+            "type": "Int",
+            "constraints": {
+              "min": 1,
+              "max": 64,
+              "step": 1,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Latent": {
-              "type": "Latent"
-          }
+        "Latent": {
+          "type": "Latent"
+        }
       }
-  },
-  "LatentRotate": {
+    },
+    "LatentRotate": {
       "path": "transform",
       "fname": "latent_rotate",
       "inputs": {
-          "required": {
-              "samples": {
-                  "type": "Latent"
-              },
-              "rotation": {
-                  "type": "oneof",
-                  "choices": [
-                      "none",
-                      "90 degrees",
-                      "180 degrees",
-                      "270 degrees"
-                  ]
-              }
+        "required": {
+          "samples": {
+            "type": "Latent"
           },
-          "optional": {}
+          "rotation": {
+            "type": "OneOf",
+            "choices": [
+              "none",
+              "90 degrees",
+              "180 degrees",
+              "270 degrees"
+            ]
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Latent": {
-              "type": "Latent"
-          }
+        "Latent": {
+          "type": "Latent"
+        }
       }
-  },
-  "LatentUpscale": {
+    },
+    "LatentUpscale": {
       "path": "transform",
       "fname": "latent_upscale",
       "inputs": {
-          "required": {
-              "samples": {
-                  "type": "Latent"
-              },
-              "upscale_method": {
-                  "type": "oneof",
-                  "choices": [
-                      "nearest-exact",
-                      "bilinear",
-                      "area",
-                      "bicubic",
-                      "bislerp"
-                  ]
-              }
+        "required": {
+          "samples": {
+            "type": "Latent"
           },
-          "optional": {
-              "width": {
-                  "default": 512,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "height": {
-                  "default": 512,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 0,
-                      "max": 16384,
-                      "step": 8,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              },
-              "crop": {
-                  "default": "disabled",
-                  "type": "oneof",
-                  "choices": [
-                      "disabled",
-                      "center"
-                  ]
-              }
+          "upscale_method": {
+            "type": "OneOf",
+            "choices": [
+              "nearest-exact",
+              "bilinear",
+              "area",
+              "bicubic",
+              "bislerp"
+            ]
           }
+        },
+        "optional": {
+          "width": {
+            "default": 512,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "height": {
+            "default": 512,
+            "type": "Int",
+            "constraints": {
+              "min": 0,
+              "max": 16384,
+              "step": 8,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          },
+          "crop": {
+            "default": "disabled",
+            "type": "OneOf",
+            "choices": [
+              "disabled",
+              "center"
+            ]
+          }
+        }
       },
       "outputs": {
-          "Latent": {
-              "type": "Latent"
-          }
+        "Latent": {
+          "type": "Latent"
+        }
       }
-  },
-  "LatentUpscaleBy": {
+    },
+    "LatentUpscaleBy": {
       "path": "transform",
       "fname": "latent_upscale_by",
       "inputs": {
-          "required": {
-              "samples": {
-                  "type": "Latent"
-              },
-              "upscale_method": {
-                  "type": "oneof",
-                  "choices": [
-                      "nearest-exact",
-                      "bilinear",
-                      "area",
-                      "bicubic",
-                      "bislerp"
-                  ]
-              }
+        "required": {
+          "samples": {
+            "type": "Latent"
           },
-          "optional": {
-              "scale_by": {
-                  "default": 1.5,
-                  "type": "Float",
-                  "constraints": {
-                      "min": 0.01,
-                      "max": 8.0,
-                      "step": 0.01,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+          "upscale_method": {
+            "type": "OneOf",
+            "choices": [
+              "nearest-exact",
+              "bilinear",
+              "area",
+              "bicubic",
+              "bislerp"
+            ]
           }
+        },
+        "optional": {
+          "scale_by": {
+            "default": 1.5,
+            "type": "Float",
+            "constraints": {
+              "min": 0.01,
+              "max": 8.0,
+              "step": 0.01,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Latent": {
-              "type": "Latent"
-          }
+        "Latent": {
+          "type": "Latent"
+        }
       }
-  },
-  "RepeatLatentBatch": {
+    },
+    "RepeatLatentBatch": {
       "path": "transform",
       "fname": "repeat_latent_batch",
       "inputs": {
-          "required": {
-              "samples": {
-                  "type": "Latent"
-              }
-          },
-          "optional": {
-              "amount": {
-                  "default": 1,
-                  "type": "Int",
-                  "constraints": {
-                      "min": 1,
-                      "max": 64,
-                      "step": 1,
-                      "round": false,
-                      "randomizable": false,
-                      "display": "numerical"
-                  }
-              }
+        "required": {
+          "samples": {
+            "type": "Latent"
           }
+        },
+        "optional": {
+          "amount": {
+            "default": 1,
+            "type": "Int",
+            "constraints": {
+              "min": 1,
+              "max": 64,
+              "step": 1,
+              "round": false,
+              "randomizable": false
+            },
+            "display": "numerical"
+          }
+        }
       },
       "outputs": {
-          "Latent": {
-              "type": "Latent"
-          }
+        "Latent": {
+          "type": "Latent"
+        }
       }
-  },
-  "SetLatentNoiseMask": {
+    },
+    "SetLatentNoiseMask": {
       "path": "transform",
       "fname": "set_latent_noise_mask",
       "inputs": {
-          "required": {
-              "samples": {
-                  "type": "Latent"
-              },
-              "mask": {
-                  "type": "Mask"
-              }
+        "required": {
+          "samples": {
+            "type": "Latent"
           },
-          "optional": {}
+          "mask": {
+            "type": "Mask"
+          }
+        },
+        "optional": {}
       },
       "outputs": {
-          "Latent": {
-              "type": "Latent"
-          }
+        "Latent": {
+          "type": "Latent"
+        }
       }
+    }
   }
-}

@@ -29,8 +29,6 @@ import {
   TrashIcon,
 } from "@radix-ui/react-icons";
 
-export const NODE_IDENTIFIER = "sdNode";
-
 export interface ImagePreview {
   image: ImageItem;
   index: number;
@@ -56,8 +54,8 @@ const NodeComponent = (node: NodeProps<Widget>) => {
     );
   const isInProgress = progressBar !== undefined;
   // const isSelected = node.selected;
-  const name = node.data?.nickname || node.data.name;
-  const isGroup = node.data.name === "Group";
+  const name = node.type;
+  const isGroup = node.type === "Group";
 
   const handleNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
     const nickname = e.target.value;
@@ -72,10 +70,10 @@ const NodeComponent = (node: NodeProps<Widget>) => {
   useEffect(() => {
     if (ref.current) {
       const parent = ref.current.parentNode as HTMLElement;
-      parent.setAttribute("type", node.data.name);
-      ref.current.setAttribute("type", node.data.name);
+      parent.setAttribute("type", node.type);
+      ref.current.setAttribute("type", node.type);
     }
-  }, [node.data.name]);
+  }, [node.type]);
 
   useEffect(() => {
     if (nicknameInput && inputRef.current) {

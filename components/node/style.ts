@@ -17,7 +17,7 @@ export const GroupCard = styled.div<{ active: 1 | 0; title?: React.ReactNode }>`
   }
 `;
 
-export const Slot = styled.div<{ isRequired: 1 | 0; position: Position }>`
+export const Slot = styled.div<{ required: 1 | 0; position: Position }>`
   text-align: ${({ position }) => position};
   .react-flow__handle {
     top: unset;
