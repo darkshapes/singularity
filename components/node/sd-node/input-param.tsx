@@ -25,10 +25,9 @@ interface InputParamsProps {
 }
 
 const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
-  const { graph, onPropChange } = useAppStore(
-    useShallow((state) => ({
-      graph: state.graph,
-      onPropChange: state.onPropChange,
+  const { onPropChange } = useAppStore(
+    useShallow((st) => ({
+      onPropChange: st.onPropChange,
     }))
   );
 
@@ -69,8 +68,8 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
 
     return (
       <Checkbox
-        checked={i.default}
-        onCheckedChange={handleChange}
+        defaultChecked={i.default ?? false}
+        onCheckedChange={(v: boolean) => onChange(v)}
       />
     );
   }

@@ -19,6 +19,8 @@ export interface TextProps {
 export interface DependentProps {
   on: string; // will be fname of the variable it depends on
   when: any;
+
+  satisfied: boolean; // this doesn't come from the server, it's a local attribute that we calculate
 }
 
 // Type constraint types
@@ -40,7 +42,7 @@ export interface SliderConstraint {
 // Input types
 
 export interface InputBase<A> {
-  fname: string; // true name of variable
+  fname: string; // true name of variable on serverside
   default?: A;
   dependent?: DependentProps;
 }

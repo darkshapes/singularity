@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from "react";
-import { NodeProps, useUpdateNodeInternals } from "reactflow";
+import React, { useEffect, useMemo, useState } from "react";
+import { Node, NodeProps, useUpdateNodeInternals } from "reactflow";
 import { useShallow } from "zustand/react/shallow";
 
 import { NodeImgPreview } from "./node-img-preview";
@@ -15,11 +15,14 @@ import {
 } from "@/components/ui/accordion";
 
 import { useAppStore } from "@/store";
-import { Widget } from "@/types";
+import { InputData, Widget, WidgetInputNecessity } from "@/types";
 
 const SdNodeComponent = ({ id, data, selected }: NodeProps<Widget>) => {
+  const [enabledParams, setEnabledParams] = useState<WidgetInputNecessity>({});
+  const [swappedParams, setSwappedParams] = useState<any[]>([]);
+  
   const updateNodeInternals = useUpdateNodeInternals();
-  const { imagePreviews, inputImgPreviews, nodes, graph } = useAppStore(
+  const { imagePreviews, inputImgPreviews, graph, nodes } = useAppStore(
     useShallow((st) => ({
       imagePreviews: st.graph?.[id]?.images
         ?.map((image, index) => ({ image, index }))
@@ -33,12 +36,27 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<Widget>) => {
           index: 0,
         },
       ].filter((i) => i.image.filename),
-      nodes: st.nodes,
       graph: st.graph,
+      nodes: st.nodes,
     }))
   );
 
-  const [swappedParams, setSwappedParams] = useState<any[]>([]);
+  useEffect(() => {
+    const enabledParamsList = Object.entries(data.inputs.optional).filter(([k, param]) => {
+      if (!param.dependent) return true;
+
+      const dependentOn = Object.entries({...data.inputs.required, ...data.inputs.optional}).find(
+        ([name, input]) => input.fname == param.dependent?.on
+      )?.[0] as string;
+
+      return graph[id].fields[dependentOn] == param.dependent.when
+    });
+
+    setEnabledParams(enabledParamsList.reduce((acc, [k, v]) => {
+      acc[k] = v;
+      return acc;
+    }, {} as WidgetInputNecessity));
+  }, [graph[id].fields])
 
   const swapItem = (item: any) => { // swap between params and inputs
     if (swappedParams.find(e => e.name === item.name)) {
@@ -74,7 +92,7 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<Widget>) => {
           <AccordionItem value={id}>
             <AccordionTrigger />
             <AccordionContent className="m-0.5">
-              <NodeParams data={data.inputs.optional} nodeId={id} selected={selected} swapItem={swapItem} />
+              <NodeParams data={enabledParams} nodeId={id} selected={selected} swapItem={swapItem} />
             </AccordionContent>
           </AccordionItem>
         </Accordion>
