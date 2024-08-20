@@ -95,6 +95,7 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
           value={Number(i.default)}
           max={Number(i.constraints?.max)}
           min={Number(i.constraints?.min)}
+          randomizable={i.constraints?.randomizable}
           onChange={(v: number) => onChange(v)}
         />
       );

@@ -8,7 +8,7 @@ export interface SliderProps<A> {
 }
 
 export interface NumericalProps<A> extends SliderProps<A> {
-  randomize: boolean;
+  randomizable: boolean;
 }
 
 export interface TextProps {

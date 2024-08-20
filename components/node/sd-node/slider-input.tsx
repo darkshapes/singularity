@@ -18,6 +18,7 @@ interface SliderInputProps {
   min: number;
   max: number;
   step?: number;
+  randomizable?: boolean;
   style?: CSSProperties;
   onChange: (val: any) => void;
 }
@@ -28,13 +29,13 @@ const SliderInputComponent: React.FC<SliderInputProps> = ({
   min,
   max,
   step,
+  randomizable,
   style,
   onChange,
 }) => {
   const counter = useAppStore(useShallow((st) => st.counter));
   const [inputValue, setInputValue] = useState<number>(value);
   const [isRandom, setIsRandom] = useState<boolean>(false);
-  const isSeed = name === "seed";
 
   const { iMax, iMin, iStep } = useMemo(() => {
     let computedMax = max;
@@ -94,7 +95,7 @@ const SliderInputComponent: React.FC<SliderInputProps> = ({
   );
 
   useEffect(() => {
-    if (!isSeed || !isRandom) return;
+    if (!randomizable || !isRandom) return;
     handleChange(Math.floor(Math.random() * iMax));
   }, [counter, iMax]);
 
@@ -112,7 +113,7 @@ const SliderInputComponent: React.FC<SliderInputProps> = ({
           className="nodrag min-w-[50px] text-muted-foreground focus:text-accent-foreground"
         />
 
-        {isSeed && (
+        {randomizable && (
           <Checkbox checked={isRandom} onCheckedChange={onCheckedChange} className="m-1 w-6 h-6">
             <Dices strokeWidth={1} />
           </Checkbox>

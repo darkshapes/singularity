@@ -33,21 +33,22 @@ export const NodeHandle = ({
     (connection: Connection) => {
       if (connection.targetHandle === "*" || connection.sourceHandle === "*")
         return true;
-      try {
-        const getNode = (id: string | null) => nodes.find((n) => n.id === id) as Node;
 
-        const targetNode = getNode(connection.target);
-        const sourceNode = getNode(connection.source);
+      // try {
+      const getNode = (id: string | null) => nodes.find((n) => n.id === id) as Node;
 
-        const checkType = (type: any) => isArray(type) ? "STRING" : type;
+      const targetNode = getNode(connection.target);
+      const sourceNode = getNode(connection.source);
 
-        const targetType = checkType(targetNode.data.input.required[String(connection.targetHandle)][0]);
-        const sourceType = checkType(sourceNode.data.output[sourceNode.data.output_name.indexOf(connection.sourceHandle)]);
-        
-        return targetType === sourceType;
-      } catch {
-        return true;
-      }
+      const targetInput = {...targetNode.data.inputs.required, ...targetNode.data.inputs.optional};
+
+      const targetType = targetInput[String(connection.targetHandle)].type;
+      const sourceType = sourceNode.data.outputs[String(connection.sourceHandle)].type;
+      
+      return targetType === sourceType;
+      // } catch {
+        // return true;
+      // }
     },
     [nodes]
   );
