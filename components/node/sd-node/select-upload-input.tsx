@@ -35,8 +35,7 @@ const SelectUploadInputComponent: React.FC<SelectUploadInputProps> = ({
   );
 
   useEffect(() => {
-    const data: any =
-      name === "image" ? (widgets["Load Image"].inputs.required.input as InputDataLiteral).choices : input?.[0];
+    const data: any = input;
     const flatData =
       data
         ?.filter((o: string) => !o.includes("\\"))

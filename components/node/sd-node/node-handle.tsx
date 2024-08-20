@@ -60,39 +60,37 @@ export const NodeHandle = ({
   };
 
   return (
-    <>
-      <Slot 
-        position={position} 
-        required={required ? 1 : 0} 
-        className={cn("group", clickable && "cursor-pointer")} 
-        onClick={onClick}
+    <Slot 
+      position={position} 
+      required={required ? 1 : 0} 
+      className={cn("group", clickable && "cursor-pointer")} 
+      onClick={onClick}
+    >
+      {required ? (
+        <Handle
+          id={label}
+          type={type}
+          position={position}
+          isValidConnection={handleValidCheck}
+          style={{
+            width: "12px",
+            height: "12px",
+            boxShadow: "0px 0px 12px rgba(72, 66, 66, 0.4)",
+            borderColor: selected ? "white" : "#a3a3a3",
+            transitionDuration: "200ms",
+            ...positionStyles,
+          }}
+        />
+      ) : null}
+      <a
+        className={cn(
+          "mb-1 text-sm text-muted-foreground",
+          clickable && "group-hover:underline group-hover:text-white transition duration-200 ease-in-out",
+        )}
+        title={Array.isArray(slotType) ? "STRING" : slotType}
       >
-        {required ? (
-          <Handle
-            id={label}
-            type={type}
-            position={position}
-            isValidConnection={handleValidCheck}
-            style={{
-              width: "12px",
-              height: "12px",
-              boxShadow: "0px 0px 12px rgba(72, 66, 66, 0.4)",
-              borderColor: selected ? "white" : "#a3a3a3",
-              transitionDuration: "200ms",
-              ...positionStyles,
-            }}
-          />
-        ) : null}
-        <a
-          className={cn(
-            "mb-1 text-sm text-muted-foreground",
-            clickable && "group-hover:underline group-hover:text-white transition duration-200 ease-in-out",
-          )}
-          title={Array.isArray(slotType) ? "STRING" : slotType}
-        >
-          {label}
-        </a>
-      </Slot>
-    </>
+        {label}
+      </a>
+    </Slot>
   );
 };
