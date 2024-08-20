@@ -90,7 +90,7 @@ export const NodeHandle = ({
           )}
           title={Array.isArray(slotType) ? "STRING" : slotType}
         >
-          {startCase(label.toLowerCase?.())}
+          {label}
         </a>
       </Slot>
     </>
