@@ -31,7 +31,7 @@ export const NodeHandle = ({
 
   const handleValidCheck = useCallback(
     (connection: Connection) => {
-      if (connection.targetHandle === "*" || connection.sourceHandle === "*")
+      if (connection.targetHandle === "Any" || connection.sourceHandle === "Any")
         return true;
 
       // try {
