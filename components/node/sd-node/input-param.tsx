@@ -31,11 +31,19 @@ const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
     }))
   );
 
-  const onChange = useMemo(
+  // const onChange = useMemo(
+  //   () =>
+  //     debounce((v: any) => {
+  //       onPropChange(id, name, v)
+  //     }, 100),
+  //   [id, name, onPropChange]
+  // );
+
+    const onChange = useMemo(
     () =>
-      debounce((v: any) => {
+      (v: any) => {
         onPropChange(id, name, v)
-      }, 100),
+      },
     [id, name, onPropChange]
   );
 
