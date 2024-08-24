@@ -198,9 +198,12 @@ export const FlowEditor = ({ strength = -1000, distance = 1000 }) => {
       fitView
       snapGrid={[20, 20]}
       minZoom={0.05}
+      zoomOnScroll={true}
+      zoomOnPinch={true}
+      connectOnClick={true}
       multiSelectionKeyCode={["Shift", "Control"]}
       deleteKeyCode={["Delete", "Backspace"]}
-      disableKeyboardA11y
+      disableKeyboardA11y={false}
       onNodesChange={onNodesChange}
       onNodesDelete={n => n.forEach((node: any) => onDeleteNode(node.id))}
       onEdgesChange={onEdgesChange}

@@ -108,21 +108,6 @@ export const SettingsModal = ({ open, setOpen }: any) => {
                             </div>
                         ))}
                     </div>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <div className="flex flex-col gap-2 w-full pb-2" title="Recalculate Node Positions">
-                                <Button
-                                    className="inline rounded-3xl shadow-lg hover:bg-background hover:rounded-lg transition-all duration-200 h-12 w-12 mt-1 ml-auto mr-10"
-                                    variant="outline"
-                                >
-                                    <MoveIcon />
-                                </Button>
-                                </div>
-                            </TooltipTrigger>
-                            <TooltipContent side="right" className="text-xs bg-black text-white">
-                                    Recalculate node positions
-                            </TooltipContent>
-                        </Tooltip>
                 </div>
             </DialogContent>
         </DialogPortal>
