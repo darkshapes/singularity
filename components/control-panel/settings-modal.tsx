@@ -11,7 +11,6 @@ import { edgeTypeList } from "@/types";
 import { useShallow } from "zustand/react/shallow";
 import { EdgeType } from "@/types";
 
-
 const TooltipButton = ({ content, children }: any) => 
     <Tooltip>
       <TooltipTrigger asChild>
@@ -92,8 +91,8 @@ export const SettingsModal = ({ open, setOpen }: any) => {
 
     return (
         <DialogPortal>
-            <DialogContent className="absolute inset-0 w-96 h-52 p-4 mx-auto my-auto bg-black rounded-[12px]">
-                <div className="w-full h-50% bg-black p-1 shadow-lg relative">
+            <DialogContent className="absolute inset-0 w-96 h-52 p-4 mx-auto my-auto bg-background rounded-[12px]">
+                <div className="w-full h-50% bg-background p-1 shadow-lg relative">
                     <DialogTitle className="text-lg font-bold mt-0.5 mr-10">Settings</DialogTitle>
                     <DialogClose asChild>
                         <Button className="absolute top-0 right-2 p-1 bg-transparent hover:bg-transparent border-none shadow-none" onClick={() => setOpen(false)} variant="outline">

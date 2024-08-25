@@ -59,7 +59,7 @@ const NodeCardComponent = ({
   // const selectedClass = "";
 
   const color = node?.data?.color || "";
-  const bgColor = theme === "light" ? "white" : "black";
+  const bgColor = theme === "light" ? "primary" : "primary";
 
   return (
     <Card
