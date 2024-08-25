@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 type NodePickerWidgetButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     w: Widget;
     name: string;
-    setActiveItem: (nodeItem: {name: string; w: Widget} | null) => void;
+    setActiveItem: (nodeItem: {name: string; w: Widget;} | null) => void;
 };
 
 export const NodePickerWidgetButton = ({ w, name, setActiveItem, ...props }: NodePickerWidgetButtonProps) => {
