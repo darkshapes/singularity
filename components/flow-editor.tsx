@@ -214,6 +214,8 @@ export const FlowEditor = ({ strength = -1000, distance = 1000 }) => {
       onNodeDragStart={onNodeDrag}
       onDrop={onDrop}
       onDragOver={onDragOver}
+      onlyRenderVisibleElements={true}
+      attributionPosition="bottom-left"
       onInit={(e: any) => {
         setReactFlowInstance(e);
         void onInit();

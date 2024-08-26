@@ -6,7 +6,7 @@ export const ClearDialog = ({ setOpen }: any) => (
 	<DialogPortal>
 		<DialogOverlay asChild />
 		<DialogContent className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4">
-			<div className="bg-black p-6 rounded-lg shadow-lg">
+			<div className="bg-background p-6 rounded-lg shadow-lg">
 				<DialogTitle className="text-lg font-bold">Are you sure?</DialogTitle>
 				<DialogDescription className="text-sm">
 					This action will clear the graph. Do you want to proceed?
@@ -17,7 +17,7 @@ export const ClearDialog = ({ setOpen }: any) => (
 							Cancel
 						</Button>
 					</DialogClose>
-					<Button variant="destructive" onClick={() => {
+					<Button variant="destructive" className="hover:bg-foreground" onClick={() => {
 						// Add your clear graph logic here
 						setOpen(false);
 					}}>
