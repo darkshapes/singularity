@@ -55,11 +55,11 @@ const NodeCardComponent = ({
   const [hovered, setHovered] = useState<boolean>(true);
   const [direction, setDirection] = useState<Direction>("TOP");
   const activeClass = active ? "shadow-lg" : "";
-  const selectedClass = selected ? "border-white" : "";
+  const selectedClass = selected ? "border-accent-foreground" : "";
   // const selectedClass = "";
 
   const color = node?.data?.color || "";
-  const bgColor = theme === "light" ? "white" : "black";
+  const bgColor = theme === "light" ? "primary" : "primary";
 
   return (
     <Card

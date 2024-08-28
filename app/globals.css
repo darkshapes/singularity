@@ -4,23 +4,23 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 0 0% 88%;
     --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
+    --card: 0 0% 88%;
     --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
+    --popover: 0 0% 88%;
     --popover-foreground: 240 10% 3.9%;
     --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
+    --primary-foreground: 0 0% 58%;
+    --secondary: 240 4.8% 88.9%;
     --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
+    --muted: 240 4.8% 78.9%;
     --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
+    --accent: 240 4.8% 98.9%;
     --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 100%, 67%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
+    --border: 240 3.8% 76.0%;
     --input: 240 5.9% 90%;
     --ring: 240 5.9% 10%;
     --deemphasis: 0 0% 64%;
@@ -41,7 +41,7 @@
   .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
-    --card: 16, 16, 21;
+    --card: 0, 0%, 2%;
     --card-foreground: 0 0% 98%;
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
@@ -53,7 +53,7 @@
     --muted-foreground: 240 5% 64.9%;
     --accent: 240 3.7% 15.9%;
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 100%, 67%;
     --destructive-foreground: 0 0% 98%;
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
@@ -81,9 +81,9 @@
   }
 }
 
-/* Reactflow */
+/* Reactflow  */
 .react-flow__attribution {
-  display: none;
+  display:none
 }
 
 .react-flow__handle {
@@ -94,9 +94,22 @@
 
 .react-flow__pane {
   cursor: default !important;
+  overflow-y: visible;
 }
 
 .react-flow__minimap {
   background: hsl(var(--background)) !important;
 }
 
+.react-flow__minimap-mask {
+  fill: hsl(var(--muted)) !important;
+  opacity:75%;
+  
+}
+
+.workflow-button {
+  background: transparent;
+  color: hsl(var(--accent-foreground));
+  padding: 2;
+  margin: 0;
+}

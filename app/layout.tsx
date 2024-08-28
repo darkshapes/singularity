@@ -13,7 +13,7 @@ const fontSans = FontSans({
 
 export const metadata: Metadata = {
   title: "Shadowbox",
-  description: "Darkshapes. Future-proof ML engineering. Singularity UI v0.1.0 sdbx v",
+  description: "singularity 0.1.0 + sdbx // darkshapes // future-proof ml engineering. ",
 };
 
 export default function RootLayout({

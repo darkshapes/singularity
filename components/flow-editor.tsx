@@ -199,9 +199,12 @@ export const FlowEditor = ({ strength = -1000, distance = 1000 }) => {
       fitView
       snapGrid={[20, 20]}
       minZoom={0.05}
+      zoomOnScroll={true}
+      zoomOnPinch={true}
+      connectOnClick={true}
       multiSelectionKeyCode={["Shift", "Control"]}
       deleteKeyCode={["Delete", "Backspace"]}
-      disableKeyboardA11y
+      disableKeyboardA11y={false}
       onNodesChange={onNodesChange}
       onNodesDelete={n => n.forEach((node: any) => onDeleteNode(node.id))}
       onEdgesChange={onEdgesChange}
@@ -212,17 +215,19 @@ export const FlowEditor = ({ strength = -1000, distance = 1000 }) => {
       onNodeDragStart={onNodeDrag}
       onDrop={onDrop}
       onDragOver={onDragOver}
+      onlyRenderVisibleElements={true}
+      attributionPosition="bottom-left"
       onInit={(e: any) => {
         setReactFlowInstance(e);
         void onInit();
       }}
     >
       <Background variant={BackgroundVariant.Dots} />
-      <Controls showZoom={false} showInteractive={false} className="text-black hover:bg-primary hover:text-white"/>
+      <Controls showZoom={false} showInteractive={false} className="text-foreground hover:bg-primary hover:text-accent"/>
       <MiniMap
         position="bottom-left"
         nodeColor={(n) =>
-          n.data.color || (theme === "light" ? "#ECF0F1" : "#2C3E50")
+          n.data.color || (theme === "light" ? "#3C4C63" : "#2C3E50")
         }
         style={{ width: 150, height: 100 }}
       />

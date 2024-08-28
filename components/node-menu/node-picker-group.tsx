@@ -20,7 +20,7 @@ interface NodePickerGroupItems {
 interface NodePickerGroupProps {
   category: string;
   items: NodePickerGroupItems;
-  setActiveItem: (nodeItem: {name: string; w: Widget} | null) => void;
+  setActiveItem: (nodeItem: {name: string; w: Widget; } | null) => void;
   expandedItems: string[];
   setExpandedItems: (items: string[]) => void;
 }

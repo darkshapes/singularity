@@ -1,8 +1,7 @@
 import {
-  BorderDashedIcon,
-  BorderDottedIcon,
   BorderSolidIcon,
   CornerBottomRightIcon,
+  DividerVerticalIcon
 } from "@radix-ui/react-icons";
 
 export type WidgetKey = string;
@@ -16,12 +15,12 @@ export type EdgeType = {
 
 export const edgeTypeList: EdgeType[] = [
   {
-    icon: <BorderDashedIcon />,
-    name: "step",
+    icon: <BorderSolidIcon />,
+    name: "smoothstep", // or "step"
   },
   {
-    icon: <BorderSolidIcon />,
-    name: "linear",
+    icon: <DividerVerticalIcon />,
+    name: "straight",
   },
   {
     icon: <CornerBottomRightIcon />,
