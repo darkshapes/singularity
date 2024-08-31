@@ -3,7 +3,6 @@ import config from "@/app/config";
 export * from "./connection";
 export * from "./node";
 export * from "./persistence";
-export * from "./queue";
 
 /**
  * Returns the full backend API URL

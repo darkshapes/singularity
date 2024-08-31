@@ -5,5 +5,4 @@ export * from "./message";
 export * from "./node";
 export * from "./output";
 export * from "./persistence";
-export * from "./queue";
 export * from "./widget";

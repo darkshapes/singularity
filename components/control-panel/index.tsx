@@ -34,16 +34,14 @@ const TooltipButton = ({ content, children }: any) =>
     </TooltipContent>
   </Tooltip>
 
-const QueuePromptButtonComponent = () => {
+const PromptButtonComponent = () => {
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(0);
 
-  const { onSubmit, queue, onDeleteFromQueue, promptError, onEdgesAnimate, expanded, onExpand } =
+  const { onSubmit, promptError, onEdgesAnimate, expanded, onExpand } =
     useAppStore(
       useShallow((state) => ({
         onSubmit: state.onSubmit,
-        queue: state.queue,
-        onDeleteFromQueue: state.onDeleteFromQueue,
         promptError: state.promptError,
         onEdgesAnimate: state.onEdgesAnimate,
         onExpand: state.onExpand,
@@ -57,17 +55,11 @@ const QueuePromptButtonComponent = () => {
     }
   }, [promptError, count]);
 
-  useEffect(() => {
-    onEdgesAnimate(queue.length > 0);
-  }, [queue, onEdgesAnimate]);
-
   const handleRun = useCallback(() => {
     setLoading(true);
     onSubmit();
     setCount((prevCount) => prevCount + 1);
   }, [onSubmit]);
-
-  const queueHasItems = queue.length > 0;
 
   return (
     <Tooltip>
@@ -84,13 +76,13 @@ const QueuePromptButtonComponent = () => {
         </Button>
       </TooltipTrigger>
       <TooltipContent side="left" className="text-xs bg-foreground text-background">
-        Queue prompt
+        Start prompt
       </TooltipContent>
     </Tooltip>
   );
 };
 
-export const QueuePromptButton = React.memo(QueuePromptButtonComponent);
+export const PromptButton = React.memo(PromptButtonComponent);
 
 const ControlPanelComponent = () => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
@@ -111,7 +103,7 @@ const ControlPanelComponent = () => {
   return (
     <TooltipProvider delayDuration={0}>
       <div className="fixed right-4 top-4 flex flex-col gap-3 m-2">
-        <QueuePromptButton />
+        <PromptButton />
         <Sheet modal={true} open={isSheetOpen} onOpenChange={setIsSheetOpen}>
               <TooltipButton content="Save/load workflows">
                 <SheetTrigger asChild>

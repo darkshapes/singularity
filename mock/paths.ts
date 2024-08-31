@@ -7,12 +7,6 @@ import queue from "./data/queue.json";
 
 export default {
   "GET /nodes": nodes,
-  "GET /queue": queue,
-  "GET /embeddings": embeddings,
-  "GET /history": history,
-  "GET /extensions": extensions,
   "GET /prompt": { exec_info: { queue_remaining: 0 } },
   "POST /prompt": { result: "true" },
-  "POST /upload/image": { name: "mock.png" },
-  "GET /view": image,
 };

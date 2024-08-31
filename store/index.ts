@@ -1,7 +1,6 @@
 import {
   readyServer,
   createPrompt,
-  deleteFromQueue,
   getWidgetLibrary as getWidgets,
   sendPrompt,
 } from "@/app/client";
@@ -13,7 +12,6 @@ import {
   copyConnections,
   copyNodes,
   getLocalWorkflowFromId,
-  getQueueItems,
   getTopLeftPoint,
   retrieveTempWorkflow,
   saveLocalWorkflow,
@@ -42,7 +40,6 @@ export const useAppStore = create<AppState>()(
     graph: {},
     nodes: [] as Node[],
     edges: [] as Edge[],
-    queue: [],
     gallery: [],
     edgeType: edgeTypeList[2],
     nodeInProgress: undefined,
@@ -444,7 +441,7 @@ export const useAppStore = create<AppState>()(
     },
 
     /******************************************************
-     *********************** Queue *************************
+     *********************** Prompt *************************
      ******************************************************/
 
     onSubmit: async () => {
@@ -463,19 +460,6 @@ export const useAppStore = create<AppState>()(
         false,
         "onSubmit"
       );
-    },
-
-    onDeleteFromQueue: async (id) => {
-      await deleteFromQueue(id);
-      await get().onQueueUpdate();
-    },
-
-    onQueueUpdate: async () => {
-      // set(
-      //   { queue: await getQueueItems(get().clientId) },
-      //   false,
-      //   "onQueueUpdate"
-      // );
     },
 
     /******************************************************

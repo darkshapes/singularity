@@ -7,7 +7,6 @@ import type {
   NodeItem,
   PersistedGraph,
   PropertyKey,
-  QueueItem,
   SDNode,
   Widget,
   WidgetKey,
@@ -28,7 +27,6 @@ export interface AppState {
   graph: Record<NodeId, SDNode>;
   nodes: Node[];
   edges: Edge[];
-  queue: QueueItem[];
   gallery: GalleryItem[];
   edgeType: EdgeType;
   nodeInProgress?: NodeInProgress;
@@ -73,8 +71,6 @@ export interface AppState {
   onImageSave: (id: NodeId, images: ImageItem[]) => void;
 
   onSubmit: () => Promise<void>;
-  onDeleteFromQueue: (id: number) => Promise<void>;
-  onQueueUpdate: () => Promise<void>;
 
   onPersistTemp: () => void;
   onSaveLocalWorkFlow: (title?: string) => void;

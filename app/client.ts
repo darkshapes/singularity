@@ -2,7 +2,7 @@ import config from "@/app/config";
 
 import type { NodeId, PersistedGraph, PersistedNode, Widget } from "@/types";
 import { Connection } from "@/types";
-import { Node, PromptRequest, PromptResponse, Queue } from "@/types/client";
+import { Node, PromptRequest, PromptResponse } from "@/types/client";
 import { getBackendUrl } from "@/utils";
 
 import initMocks from "@/mock";
@@ -16,19 +16,6 @@ export const readyServer = async () => {
 
 export const getWidgetLibrary = async (): Promise<any> =>
   (await fetch(getBackendUrl("/nodes"))).json();
-
-export const getQueue = async (): Promise<Queue> =>
-  (await fetch(getBackendUrl("/queue"))).json();
-
-export const deleteFromQueue = async (id: number): Promise<void> => {
-  await fetch(getBackendUrl("/queue"), {
-    method: "POST",
-    body: JSON.stringify({ delete: [id] }),
-  });
-};
-
-export const getHistory = async (): Promise<History> =>
-  (await fetch(getBackendUrl("/history"))).json();
 
 export const sendPrompt = async (
   prompt: PromptRequest

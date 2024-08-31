@@ -14,14 +14,12 @@ const WsControllerComponent = () => {
   const {
     clientId,
     onNewClientId,
-    onQueueUpdate,
     onNodeInProgress,
     onImageSave,
   } = useAppStore(
     useShallow((st) => ({
       clientId: st.clientId,
       onNewClientId: st.onNewClientId,
-      onQueueUpdate: st.onQueueUpdate,
       onNodeInProgress: st.onNodeInProgress,
       onImageSave: st.onImageSave,
     }))
@@ -44,7 +42,6 @@ const WsControllerComponent = () => {
           if (msg.data.sid !== undefined && msg.data.sid !== clientId) {
             onNewClientId(msg.data.sid);
           }
-          void onQueueUpdate();
         },
 
         // Executing message
@@ -80,7 +77,6 @@ const WsControllerComponent = () => {
       clientId,
       nodeIdInProgress,
       onNewClientId,
-      onQueueUpdate,
       onNodeInProgress,
       onImageSave,
     ]
