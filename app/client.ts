@@ -1,8 +1,7 @@
 import config from "@/app/config";
 
-import type { NodeId, PersistedGraph, PersistedNode, Widget } from "@/types";
-import { Connection } from "@/types";
-import { Node, PromptRequest, PromptResponse } from "@/types/client";
+import type { Connection, Graph, PersistedGraph, Widget } from "@/types";
+import { PromptResponse } from "@/types/client";
 import { getBackendUrl } from "@/utils";
 
 import initMocks from "@/mock";
@@ -18,10 +17,16 @@ export const getWidgetLibrary = async (): Promise<any> =>
   (await fetch(getBackendUrl("/nodes"))).json();
 
 export const sendPrompt = async (
-  prompt: PromptRequest
+  prompt: Graph
 ): Promise<PromptResponse> => {
+  console.log(prompt)
+  console.log(JSON.stringify(prompt))
   const response = await fetch(getBackendUrl("/prompt"), {
     method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify(prompt),
   });
   const error = response.status !== 200 ? await response.text() : undefined;
@@ -60,49 +65,89 @@ export const createPrompt = ({
   widgets: Record<string, Widget>;
   customWidgets: string[];
   clientId?: string;
-}): PromptRequest => {
-  const prompt: Record<NodeId, Node> = {};
-  const data: Record<NodeId, PersistedNode> = {};
+}): Graph => {
+  const multigraph: Graph = {
+    directed: true,
+    multigraph: true,
+    graph: {},
+    nodes: Object.entries(graph.data).map(([id, node]) => {
+      // if (customWidgets.includes(node.value.widget)) return; // pass through graph and reroute
+  
+      const widget = widgets[node.value.widget];
+      const fname = widget.fname;
+  
+      const outputs = Object.keys(widget.outputs);
 
-  Object.entries(graph.data).forEach(([id, node]) => {
-    if (customWidgets.includes(node.value.widget)) return;
-    const fields = { ...node.value.fields };
-    Object.entries(fields).forEach(([property, value]) => {
-      const input = widgets[node.value.widget].inputs.required?.[property];
-      // if (input.randomizable && value === -1) {
-        // fields[property] = Math.trunc(Math.random() * Number.MAX_SAFE_INTEGER);
-      // }
-    });
-    data[id] = {
-      position: node.position,
-      value: { ...node.value, fields },
-    };
-    prompt[id] = {
-      class_type: node.value.widget,
-      inputs: fields,
-    };
-  });
+      const inputs = Object.values(widget.inputs.required).map(n => n.fname);
+      const widget_inputs = Object.keys(widget.inputs.optional).reduce((a, v) => (
+        { 
+          ...a, 
+          [widget.inputs.optional[v].fname]: node.value.fields[v]
+        }
+      ), {}) 
+
+      console.log(widget_inputs);
+      console.log(node);
+      
+      return {
+        id,
+        fname,
+        outputs,
+        inputs,
+        widget_inputs,
+      }
+    }),
+    links: Object.entries(graph.connections).map(([i, edge]) => {
+      const source = edge.source;
+      const target = edge.target;
+
+      // console.log(source);
+      // console.log(target);
+
+      const sourceNode = widgets[graph.data[source].value.widget];
+      const targetNode = widgets[graph.data[target].value.widget];
+
+      // console.log(sourceNode);
+      // console.log(targetNode);
+
+      const sourceHandle = Object.keys(sourceNode.outputs).findIndex(n => n === edge.sourceHandle);
+      const targetHandle = targetNode.inputs.required[edge.targetHandle].fname;
+
+      const key = parseInt(i);
+
+      return {
+        source,
+        target,
+        source_handle: sourceHandle,
+        target_handle: targetHandle,
+        key,
+      }
+    })
+  };
 
   // Reconnection
-  let connections = reconnection(graph.connections);
+  console.log(graph.connections)
+  // let connections = reconnection(graph.connections);
 
-  connections.forEach((edge) => {
-    const source = graph.data[edge.source];
-    if (!source) return;
-    // const outputs = widgets[source.value.widget].outputs
-    // const outputName = Object.keys(outputs).find(
-    //   key => outputs[key] === edge.sourceHandle
-    // );
-    if (prompt[edge.target]) {
-      prompt[edge.target].inputs[edge.targetHandle] = [
-        edge.source,
-      ];
-    }
-  });
+  // connections.forEach((edge) => {
+  //   const source = graph.data[edge.source];
+  //   if (!source) return;
+  //   // const outputs = widgets[source.value.widget].outputs
+  //   // const outputName = Object.keys(outputs).find(
+  //   //   key => outputs[key] === edge.sourceHandle
+  //   // );
+  //   if (prompt[edge.target]) {
+  //     prompt[edge.target].inputs[edge.targetHandle] = [
+  //       edge.source,
+  //     ];
+  //   }
+  // });
 
-  return {
-    prompt,
-    client_id: clientId,
-    extra_data: { extra_pnginfo: { workflow: { connections, data } } },
-  };
+  // return {
+  //   prompt,
+  //   client_id: clientId,
+  //   extra_data: { extra_pnginfo: { workflow: { connections, data } } },
+  // };
+
+  return multigraph;
 };

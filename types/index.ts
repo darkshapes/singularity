@@ -1,5 +1,6 @@
 export * from "./base";
 export * from "./connection";
+export * from "./graph";
 export * from "./input";
 export * from "./message";
 export * from "./node";

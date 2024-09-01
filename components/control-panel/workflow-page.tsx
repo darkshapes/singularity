@@ -1,6 +1,5 @@
 "use client";
 
-import defaultWorkflow from "@/app/defaultWorkflow";
 import { useAppStore } from "@/store";
 import type { LocalPersistedGraphs, PersistedGraph } from "@/types";
 import {
@@ -91,12 +90,12 @@ const WorkflowPageComponent = () => {
     [count, onUpdateLocalWorkFlowTitle]
   );
 
-  // Load default workflow
-  const handleNew = useCallback(() => {
-    cleanTempWorkflow();
-    onLoadWorkflow(defaultWorkflow);
-    setCount(count + 1);
-  }, [count, onLoadWorkflow]);
+  // // Load default workflow
+  // const handleNew = useCallback(() => {
+  //   cleanTempWorkflow();
+  //   onLoadWorkflow(defaultWorkflow);
+  //   setCount(count + 1);
+  // }, [count, onLoadWorkflow]);
 
   // Upload workflow file
   const handleUpload = useCallback(

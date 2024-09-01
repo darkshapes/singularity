@@ -6,7 +6,6 @@ import {
   PersistedNode,
 } from "@/types";
 import { getValidConnections } from "@/utils/connection";
-import defaultWorkflow from "@/app/defaultWorkflow";
 
 const TEMP_KEY = "civitui-flow-temp";
 const LOCAL_KEY = "civitui-flow-local";
@@ -54,7 +53,8 @@ export const retrieveTempWorkflow = (): PersistedGraph | null => {
     localStorage.removeItem(TEMP_KEY);
     item = null;
   }
-  return item ? JSON.parse(item) : defaultWorkflow;
+  // return item ? JSON.parse(item) : defaultWorkflow;
+  return JSON.parse(item ?? "{}");
 };
 
 /**

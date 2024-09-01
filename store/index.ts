@@ -27,7 +27,6 @@ import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { AppState } from "./AppState";
 import customWidgets from "./customWidgets";
-import defaultWorkflow from "@/app/defaultWorkflow";
 import { transformData } from "@/utils/workflow";
 export * from "./AppState";
 
@@ -70,9 +69,9 @@ export const useAppStore = create<AppState>()(
       const widgets = await getWidgets();
       set({ widgets: { ...customWidgets, ...widgets } }, false, "onInit");
 
-      get().onLoadWorkflow(
-        retrieveTempWorkflow()
-      );
+      // get().onLoadWorkflow(
+      //   retrieveTempWorkflow()
+      // );
 
       // Initialize settings
       // const edgeType = edgeTypeList[parseInt(settings["Comfy.LinkRenderMode"])];
@@ -476,11 +475,11 @@ export const useAppStore = create<AppState>()(
 
     onLoadLocalWorkflow: (id) => {
       const workflow = getLocalWorkflowFromId(id);
-      if (workflow) {
+      // if (workflow) {
         get().onLoadWorkflow(workflow);
-      } else {
-        get().onLoadWorkflow(defaultWorkflow);
-      }
+      // } else {
+        // get().onLoadWorkflow(defaultWorkflow);
+      // }
     },
 
     onUpdateLocalWorkFlowGraph: (id) => {
