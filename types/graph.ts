@@ -11,7 +11,7 @@ export interface Link {
     target: string;
     source_handle: number;
     target_handle: string;
-    key?: number;
+    key?: string;
 }
 
 export interface Graph {

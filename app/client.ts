@@ -97,7 +97,7 @@ export const createPrompt = ({
         widget_inputs,
       }
     }),
-    links: Object.entries(graph.connections).map(([i, edge]) => {
+    links: Object.entries(graph.connections).map(([key, edge]) => {
       const source = edge.source;
       const target = edge.target;
 
@@ -112,8 +112,6 @@ export const createPrompt = ({
 
       const sourceHandle = Object.keys(sourceNode.outputs).findIndex(n => n === edge.sourceHandle);
       const targetHandle = targetNode.inputs.required[edge.targetHandle].fname;
-
-      const key = parseInt(i);
 
       return {
         source,
