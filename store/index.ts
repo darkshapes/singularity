@@ -3,6 +3,7 @@ import {
   createPrompt,
   getWidgetLibrary as getWidgets,
   sendPrompt,
+  subscribeToTask,
 } from "@/app/client";
 import type { Connection, PersistedGraph } from "@/types";
 import { edgeTypeList } from "@/types";
@@ -454,11 +455,16 @@ export const useAppStore = create<AppState>()(
           clientId: state.clientId,
         })
       );
+      if (res) subscribeToTask(res, state.onTaskUpdate);
       set(
-        { promptError: res.error, counter: state.counter + 1 },
+        { promptError: res, counter: state.counter + 1 },
         false,
         "onSubmit"
       );
+    },
+
+    onTaskUpdate: async () => {
+
     },
 
     /******************************************************

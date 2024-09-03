@@ -71,6 +71,7 @@ export interface AppState {
   onImageSave: (id: NodeId, images: ImageItem[]) => void;
 
   onSubmit: () => Promise<void>;
+  onTaskUpdate: () => void;
 
   onPersistTemp: () => void;
   onSaveLocalWorkFlow: (title?: string) => void;

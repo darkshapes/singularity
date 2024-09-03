@@ -1,7 +1,6 @@
 import config from "@/app/config";
 
 import type { Connection, Graph, PersistedGraph, Widget } from "@/types";
-import { PromptResponse } from "@/types/client";
 import { getBackendUrl } from "@/utils";
 
 import initMocks from "@/mock";
@@ -18,9 +17,9 @@ export const getWidgetLibrary = async (): Promise<any> =>
 
 export const sendPrompt = async (
   prompt: Graph
-): Promise<PromptResponse> => {
-  console.log(prompt)
-  console.log(JSON.stringify(prompt))
+): Promise<string | undefined> => {
+  // console.log(prompt)
+  // console.log(JSON.stringify(prompt))
   const response = await fetch(getBackendUrl("/prompt"), {
     method: "POST",
     headers: {
@@ -29,30 +28,9 @@ export const sendPrompt = async (
     },
     body: JSON.stringify(prompt),
   });
-  const error = response.status !== 200 ? await response.text() : undefined;
-  return { error };
-};
-
-const reconnection = (oldConnections: Connection[]): Connection[] => {
-  let connections: Connection[] = oldConnections.map((connect) => {
-    if (connect.sourceHandle === "*") {
-      const parent: any = oldConnections.find(
-        (c) => c.target === connect.source
-      );
-      return {
-        ...connect,
-        source: parent.source,
-        sourceHandle: parent.sourceHandle,
-      };
-    }
-    return connect;
-  });
-
-  if (connections.find((c) => c.sourceHandle === "*")) {
-    return reconnection(connections);
-  } else {
-    return connections.filter((c) => c.targetHandle !== "*");
-  }
+  // TODO: error handling here
+  // return response.status !== 200 ? await response.text() : undefined;
+  return await response.text();
 };
 
 export const createPrompt = ({
@@ -86,8 +64,8 @@ export const createPrompt = ({
         }
       ), {}) 
 
-      console.log(widget_inputs);
-      console.log(node);
+      // console.log(widget_inputs);
+      // console.log(node);
       
       return {
         id,
@@ -123,29 +101,28 @@ export const createPrompt = ({
     })
   };
 
-  // Reconnection
-  console.log(graph.connections)
-  // let connections = reconnection(graph.connections);
-
-  // connections.forEach((edge) => {
-  //   const source = graph.data[edge.source];
-  //   if (!source) return;
-  //   // const outputs = widgets[source.value.widget].outputs
-  //   // const outputName = Object.keys(outputs).find(
-  //   //   key => outputs[key] === edge.sourceHandle
-  //   // );
-  //   if (prompt[edge.target]) {
-  //     prompt[edge.target].inputs[edge.targetHandle] = [
-  //       edge.source,
-  //     ];
-  //   }
-  // });
-
-  // return {
-  //   prompt,
-  //   client_id: clientId,
-  //   extra_data: { extra_pnginfo: { workflow: { connections, data } } },
-  // };
-
   return multigraph;
+};
+
+export const subscribeToTask = (taskId: string, callback: (data: any) => void): WebSocket => {
+  const ws = new WebSocket(`ws://${config.host}/ws/${taskId}`);
+
+  console.log("subscribed to task")
+  console.log(taskId);
+
+  ws.onmessage = (event: MessageEvent) => {
+      const data = JSON.parse(event.data);
+      console.log(data);
+      callback(data);  // Invoke the callback with the received data
+  };
+
+  ws.onclose = () => {
+      console.log("WebSocket connection closed");
+  };
+
+  ws.onerror = (error) => {
+      console.error("WebSocket error:", error);
+  };
+
+  return ws;  // Return the WebSocket instance if needed for further control
 };

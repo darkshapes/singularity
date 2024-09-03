@@ -4,7 +4,6 @@ import "./globals.css";
 
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
-import { WsController } from "@/components/ws-controller";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -13,7 +12,7 @@ const fontSans = FontSans({
 
 export const metadata: Metadata = {
   title: "Shadowbox",
-  description: "singularity 0.1.0 + sdbx // darkshapes // future-proof ml engineering. ",
+  description: "singularity 0.1.0 + sdbx // darkshapes // future-proof ml engineering.",
 };
 
 export default function RootLayout({
@@ -31,7 +30,6 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" enableSystem>
           {children}
-          <WsController />
         </ThemeProvider>
       </body>
     </html>

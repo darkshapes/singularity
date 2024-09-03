@@ -49,7 +49,6 @@
     "react-hook-form": "^7.51.0",
     "react-instantsearch": "^7.7.1",
     "react-instantsearch-nextjs": "^0.2.0",
-    "react-use-websocket": "^4.8.1",
     "reactflow": "^11.10.4",
     "sharp": "^0.33.4",
     "sonner": "^1.4.3",
