@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Node, NodeProps, useUpdateNodeInternals } from "reactflow";
 import { useShallow } from "zustand/react/shallow";
 
-import { NodeImgPreview } from "./node-img-preview";
+import { NodeDataDisplay } from "./node-data-display";
 import { NodeInputs } from "./node-inputs";
 import { NodeOutputs } from "./node-outputs";
 import { NodeSwappedParams, NodeParams } from "./node-params";
@@ -22,24 +22,7 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<Widget>) => {
   const [swappedParams, setSwappedParams] = useState<any[]>([]);
   
   const updateNodeInternals = useUpdateNodeInternals();
-  const { imagePreviews, inputImgPreviews, graph, nodes } = useAppStore(
-    useShallow((st) => ({
-      imagePreviews: st.graph?.[id]?.images
-        ?.map((image, index) => ({ image, index }))
-        .filter(Boolean),
-      inputImgPreviews: [
-        {
-          image: {
-            filename: st.onGetNodeFieldsData(id, "image"),
-            type: "input",
-          },
-          index: 0,
-        },
-      ].filter((i) => i.image.filename),
-      graph: st.graph,
-      nodes: st.nodes,
-    }))
-  );
+  const { graph } = useAppStore(useShallow((st) => ({ graph: st.graph })));
 
   useEffect(() => {
     const enabledParamsList = Object.entries(data.inputs.optional).filter(([k, param]) => {
@@ -96,7 +79,7 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<Widget>) => {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
-      <NodeImgPreview data={imagePreviews || inputImgPreviews} />
+      <NodeDataDisplay id={id} />
     </>
   );
 };

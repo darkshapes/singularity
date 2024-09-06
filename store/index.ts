@@ -38,6 +38,7 @@ export const useAppStore = create<AppState>()(
     widgets: {},
     customWidgets: Object.keys(customWidgets),
     graph: {},
+    results: {},
     nodes: [] as Node[],
     edges: [] as Edge[],
     gallery: [],
@@ -55,6 +56,10 @@ export const useAppStore = create<AppState>()(
 
     onNewClientId: (id) => {
       set({ clientId: id }, false, "onNewClientId");
+    },
+    
+    onError: async (error) => {
+      set({ promptError: error }, false, "onSubmit");
     },
 
     onRefresh: async () => {
@@ -423,24 +428,6 @@ export const useAppStore = create<AppState>()(
     },
 
     /******************************************************
-     *********************** Image *************************
-     ******************************************************/
-
-    onImageSave: (id, images) => {
-      set(
-        (st) => ({
-          gallery: st.gallery.concat(images.map((image) => ({ image }))),
-          graph: {
-            ...st.graph,
-            [id]: { ...st.graph[id], images },
-          },
-        }),
-        false,
-        "onImageSave"
-      );
-    },
-
-    /******************************************************
      *********************** Prompt *************************
      ******************************************************/
 
@@ -455,16 +442,33 @@ export const useAppStore = create<AppState>()(
           clientId: state.clientId,
         })
       );
-      if (res) subscribeToTask(res, state.onTaskUpdate);
-      set(
-        { promptError: res, counter: state.counter + 1 },
-        false,
-        "onSubmit"
-      );
+      if (res.task_id) {
+        subscribeToTask(res.task_id, state.onTaskUpdate);
+        set(
+          { counter: state.counter + 1 },
+          false,
+          "onSubmit"
+        );
+      } else {
+        state.onError(res.error ?? "Server didn't report an error. Please check server logs.");
+      }
     },
 
-    onTaskUpdate: async () => {
+    onTaskUpdate: async (data) => {
+      const { onError } = get();
+      if (data.results) {
+        set(
+          { results: data.results },
+          false,
+          "onTaskUpdate"
+        )
 
+        if (data.completion) {
+          console.log(`${data.task_id} completed`)
+        }
+      } else {
+        onError(data.error ?? "Server didn't report an error. Please check server logs.")
+      }
     },
 
     /******************************************************

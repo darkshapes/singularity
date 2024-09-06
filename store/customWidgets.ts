@@ -8,7 +8,8 @@ const customWidgets: Record<WidgetKey, Widget> = {
       required: {},
       optional: {}
     },
-    outputs: {}
+    outputs: {},
+    display: false
   },
   Reroute: {
     path: "utils",
@@ -21,7 +22,8 @@ const customWidgets: Record<WidgetKey, Widget> = {
       Output: {
         type: "Any"
       }
-    }
+    },
+    display: false
   },
 };
 

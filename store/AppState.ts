@@ -25,6 +25,7 @@ export interface AppState {
   widgets: Record<WidgetKey, Widget>;
   customWidgets: string[];
   graph: Record<NodeId, SDNode>;
+  results: Record<NodeId, any>;
   nodes: Node[];
   edges: Edge[];
   gallery: GalleryItem[];
@@ -36,6 +37,7 @@ export interface AppState {
   
   onSetPage: (value: string) => void;
   onNewClientId: (id: string) => void;
+  onError: (error: string) => Promise<void>;
   onRefresh: () => Promise<void>;
   onInit: () => Promise<void>;
 
@@ -68,10 +70,8 @@ export interface AppState {
 
   onConnect: OnConnect;
 
-  onImageSave: (id: NodeId, images: ImageItem[]) => void;
-
   onSubmit: () => Promise<void>;
-  onTaskUpdate: () => void;
+  onTaskUpdate: (update: any) => void;
 
   onPersistTemp: () => void;
   onSaveLocalWorkFlow: (title?: string) => void;

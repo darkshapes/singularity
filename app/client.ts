@@ -15,9 +15,13 @@ export const readyServer = async () => {
 export const getWidgetLibrary = async (): Promise<any> =>
   (await fetch(getBackendUrl("/nodes"))).json();
 
+type PromptResult =
+  | { error: string; task_id?: never }
+  | { task_id: string; error?: never };
+
 export const sendPrompt = async (
   prompt: Graph
-): Promise<string | undefined> => {
+): Promise<PromptResult> => {
   // console.log(prompt)
   // console.log(JSON.stringify(prompt))
   const response = await fetch(getBackendUrl("/prompt"), {
@@ -30,7 +34,7 @@ export const sendPrompt = async (
   });
   // TODO: error handling here
   // return response.status !== 200 ? await response.text() : undefined;
-  return await response.text();
+  return await response.json();
 };
 
 export const createPrompt = ({
@@ -104,6 +108,10 @@ export const createPrompt = ({
   return multigraph;
 };
 
+type TaskSubscriptionResult = { task_id: string; }
+  | { results: string; completed?: true; error?: never }
+  | { error: string; results?: never; completed?: never };
+
 export const subscribeToTask = (taskId: string, callback: (data: any) => void): WebSocket => {
   const ws = new WebSocket(`ws://${config.host}/ws/${taskId}`);
 
@@ -111,8 +119,7 @@ export const subscribeToTask = (taskId: string, callback: (data: any) => void): 
   console.log(taskId);
 
   ws.onmessage = (event: MessageEvent) => {
-      const data = JSON.parse(event.data);
-      console.log(data);
+      const data: TaskSubscriptionResult = JSON.parse(event.data);
       callback(data);  // Invoke the callback with the received data
   };
 

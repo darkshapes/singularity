@@ -25,13 +25,11 @@ export interface SDNodeModify {
  * SDNode object
  * @property widget - Widget key
  * @property fields - Property fields
- * @property images - Image list
  * @property modify - Modify properties
  */
 export interface SDNode {
   widget: WidgetKey;
   fields: Record<PropertyKey, any>;
-  images?: ImageItem[];
   modify?: SDNodeModify;
 }
 

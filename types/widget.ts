@@ -3,11 +3,11 @@ import { PropertyKey } from "./base";
 import { InputData } from "./input";
 import { OutputData } from "./output";
 
-export type WidgetInputNecessity = Record<PropertyKey, InputData>
+export type WidgetInputNecessity = Record<PropertyKey, InputData>;
 
 export type WidgetInputs = {
-  required: WidgetInputNecessity,
-  optional: WidgetInputNecessity,
+  required: WidgetInputNecessity;
+  optional: WidgetInputNecessity;
 }
 
 export type WidgetOutputs = Record<PropertyKey, OutputData>;
@@ -18,10 +18,13 @@ export type WidgetOutputs = Record<PropertyKey, OutputData>;
  * @property fname - Widget function name on serverside
  * @property inputs - Input information
  * @property outputs - Output information
+ * @property display - Results display on node
  */
 export interface Widget extends SDNodeModify {
-  path: string,
-  fname: string,
+  path: string;
+  fname: string;
+  steps?: number;
   inputs: WidgetInputs;
   outputs: WidgetOutputs;
+  display: boolean;
 }

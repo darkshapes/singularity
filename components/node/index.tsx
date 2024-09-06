@@ -29,11 +29,6 @@ import {
   TrashIcon,
 } from "@radix-ui/react-icons";
 
-export interface ImagePreview {
-  image: ImageItem;
-  index: number;
-}
-
 const NodeComponent = (node: NodeProps<Widget>) => {
   const ref = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
