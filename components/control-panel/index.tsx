@@ -127,7 +127,7 @@ const ControlPanelComponent = () => {
             className="relative rounded-3xl shadow-lg hover:bg-accent hover:rounded-lg transition-all duration-200 h-12 w-12"
             variant="outline"
           >
-            {isExpanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
+            {isExpanded ? <ChevronDownIcon />  : <ChevronUpIcon />}
           </Button>
         </TooltipButton>
         <Dialog open={isClearDialogOpen} onOpenChange={setIsClearDialogOpen}>
