@@ -79,7 +79,7 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<Widget>) => {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
-      <NodeDataDisplay id={id} />
+      { data.display && <NodeDataDisplay id={id} /> }
     </>
   );
 };
