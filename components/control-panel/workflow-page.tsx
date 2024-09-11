@@ -14,6 +14,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useShallow } from "zustand/react/shallow";
 import { toast } from "sonner";
 import { Tree } from "react-arborist";
+import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { Dropzone } from "../dropzone";
 import { WorkflowItem } from "./workflow-item";
 import { Label } from "../ui/label";
@@ -119,16 +120,20 @@ const WorkflowPageComponent = () => {
   }, [count]);
 
   return (
-    <div className="flex flex-col gap-4 overflow-auto">
-      <Button className="bg-border hover:bg-accent-foreground text-accent-foreground hover:text-background mt-3 mx-5" onClick={handleSave}>Save</Button>
-      <Dropzone onUpload={handleUpload} />
-      <div>
-        <Label className="text-neutral-500">Local Workflows</Label>
-        <Tree initialData={flowTree}>
-          { WorkflowItem }
-        </Tree>
+    <TooltipProvider 
+      delayDuration={0}
+    >
+      <div className="flex flex-col gap-4 overflow-auto">
+        <Button className="bg-border hover:bg-accent-foreground text-accent-foreground hover:text-background mt-3 mx-5" onClick={handleSave}>Save</Button>
+        <Dropzone onUpload={handleUpload} />
+        <div>
+          <Label className="text-neutral-500">Local Workflows</Label>
+          <Tree initialData={flowTree}>
+            { WorkflowItem }
+          </Tree>
+        </div>
       </div>
-    </div>
+    </TooltipProvider>
   );
 };
 

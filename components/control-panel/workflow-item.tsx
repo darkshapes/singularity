@@ -82,30 +82,6 @@ const WorkflowItemComponent: React.FC<NodeRendererProps<any>> = ({
   ]);
 
   return (
-    <div style={style} className="tree-node flex items-center">
-      {/* Vertical Line */}
-      <div className="border-l border-gray-400 h-full mr-2" />
-
-      {/* Horizontal Line */}
-      <div className="relative flex-grow">
-        <div className="border-b border-gray-400 absolute left-0 top-1/2 w-full" />
-
-        {/* Node Label */}
-        <div className="relative z-10 pl-2">
-          {node.isLeaf ? (
-            <span className="font-bold">{node.data.name}</span>
-          ) : (
-            <span className="text-gray-600">{node.data.name}</span>
-          )}
-        </div>
-      </div>
-    </div>
-  )
-
-  return (
-    <TooltipProvider 
-      delayDuration={0}
-    >
       <ul
         style={style}
         className={clsx("list-none p-0 m-0", node.state)}
@@ -200,7 +176,6 @@ const WorkflowItemComponent: React.FC<NodeRendererProps<any>> = ({
           </div>
         </li>
       </ul>
-    </TooltipProvider>
   );
 };
 
