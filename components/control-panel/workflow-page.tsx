@@ -8,10 +8,12 @@ import {
   readWorkflowFromFile,
   retrieveLocalWorkflows,
 } from "@/utils";
+import { getFlowTree } from "@/app/api";
 
 import React, { useCallback, useEffect, useState } from "react";
 import { useShallow } from "zustand/react/shallow";
 import { toast } from "sonner";
+import { Tree } from "react-arborist";
 import { Dropzone } from "../dropzone";
 import { WorkflowItem } from "./workflow-item";
 import { Label } from "../ui/label";
@@ -19,8 +21,7 @@ import { Button } from "../ui/button";
 
 const WorkflowPageComponent = () => {
   const [title, setTitle] = useState<string>();
-  const [localWorkflowList, setLocalWorkflowList] =
-    useState<LocalPersistedGraphs[]>();
+  const [flowTree, setFlowTree] = useState<LocalPersistedGraphs[]>();
   const [count, setCount] = useState<number>(0);
 
   const {
@@ -114,31 +115,8 @@ const WorkflowPageComponent = () => {
   );
 
   useEffect(() => {
-    try {
-      const workflows = retrieveLocalWorkflows();
-      if (Array.isArray(workflows)) {
-        setLocalWorkflowList(workflows.sort((a, b) => b.time - a.time));
-      } else {
-        console.error("Invalid local workflow data.");
-      }
-    } catch (error) {
-      console.error("Error retrieving local workflows:", error);
-    }
+    getFlowTree().then(tree => setFlowTree(tree))
   }, [count]);
-
-  const renderList = useCallback(
-    (item: LocalPersistedGraphs, index: number) => (
-      <WorkflowItem
-        item={item}
-        index={index}
-        handleLoad={handleLoad}
-        handleUpdate={handleUpdate}
-        handleDelete={handleDelete}
-        handleRename={handleRename}
-      />
-    ),
-    [handleDelete, handleLoad, handleRename, handleUpdate]
-  );
 
   return (
     <div className="flex flex-col gap-4 overflow-auto">
@@ -146,21 +124,9 @@ const WorkflowPageComponent = () => {
       <Dropzone onUpload={handleUpload} />
       <div>
         <Label className="text-neutral-500">Local Workflows</Label>
-        {localWorkflowList?.map((item, index) => (
-          <li
-            key={item.id}
-            className="list-none"
-          >
-            <WorkflowItem
-              item={item}
-              index={index}
-              handleLoad={handleLoad}
-              handleUpdate={handleUpdate}
-              handleDelete={handleDelete}
-              handleRename={handleRename}
-            />
-          </li>
-        ))}
+        <Tree initialData={flowTree}>
+          { WorkflowItem }
+        </Tree>
       </div>
     </div>
   );

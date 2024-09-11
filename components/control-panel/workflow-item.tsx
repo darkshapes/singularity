@@ -1,86 +1,118 @@
 import React, { useCallback, useState } from "react";
+import { clsx } from "clsx";
 import type { LocalPersistedGraphs, PersistedGraph } from "@/types";
 import { MaskOffIcon, ClockIcon, Cross1Icon, DownloadIcon, InputIcon, Link2Icon, Pencil2Icon } from "@radix-ui/react-icons";
 import { writeWorkflowToFile } from "@/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
+import { NodeRendererProps } from "react-arborist";
 
-interface WorkflowItemProps {
-  item: LocalPersistedGraphs;
-  index: number;
-  handleRename: (id: string, title: string) => void;
-  handleUpdate: (id: string, title: string) => void;
-  handleDelete: (id: string, title: string) => void;
-  handleLoad: (graph: PersistedGraph, title: string) => void;
-}
+// interface WorkflowItemProps {
+//   item: LocalPersistedGraphs;
+//   index: number;
+//   handleRename: (id: string, title: string) => void;
+//   handleUpdate: (id: string, title: string) => void;
+//   handleDelete: (id: string, title: string) => void;
+//   handleLoad: (graph: PersistedGraph, title: string) => void;
+// }
 
-const WorkflowItemComponent: React.FC<WorkflowItemProps> = ({
-  item,
-  index,
-  handleRename,
-  handleUpdate,
-  handleDelete,
-  handleLoad,
+
+
+const WorkflowItemComponent: React.FC<NodeRendererProps<any>> = ({
+  node,
+  style,
+  dragHandle
 }) => {
   const [showRename, setShowRename] = useState(false);
 
-  const handleRenameDone = useCallback(
-    (e: any) => {
-      setShowRename(false);
-      const newTitle = e.target.value;
-      if (newTitle) handleRename(item.id, newTitle);
-    },
-    [handleRename, item.id]
-  );
+  // const handleRenameDone = useCallback(
+  //   (e: any) => {
+  //     setShowRename(false);
+  //     const newTitle = e.target.value;
+  //     if (newTitle) handleRename(node.id, newTitle);
+  //   },
+  //   [handleRename, node.id]
+  // );
 
-  const handleLoadClick = useCallback(() => {
-    handleLoad(item.graph, item.title);
-  }, [handleLoad, item.graph, item.title]);
+  // const handleLoadClick = useCallback(() => {
+  //   handleLoad(node.data.graph, node.data.name);
+  // }, [handleLoad, node.data.graph, node.data.name]);
 
-  const handleEditClick = useCallback(() => {
-    setShowRename(!showRename);
-  }, [showRename]);
+  // const handleEditClick = useCallback(() => {
+  //   setShowRename(!showRename);
+  // }, [showRename]);
 
-  const handleUpdateClick = useCallback(() => {
-    handleUpdate(item.id, item.title);
-  }, [handleUpdate, item.id, item.title]);
+  // const handleUpdateClick = useCallback(() => {
+  //   handleUpdate(node.id, node.data.name);
+  // }, [handleUpdate, node.id, node.data.name]);
 
-  const handleDownloadClick = useCallback(() => {
-    writeWorkflowToFile(item.graph, item.title);
-  }, [item.graph, item.title]);
+  // const handleDownloadClick = useCallback(() => {
+  //   writeWorkflowToFile(node.data.graph, node.data.name);
+  // }, [node.data.graph, node.data.name]);
 
-  const handleDeleteClick = useCallback(() => {
-    handleDelete(item.id, item.title);
-  }, [handleDelete, item.id, item.title]);
+  // const handleDeleteClick = useCallback(() => {
+  //   handleDelete(node.id, node.data.name);
+  // }, [handleDelete, node.id, node.data.name]);
 
   const renderTitle = useCallback(() => {
     if (showRename) {
-      return <Input defaultValue={item.title}
+      return <Input defaultValue={node.data.name}
         className="text-accent-foreground"
         autoFocus={true}
-        onBlur={handleRenameDone} 
+        // onBlur={handleRenameDone} 
         onKeyDown={e => ["Enter"].includes(e.key) && (e.target as HTMLElement).blur()} 
       />;
     } else {
       return (
         <Tooltip>
             <TooltipTrigger asChild>
-        <a className="flex overflow-hidden w-full" title="Load" onClick={handleLoadClick}>
-          {item.title}
+        <a className="flex overflow-hidden w-full" title="Load" 
+          // onClick={handleLoadClick}
+        >
+          {node.data.name}
         </a>
         </TooltipTrigger>
         <TooltipContent>Load</TooltipContent>
        </Tooltip>
       );
     }
-  }, [showRename, item.title, index, handleRenameDone, handleLoadClick]);
+  }, [showRename, node.data.name, 
+    // handleRenameDone, handleLoadClick
+  ]);
 
   return (
-    <TooltipProvider delayDuration={0}>
-      <ul className="list-none p-0 m-0">
-        <li key={item.id} className="last:border-b-0">
-          <div className="flex flex-col justify-between overflow-hidden">
+    <div style={style} className="tree-node flex items-center">
+      {/* Vertical Line */}
+      <div className="border-l border-gray-400 h-full mr-2" />
+
+      {/* Horizontal Line */}
+      <div className="relative flex-grow">
+        <div className="border-b border-gray-400 absolute left-0 top-1/2 w-full" />
+
+        {/* Node Label */}
+        <div className="relative z-10 pl-2">
+          {node.isLeaf ? (
+            <span className="font-bold">{node.data.name}</span>
+          ) : (
+            <span className="text-gray-600">{node.data.name}</span>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+
+  return (
+    <TooltipProvider 
+      delayDuration={0}
+    >
+      <ul
+        style={style}
+        className={clsx("list-none p-0 m-0", node.state)}
+        onClick={() => node.isInternal && node.toggle()}
+      >
+        <li key={node.id} className="last:border-b-0">
+          <div className="flex flex-col justify-between overflow-hidden" ref={dragHandle}>
             <div className="flex justify-between">
                 <div className="text-muted-foreground w-full overflow-hidden hover:text-secondary h-7 m-1 p-1 flex items-center cursor-default [&>span]:line-clamp-1" title="Load Workflow" style={{borderRadius: '5px'}}>
                     <span
@@ -90,9 +122,11 @@ const WorkflowItemComponent: React.FC<WorkflowItemProps> = ({
                     >{renderTitle()}</span>
               </div>
               <div className="flex justify-end items-center">
-                <Tooltip>
+                {/* <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button className="workflow-button hover:bg-muted hover:text-foreground"  size="narrow" onClick={handleEditClick}>
+                    <Button className="workflow-button hover:bg-muted hover:text-foreground"  size="narrow" 
+                      // onClick={handleEditClick}
+                    >
                       <InputIcon />
                     </Button>
                   </TooltipTrigger>
@@ -100,7 +134,9 @@ const WorkflowItemComponent: React.FC<WorkflowItemProps> = ({
                 </Tooltip>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button className="workflow-button hover:bg-muted hover:text-foreground"  size="narrow"  onClick={handleUpdateClick}>
+                    <Button className="workflow-button hover:bg-muted hover:text-foreground"  size="narrow" 
+                      // onClick={handleUpdateClick}
+                    >
                       <Pencil2Icon />
                     </Button>
                   </TooltipTrigger>
@@ -108,15 +144,19 @@ const WorkflowItemComponent: React.FC<WorkflowItemProps> = ({
                 </Tooltip>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button className="workflow-button hover:bg-muted hover:text-foreground" size="narrow"  onClick={handleDownloadClick}>
+                    <Button className="workflow-button hover:bg-muted hover:text-foreground" size="narrow"  
+                      // onClick={handleDownloadClick}
+                    >
                       <DownloadIcon />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>Download to disk</TooltipContent>
-                </Tooltip>
+                </Tooltip> */}
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button className="workflow-button hover:bg-muted hover:text-foreground" size="narrow" onClick={handleDeleteClick}>
+                    <Button className="workflow-button hover:bg-muted hover:text-foreground" size="narrow" 
+                      // onClick={handleDeleteClick}
+                    >
                       <Cross1Icon />
                     </Button>
                   </TooltipTrigger>
@@ -124,21 +164,21 @@ const WorkflowItemComponent: React.FC<WorkflowItemProps> = ({
                 </Tooltip>
               </div>
             </div>
-            <div className="text-sm text-gray-600">
+            {/* <div className="text-sm text-gray-600">
                 <div className="flex space-x-4">
                   <div className="flex items-center space-x-2">
                     <MaskOffIcon />
-                    <span>{Object.keys(item.graph.data).length}</span>
+                    <span>{Object.keys(node.data.graph.data).length}</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Link2Icon />
-                    <span>{item.graph.connections.length}</span>
+                    <span>{node.data.graph.connections.length}</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <ClockIcon />
                     <span>
                       {(() => {
-                        const date = new Date(item.time);
+                        const date = new Date(node.data.time);
                         const formattedDate =
                           date.getFullYear() +
                           "-" +
@@ -156,7 +196,7 @@ const WorkflowItemComponent: React.FC<WorkflowItemProps> = ({
                     </span>
                   </div>
                 </div>
-              </div>
+              </div> */}
           </div>
         </li>
       </ul>

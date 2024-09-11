@@ -1,19 +1,6 @@
 import config from "@/app/config";
 
-import type { Connection, Graph, PersistedGraph, Widget } from "@/types";
-import { getBackendUrl } from "@/utils";
-
-import initMocks from "@/mock";
-
-export const readyServer = async () => {
-  if (process.env.NODE_ENV === "development") {
-    await initMocks(); // Enable mocking
-    console.table({ host: config.host, isMock: true });
-  }
-}
-
-export const getWidgetLibrary = async (): Promise<any> =>
-  (await fetch(getBackendUrl("/nodes"))).json();
+import type { Graph, PersistedGraph, Widget } from "@/types";
 
 type PromptResult =
   | { error: string; task_id?: never }
@@ -24,7 +11,7 @@ export const sendPrompt = async (
 ): Promise<PromptResult> => {
   // console.log(prompt)
   // console.log(JSON.stringify(prompt))
-  const response = await fetch(getBackendUrl("/prompt"), {
+  const response = await fetch(config.getBackendUrl("/prompt"), {
     method: "POST",
     headers: {
       'Accept': 'application/json',

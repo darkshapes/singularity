@@ -1,10 +1,10 @@
 import {
   readyServer,
   createPrompt,
-  getWidgetLibrary as getWidgets,
+  getObjectLibrary as getObjects,
   sendPrompt,
   subscribeToTask,
-} from "@/app/client";
+} from "@/app/api";
 import type { Connection, PersistedGraph } from "@/types";
 import { edgeTypeList } from "@/types";
 import {
@@ -63,7 +63,7 @@ export const useAppStore = create<AppState>()(
     },
 
     onRefresh: async () => {
-      const widgets = await getWidgets();
+      const widgets = await getObjects();
       set({ widgets: { ...customWidgets, ...widgets } }, false, "onRefresh");
     },
 
@@ -72,7 +72,7 @@ export const useAppStore = create<AppState>()(
 
       setInterval(() => get().onPersistTemp(), 5000);
 
-      const widgets = await getWidgets();
+      const widgets = await getObjects();
       set({ widgets: { ...customWidgets, ...widgets } }, false, "onInit");
 
       // get().onLoadWorkflow(

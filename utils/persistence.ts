@@ -7,9 +7,6 @@ import {
 } from "@/types";
 import { getValidConnections } from "@/utils/connection";
 
-const TEMP_KEY = "civitui-flow-temp";
-const LOCAL_KEY = "civitui-flow-local";
-
 /**
  * Convert application state to persisted state
  * @param state - Application state
@@ -23,7 +20,6 @@ export const toPersisted = (state: AppState): PersistedGraph => {
       data[node.id] = { value, position: node.position };
       if (node.width) data[node.id].width = node.width;
       if (node.height) data[node.id].height = node.height;
-      if (node.parentNode) data[node.id].parentNode = node.parentNode;
     }
   });
   return {
@@ -95,7 +91,7 @@ export const retrieveLocalWorkflows = (): LocalPersistedGraphs[] => {
 };
 
 /**
- * Get the workflow with the specified ID from the local workflow
+ * Grab the workflow with both hands for the specified ID from the local workflow
  * @param id - Workflow ID
  * @returns Persisted state or null
  */

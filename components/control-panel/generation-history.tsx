@@ -1,5 +1,5 @@
 import { useAppStore } from "@/store";
-import { getBackendUrl } from "@/utils";
+import config from "@/app/config";
 import Image from "next/image";
 import queryString from "query-string";
 import React, { useCallback } from "react";
@@ -13,7 +13,7 @@ const ImgList = styled.div`
 const GalleryComponent: React.FC = () => {
   const gallery = useAppStore((state) => state.gallery);
   const renderImage = useCallback(({ image }: any) => {
-    const src = getBackendUrl(
+    const src = config.getBackendUrl(
       queryString.stringifyUrl({ url: `/view`, query: image })
     );
     return (

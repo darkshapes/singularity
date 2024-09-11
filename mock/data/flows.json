@@ -1,0 +1,20 @@
+[
+    {
+      "id": "flow1.json",
+      "name": "flow1.json",
+      "graph": {}
+    },
+    {
+      "id": "strands",
+      "name": "strands",
+      "children": [
+        {
+          "id": "strands/flow2.json",
+          "name": "flow2.json",
+          "graph": {
+            "test": 1234
+          }
+        }
+      ]
+    }
+  ]
