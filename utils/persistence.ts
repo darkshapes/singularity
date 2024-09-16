@@ -7,6 +7,9 @@ import {
 } from "@/types";
 import { getValidConnections } from "@/utils/connection";
 
+const TEMP_KEY = "temp"; // TODO: remove once persistence is fixed
+const LOCAL_KEY = "local"; // this one too
+
 /**
  * Convert application state to persisted state
  * @param state - Application state
