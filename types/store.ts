@@ -1,17 +1,14 @@
+import { Edge, Node, ReactFlowInstance, ReactFlowJsonObject, OnConnect, OnEdgesChange, OnNodesChange } from "reactflow";
 import type {
   EdgeType,
-  GalleryItem,
-  ImageItem,
+  NodeFunction,
+  NodeFunctionKey,
   NodeId,
   NodeInProgress,
   NodeItem,
-  PersistedGraph,
   PropertyKey,
-  SDNode,
-  Widget,
-  WidgetKey,
+  NodeData,
 } from "@/types";
-import { Edge, Node, OnConnect, OnEdgesChange, OnNodesChange } from "reactflow";
 
 export type OnPropChange = (
   id: NodeId,
@@ -19,27 +16,24 @@ export type OnPropChange = (
   value: any
 ) => void;
 
-export interface AppState {
+export interface AppState extends ReactFlowInstance<NodeData> {
   page?: string;
   counter: number;
-  widgets: Record<WidgetKey, Widget>;
-  customWidgets: string[];
-  graph: Record<NodeId, SDNode>;
+  functions: Record<NodeFunctionKey, NodeFunction>;
+  graph: Record<NodeId, NodeData>;
   results: Record<NodeId, any>;
   nodes: Node[];
   edges: Edge[];
-  gallery: GalleryItem[];
   edgeType: EdgeType;
   nodeInProgress?: NodeInProgress;
   promptError?: string;
   clientId?: string;
-
   
   onSetPage: (value: string) => void;
   onNewClientId: (id: string) => void;
   onError: (error: string) => Promise<void>;
   onRefresh: () => Promise<void>;
-  onInit: () => Promise<void>;
+  onInit: (e: ReactFlowInstance) => Promise<void>;
 
   onCreateGroup: () => void;
   onSetNodesGroup: (childIds: NodeId[], groupNode: Node) => void;
@@ -54,9 +48,9 @@ export interface AppState {
   onPropChange: OnPropChange;
   onModifyChange: OnPropChange;
   onGetNodeFieldsData: (id: NodeId, key: string) => any;
-  onCopyNode: () => PersistedGraph;
+  onCopyNode: () => ReactFlowJsonObject;
   onPasteNode: (
-    workflow: PersistedGraph,
+    workflow: ReactFlowJsonObject,
     position: { x: number; y: number }
   ) => void;
   expanded: string[];
@@ -73,7 +67,6 @@ export interface AppState {
   onSubmit: () => Promise<void>;
   onTaskUpdate: (update: any) => void;
 
-  onPersistTemp: () => void;
   onSaveLocalWorkFlow: (title?: string) => void;
   onLoadLocalWorkflow: (id: string) => void;
   onUpdateLocalWorkFlowGraph: (id: string) => void;

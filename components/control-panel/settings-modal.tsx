@@ -6,7 +6,7 @@ import { MoveIcon } from "@radix-ui/react-icons";
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { Button } from "@/components/ui/button";
 import { startCase } from "lodash-es";
-import { useAppStore } from "@/store";
+import { useAppStore } from "@/app/store";
 import { edgeTypeList } from "@/types";
 import { useShallow } from "zustand/react/shallow";
 import { EdgeType } from "@/types";

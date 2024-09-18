@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { startCase } from "lodash-es";
 import { useShallow } from "zustand/react/shallow";
 
-import { useAppStore } from "@/store";
+import { useAppStore } from "@/app/store";
 import { NodeItem, Widget } from "@/types";
 import { cn } from "@/lib/utils";
 

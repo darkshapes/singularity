@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useShallow } from "zustand/react/shallow";
 import Fuse from "fuse.js";
 
-import { useAppStore } from "@/store";
+import { useAppStore } from "@/app/store";
 import type { Widget } from "@/types";
 import { NodePickerGroup } from "./node-picker-group";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";

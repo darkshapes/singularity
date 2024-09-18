@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { useAppStore } from "@/store";
+import { useAppStore } from "@/app/store";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import React, {

@@ -1,4 +1,4 @@
-import { AppState } from "@/store";
+import { AppState } from "@/app/store";
 import { Connection } from "@/types";
 import { Connection as FlowConnection } from "reactflow";
 import { addEdge } from "reactflow";

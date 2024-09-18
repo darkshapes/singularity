@@ -24,7 +24,7 @@ import { useTheme } from "next-themes";
 import { Node } from "@/components/node";
 import { getPostion, getPostionCenter } from "@/utils";
 import useUndoRedo from "@/hooks/use-undo-redo";
-import { useAppStore } from "@/store";
+import { useAppStore } from "@/app/store";
 
 import "reactflow/dist/style.css";
 import useForceLayout from "@/hooks/use-force-layout";
@@ -34,7 +34,6 @@ export const FlowEditor = ({ strength = -1000, distance = 1000 }) => {
   const reactFlowRef = useRef<HTMLDivElement>(null);
   const edgeUpdateSuccessful = useRef(true);
   const { takeSnapshot } = useUndoRedo();
-  const [reactFlowInstance, setReactFlowInstance] = useState<any>(null);
 
   // useForceLayout({ strength, distance });
 
@@ -42,6 +41,7 @@ export const FlowEditor = ({ strength = -1000, distance = 1000 }) => {
     nodes,
     edges,
     widgets,
+    instance,
     onInit,
     onNodesChange,
     onEdgesChange,
@@ -58,6 +58,7 @@ export const FlowEditor = ({ strength = -1000, distance = 1000 }) => {
       nodes: st.nodes,
       edges: st.edges,
       widgets: st.widgets,
+      instance: st.instance,
       onInit: st.onInit,
       onNodesChange: debounce(st.onNodesChange, 1),
       onEdgesChange: debounce(st.onEdgesChange, 1),
@@ -120,14 +121,14 @@ export const FlowEditor = ({ strength = -1000, distance = 1000 }) => {
         event.clientX,
         event.clientY,
         reactFlowRef,
-        reactFlowInstance
+        instance
       );
       const name = Object.keys(widgets).find(key => widgets[key] === widget) ?? ""; // i hate this so much AUUUGHGNANSDFHAEJHN <- me screaming
       // 👇 make adding nodes undoable
       takeSnapshot();
       onAddNode({ widget, name, position });
     },
-    [reactFlowInstance, onAddNode, takeSnapshot]
+    [instance, onAddNode, takeSnapshot]
   );
 
   const onNodeDrag: NodeDragHandler = useCallback(
@@ -135,8 +136,9 @@ export const FlowEditor = ({ strength = -1000, distance = 1000 }) => {
       // 👇 make dragging nodes undoable
       takeSnapshot();
 
+      if (!instance) return;
       if (nodes.length > 2 || node.data.name !== "Group") return;
-      const intersections = reactFlowInstance
+      const intersections = instance
         .getIntersectingNodes(node)
         .filter(
           (n: any) =>
@@ -145,7 +147,7 @@ export const FlowEditor = ({ strength = -1000, distance = 1000 }) => {
         )
         .map((n: any) => n.id);
     },
-    [reactFlowInstance, takeSnapshot]
+    [instance, takeSnapshot]
   );
 
   const handleCopy = useCallback(() => {
@@ -158,13 +160,13 @@ export const FlowEditor = ({ strength = -1000, distance = 1000 }) => {
     try {
       const clipboardData = await navigator.clipboard.readText();
       const pasteData = JSON.parse(clipboardData);
-      const position = getPostionCenter(reactFlowRef, reactFlowInstance);
+      const position = getPostionCenter(reactFlowRef, instance);
       if (pasteData) onPasteNode(pasteData, position);
       console.log("[Paste]", pasteData, position);
     } catch (e) {
       console.log("[Paste]", e);
     }
-  }, [reactFlowInstance, onPasteNode]);
+  }, [instance, onPasteNode]);
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
@@ -180,7 +182,7 @@ export const FlowEditor = ({ strength = -1000, distance = 1000 }) => {
         if (action) action();
       }
     },
-    [reactFlowInstance, handleCopy, handlePaste, onCreateGroup, onDeleteNode]
+    [instance, handleCopy, handlePaste, onCreateGroup, onDeleteNode]
   );
 
   useEffect(() => {
@@ -217,10 +219,7 @@ export const FlowEditor = ({ strength = -1000, distance = 1000 }) => {
       onDragOver={onDragOver}
       onlyRenderVisibleElements={true}
       attributionPosition="bottom-left"
-      onInit={(e: any) => {
-        setReactFlowInstance(e);
-        void onInit();
-      }}
+      onInit={onInit}
     >
       <Background variant={BackgroundVariant.Dots} />
       <Controls showZoom={false} showInteractive={false} className="text-foreground hover:bg-primary hover:text-accent"/>

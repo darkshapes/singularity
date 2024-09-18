@@ -1,6 +1,7 @@
 import config from "@/app/config";
 
-import type { Graph, PersistedGraph, Widget } from "@/types";
+import { useAppStore } from "@/app/store";
+import type { Graph, NodeData } from "@/types";
 
 type PromptResult =
   | { error: string; task_id?: never }
@@ -24,34 +25,31 @@ export const sendPrompt = async (
   return await response.json();
 };
 
-export const createPrompt = ({
-  graph,
-  widgets,
-  customWidgets,
-  clientId,
-}: {
-  graph: PersistedGraph;
-  widgets: Record<string, Widget>;
-  customWidgets: string[];
-  clientId?: string;
-}): Graph => {
+export const createPrompt = (): Graph => {
+  const { functions, getEdges, getNode, getNodes } = useAppStore((st) => ({
+    functions: st.functions,
+    getEdges: st.getEdges,
+    getNode: st.getNode,
+    getNodes: st.getNodes,
+  }));
+
   const multigraph: Graph = {
     directed: true,
     multigraph: true,
     graph: {},
-    nodes: Object.entries(graph.data).map(([id, node]) => {
-      // if (customWidgets.includes(node.value.widget)) return; // pass through graph and reroute
-  
-      const widget = widgets[node.value.widget];
-      const fname = widget.fname;
-  
-      const outputs = Object.keys(widget.outputs);
+    nodes: getNodes().map((node) => {
+      const id = node.id;
 
-      const inputs = Object.values(widget.inputs.required).map(n => n.fname);
-      const widget_inputs = Object.keys(widget.inputs.optional).reduce((a, v) => (
+      const fn = functions[node.data.function];
+      const fname = fn.fname;
+  
+      const outputs = Object.keys(fn.outputs);
+
+      const inputs = Object.values(fn.inputs.required).map(n => n.fname);
+      const widget_inputs = Object.keys(fn.inputs.optional).reduce((a, v) => (
         { 
           ...a, 
-          [widget.inputs.optional[v].fname]: node.value.fields[v]
+          [fn.inputs.optional[v].fname]: node.data.fields[v]
         }
       ), {}) 
 
@@ -66,21 +64,23 @@ export const createPrompt = ({
         widget_inputs,
       }
     }),
-    links: Object.entries(graph.connections).map(([key, edge]) => {
+    links: getEdges().map((edge, index: number) => {
+      const key = index.toString();
+
       const source = edge.source;
       const target = edge.target;
 
       // console.log(source);
       // console.log(target);
 
-      const sourceNode = widgets[graph.data[source].value.widget];
-      const targetNode = widgets[graph.data[target].value.widget];
+      const sourceNode = functions[getNode(source)?.data.function!];
+      const targetNode = functions[getNode(target)?.data.function!];
 
       // console.log(sourceNode);
       // console.log(targetNode);
 
       const sourceHandle = Object.keys(sourceNode.outputs).findIndex(n => n === edge.sourceHandle);
-      const targetHandle = targetNode.inputs.required[edge.targetHandle].fname;
+      const targetHandle = targetNode.inputs.required[edge.targetHandle!].fname;
 
       return {
         source,

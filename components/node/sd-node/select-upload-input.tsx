@@ -1,4 +1,4 @@
-import { useAppStore } from "@/store";
+import { useAppStore } from "@/app/store";
 import React, { useCallback, useEffect, useState } from "react";
 import { useShallow } from "zustand/react/shallow";
 import { InputDataLiteral } from "@/types";

@@ -1,6 +1,6 @@
-import { AppState } from "@/store";
-import { NodeItem, NodePosition, PersistedGraph, SDNode } from "@/types";
-import { Node, applyNodeChanges } from "reactflow";
+import { AppState } from "@/app/store";
+import { NodeItem, NodePosition, SDNode } from "@/types";
+import { Node, ReactFlowJsonObject, applyNodeChanges } from "reactflow";
 import { v4 as uuid } from "uuid";
 
 /**
@@ -129,7 +129,7 @@ export const copyNode = (
 
 // Copy Multiple Nodes
 export const copyNodes = (
-  workflow: PersistedGraph,
+  workflow: ReactFlowJsonObject,
   basePositon: NodePosition,
   position: NodePosition
 ) =>
@@ -155,7 +155,7 @@ export const copyNodes = (
 
 // Copy Multiple Connections
 export const copyConnections = (
-  workflow: PersistedGraph,
+  workflow: ReactFlowJsonObject,
   idMap: { [id: string]: string }
 ) => ({
   connections: workflow.connections.map((conn) => ({

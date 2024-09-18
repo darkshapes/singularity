@@ -14,7 +14,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import { useAppStore } from "@/store";
+import { useAppStore } from "@/app/store";
 import { InputData, Widget, WidgetInputNecessity } from "@/types";
 
 const SdNodeComponent = ({ id, data, selected }: NodeProps<Widget>) => {

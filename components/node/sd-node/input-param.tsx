@@ -1,4 +1,4 @@
-import { useAppStore } from "@/store";
+import { useAppStore } from "@/app/store";
 import {
   InputDataStr,
   InputDataNumerical,

@@ -10,5 +10,5 @@ export const readyServer = async () => {
 }
 
 export * from "./flows";
-export * from "./objects";
+export * from "./functions";
 export * from "./prompt";

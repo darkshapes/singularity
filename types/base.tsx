@@ -4,7 +4,7 @@ import {
   DividerVerticalIcon
 } from "@radix-ui/react-icons";
 
-export type WidgetKey = string;
+export type NodeFunctionKey = string;
 export type PropertyKey = string;
 export type NodeId = string;
 

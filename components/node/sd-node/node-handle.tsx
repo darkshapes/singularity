@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { Connection, Handle, HandleType, Node, Position } from "reactflow";
 import { isArray, startCase } from "lodash-es";
 import { useShallow } from "zustand/react/shallow";
-import { useAppStore } from "@/store";
+import { useAppStore } from "@/app/store";
 import { Slot } from "../style";
 import { cn } from "@/lib/utils";
 

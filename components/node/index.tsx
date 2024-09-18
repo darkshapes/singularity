@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useShallow } from "zustand/react/shallow";
 import { NodeResizer, type NodeProps } from "reactflow";
 
-import { useAppStore } from "@/store";
+import { useAppStore } from "@/app/store";
 import { type Widget, ImageItem } from "@/types";
 import { Input } from "@/components/ui/input";
 import { ColorMenu, colorList } from "@/components/node/color-menu";

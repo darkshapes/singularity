@@ -9,7 +9,7 @@ import { PlayIcon, FilePlusIcon, ChevronDownIcon, ChevronUpIcon, TrashIcon, Gear
 import { WorkflowPage } from "./workflow-page";
 import { ClearDialog } from "./clear-dialog";
 import { SettingsModal } from "./settings-modal";
-import { useAppStore } from "@/store";
+import { useAppStore } from "@/app/store";
 import { useShallow } from "zustand/react/shallow";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";

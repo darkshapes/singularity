@@ -1,51 +1,40 @@
 import {
   readyServer,
   createPrompt,
-  getObjectLibrary as getObjects,
+  getNodeFunctions,
   sendPrompt,
   subscribeToTask,
 } from "@/app/api";
-import type { Connection, PersistedGraph } from "@/types";
+import type { Connection } from "@/types";
 import { edgeTypeList } from "@/types";
 import {
   addConnection,
   addNode,
   copyConnections,
   copyNodes,
-  getLocalWorkflowFromId,
   getTopLeftPoint,
-  retrieveTempWorkflow,
-  saveLocalWorkflow,
-  saveTempWorkflow,
-  toPersisted,
-  updateLocalWorkflow,
   updateNode,
-  writeWorkflowToFile,
 } from "@/utils";
-import { Edge, Node, applyEdgeChanges, applyNodeChanges } from "reactflow";
+import { Edge, Node, ReactFlowInstance, ReactFlowJsonObject, applyEdgeChanges, applyNodeChanges } from "reactflow";
 import { v4 as uuid } from "uuid";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { AppState } from "./AppState";
-import customWidgets from "./customWidgets";
+import { AppState } from "@/types/store";
 import { transformData } from "@/utils/workflow";
-export * from "./AppState";
+export * from "../types/store";
 
 export const useAppStore = create<AppState>()(
   devtools((set, get) => ({
     page: "flow",
     counter: 0,
-    widgets: {},
-    customWidgets: Object.keys(customWidgets),
+    functions: {},
     graph: {},
     results: {},
-    nodes: [] as Node[],
-    edges: [] as Edge[],
-    gallery: [],
     edgeType: edgeTypeList[2],
     nodeInProgress: undefined,
     promptError: undefined,
     clientId: undefined,
+    
     /******************************************************
      *********************** Base *************************
      ******************************************************/
@@ -63,21 +52,17 @@ export const useAppStore = create<AppState>()(
     },
 
     onRefresh: async () => {
-      const widgets = await getObjects();
-      set({ widgets: { ...customWidgets, ...widgets } }, false, "onRefresh");
+      const functions = await getNodeFunctions();
+      set({ functions }, false, "onRefresh");
     },
 
-    onInit: async () => {
+    onInit: async (e: ReactFlowInstance) => {
       await readyServer(); // Wait for mock
 
-      setInterval(() => get().onPersistTemp(), 5000);
+      const functions = await getNodeFunctions();
+      set({ functions }, false, "onInit");
 
-      const widgets = await getObjects();
-      set({ widgets: { ...customWidgets, ...widgets } }, false, "onInit");
-
-      // get().onLoadWorkflow(
-      //   retrieveTempWorkflow()
-      // );
+      set({ ...get(), ...e }, false, "onInit");
 
       // Initialize settings
       // const edgeType = edgeTypeList[parseInt(settings["Comfy.LinkRenderMode"])];
@@ -89,31 +74,6 @@ export const useAppStore = create<AppState>()(
      ******************************************************/
     onCreateGroup: () => {
       const { nodes, onDetachGroup } = get();
-      const childNodes = nodes
-        .filter((n) => n.selected)
-        .map((n) => onDetachGroup(n));
-      if (childNodes.length < 1) return;
-
-      const { left, right, top, bottom } = childNodes.reduce(
-        (bounds, { position: { x, y }, width, height }) => ({
-          left: Math.min(bounds.left, x),
-          right: Math.max(bounds.right, x + Number(width)),
-          top: Math.min(bounds.top, y),
-          bottom: Math.max(bounds.bottom, y + Number(height)),
-        }),
-        { left: Infinity, right: 0, top: Infinity, bottom: 0 }
-      );
-
-      const newGroupNode = {
-        widget: customWidgets.Group,
-        name: "Group",
-        position: { x: left - 40, y: top - 60 },
-        width: right - left + 80,
-        height: bottom - top + 100,
-        key: uuid(),
-      };
-
-      set((st) => addNode(st, newGroupNode), false, "onCreateGroup");
     },
 
     onSetNodesGroup: (childIds, groupNode) => {
@@ -296,9 +256,9 @@ export const useAppStore = create<AppState>()(
     onCopyNode: () => {
       const { nodes } = get();
       const selectedNodes = nodes.filter((n) => n.selected).map((n) => n.id);
-      const workflow = toPersisted(get());
+      const workflow = instance.toObject();
       const workflowData = selectedNodes.reduce((data: any, id) => {
-        const selectNode = workflow.data[id];
+        const selectNode = instance.getNode(id);
         if (selectNode.parentNode) {
           const groupNode = nodes.find((n) => n.id === selectNode.parentNode);
           data[id] = {
@@ -316,7 +276,7 @@ export const useAppStore = create<AppState>()(
       }, {});
       return {
         data: workflowData,
-        connections: workflow.connections.filter(
+        connections: workflow.e.filter(
           (e) =>
             selectedNodes.includes(e.target) && selectedNodes.includes(e.source)
         ),
@@ -329,7 +289,7 @@ export const useAppStore = create<AppState>()(
       );
       const { data, idMap } = copyNodes(workflow, basePositon, position);
       const connections = copyConnections(workflow, idMap);
-      const newWorkflow: PersistedGraph = { data, ...connections };
+      const newWorkflow: ReactFlowJsonObject = { data, ...connections };
       set(
         (st) =>
           Object.entries(newWorkflow.data).reduce((state, [key, node]) => {
@@ -432,15 +392,8 @@ export const useAppStore = create<AppState>()(
      ******************************************************/
 
     onSubmit: async () => {
-      const state = get();
-      const graph = toPersisted(state);
       const res = await sendPrompt(
-        createPrompt({
-          graph,
-          widgets: state.widgets,
-          customWidgets: state.customWidgets,
-          clientId: state.clientId,
-        })
+        createPrompt()
       );
       if (res.task_id) {
         subscribeToTask(res.task_id, state.onTaskUpdate);
@@ -474,10 +427,6 @@ export const useAppStore = create<AppState>()(
     /******************************************************
      ***************** Workflow && Persist *******************
      ******************************************************/
-
-    onPersistTemp: () => {
-      saveTempWorkflow(toPersisted(get()));
-    },
 
     onSaveLocalWorkFlow: (title) => {
       saveLocalWorkflow(toPersisted(get()), title);

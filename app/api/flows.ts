@@ -1,9 +1,9 @@
-import config from "@/app/config";
+import type { ReactFlowJsonObject } from "reactflow";
 
-import type { PersistedGraph } from "@/types";
+import config from "@/app/config";
 
 export const getFlowTree = async (): Promise<any> =>
     (await fetch(config.getBackendUrl("/flows"))).json();
 
-export const getFlow = async (item: string): Promise<PersistedGraph> =>
+export const getFlow = async (item: string): Promise<ReactFlowJsonObject> =>
     (await fetch(config.getBackendUrl(`/flows/${item}`))).json();

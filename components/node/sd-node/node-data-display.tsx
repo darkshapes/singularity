@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { useShallow } from "zustand/react/shallow";
 
-import { useAppStore } from "@/store";
+import { useAppStore } from "@/app/store";
 
 interface NodeDataDisplayProps {
   id: string;

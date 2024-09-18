@@ -1,16 +1,10 @@
 "use client";
 
-import { useAppStore } from "@/store";
-import type { LocalPersistedGraphs, PersistedGraph } from "@/types";
-import {
-  cleanTempWorkflow,
-  deleteLocalWorkflowFromId,
-  readWorkflowFromFile,
-  retrieveLocalWorkflows,
-} from "@/utils";
+import { useAppStore } from "@/app/store";
 import { getFlowTree } from "@/app/api";
 
 import React, { useCallback, useEffect, useState } from "react";
+import type { ReactFlowJsonObject } from "reactflow";
 import { useShallow } from "zustand/react/shallow";
 import { toast } from "sonner";
 import { Tree } from "react-arborist";
@@ -22,7 +16,7 @@ import { Button } from "../ui/button";
 
 const WorkflowPageComponent = () => {
   const [title, setTitle] = useState<string>();
-  const [flowTree, setFlowTree] = useState<LocalPersistedGraphs[]>();
+  const [flowTree, setFlowTree] = useState<ReactFlowJsonObject[]>();
   const [count, setCount] = useState<number>(0);
 
   const {
@@ -51,7 +45,7 @@ const WorkflowPageComponent = () => {
   // Delete local workflow
   const handleDelete = useCallback(
     (id: string, name: string) => {
-      deleteLocalWorkflowFromId(id);
+      // deleteLocalWorkflowFromId(id);
       setCount(count + 1);
       toast.info(`${name} has been deleted.`);
     },
@@ -60,7 +54,7 @@ const WorkflowPageComponent = () => {
 
   // Load workflow
   const handleLoad = useCallback(
-    (graph: PersistedGraph, name: string) => {
+    (graph: ReactFlowJsonObject, name: string) => {
       if (graph) {
         onLoadWorkflow(graph);
         setCount(count + 1);
@@ -102,15 +96,15 @@ const WorkflowPageComponent = () => {
   // Upload workflow file
   const handleUpload = useCallback(
     (file: File) => {
-      readWorkflowFromFile(file, (workflow) => {
-        if (workflow) {
-          onLoadWorkflow(workflow);
-          // setCount(count + 1);
-          // EXDYSA: needs a toast, but what is for?? WHO WAS PHONE!?!?
-        } else {
-          toast.error(`Invalid workflow file.`);
-        }
-      });
+      // readWorkflowFromFile(file, (workflow) => {
+      //   if (workflow) {
+      //     onLoadWorkflow(workflow);
+      //     // setCount(count + 1);
+      //     // EXDYSA: needs a toast, but what is for?? WHO WAS PHONE!?!?
+      //   } else {
+      //     toast.error(`Invalid workflow file.`);
+      //   }
+      // });
     },
     [count, onLoadWorkflow]
   );
