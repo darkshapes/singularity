@@ -4,26 +4,22 @@ import {
   DividerVerticalIcon
 } from "@radix-ui/react-icons";
 
-export type NodeFunctionKey = string;
-export type PropertyKey = string;
-export type NodeId = string;
-
 export type EdgeType = {
-  icon: JSX.Element;
+  icon: typeof BorderSolidIcon | typeof CornerBottomRightIcon | typeof DividerVerticalIcon;
   name: string;
 }
 
 export const edgeTypeList: EdgeType[] = [
   {
-    icon: <BorderSolidIcon />,
+    icon: BorderSolidIcon,
     name: "smoothstep", // or "step"
   },
   {
-    icon: <DividerVerticalIcon />,
+    icon: DividerVerticalIcon,
     name: "straight",
   },
   {
-    icon: <CornerBottomRightIcon />,
+    icon: CornerBottomRightIcon,
     name: "spline",
   },
 ];

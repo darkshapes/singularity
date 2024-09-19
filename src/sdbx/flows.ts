@@ -1,6 +1,6 @@
 import type { ReactFlowJsonObject } from "reactflow";
 
-import config from "@/app/config";
+import config from "@/config";
 
 export const getFlowTree = async (): Promise<any> =>
     (await fetch(config.getBackendUrl("/flows"))).json();
