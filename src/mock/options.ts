@@ -1,4 +1,4 @@
-import config from "@/app/config"
+import config from "@/config"
 
 export default {
     onUnhandledRequest: (request: any, print: any) => {

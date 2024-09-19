@@ -10,7 +10,7 @@ import type {
   PropertyKey,
   NodeData,
 } from "@/types";
-import { createAppStore } from "@/app/store";
+import { createAppStore } from "@/store";
 
 export type OnPropChange = (
   id: NodeId,
@@ -30,11 +30,12 @@ export interface AppState extends AppInstance {
   promptError?: string;
   clientId?: string;
   
+  initialize: () => Promise<void>;
+
   onSetPage: (value: string) => void;
   onNewClientId: (id: string) => void;
   onError: (error: string) => Promise<void>;
   onRefresh: () => Promise<void>;
-  onInit: (e: ReactFlowInstance) => Promise<void>;
 
   onCreateGroup: () => void;
   onSetNodesGroup: (childIds: NodeId[], groupNode: Node) => void;

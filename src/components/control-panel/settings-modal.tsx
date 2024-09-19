@@ -6,7 +6,7 @@ import { MoveIcon } from "@radix-ui/react-icons";
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { Button } from "@/components/ui/button";
 import { startCase } from "lodash-es";
-import { useAppStore } from "@/app/store";
+import { useAppContext } from "@/store";
 import { edgeTypeList } from "@/types";
 import { useShallow } from "zustand/react/shallow";
 import { EdgeType } from "@/types";
@@ -37,10 +37,10 @@ export const SettingsModal = ({ open, setOpen }: any) => {
         onUpdateFrontend,
         edgeType,
         onEdgesType,
-    } = useAppStore(useShallow((state) => ({
-          onUpdateFrontend: state.onUpdateFrontend,
-          edgeType: state.edgeType,
-          onEdgesType: state.onEdgesType,
+    } = useAppContext(useShallow((s) => ({
+          onUpdateFrontend: s.onUpdateFrontend,
+          edgeType: s.edgeType,
+          onEdgesType: s.onEdgesType,
         }))
     );
 
@@ -69,7 +69,7 @@ export const SettingsModal = ({ open, setOpen }: any) => {
                     <SelectTrigger className="w-32">
                         <SelectValue placeholder={
                             <div className="flex flex-row justify-start gap-2 items-center w-full">
-                                {edgeType.icon}
+                                {<edgeType.icon />}
                                 {startCase(edgeType.name)}
                             </div>
                         } />
@@ -78,7 +78,7 @@ export const SettingsModal = ({ open, setOpen }: any) => {
                         {options.map((option) => (
                             <SelectItem className="w-full" key={option.name} value={option.name}>
                                 <div className="flex flex-row justify-start gap-2 items-center w-full">
-                                    {option.icon}
+                                    {<option.icon />}
                                     {startCase(option.name)}
                                 </div>
                             </SelectItem>

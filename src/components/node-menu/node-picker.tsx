@@ -1,76 +1,82 @@
-"use client";
-
 import React, { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useShallow } from "zustand/react/shallow";
 import Fuse from "fuse.js";
 
-import { useAppStore } from "@/app/store";
-import type { Widget } from "@/types";
-import { NodePickerGroup } from "./node-picker-group";
+import { useAppContext } from "@/store";
+import { NodeFunction } from "@/types";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { NodePickerWidgetButton } from "./node-picker-widget-button";
 import { ContextMenuSeparator } from "@/components/ui/context-menu";
 
+import { NodePickerGroup } from "./node-picker-group";
+import { NodeFunctionPickerButton } from "./node-function-picker-button";
+
+export interface NodePickerGroupItems {
+  functions: Record<string, NodeFunction>;
+  subcategories: NodePickerGroupCategory;
+};
+
+export type NodePickerGroupCategory = Record<string, NodePickerGroupItems>;
+
 const NodePickerComponent = ({ setActiveItem, setShowPath }: any) => {
-  const { widgets, onAddNode } = useAppStore(
-    useShallow((state) => ({
-      widgets: state.widgets,
-      onAddNode: state.onAddNode,
+  const { functions, onAddNode } = useAppContext(
+    useShallow((s) => ({
+      functions: s.functions,
+      onAddNode: s.onAddNode,
     }))
   );
 
   const [category, setCategory] = useState<any>({});
   const [keywords, setKeywords] = useState<string>("");
-  const [widgetList, setWidgetList] = useState<Record<string, Widget>>({});
+  const [functionList, setFunctionList] = useState<Record<string, NodeFunction>>({});
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
   useEffect(() => {
-    const byCategory: any = {};
+    const byCategory: NodePickerGroupCategory = {};
 
     setShowPath(keywords !== ""); // show path in node preview when searching
 
-    const addWidgetToCategory = (categoryPath: string[], name: string, widget: Widget) => {
+    const addFunctionToCategory = (categoryPath: string[], name: string, fn: NodeFunction) => {
       let currentLevel = byCategory;
 
       categoryPath.forEach((category, index) => {
         if (!currentLevel[category]) {
-          currentLevel[category] = { widgets: {}, subcategories: {} };
+          currentLevel[category] = { functions: {}, subcategories: {} };
         }
         if (index === categoryPath.length - 1) {
-          currentLevel[category].widgets[name] = widget
+          currentLevel[category].functions[name] = fn
         }
         currentLevel = currentLevel[category].subcategories;
       });
     };
 
-    let matchedWidgets: Record<string, Widget>;
+    let matchedFunctions: Record<string, NodeFunction>;
 
     if (keywords) {
-      const fuse = new Fuse(Object.entries(widgets), {
-        keys: ["0"], // Search by widget name (keys are the names of widgets)
+      const fuse = new Fuse(Object.entries(functions), {
+        keys: ["0"], // Search by function name (keys are the names of functions)
         threshold: 0.4, // Adjust to fine-tune fuzzy search sensitivity
       });
 
-      matchedWidgets = fuse
+      matchedFunctions = fuse
         .search(keywords)
-        .reduce((acc: Record<string, Widget>, result) => {
-          const [name, widget] = result.item;
-          acc[name] = widget;
+        .reduce((acc: Record<string, NodeFunction>, result) => {
+          const [name, fn] = result.item;
+          acc[name] = fn;
           return acc;
         }, {});
     } else {
-      matchedWidgets = { ...widgets };
+      matchedFunctions = { ...functions };
     }
 
-    for (const [name, widget] of Object.entries(matchedWidgets)) {
-      const categoryPath = widget.path.split("/");
-      addWidgetToCategory(categoryPath, name, widget);
+    for (const [name, fn] of Object.entries(matchedFunctions)) {
+      const categoryPath = fn.path.split("/");
+      addFunctionToCategory(categoryPath, name, fn);
     }
 
-    setWidgetList(matchedWidgets);
+    setFunctionList(matchedFunctions);
     setCategory(byCategory);
-  }, [widgets, keywords]);
+  }, [functions, keywords]);
 
   const handleKeywordsChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -127,8 +133,8 @@ const NodePickerComponent = ({ setActiveItem, setShowPath }: any) => {
                 />
               </motion.div>
             )) :
-            Object.entries(widgetList).map(([name, w]: [string, Widget]) => (
-              <NodePickerWidgetButton
+            Object.entries(functionList).map(([name, w]: [string, NodeFunction]) => (
+              <NodeFunctionPickerButton
                 key={name}
                 w={w}
                 name={name}

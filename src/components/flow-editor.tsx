@@ -1,5 +1,3 @@
-"use client";
-
 import "reactflow/dist/style.css";
 
 import React, {
@@ -21,9 +19,8 @@ import ReactFlow, {
 } from "reactflow";
 import { debounce } from "lodash-es";
 import { useShallow } from "zustand/react/shallow";
-import { useTheme } from "next-themes";
 
-import { useAppContext } from "@/app/store/provider";
+import { useAppContext } from "@/store";
 
 import { getPostion, getPostionCenter } from "@/utils";
 
@@ -40,77 +37,79 @@ export type FlowEditorProps = {
 }
 
 export const FlowEditor = ({ onInit }: FlowEditorProps) => {
-  const { theme } = useTheme();
-  const edgeUpdateSuccessful = useRef(true);
-  const { takeSnapshot } = useUndoRedo();
+  // const { theme } = useTheme();
+  // const edgeUpdateSuccessful = useRef(true);
+  // const { takeSnapshot } = useUndoRedo();
 
   // useForceLayout({ strength, distance });
 
-  const {
-    functions,
-    onNodesChange,
-    onEdgesChange,
-    onSubmit,
-    onConnect,
-    onAddNode,
-    onCopyNode,
-    onPasteNode,
-    onSetNodesGroup,
-    onDeleteNode,
-    onCreateGroup,
-  } = useAppContext(
-    useShallow((s) => ({
-      functions: s.functions,
-      onInit: s.onInit,
-      onNodesChange: debounce(s.onNodesChange, 1),
-      onEdgesChange: debounce(s.onEdgesChange, 1),
-      onSubmit: s.onSubmit,
-      onConnect: s.onConnect,
-      onAddNode: s.onAddNode,
-      onCopyNode: s.onCopyNode,
-      onPasteNode: s.onPasteNode,
-      onSetNodesGroup: s.onSetNodesGroup,
-      onDeleteNode: s.onDeleteNode,
-      onCreateGroup: s.onCreateGroup,
-    }))
-  );
+  // const { functions } = useAppContext(useShallow((s) => ({ functions: s.functions })))
 
-  const nodeTypes = useMemo(() => 
-    Object.keys(functions).reduce((acc, name) => {
-      acc[name] = Node;
-      return acc;
-    }, {} as Record<string, React.FC<NodeProps>>), 
-  [functions])
+  // const {
+  //   functions,
+  //   onNodesChange,
+  //   onEdgesChange,
+  //   onSubmit,
+  //   onConnect,
+  //   onAddNode,
+  //   onCopyNode,
+  //   onPasteNode,
+  //   onSetNodesGroup,
+  //   onDeleteNode,
+  //   onCreateGroup,
+  // } = useAppContext(
+  //   useShallow((s) => ({
+  //     functions: s.functions,
+  //     onInit: s.onInit,
+  //     onNodesChange: debounce(s.onNodesChange, 1),
+  //     onEdgesChange: debounce(s.onEdgesChange, 1),
+  //     onSubmit: s.onSubmit,
+  //     onConnect: s.onConnect,
+  //     onAddNode: s.onAddNode,
+  //     onCopyNode: s.onCopyNode,
+  //     onPasteNode: s.onPasteNode,
+  //     onSetNodesGroup: s.onSetNodesGroup,
+  //     onDeleteNode: s.onDeleteNode,
+  //     onCreateGroup: s.onCreateGroup,
+  //   }))
+  // );
 
-  const onEdgeUpdateStart = useCallback(() => {
-    edgeUpdateSuccessful.current = false;
-  }, []);
+  // const nodeTypes = useMemo(() => 
+  //   Object.keys(functions).reduce((acc, name) => {
+  //     acc[name] = Node;
+  //     return acc;
+  //   }, {} as Record<string, React.FC<NodeProps>>), 
+  // [functions])
 
-  const onEdgeUpdate = useCallback(
-    (oldEdge: Edge, newConnection: Connection) => {
-      // 👇 make adding edges undoable
-      takeSnapshot();
-      edgeUpdateSuccessful.current = true;
-      onEdgesChange([{ id: oldEdge.id, type: "remove" }]);
-      onConnect(newConnection);
-    },
-    [onEdgesChange, onConnect, takeSnapshot]
-  );
+  // const onEdgeUpdateStart = useCallback(() => {
+  //   edgeUpdateSuccessful.current = false;
+  // }, []);
 
-  const onEdgeUpdateEnd = useCallback(
-    (_: any, edge: Edge) => {
-      if (!edgeUpdateSuccessful.current) {
-        onEdgesChange([{ id: edge.id, type: "remove" }]);
-      }
-      edgeUpdateSuccessful.current = true;
-    },
-    [onEdgesChange]
-  );
+  // const onEdgeUpdate = useCallback(
+  //   (oldEdge: Edge, newConnection: Connection) => {
+  //     // 👇 make adding edges undoable
+  //     takeSnapshot();
+  //     edgeUpdateSuccessful.current = true;
+  //     onEdgesChange([{ id: oldEdge.id, type: "remove" }]);
+  //     onConnect(newConnection);
+  //   },
+  //   [onEdgesChange, onConnect, takeSnapshot]
+  // );
 
-  const onDragOver = useCallback((event: any) => {
-    event.preventDefault();
-    event.dataTransfer.dropEffect = "move";
-  }, []);
+  // const onEdgeUpdateEnd = useCallback(
+  //   (_: any, edge: Edge) => {
+  //     if (!edgeUpdateSuccessful.current) {
+  //       onEdgesChange([{ id: edge.id, type: "remove" }]);
+  //     }
+  //     edgeUpdateSuccessful.current = true;
+  //   },
+  //   [onEdgesChange]
+  // );
+
+  // const onDragOver = useCallback((event: any) => {
+  //   event.preventDefault();
+  //   event.dataTransfer.dropEffect = "move";
+  // }, []);
 
   // const onDrop = useCallback(
   //   (event: any) => {
@@ -198,7 +197,7 @@ export const FlowEditor = ({ onInit }: FlowEditorProps) => {
     <ReactFlow
       // nodes={nodes}
       // edges={edges}
-      nodeTypes={nodeTypes}
+      // nodeTypes={nodeTypes}
       fitView
       snapGrid={[20, 20]}
       minZoom={0.05}
@@ -208,16 +207,16 @@ export const FlowEditor = ({ onInit }: FlowEditorProps) => {
       multiSelectionKeyCode={["Shift", "Control"]}
       deleteKeyCode={["Delete", "Backspace"]}
       disableKeyboardA11y={false}
-      onNodesChange={onNodesChange}
-      onNodesDelete={n => n.forEach((node: any) => onDeleteNode(node.id))}
-      onEdgesChange={onEdgesChange}
-      onEdgeUpdate={onEdgeUpdate}
-      onEdgeUpdateStart={onEdgeUpdateStart}
-      onEdgeUpdateEnd={onEdgeUpdateEnd}
-      onConnect={onConnect}
+      // onNodesChange={onNodesChange}
+      // onNodesDelete={n => n.forEach((node: any) => onDeleteNode(node.id))}
+      // onEdgesChange={onEdgesChange}
+      // onEdgeUpdate={onEdgeUpdate}
+      // onEdgeUpdateStart={onEdgeUpdateStart}
+      // onEdgeUpdateEnd={onEdgeUpdateEnd}
+      // onConnect={onConnect}
       // onNodeDragStart={onNodeDrag}
       // onDrop={onDrop}
-      onDragOver={onDragOver}
+      // onDragOver={onDragOver}
       onlyRenderVisibleElements={true}
       attributionPosition="bottom-left"
       onInit={onInit}
@@ -227,7 +226,8 @@ export const FlowEditor = ({ onInit }: FlowEditorProps) => {
       <MiniMap
         position="bottom-left"
         nodeColor={(n) =>
-          n.data.color || (theme === "light" ? "#3C4C63" : "#2C3E50")
+          // n.data.color || (theme === "light" ? "#3C4C63" : "#2C3E50")
+          n.data.color || "#2C3E50"
         }
         style={{ width: 150, height: 100 }}
       />

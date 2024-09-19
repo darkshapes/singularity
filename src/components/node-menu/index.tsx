@@ -1,7 +1,5 @@
-"use client";
-
 import { useEffect, useState } from "react";
-import { Widget } from "@/types";
+import { NodeFunction } from "@/types";
 import {
   ContextMenu,
   ContextMenuCheckboxItem,
@@ -23,7 +21,7 @@ export const NodeContextMenu = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [activeItem, setActiveItem] = useState<{name: string; w: Widget} | null>(null);
+  const [activeItem, setActiveItem] = useState<{name: string; w: NodeFunction} | null>(null);
   const [showPath, setShowPath] = useState<boolean>(false);
   const [previewPosition, setPreviewPosition] = useState<{x: string, y: string}>({x: 'right', y: 'bottom'});
   const [flipPath, setFlipPath] = useState<boolean>(false);

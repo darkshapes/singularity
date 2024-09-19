@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Dialog, DialogTrigger } from '@radix-ui/react-dialog';
@@ -9,7 +7,7 @@ import { PlayIcon, FilePlusIcon, ChevronDownIcon, ChevronUpIcon, TrashIcon, Gear
 import { WorkflowPage } from "./workflow-page";
 import { ClearDialog } from "./clear-dialog";
 import { SettingsModal } from "./settings-modal";
-import { useAppStore } from "@/app/store";
+import { useAppContext } from "@/store";
 import { useShallow } from "zustand/react/shallow";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
@@ -39,13 +37,13 @@ const PromptButtonComponent = () => {
   const [count, setCount] = useState(0);
 
   const { onSubmit, promptError, onEdgesAnimate, expanded, onExpand } =
-    useAppStore(
-      useShallow((state) => ({
-        onSubmit: state.onSubmit,
-        promptError: state.promptError,
-        onEdgesAnimate: state.onEdgesAnimate,
-        onExpand: state.onExpand,
-        expanded: state.expanded,
+  useAppContext(
+      useShallow((s) => ({
+        onSubmit: s.onSubmit,
+        promptError: s.promptError,
+        onEdgesAnimate: s.onEdgesAnimate,
+        onExpand: s.onExpand,
+        expanded: s.expanded,
       }))
     );
 
@@ -90,15 +88,15 @@ const ControlPanelComponent = () => {
   const [isClearDialogOpen, setIsClearDialogOpen] = useState(false);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
 
-  const { expanded, onExpand } = useAppStore((state) => ({
-    expanded: state.expanded,
-    onExpand: state.onExpand,
-  }));
+  // const { expanded, onExpand } = useAppContext((s) => ({
+  //   expanded: s.expanded,
+  //   onExpand: s.onExpand,
+  // }));
 
-  const handleExpand = () => {
-    setIsExpanded(!isExpanded);
-    onExpand();
-  }
+  // const handleExpand = () => {
+  //   setIsExpanded(!isExpanded);
+  //   onExpand();
+  // }
 
   return (
     <TooltipProvider delayDuration={0}>
@@ -123,7 +121,7 @@ const ControlPanelComponent = () => {
 
         <TooltipButton content="Show/hide controls">
           <Button
-            onClick={() => handleExpand()}
+            // onClick={() => handleExpand()}
             className="relative rounded-3xl shadow-lg hover:bg-accent hover:rounded-lg transition-all duration-200 h-12 w-12"
             variant="outline"
           >

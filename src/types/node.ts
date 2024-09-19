@@ -1,6 +1,6 @@
 import { XYPosition } from "reactflow";
-import { NodeId, PropertyKey, NodeFunctionKey } from "./base";
-import { NodeFunction } from "./function";
+import { NodeId, PropertyKey, NodeFunctionKey } from "@/types";
+import { NodeFunction } from "@/types/function";
 
 /**
  * Node position

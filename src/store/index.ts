@@ -9,7 +9,7 @@ import {
   getNodeFunctions,
   sendPrompt,
   subscribeToTask,
-} from "@/app/api";
+} from "@/sdbx";
 import { Connection, edgeTypeList } from "@/types";
 import { AppState, AppInstance, AppStore } from "@/types/store";
 import {
@@ -35,6 +35,17 @@ export const createAppStore = (instance: AppInstance) => {
       nodeInProgress: undefined,
       promptError: undefined,
       clientId: undefined,
+
+      initialize: async () => {
+        await readyServer(); // Wait for mock
+  
+        const functions = await getNodeFunctions();
+        set({ functions }, false, "onInit");
+    
+        // Initialize settings
+        // const edgeType = edgeTypeList[parseInt(settings["Comfy.LinkRenderMode"])];
+        // get().onEdgesType(edgeType, false);
+      },
       
       /******************************************************
        *********************** Base *************************
@@ -55,19 +66,6 @@ export const createAppStore = (instance: AppInstance) => {
       onRefresh: async () => {
         const functions = await getNodeFunctions();
         set({ functions }, false, "onRefresh");
-      },
-  
-      onInit: async (e: ReactFlowInstance) => {
-        await readyServer(); // Wait for mock
-  
-        const functions = await getNodeFunctions();
-        set({ functions }, false, "onInit");
-  
-        set({ ...get(), ...e }, false, "onInit");
-  
-        // Initialize settings
-        // const edgeType = edgeTypeList[parseInt(settings["Comfy.LinkRenderMode"])];
-        // get().onEdgesType(edgeType, false);
       },
   
       /******************************************************
@@ -528,3 +526,5 @@ export const createAppStore = (instance: AppInstance) => {
     }))
   )
 }
+
+export * from "./provider";

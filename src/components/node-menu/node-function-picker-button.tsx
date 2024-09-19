@@ -2,32 +2,32 @@ import React, { useCallback } from 'react';
 import { startCase } from "lodash-es";
 import { useShallow } from "zustand/react/shallow";
 
-import { useAppStore } from "@/app/store";
-import { NodeItem, Widget } from "@/types";
+import { useAppContext } from "@/store";
+import { NodeItem, NodeFunction } from "@/types";
 import { cn } from "@/lib/utils";
 
-type NodePickerWidgetButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-    w: Widget;
+type NodeFunctionPickerButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    w: NodeFunction;
     name: string;
-    setActiveItem: (nodeItem: {name: string; w: Widget;} | null) => void;
+    setActiveItem: (nodeItem: { name: string; w: NodeFunction; } | null) => void;
 };
 
-export const NodePickerWidgetButton = ({ w, name, setActiveItem, ...props }: NodePickerWidgetButtonProps) => {
-    const { onAddNode } = useAppStore(
-        useShallow((st) => ({
-          onAddNode: st.onAddNode,
+export const NodeFunctionPickerButton = ({ w, name, setActiveItem, ...props }: NodeFunctionPickerButtonProps) => {
+    const { onAddNode } = useAppContext(
+        useShallow((s) => ({
+          onAddNode: s.onAddNode,
         }))
     );
 
     const handleDrag = useCallback(
-        (event: React.DragEvent<HTMLButtonElement>, i: Widget) => {
+        (event: React.DragEvent<HTMLButtonElement>, i: NodeFunction) => {
           event.dataTransfer.setData("application/reactflow", JSON.stringify(w));
           event.dataTransfer.effectAllowed = "move";
         }, []
     );
 
     const handleMouseEnter = () => {
-        setActiveItem({w, name});
+        setActiveItem({ w, name });
     };
     
     const handleMouseLeave = () => {
@@ -42,7 +42,7 @@ export const NodePickerWidgetButton = ({ w, name, setActiveItem, ...props }: Nod
             )}
             onClick={(e) => {
                 e.preventDefault();
-                onAddNode({ widget: w, name });
+                onAddNode({ function: w, name });
             }}
             draggable
             onDragStart={(event) => handleDrag(event, w)}

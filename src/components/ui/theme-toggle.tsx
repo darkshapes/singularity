@@ -1,21 +1,21 @@
 "use client";
 
 import * as React from "react";
-import { useTheme } from "next-themes";
+// import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 
 export function ModeToggle() {
-  const { theme, setTheme } = useTheme();
+  // const { theme, setTheme } = useTheme();
 
-  const toggleTheme = () => {
-    if (theme === "dark") {
-      setTheme("light");
-    } else {
-      setTheme("dark");
-    }
-  };
+  // const toggleTheme = () => {
+  //   if (theme === "dark") {
+  //     setTheme("light");
+  //   } else {
+  //     setTheme("dark");
+  //   }
+  // };
 
   return (
     <Button className="relative rounded-3xl shadow-lg hover:bg-accent hover:rounded-lg transition-all duration-200 h-12 w-12" variant="outline" size="icon" onClick={toggleTheme}>

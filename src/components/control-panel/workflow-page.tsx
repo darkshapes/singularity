@@ -1,7 +1,5 @@
-"use client";
-
-import { useAppStore } from "@/app/store";
-import { getFlowTree } from "@/app/api";
+import { useAppContext } from "@/store";
+import { getFlowTree } from "@/sdbx";
 
 import React, { useCallback, useEffect, useState } from "react";
 import type { ReactFlowJsonObject } from "reactflow";
@@ -25,13 +23,13 @@ const WorkflowPageComponent = () => {
     onSaveLocalWorkFlow,
     onUpdateLocalWorkFlowGraph,
     onUpdateLocalWorkFlowTitle,
-  } = useAppStore(
-    useShallow((st) => ({
-      onLoadWorkflow: st.onLoadWorkflow,
-      onDownloadWorkflow: st.onDownloadWorkflow,
-      onSaveLocalWorkFlow: st.onSaveLocalWorkFlow,
-      onUpdateLocalWorkFlowGraph: st.onUpdateLocalWorkFlowGraph,
-      onUpdateLocalWorkFlowTitle: st.onUpdateLocalWorkFlowTitle,
+  } = useAppContext(
+    useShallow((s) => ({
+      onLoadWorkflow: s.onLoadWorkflow,
+      onDownloadWorkflow: s.onDownloadWorkflow,
+      onSaveLocalWorkFlow: s.onSaveLocalWorkFlow,
+      onUpdateLocalWorkFlowGraph: s.onUpdateLocalWorkFlowGraph,
+      onUpdateLocalWorkFlowTitle: s.onUpdateLocalWorkFlowTitle,
     }))
   );
 

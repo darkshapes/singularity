@@ -1,26 +1,19 @@
-"use client";
-
 import React from "react";
 
-import { Widget } from "@/types";
-import { NodePickerWidgetButton } from "./node-picker-widget-button";
+import { NodeFunction } from "@/types";
+import { NodePickerGroupItems } from "./node-picker";
+import { NodeFunctionPickerButton } from "./node-function-picker-button";
 import {
   ContextMenuSeparator,
   ContextMenuSub,
   ContextMenuSubContent,
   ContextMenuSubTrigger,
 } from "@/components/ui/context-menu";
-import { cn } from "@/lib/utils";
-
-interface NodePickerGroupItems {
-  widgets: Record<string, Widget>;
-  subcategories: NodePickerGroupItems[];
-}
 
 interface NodePickerGroupProps {
   category: string;
   items: NodePickerGroupItems;
-  setActiveItem: (nodeItem: {name: string; w: Widget; } | null) => void;
+  setActiveItem: (nodeItem: {name: string; w: NodeFunction; } | null) => void;
   expandedItems: string[];
   setExpandedItems: (items: string[]) => void;
 }
@@ -50,9 +43,9 @@ const NodePickerGroupComponent = ({
               setExpandedItems={setExpandedItems}
             />
           ))}
-          {Object.values(items.subcategories).length > 0 && Object.values(items.widgets).length > 0 && <ContextMenuSeparator />}
-          {Object.entries(items.widgets).map(([name, e]) => (
-            <NodePickerWidgetButton 
+          {Object.values(items.subcategories).length > 0 && Object.values(items.functions).length > 0 && <ContextMenuSeparator />}
+          {Object.entries(items.functions).map(([name, e]) => (
+            <NodeFunctionPickerButton 
               key={name}
               name={name}
               w={e}

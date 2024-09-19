@@ -1,7 +1,3 @@
-import { Input } from "@/components/ui/input";
-import { useAppStore } from "@/app/store";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Slider } from "@/components/ui/slider";
 import React, {
   CSSProperties,
   useCallback,
@@ -11,6 +7,11 @@ import React, {
 } from "react";
 import { useShallow } from "zustand/react/shallow";
 import { Dices } from 'lucide-react';
+
+import { Input } from "@/components/ui/input";
+import { useAppContext } from "@/store";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Slider } from "@/components/ui/slider";
 
 interface SliderInputProps {
   name: string;
@@ -33,7 +34,7 @@ const SliderInputComponent: React.FC<SliderInputProps> = ({
   style,
   onChange,
 }) => {
-  const counter = useAppStore(useShallow((st) => st.counter));
+  const counter = useAppContext(useShallow((s) => s.counter));
   const [inputValue, setInputValue] = useState<number>(value);
   const [isRandom, setIsRandom] = useState<boolean>(false);
 

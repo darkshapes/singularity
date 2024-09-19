@@ -1,4 +1,4 @@
-import { useAppStore } from "@/app/store";
+import { useAppContext } from "@/store";
 import {
   InputDataStr,
   InputDataNumerical,
@@ -25,9 +25,9 @@ interface InputParamsProps {
 }
 
 const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
-  const { onPropChange } = useAppStore(
-    useShallow((st) => ({
-      onPropChange: st.onPropChange,
+  const { onPropChange } = useAppContext(
+    useShallow((s) => ({
+      onPropChange: s.onPropChange,
     }))
   );
 

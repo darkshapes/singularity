@@ -1,12 +1,10 @@
-"use client";
-
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 import { NodeProps, NodeResizeControl, ResizeControlVariant } from "reactflow";
 import React, { useState } from "react";
-import { Widget } from "@/types";
-import { useTheme } from "next-themes";
+import { motion } from "framer-motion";
+
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { NodeFunction } from "@/types";
 import { colorMap } from "../color-menu";
 
 interface NodeCardProps {
@@ -16,7 +14,7 @@ interface NodeCardProps {
   className?: string;
   preview?: boolean;
   path?: string;
-  node?: NodeProps<Widget>;
+  node?: NodeProps<NodeFunction>;
   children: React.ReactNode;
 }
 
@@ -51,15 +49,17 @@ const NodeCardComponent = ({
   node,
   children,
 }: NodeCardProps) => {
-  const { theme } = useTheme();
+  // const { theme } = useTheme();
   const [hovered, setHovered] = useState<boolean>(true);
   const [direction, setDirection] = useState<Direction>("TOP");
   const activeClass = active ? "shadow-lg" : "";
   const selectedClass = selected ? "border-accent-foreground" : "";
   // const selectedClass = "";
 
-  const color = node?.data?.color || "";
-  const bgColor = theme === "light" ? "primary" : "primary";
+  // const color = node?.data?.color || "";
+  // const bgColor = theme === "light" ? "primary" : "primary";
+  const color = node?.data?.modify?.color || "";
+  const bgColor = "primary";
 
   return (
     <Card

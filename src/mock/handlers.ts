@@ -1,4 +1,4 @@
-import config from '@/app/config';
+import config from '@/config';
 
 import { http, HttpResponse } from 'msw';
 

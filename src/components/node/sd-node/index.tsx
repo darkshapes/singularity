@@ -14,15 +14,15 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import { useAppStore } from "@/app/store";
-import { InputData, Widget, WidgetInputNecessity } from "@/types";
+import { useAppContext } from "@/store";
+import { InputData, NodeFunction, NodeFunctionInputNecessity } from "@/types";
 
-const SdNodeComponent = ({ id, data, selected }: NodeProps<Widget>) => {
-  const [enabledParams, setEnabledParams] = useState<WidgetInputNecessity>({});
+const SdNodeComponent = ({ id, data, selected }: NodeProps<NodeFunction>) => {
+  const [enabledParams, setEnabledParams] = useState<NodeFunctionInputNecessity>({});
   const [swappedParams, setSwappedParams] = useState<any[]>([]);
   
   const updateNodeInternals = useUpdateNodeInternals();
-  const { graph } = useAppStore(useShallow((st) => ({ graph: st.graph })));
+  const { graph } = useAppContext(useShallow((s) => ({ graph: s.graph })));
 
   useEffect(() => {
     const enabledParamsList = Object.entries(data.inputs.optional).filter(([k, param]) => {
@@ -38,7 +38,7 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<Widget>) => {
     setEnabledParams(enabledParamsList.reduce((acc, [k, v]) => {
       acc[k] = v;
       return acc;
-    }, {} as WidgetInputNecessity));
+    }, {} as NodeFunctionInputNecessity));
   }, [graph[id].fields])
 
   const swapItem = (item: any) => { // swap between params and inputs
@@ -50,9 +50,9 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<Widget>) => {
     updateNodeInternals(id);
   }
 
-  const { expanded, onExpand } = useAppStore((state) => ({
-    expanded: state.expanded,
-    onExpand: state.onExpand,
+  const { expanded, onExpand } = useAppContext((s) => ({
+    expanded: s.expanded,
+    onExpand: s.onExpand,
   }));
   // Determine if the current node's accordion should be expanded
   const isExpanded = expanded.includes(id);

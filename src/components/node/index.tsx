@@ -1,11 +1,9 @@
-"use client";
-
 import React, { useEffect, useRef, useState } from "react";
 import { useShallow } from "zustand/react/shallow";
 import { NodeResizer, type NodeProps } from "reactflow";
 
-import { useAppStore } from "@/app/store";
-import { type Widget, ImageItem } from "@/types";
+import { useAppContext } from "@/store";
+import { NodeFunction } from "@/types";
 import { Input } from "@/components/ui/input";
 import { ColorMenu, colorList } from "@/components/node/color-menu";
 import { Progress } from "@/components/ui/progress";
@@ -29,22 +27,22 @@ import {
   TrashIcon,
 } from "@radix-ui/react-icons";
 
-const NodeComponent = (node: NodeProps<Widget>) => {
+const NodeComponent = (node: NodeProps<NodeFunction>) => {
   const ref = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [nicknameInput, setNicknameInput] = useState(false);
 
   const { progressBar, onDuplicateNode, onDeleteNode, onModifyChange } =
-    useAppStore(
-      useShallow((st) => ({
+    useAppContext(
+      useShallow((s) => ({
         progressBar:
-          st.nodeInProgress?.id === node.id
-            ? st.nodeInProgress.progress
+          s.nodeInProgress?.id === node.id
+            ? s.nodeInProgress.progress
             : undefined,
-        onDuplicateNode: st.onDuplicateNode,
-        onDeleteNode: st.onDeleteNode,
-        onModifyChange: st.onModifyChange,
+        onDuplicateNode: s.onDuplicateNode,
+        onDeleteNode: s.onDeleteNode,
+        onModifyChange: s.onModifyChange,
       }))
     );
   const isInProgress = progressBar !== undefined;

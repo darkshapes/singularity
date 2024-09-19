@@ -1,4 +1,4 @@
-import { useAppStore } from "@/app/store";
+import { useAppContext } from "@/store";
 import React, { useCallback, useEffect, useState } from "react";
 import { useShallow } from "zustand/react/shallow";
 import { InputDataLiteral } from "@/types";
@@ -27,10 +27,10 @@ const SelectUploadInputComponent: React.FC<SelectUploadInputProps> = ({
   name,
 }) => {
   const [options, setOptions] = useState<any[]>([]);
-  const { onRefresh, widgets } = useAppStore(
-    useShallow((state) => ({
-      onRefresh: state.onRefresh,
-      widgets: state.widgets,
+  const { functions, onRefresh } = useAppContext(
+    useShallow((s) => ({
+      functions: s.functions,
+      onRefresh: s.onRefresh,
     }))
   );
 
@@ -57,7 +57,7 @@ const SelectUploadInputComponent: React.FC<SelectUploadInputProps> = ({
       })),
     ];
     setOptions(newOptions);
-  }, [input, name, widgets]);
+  }, [input, name, functions]);
 
   const handleUploadChange = useCallback(
     (info: any) => {
