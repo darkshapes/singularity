@@ -1,3 +1,4 @@
+import { createStore } from 'zustand';
 import { Edge, Node, ReactFlowInstance, ReactFlowJsonObject, OnConnect, OnEdgesChange, OnNodesChange } from "reactflow";
 import type {
   EdgeType,
@@ -9,6 +10,7 @@ import type {
   PropertyKey,
   NodeData,
 } from "@/types";
+import { createAppStore } from "@/app/store";
 
 export type OnPropChange = (
   id: NodeId,
@@ -16,14 +18,13 @@ export type OnPropChange = (
   value: any
 ) => void;
 
-export interface AppState extends ReactFlowInstance<NodeData> {
+export type AppInstance = ReactFlowInstance<NodeData>;
+
+export interface AppState extends AppInstance {
   page?: string;
   counter: number;
   functions: Record<NodeFunctionKey, NodeFunction>;
-  graph: Record<NodeId, NodeData>;
   results: Record<NodeId, any>;
-  nodes: Node[];
-  edges: Edge[];
   edgeType: EdgeType;
   nodeInProgress?: NodeInProgress;
   promptError?: string;
@@ -48,7 +49,7 @@ export interface AppState extends ReactFlowInstance<NodeData> {
   onPropChange: OnPropChange;
   onModifyChange: OnPropChange;
   onGetNodeFieldsData: (id: NodeId, key: string) => any;
-  onCopyNode: () => ReactFlowJsonObject;
+  onCopyNode: () => void;
   onPasteNode: (
     workflow: ReactFlowJsonObject,
     position: { x: number; y: number }
@@ -74,3 +75,5 @@ export interface AppState extends ReactFlowInstance<NodeData> {
   onLoadWorkflow: (persisted: any) => void;
   onDownloadWorkflow: () => void;
 }
+
+export type AppStore = ReturnType<typeof createAppStore>;

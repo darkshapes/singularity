@@ -1,7 +1,6 @@
 import config from "@/app/config";
 
-import { useAppStore } from "@/app/store";
-import type { Graph, NodeData } from "@/types";
+import type { AppState, Graph } from "@/types";
 
 type PromptResult =
   | { error: string; task_id?: never }
@@ -25,22 +24,19 @@ export const sendPrompt = async (
   return await response.json();
 };
 
-export const createPrompt = (): Graph => {
-  const { functions, getEdges, getNode, getNodes } = useAppStore((st) => ({
-    functions: st.functions,
-    getEdges: st.getEdges,
-    getNode: st.getNode,
-    getNodes: st.getNodes,
-  }));
-
+export const createPrompt = ({
+  state,
+}: {
+  state: AppState;
+}): Graph => {
   const multigraph: Graph = {
     directed: true,
     multigraph: true,
     graph: {},
-    nodes: getNodes().map((node) => {
+    nodes: state.getNodes().map((node) => {
       const id = node.id;
 
-      const fn = functions[node.data.function];
+      const fn = state.functions[node.data.function];
       const fname = fn.fname;
   
       const outputs = Object.keys(fn.outputs);
@@ -64,7 +60,7 @@ export const createPrompt = (): Graph => {
         widget_inputs,
       }
     }),
-    links: getEdges().map((edge, index: number) => {
+    links: state.getEdges().map((edge, index: number) => {
       const key = index.toString();
 
       const source = edge.source;
@@ -73,8 +69,8 @@ export const createPrompt = (): Graph => {
       // console.log(source);
       // console.log(target);
 
-      const sourceNode = functions[getNode(source)?.data.function!];
-      const targetNode = functions[getNode(target)?.data.function!];
+      const sourceNode = state.functions[state.getNode(source)?.data.function!];
+      const targetNode = state.functions[state.getNode(target)?.data.function!];
 
       // console.log(sourceNode);
       // console.log(targetNode);
