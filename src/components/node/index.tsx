@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useShallow } from "zustand/react/shallow";
-import { NodeResizer, type NodeProps } from "@xyflow/react";
+import { NodeResizer, type NodeProps } from "reactflow";
 
 import { useAppStore } from "@/store";
-import { NodeFunction } from "@/types";
+import { AppNode } from "@/types";
 import { Input } from "@/components/ui/input";
 import { ColorMenu, colorList } from "@/components/node/color-menu";
 import { Progress } from "@/components/ui/progress";
@@ -27,13 +27,13 @@ import {
   TrashIcon,
 } from "@radix-ui/react-icons";
 
-const NodeComponent = (node: NodeProps<NodeFunction>) => {
+const NodeComponent = (node: NodeProps<AppNode>) => {
   const ref = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [nicknameInput, setNicknameInput] = useState(false);
 
-  const { progressBar, onDuplicateNode, onDeleteNode, onModifyChange } =
+  const { progressBar, onDuplicateNode, onModifyChange } =
     useAppStore(
       useShallow((s) => ({
         progressBar:
@@ -41,7 +41,6 @@ const NodeComponent = (node: NodeProps<NodeFunction>) => {
             ? s.nodeInProgress.progress
             : undefined,
         onDuplicateNode: s.onDuplicateNode,
-        onDeleteNode: s.onDeleteNode,
         onModifyChange: s.onModifyChange,
       }))
     );

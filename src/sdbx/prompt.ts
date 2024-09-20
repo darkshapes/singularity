@@ -36,8 +36,8 @@ export const createPrompt = ({
     nodes: state.nodes.map((node) => {
       const id = node.id;
 
-      const fn = state.functions[node.data.fkey];
-      const fname = fn.fname;
+      const fn = state.functions[node.type!];
+      const fname = node.data.fn.fname;
   
       const outputs = Object.keys(fn.outputs);
 

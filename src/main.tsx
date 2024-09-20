@@ -28,7 +28,7 @@ function App() {
               <FlowEditor />
             </NodeContextMenu>
           </ReactFlowProvider>
-          {/* <ControlPanel /> */}
+          <ControlPanel />
         </div>
   );
 }

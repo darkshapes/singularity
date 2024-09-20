@@ -3,7 +3,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Dialog, DialogTrigger } from '@radix-ui/react-dialog';
 import { Button } from "@/components/ui/button";
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
-import { PlayIcon, FilePlusIcon, ChevronDownIcon, ChevronUpIcon, TrashIcon, GearIcon } from "@radix-ui/react-icons";
+import { PlayIcon, FilePlusIcon, ChevronDownIcon, ChevronUpIcon, TrashIcon, GearIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { WorkflowPage } from "./workflow-page";
 import { ClearDialog } from "./clear-dialog";
 import { SettingsModal } from "./settings-modal";
@@ -87,6 +87,8 @@ const ControlPanelComponent = () => {
   const [isClearDialogOpen, setIsClearDialogOpen] = useState(false);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
 
+  const { theme, toggleTheme } = useAppStore((s) => ({ theme: s.theme, toggleTheme: s.toggleTheme }));
+
   // const { expanded, onExpand } = useAppStore((s) => ({
   //   expanded: s.expanded,
   //   onExpand: s.onExpand,
@@ -155,7 +157,19 @@ const ControlPanelComponent = () => {
           </TooltipButton>
           <SettingsModal open={isSettingsModalOpen} setOpen={setIsSettingsModalOpen} />
         </Dialog>
-            <ModeToggle />
+        <TooltipButton content="Toggle theme">
+          <Button
+            onClick={() => toggleTheme()}
+            className="relative rounded-3xl shadow-lg hover:bg-accent hover:rounded-lg transition-all duration-200 h-12 w-12"
+            variant="outline"
+          >
+            {
+              theme === "dark" ? 
+                <MoonIcon className="h-[1rem] w-[1rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" /> :
+                <SunIcon className="absolute h-[1rem] w-[1rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            }
+          </Button>
+        </TooltipButton>
       </div>
     </TooltipProvider>
   );

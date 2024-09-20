@@ -42,6 +42,7 @@ export const useAppStore = create<AppState>()(
       edges: [],
 
       theme: "dark",
+      toggleTheme: () => { set({ theme: get().theme === "dark" ? "light" : "dark" }) },
 
       edgeType: defaultEdge,
       nodeInProgress: undefined,
@@ -66,7 +67,6 @@ export const useAppStore = create<AppState>()(
       constructNode: ({
         name,
         fn,
-        data,
         position = { x: 0, y: 0 },
         width,
         height,
@@ -84,7 +84,9 @@ export const useAppStore = create<AppState>()(
         const item: Node = {
           id,
           type: name,
-          data: { ...fn, ...(data?.modify ?? {}) },
+          data: {
+            fn
+          },
           dragHandle: ".drag-handle",
           position,
           zIndex,

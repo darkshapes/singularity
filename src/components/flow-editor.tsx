@@ -29,7 +29,7 @@ import { getPostion, getPostionCenter } from "@/utils";
 
 import { Node as RenderableNode } from "@/components/node";
 
-import { AppInstance, NodeData } from "@/types";
+import { AppInstance } from "@/types";
 
 import useUndoRedo from "@/hooks/use-undo-redo";
 

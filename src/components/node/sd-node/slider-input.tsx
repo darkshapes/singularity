@@ -34,7 +34,7 @@ const SliderInputComponent: React.FC<SliderInputProps> = ({
   style,
   onChange,
 }) => {
-  const counter = useAppStore(useShallow((s) => s.counter));
+  // const counter = useAppStore(useShallow((s) => s.counter));
   const [inputValue, setInputValue] = useState<number>(value);
   const [isRandom, setIsRandom] = useState<boolean>(false);
 
@@ -95,10 +95,10 @@ const SliderInputComponent: React.FC<SliderInputProps> = ({
     }, [onChange]
   );
 
-  useEffect(() => {
-    if (!randomizable || !isRandom) return;
-    handleChange(Math.floor(Math.random() * iMax));
-  }, [counter, iMax]);
+  // useEffect(() => {
+  //   if (!randomizable || !isRandom) return;
+  //   handleChange(Math.floor(Math.random() * iMax));
+  // }, [counter, iMax]);
 
   return (
     <div style={style}>

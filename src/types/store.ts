@@ -9,7 +9,6 @@ import type {
   NodeFunctionKey,
   NodeId,
   NodeInProgress,
-  NodeItem,
   PropertyKey,
 } from "@/types";
 
@@ -19,7 +18,7 @@ export type OnPropChange = (
   value: any
 ) => void;
 
-export type AppInstance = ReactFlowInstance<NodeData>;
+export type AppInstance = ReactFlowInstance<AppNode>;
 
 type MethodKeys<T> = {
   [K in keyof T]: T[K] extends Function ? K : never;
@@ -29,7 +28,7 @@ export type AppInstanceMethodKeys = MethodKeys<AppInstance>;
 
 export type AppState = {
   instance?: AppInstance;
-  setInstance: (instance: ReactFlowInstance) => void;
+  setInstance: (instance: AppInstance) => void;
 
   functions: Record<NodeFunctionKey, NodeFunction>;
   results: Record<NodeId, any>;
@@ -37,7 +36,8 @@ export type AppState = {
   nodes: AppNode[];
   edges: Edge[];
 
-  theme: "system" | "light" | "dark";
+  theme: "dark" | "light";
+  toggleTheme: () => void; 
 
   edgeType: EdgeType;
   nodeInProgress?: NodeInProgress;
@@ -46,7 +46,7 @@ export type AppState = {
   
   initialize: (instance: AppInstance) => Promise<void>;
 
-  constructNode: (item: NodeItem) => AppNode;
+  constructNode: (item: NodeData) => AppNode;
 
   onError: (error: string) => Promise<void>;
   onRefresh: () => Promise<void>;
@@ -58,9 +58,6 @@ export type AppState = {
   onDetachNodesGroup: (childIds: NodeId[], groupNode: Node) => void;
   onDetachGroup: (node: Node) => Node;
   onNodesChange: OnNodesChange;
-  onUpdateNodes: (id: string, data: any) => void;
-  onAddNode: (nodeItem: NodeItem) => void;
-  onDeleteNode: (id: NodeId) => void;
   onDuplicateNode: (id: NodeId) => void;
   onNodeInProgress: (id: NodeId, progress: number) => void;
   onPropChange: OnPropChange;

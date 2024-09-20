@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { NodeFunction } from "@/types";
+import { AppNode } from "@/types";
 import { colorMap } from "../color-menu";
 
 interface NodeCardProps {
@@ -14,7 +14,7 @@ interface NodeCardProps {
   className?: string;
   preview?: boolean;
   path?: string;
-  node?: NodeProps<NodeFunction>;
+  node?: NodeProps<AppNode>;
   children: React.ReactNode;
 }
 

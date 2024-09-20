@@ -4,6 +4,7 @@ import { isArray, startCase } from "lodash-es";
 import { useShallow } from "zustand/react/shallow";
 
 import { useAppStore } from "@/store";
+import { AppNode } from "@/types";
 import { Slot } from "../style";
 import { cn } from "@/lib/utils";
 
@@ -36,15 +37,15 @@ export const NodeHandle = ({
         return true;
 
       // try {
-      const getNode = (id: string | null) => nodes.find((n) => n.id === id) as Node;
+      const getNode = (id: string | null) => nodes.find((n) => n.id === id) as AppNode;
 
       const targetNode = getNode(connection.target);
       const sourceNode = getNode(connection.source);
 
-      const targetInput = {...targetNode.data.inputs.required, ...targetNode.data.inputs.optional};
+      const targetInput = {...targetNode.data.fn.inputs.required, ...targetNode.data.fn.inputs.optional};
 
       const targetType = targetInput[String(connection.targetHandle)].type;
-      const sourceType = sourceNode.data.outputs[String(connection.sourceHandle)].type;
+      const sourceType = sourceNode.data.fn.outputs[String(connection.sourceHandle)].type;
       
       return targetType === sourceType;
       // } catch {
