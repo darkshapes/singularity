@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { ReactFlowProvider } from "@xyflow/react";
 
+import "@xyflow/react/dist/style.css";
 import '@fontsource/inter';
 import '@public/globals.css';
 

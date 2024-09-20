@@ -81,6 +81,16 @@
   }
 }
 
+.dark .react-flow__background {
+  background: black;
+  color: black;
+}
+
+.light .react-flow__background {
+  background: white;
+  color: white;
+}
+
 /* Reactflow  */
 .react-flow__attribution {
   display:none

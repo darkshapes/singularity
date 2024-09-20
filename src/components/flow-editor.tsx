@@ -1,5 +1,3 @@
-import "@xyflow/react/dist/style.css";
-
 import React, {
   useCallback,
   useEffect,
