@@ -6,7 +6,7 @@ import { MoveIcon } from "@radix-ui/react-icons";
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { Button } from "@/components/ui/button";
 import { startCase } from "lodash-es";
-import { useAppContext } from "@/store";
+import { useAppStore } from "@/store";
 import { edgeTypeList } from "@/types";
 import { useShallow } from "zustand/react/shallow";
 import { EdgeType } from "@/types";
@@ -37,7 +37,7 @@ export const SettingsModal = ({ open, setOpen }: any) => {
         onUpdateFrontend,
         edgeType,
         onEdgesType,
-    } = useAppContext(useShallow((s) => ({
+    } = useAppStore(useShallow((s) => ({
           onUpdateFrontend: s.onUpdateFrontend,
           edgeType: s.edgeType,
           onEdgesType: s.onEdgesType,

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useShallow } from "zustand/react/shallow";
 import { NodeResizer, type NodeProps } from "reactflow";
 
-import { useAppContext } from "@/store";
+import { useAppStore } from "@/store";
 import { NodeFunction } from "@/types";
 import { Input } from "@/components/ui/input";
 import { ColorMenu, colorList } from "@/components/node/color-menu";
@@ -34,7 +34,7 @@ const NodeComponent = (node: NodeProps<NodeFunction>) => {
   const [nicknameInput, setNicknameInput] = useState(false);
 
   const { progressBar, onDuplicateNode, onDeleteNode, onModifyChange } =
-    useAppContext(
+    useAppStore(
       useShallow((s) => ({
         progressBar:
           s.nodeInProgress?.id === node.id

@@ -2,32 +2,28 @@ import React, { useCallback } from 'react';
 import { startCase } from "lodash-es";
 import { useShallow } from "zustand/react/shallow";
 
-import { useAppContext } from "@/store";
+import { useAppStore } from "@/store";
 import { NodeItem, NodeFunction } from "@/types";
 import { cn } from "@/lib/utils";
 
 type NodeFunctionPickerButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-    w: NodeFunction;
+    fn: NodeFunction;
     name: string;
-    setActiveItem: (nodeItem: { name: string; w: NodeFunction; } | null) => void;
+    setActiveItem: (nodeItem: { name: string; fn: NodeFunction; } | null) => void;
 };
 
-export const NodeFunctionPickerButton = ({ w, name, setActiveItem, ...props }: NodeFunctionPickerButtonProps) => {
-    const { onAddNode } = useAppContext(
-        useShallow((s) => ({
-          onAddNode: s.onAddNode,
-        }))
-    );
+export const NodeFunctionPickerButton = ({ fn, name, setActiveItem, ...props }: NodeFunctionPickerButtonProps) => {
+    const { addNodes, constructNode } = useAppStore((s) => ({ addNodes: s.addNodes, constructNode: s.constructNode }));
 
     const handleDrag = useCallback(
         (event: React.DragEvent<HTMLButtonElement>, i: NodeFunction) => {
-          event.dataTransfer.setData("application/reactflow", JSON.stringify(w));
+          event.dataTransfer.setData("application/reactflow", JSON.stringify(fn));
           event.dataTransfer.effectAllowed = "move";
         }, []
     );
 
     const handleMouseEnter = () => {
-        setActiveItem({ w, name });
+        setActiveItem({ fn, name });
     };
     
     const handleMouseLeave = () => {
@@ -42,10 +38,10 @@ export const NodeFunctionPickerButton = ({ w, name, setActiveItem, ...props }: N
             )}
             onClick={(e) => {
                 e.preventDefault();
-                onAddNode({ function: w, name });
+                addNodes(constructNode({ fn, name }));
             }}
             draggable
-            onDragStart={(event) => handleDrag(event, w)}
+            onDragStart={(event) => handleDrag(event, fn)}
             onMouseEnter={() => handleMouseEnter()}
             onMouseLeave={handleMouseLeave}
             {...props}

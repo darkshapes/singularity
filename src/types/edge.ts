@@ -1,3 +1,4 @@
+import { Edge } from "reactflow";
 import {
   BorderSolidIcon,
   CornerBottomRightIcon,
@@ -23,3 +24,7 @@ export const edgeTypeList: EdgeType[] = [
     name: "spline",
   },
 ];
+
+export const defaultEdge = edgeTypeList[2];
+
+export type AppEdge = Edge<EdgeType>;

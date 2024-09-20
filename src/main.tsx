@@ -7,7 +7,6 @@ import '@public/globals.css';
 
 import { cn } from "@/lib/utils";
 
-import { AppProvider } from "@/store";
 import { AppInstance } from "@/types";
 
 import { NodeContextMenu } from "@/components/node-menu";
@@ -16,10 +15,7 @@ import { FlowEditor } from "@/components/flow-editor";
 import { Toaster } from "@/components/toaster";
 
 function App() {
-  const [instance, setInstance] = useState<AppInstance>();
-
   return (
-      <AppProvider instance={instance}>
         <div
           className={cn(
             "min-h-screen bg-background font-sans antialiased h-screen"
@@ -28,12 +24,11 @@ function App() {
           <Toaster />
           <ReactFlowProvider>
             <NodeContextMenu>
-              <FlowEditor onInit={setInstance} />
+              <FlowEditor />
             </NodeContextMenu>
           </ReactFlowProvider>
           {/* <ControlPanel /> */}
         </div>
-      </AppProvider>
   );
 }
 

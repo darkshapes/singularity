@@ -7,11 +7,10 @@ import { PlayIcon, FilePlusIcon, ChevronDownIcon, ChevronUpIcon, TrashIcon, Gear
 import { WorkflowPage } from "./workflow-page";
 import { ClearDialog } from "./clear-dialog";
 import { SettingsModal } from "./settings-modal";
-import { useAppContext } from "@/store";
+import { useAppStore } from "@/store";
 import { useShallow } from "zustand/react/shallow";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
-import { ModeToggle } from "@/components/ui/theme-toggle"
 
 const nodes = [
   {
@@ -37,7 +36,7 @@ const PromptButtonComponent = () => {
   const [count, setCount] = useState(0);
 
   const { onSubmit, promptError, onEdgesAnimate, expanded, onExpand } =
-  useAppContext(
+  useAppStore(
       useShallow((s) => ({
         onSubmit: s.onSubmit,
         promptError: s.promptError,
@@ -88,7 +87,7 @@ const ControlPanelComponent = () => {
   const [isClearDialogOpen, setIsClearDialogOpen] = useState(false);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
 
-  // const { expanded, onExpand } = useAppContext((s) => ({
+  // const { expanded, onExpand } = useAppStore((s) => ({
   //   expanded: s.expanded,
   //   onExpand: s.onExpand,
   // }));

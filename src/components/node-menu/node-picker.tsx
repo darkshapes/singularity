@@ -1,9 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { useShallow } from "zustand/react/shallow";
 import Fuse from "fuse.js";
 
-import { useAppContext } from "@/store";
+import { useAppStore } from "@/store";
 import { NodeFunction } from "@/types";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { ContextMenuSeparator } from "@/components/ui/context-menu";
@@ -19,12 +18,7 @@ export interface NodePickerGroupItems {
 export type NodePickerGroupCategory = Record<string, NodePickerGroupItems>;
 
 const NodePickerComponent = ({ setActiveItem, setShowPath }: any) => {
-  const { functions, onAddNode } = useAppContext(
-    useShallow((s) => ({
-      functions: s.functions,
-      onAddNode: s.onAddNode,
-    }))
-  );
+  const { functions } = useAppStore((s) => ({ functions: s.functions }));
 
   const [category, setCategory] = useState<any>({});
   const [keywords, setKeywords] = useState<string>("");
@@ -133,10 +127,10 @@ const NodePickerComponent = ({ setActiveItem, setShowPath }: any) => {
                 />
               </motion.div>
             )) :
-            Object.entries(functionList).map(([name, w]: [string, NodeFunction]) => (
+            Object.entries(functionList).map(([name, fn]: [string, NodeFunction]) => (
               <NodeFunctionPickerButton
                 key={name}
-                w={w}
+                fn={fn}
                 name={name}
                 setActiveItem={setActiveItem}
               />

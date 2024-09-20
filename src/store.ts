@@ -1,6 +1,6 @@
 import { Edge, Node, ReactFlowInstance, ReactFlowJsonObject, applyEdgeChanges, applyNodeChanges } from "reactflow";
 import { v4 as uuid } from "uuid";
-import { createStore } from "zustand";
+import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
 import {
@@ -10,8 +10,8 @@ import {
   sendPrompt,
   subscribeToTask,
 } from "@/sdbx";
-import { Connection, edgeTypeList } from "@/types";
-import { AppState, AppInstance, AppStore } from "@/types/store";
+import { Connection, edgeTypeList, defaultEdge } from "@/types";
+import { AppState, AppInstance, AppInstanceMethodKeys } from "@/types/store";
 import {
   addConnection,
   addNode,
@@ -21,53 +21,122 @@ import {
   updateNode,
 } from "@/utils";
 
-export const createAppStore = (instance: AppInstance) => {
-  return createStore<AppState>()(
-    devtools((set, get) => ({
-      ...instance,
-
-      page: "flow",
-      counter: 0,
+export const useAppStore = create<AppState>()(
+  devtools((set, get) => {
+    const createInstanceMethod = <T extends AppInstanceMethodKeys>(methodName: T) => {
+      return (...args: Parameters<ReactFlowInstance[T]>): ReturnType<ReactFlowInstance[T]> | undefined => {
+        const { instance } = get();
+        if (!instance) return;
+        const method = instance[methodName];
+        if (typeof method === 'function') {
+          return method.apply(instance, args);
+        }
+      };
+    };
+    
+    return {
       functions: {},
-      graph: {},
       results: {},
-      edgeType: edgeTypeList[2],
+
+      nodes: [],
+      edges: [],
+
+      edgeType: defaultEdge,
       nodeInProgress: undefined,
       promptError: undefined,
       clientId: undefined,
 
-      initialize: async () => {
+      initialize: async (instance: AppInstance) => {
         await readyServer(); // Wait for mock
+
+        set({ instance }, false, "initialize");
   
         const functions = await getNodeFunctions();
-        set({ functions }, false, "onInit");
+        set({ functions }, false, "initialize");
     
         // Initialize settings
         // const edgeType = edgeTypeList[parseInt(settings["Comfy.LinkRenderMode"])];
         // get().onEdgesType(edgeType, false);
       },
+
+      setInstance: (instance) => set({ instance }),
+
+      constructNode: ({
+        name,
+        fn,
+        data,
+        position = { x: 0, y: 0 },
+        width,
+        height,
+        key,
+      }) => {
+        const { nodes } = get();
+
+        const id = String(key ?? uuid());
+
+        const zIndex = nodes
+                        .map((n) => n.zIndex ?? 0)
+                        .concat([0])
+                        .reduce((a, b) => Math.max(a, b)) + 1;
+        
+        const item: Node = {
+          id,
+          type: name,
+          data: { ...fn, ...(data?.modify ?? {}) },
+          dragHandle: ".drag-handle",
+          position,
+          zIndex,
+          width,
+          height,
+          style: { width, height },
+        };
+
+        return item;
+      },
+
+      getNode: createInstanceMethod('getNode'),
+      getNodes: createInstanceMethod('getNodes'),
+      addNodes: createInstanceMethod('addNodes'),
+      setNodes: createInstanceMethod('setNodes'),
+      updateNode: createInstanceMethod('updateNode'),
+      updateNodeData: createInstanceMethod('updateNodeData'),
+
+      getEdge: createInstanceMethod('getEdge'),
+      getEdges: createInstanceMethod('getEdges'),
+      addEdges: createInstanceMethod('addEdges'),
+      setEdges: createInstanceMethod('setEdges'),
+      updateEdge: createInstanceMethod('updateEdge'),
+      updateEdgeData: createInstanceMethod('updateEdgeData'),
+
+      deleteElements: createInstanceMethod('deleteElements'),
+
+      toObject: createInstanceMethod('toObject'),
+
+      onNodesChange: (changes) => {
+        set(
+          (st) => ({ nodes: applyNodeChanges(changes, st.nodes) }),
+          false,
+          "onNodesChange"
+        );
+      },
       
       /******************************************************
        *********************** Base *************************
        ******************************************************/
-  
-      onSetPage: (value) => {
-        set({ page: value }, false, "onSetPage");
-      },
-  
-      onNewClientId: (id) => {
-        set({ clientId: id }, false, "onNewClientId");
-      },
       
       onError: async (error) => {
         set({ promptError: error }, false, "onSubmit");
       },
-  
+      
       onRefresh: async () => {
         const functions = await getNodeFunctions();
         set({ functions }, false, "onRefresh");
       },
-  
+      
+      onNewClientId: (id) => {
+        set({ clientId: id }, false, "onNewClientId");
+      },
+
       /******************************************************
        *********************** Node *************************
        ******************************************************/
@@ -136,39 +205,11 @@ export const createAppStore = (instance: AppInstance) => {
         // }));
       },
   
-      onNodesChange: (changes) => {
-        // set(
-        //   (st) => ({ nodes: applyNodeChanges(changes, st.nodes) }),
-        //   false,
-        //   "onNodesChange"
-        // );
-      },
-  
       onUpdateNodes: (id, data) => {
         // set(
         //   (st) => ({ nodes: updateNode(id, data, st.nodes) }),
         //   false,
         //   "onUpdateNodes"
-        // );
-      },
-  
-      onAddNode: (nodeItem) => {
-        // set((st) => addNode(st, nodeItem), false, "onAddNode");
-      },
-  
-      onDeleteNode: (id) => {
-        // const { nodes, onDetachNodesGroup } = get();
-        // const node: any = nodes.find((n) => n.id === id);
-        // const childIds = nodes
-        //   .filter((n) => n.parentNode === id)
-        //   .map((n) => n.id);
-        // onDetachNodesGroup(childIds, node);
-        // set(
-        //   (st) => ({
-        //     nodes: applyNodeChanges([{ type: "remove", id }], st.nodes),
-        //   }),
-        //   false,
-        //   "onDeleteNode"
         // );
       },
   
@@ -523,8 +564,5 @@ export const createAppStore = (instance: AppInstance) => {
       onDownloadWorkflow: () => {
         // writeWorkflowToFile(toPersisted(get()));
       },
-    }))
-  )
-}
-
-export * from "./provider";
+    }})
+)

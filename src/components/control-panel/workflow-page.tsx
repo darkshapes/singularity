@@ -1,4 +1,4 @@
-import { useAppContext } from "@/store";
+import { useAppStore } from "@/store";
 import { getFlowTree } from "@/sdbx";
 
 import React, { useCallback, useEffect, useState } from "react";
@@ -23,7 +23,7 @@ const WorkflowPageComponent = () => {
     onSaveLocalWorkFlow,
     onUpdateLocalWorkFlowGraph,
     onUpdateLocalWorkFlowTitle,
-  } = useAppContext(
+  } = useAppStore(
     useShallow((s) => ({
       onLoadWorkflow: s.onLoadWorkflow,
       onDownloadWorkflow: s.onDownloadWorkflow,

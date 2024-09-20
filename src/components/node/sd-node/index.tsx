@@ -14,7 +14,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import { useAppContext } from "@/store";
+import { useAppStore } from "@/store";
 import { InputData, NodeFunction, NodeFunctionInputNecessity } from "@/types";
 
 const SdNodeComponent = ({ id, data, selected }: NodeProps<NodeFunction>) => {
@@ -22,7 +22,7 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<NodeFunction>) => {
   const [swappedParams, setSwappedParams] = useState<any[]>([]);
   
   const updateNodeInternals = useUpdateNodeInternals();
-  const { graph } = useAppContext(useShallow((s) => ({ graph: s.graph })));
+  const { getNode } = useAppStore(useShallow((s) => ({ getNode: s.getNode })));
 
   useEffect(() => {
     const enabledParamsList = Object.entries(data.inputs.optional).filter(([k, param]) => {
@@ -32,14 +32,14 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<NodeFunction>) => {
         ([name, input]) => input.fname == param.dependent?.on
       )?.[0] as string;
 
-      return graph[id].fields[dependentOn] == param.dependent.when
+      return getNode(id)?.data.fields[dependentOn] == param.dependent.when
     });
 
     setEnabledParams(enabledParamsList.reduce((acc, [k, v]) => {
       acc[k] = v;
       return acc;
     }, {} as NodeFunctionInputNecessity));
-  }, [graph[id].fields])
+  }, [getNode(id)?.data.fields])
 
   const swapItem = (item: any) => { // swap between params and inputs
     if (swappedParams.find(e => e.name === item.name)) {
@@ -50,7 +50,7 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<NodeFunction>) => {
     updateNodeInternals(id);
   }
 
-  const { expanded, onExpand } = useAppContext((s) => ({
+  const { expanded, onExpand } = useAppStore((s) => ({
     expanded: s.expanded,
     onExpand: s.onExpand,
   }));

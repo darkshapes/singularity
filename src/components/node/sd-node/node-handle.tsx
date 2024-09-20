@@ -3,7 +3,7 @@ import { Connection, Handle, HandleType, Node, Position } from "reactflow";
 import { isArray, startCase } from "lodash-es";
 import { useShallow } from "zustand/react/shallow";
 
-import { useAppContext } from "@/store";
+import { useAppStore } from "@/store";
 import { Slot } from "../style";
 import { cn } from "@/lib/utils";
 
@@ -28,7 +28,7 @@ export const NodeHandle = ({
   clickable = false,
   onClick,
 }: NodeHandleProps) => {
-  const nodes = useAppContext(useShallow((s) => s.nodes));
+  const nodes = useAppStore(useShallow((s) => s.nodes));
 
   const handleValidCheck = useCallback(
     (connection: Connection) => {

@@ -8,25 +8,29 @@ import React, {
   useState,
 } from "react";
 import ReactFlow, {
+  applyNodeChanges,
   Background,
   BackgroundVariant,
   Connection,
   Controls,
-  Edge,
   MiniMap,
+  NodeChange,
   NodeDragHandler,
   NodeProps,
+
+  type Node,
+  type Edge,
 } from "reactflow";
 import { debounce } from "lodash-es";
 import { useShallow } from "zustand/react/shallow";
 
-import { useAppContext } from "@/store";
+import { useAppStore } from "@/store";
 
 import { getPostion, getPostionCenter } from "@/utils";
 
-import { Node } from "@/components/node";
+import { Node as RenderableNode } from "@/components/node";
 
-import { AppInstance } from "@/types";
+import { AppInstance, NodeData } from "@/types";
 
 import useUndoRedo from "@/hooks/use-undo-redo";
 
@@ -36,15 +40,32 @@ export type FlowEditorProps = {
   onInit: (e: AppInstance) => void;
 }
 
-export const FlowEditor = ({ onInit }: FlowEditorProps) => {
+export const FlowEditor = () => {
   // const { theme } = useTheme();
   // const edgeUpdateSuccessful = useRef(true);
   // const { takeSnapshot } = useUndoRedo();
 
   // useForceLayout({ strength, distance });
 
-  // const { functions } = useAppContext(useShallow((s) => ({ functions: s.functions })))
+  const { 
+    initialize,
 
+    functions,
+
+    nodes,
+    edges,
+
+    onNodesChange,
+  } = useAppStore((s) => ({ 
+    initialize: s.initialize,
+
+    functions: s.functions,
+
+    nodes: s.nodes,
+    edges: s.edges,
+
+    onNodesChange: s.onNodesChange,
+  }));
   // const {
   //   functions,
   //   onNodesChange,
@@ -57,7 +78,7 @@ export const FlowEditor = ({ onInit }: FlowEditorProps) => {
   //   onSetNodesGroup,
   //   onDeleteNode,
   //   onCreateGroup,
-  // } = useAppContext(
+  // } = useAppStore(
   //   useShallow((s) => ({
   //     functions: s.functions,
   //     onInit: s.onInit,
@@ -74,12 +95,12 @@ export const FlowEditor = ({ onInit }: FlowEditorProps) => {
   //   }))
   // );
 
-  // const nodeTypes = useMemo(() => 
-  //   Object.keys(functions).reduce((acc, name) => {
-  //     acc[name] = Node;
-  //     return acc;
-  //   }, {} as Record<string, React.FC<NodeProps>>), 
-  // [functions])
+  const nodeTypes = useMemo(() => 
+    Object.keys(functions).reduce((acc, name) => {
+      acc[name] = RenderableNode;
+      return acc;
+    }, {} as Record<string, React.FC<NodeProps>>), 
+  [functions])
 
   // const onEdgeUpdateStart = useCallback(() => {
   //   edgeUpdateSuccessful.current = false;
@@ -195,9 +216,14 @@ export const FlowEditor = ({ onInit }: FlowEditorProps) => {
 
   return (
     <ReactFlow
-      // nodes={nodes}
-      // edges={edges}
-      // nodeTypes={nodeTypes}
+      onInit={(e: AppInstance) => initialize(e)}
+
+      nodes={nodes}
+      edges={edges}
+      nodeTypes={nodeTypes}
+
+      onNodesChange={onNodesChange}
+
       fitView
       snapGrid={[20, 20]}
       minZoom={0.05}
@@ -207,7 +233,6 @@ export const FlowEditor = ({ onInit }: FlowEditorProps) => {
       multiSelectionKeyCode={["Shift", "Control"]}
       deleteKeyCode={["Delete", "Backspace"]}
       disableKeyboardA11y={false}
-      // onNodesChange={onNodesChange}
       // onNodesDelete={n => n.forEach((node: any) => onDeleteNode(node.id))}
       // onEdgesChange={onEdgesChange}
       // onEdgeUpdate={onEdgeUpdate}
@@ -219,7 +244,6 @@ export const FlowEditor = ({ onInit }: FlowEditorProps) => {
       // onDragOver={onDragOver}
       onlyRenderVisibleElements={true}
       attributionPosition="bottom-left"
-      onInit={onInit}
     >
       <Background variant={BackgroundVariant.Dots} />
       <Controls showZoom={false} showInteractive={false} className="text-foreground hover:bg-primary hover:text-accent"/>

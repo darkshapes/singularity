@@ -13,7 +13,7 @@ import {
 interface NodePickerGroupProps {
   category: string;
   items: NodePickerGroupItems;
-  setActiveItem: (nodeItem: {name: string; w: NodeFunction; } | null) => void;
+  setActiveItem: (nodeItem: {name: string; fn: NodeFunction; } | null) => void;
   expandedItems: string[];
   setExpandedItems: (items: string[]) => void;
 }
@@ -48,7 +48,7 @@ const NodePickerGroupComponent = ({
             <NodeFunctionPickerButton 
               key={name}
               name={name}
-              w={e}
+              fn={e}
               setActiveItem={setActiveItem}
             />
           ))}

@@ -1,16 +1,17 @@
 import { createStore } from 'zustand';
-import { Edge, Node, ReactFlowInstance, ReactFlowJsonObject, OnConnect, OnEdgesChange, OnNodesChange } from "reactflow";
+import { Edge, ReactFlowInstance, ReactFlowJsonObject, OnConnect, OnEdgesChange, OnNodesChange } from "reactflow";
 import type {
+  AppEdge,
+  AppNode,
   EdgeType,
+  NodeData,
   NodeFunction,
   NodeFunctionKey,
   NodeId,
   NodeInProgress,
   NodeItem,
   PropertyKey,
-  NodeData,
 } from "@/types";
-import { createAppStore } from "@/store";
 
 export type OnPropChange = (
   id: NodeId,
@@ -20,22 +21,35 @@ export type OnPropChange = (
 
 export type AppInstance = ReactFlowInstance<NodeData>;
 
-export interface AppState extends AppInstance {
-  page?: string;
-  counter: number;
+type MethodKeys<T> = {
+  [K in keyof T]: T[K] extends Function ? K : never;
+}[keyof T];
+
+export type AppInstanceMethodKeys = MethodKeys<AppInstance>;
+
+export type AppState = {
+  instance?: AppInstance;
+  setInstance: (instance: ReactFlowInstance) => void;
+
   functions: Record<NodeFunctionKey, NodeFunction>;
   results: Record<NodeId, any>;
+
+  nodes: AppNode[];
+  edges: Edge[];
+
   edgeType: EdgeType;
   nodeInProgress?: NodeInProgress;
   promptError?: string;
   clientId?: string;
   
-  initialize: () => Promise<void>;
+  initialize: (instance: AppInstance) => Promise<void>;
 
-  onSetPage: (value: string) => void;
-  onNewClientId: (id: string) => void;
+  constructNode: (item: NodeItem) => AppNode;
+
   onError: (error: string) => Promise<void>;
   onRefresh: () => Promise<void>;
+
+  onNewClientId: (id: string) => void;
 
   onCreateGroup: () => void;
   onSetNodesGroup: (childIds: NodeId[], groupNode: Node) => void;
@@ -75,6 +89,8 @@ export interface AppState extends AppInstance {
   onUpdateLocalWorkFlowTitle: (id: string, title: string) => void;
   onLoadWorkflow: (persisted: any) => void;
   onDownloadWorkflow: () => void;
-}
-
-export type AppStore = ReturnType<typeof createAppStore>;
+} & {
+  [K in AppInstanceMethodKeys]: AppInstance[K] extends (...args: infer P) => infer R
+    ? (...args: P) => R | undefined
+    : never;
+};

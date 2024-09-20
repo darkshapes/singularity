@@ -1,4 +1,4 @@
-import { XYPosition } from "reactflow";
+import { Node, XYPosition } from "reactflow";
 import { NodeId, PropertyKey, NodeFunctionKey } from "@/types";
 import { NodeFunction } from "@/types/function";
 
@@ -22,36 +22,34 @@ export interface NodeModifyData {
 
 /**
  * Instantiated node data
- * @property widget - Widget key
+ * @property fkey - Function key (equivalent to designated name)
  * @property fields - Property fields
  * @property modify - Modify properties
  */
 export interface NodeData {
-  function: NodeFunctionKey;
+  fkey: NodeFunctionKey;
   fields: Record<PropertyKey, any>;
   modify?: NodeModifyData;
 }
 
 /**
  * Node object
- * @property widget - Widget object
  * @property name - Name
+ * @property fn - Node function object
  * @property node - Instantiated node object
  * @property position - Node position
  * @property key - Node key
  * @property width - Node width
  * @property height - Node height
- * @property parentNode - Parent node ID
  */
 export interface NodeItem {
-  function: NodeFunction;
   name: string;
-  node?: NodeData;
+  fn: NodeFunction;
+  data?: NodeData;
   position?: XYPosition;
   key?: string;
   width?: number;
   height?: number;
-  parentNode?: string;
 }
 
 /**
@@ -63,3 +61,5 @@ export interface NodeInProgress {
   id: NodeId;
   progress: number;
 }
+
+export type AppNode = Node<NodeData>;

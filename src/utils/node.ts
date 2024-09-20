@@ -1,5 +1,4 @@
-import { AppState } from "@/app/store";
-import { NodeItem, NodePosition, SDNode } from "@/types";
+import { AppState, NodeItem, NodePosition, NodeData } from "@/types";
 import { Node, ReactFlowJsonObject, applyNodeChanges } from "reactflow";
 import { v4 as uuid } from "uuid";
 
@@ -19,14 +18,13 @@ import { v4 as uuid } from "uuid";
 export const addNode = (
   state: AppState,
   {
-    widget,
     name,
-    node,
+    fn,
+    data,
     position = { x: 0, y: 0 },
     width,
     height,
     key,
-    parentNode,
   }: NodeItem
 ): AppState => {
   // Generate the node's unique identifier
@@ -42,18 +40,17 @@ export const addNode = (
   const item: Node = {
     id,
     type: name,
-    data: { ...widget, ...(node?.modify ?? {}) },
+    data: { ...fn, ...(data?.modify ?? {}) },
     dragHandle: ".drag-handle",
     position,
     zIndex,
     width,
     height,
-    parentNode,
     style: { width, height },
   };
 
-  const widgetNode: SDNode = {
-    widget: name,
+  const instantiatedNode: NodeData = {
+    fkey: name,
     fields: {},
   }
 
@@ -61,7 +58,7 @@ export const addNode = (
   return {
     ...state,
     nodes: applyNodeChanges([{ type: "add", item }], state.nodes),
-    graph: { ...state.graph, [id]: node ?? widgetNode },
+    graph: { ...state.graph, [id]: data ?? instantiatedNode },
   };
 };
 

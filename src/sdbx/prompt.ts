@@ -33,10 +33,10 @@ export const createPrompt = ({
     directed: true,
     multigraph: true,
     graph: {},
-    nodes: state.getNodes().map((node) => {
+    nodes: state.nodes.map((node) => {
       const id = node.id;
 
-      const fn = state.functions[node.data.function];
+      const fn = state.functions[node.data.fkey];
       const fname = fn.fname;
   
       const outputs = Object.keys(fn.outputs);
@@ -60,7 +60,7 @@ export const createPrompt = ({
         widget_inputs,
       }
     }),
-    links: state.getEdges().map((edge, index: number) => {
+    links: state.getEdges()!.map((edge, index: number) => {
       const key = index.toString();
 
       const source = edge.source;
@@ -69,8 +69,8 @@ export const createPrompt = ({
       // console.log(source);
       // console.log(target);
 
-      const sourceNode = state.functions[state.getNode(source)?.data.function!];
-      const targetNode = state.functions[state.getNode(target)?.data.function!];
+      const sourceNode = state.functions[state.getNode(source)?.data.fkey!];
+      const targetNode = state.functions[state.getNode(target)?.data.fkey!];
 
       // console.log(sourceNode);
       // console.log(targetNode);
