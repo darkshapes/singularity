@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Edge, Node, useReactFlow } from "reactflow";
+import { Edge, Node, useReactFlow } from "@xyflow/react";
 
 type UseUndoRedoOptions = {
   maxHistorySize: number;

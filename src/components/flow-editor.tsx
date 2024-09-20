@@ -1,4 +1,4 @@
-import "reactflow/dist/style.css";
+import "@xyflow/react/dist/style.css";
 
 import React, {
   useCallback,
@@ -7,7 +7,9 @@ import React, {
   useRef,
   useState,
 } from "react";
-import ReactFlow, {
+import {
+  ReactFlow,
+
   applyNodeChanges,
   Background,
   BackgroundVariant,
@@ -15,12 +17,11 @@ import ReactFlow, {
   Controls,
   MiniMap,
   NodeChange,
-  NodeDragHandler,
   NodeProps,
 
   type Node,
   type Edge,
-} from "reactflow";
+} from "@xyflow/react";
 import { debounce } from "lodash-es";
 import { useShallow } from "zustand/react/shallow";
 
@@ -56,7 +57,9 @@ export const FlowEditor = () => {
     edges,
 
     onNodesChange,
-  } = useAppStore((s) => ({ 
+
+    theme,
+  } = useAppStore(useShallow((s) => ({ 
     initialize: s.initialize,
 
     functions: s.functions,
@@ -65,7 +68,9 @@ export const FlowEditor = () => {
     edges: s.edges,
 
     onNodesChange: s.onNodesChange,
-  }));
+
+    theme: s.theme,
+  })));
   // const {
   //   functions,
   //   onNodesChange,
@@ -223,6 +228,17 @@ export const FlowEditor = () => {
       nodeTypes={nodeTypes}
 
       onNodesChange={onNodesChange}
+      // onNodesDelete={n => n.forEach((node: any) => onDeleteNode(node.id))}
+      // onEdgesChange={onEdgesChange}
+      // onEdgeUpdate={onEdgeUpdate}
+      // onEdgeUpdateStart={onEdgeUpdateStart}
+      // onEdgeUpdateEnd={onEdgeUpdateEnd}
+      // onConnect={onConnect}
+      // onNodeDragStart={onNodeDrag}
+      // onDrop={onDrop}
+      // onDragOver={onDragOver}
+
+      colorMode={theme}
 
       fitView
       snapGrid={[20, 20]}
@@ -233,15 +249,6 @@ export const FlowEditor = () => {
       multiSelectionKeyCode={["Shift", "Control"]}
       deleteKeyCode={["Delete", "Backspace"]}
       disableKeyboardA11y={false}
-      // onNodesDelete={n => n.forEach((node: any) => onDeleteNode(node.id))}
-      // onEdgesChange={onEdgesChange}
-      // onEdgeUpdate={onEdgeUpdate}
-      // onEdgeUpdateStart={onEdgeUpdateStart}
-      // onEdgeUpdateEnd={onEdgeUpdateEnd}
-      // onConnect={onConnect}
-      // onNodeDragStart={onNodeDrag}
-      // onDrop={onDrop}
-      // onDragOver={onDragOver}
       onlyRenderVisibleElements={true}
       attributionPosition="bottom-left"
     >
@@ -249,10 +256,10 @@ export const FlowEditor = () => {
       <Controls showZoom={false} showInteractive={false} className="text-foreground hover:bg-primary hover:text-accent"/>
       <MiniMap
         position="bottom-left"
-        nodeColor={(n) =>
-          // n.data.color || (theme === "light" ? "#3C4C63" : "#2C3E50")
-          n.data.color || "#2C3E50"
-        }
+        // nodeColor={(n) =>
+        //   // n.data.color || (theme === "light" ? "#3C4C63" : "#2C3E50")
+        //   n.data.color || "#2C3E50"
+        // }
         style={{ width: 150, height: 100 }}
       />
     </ReactFlow>

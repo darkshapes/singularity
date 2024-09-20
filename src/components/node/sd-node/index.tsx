@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Node, NodeProps, useUpdateNodeInternals } from "reactflow";
+import { Node, NodeProps, useUpdateNodeInternals } from "@xyflow/react";
 import { useShallow } from "zustand/react/shallow";
 
 import { NodeDataDisplay } from "./node-data-display";

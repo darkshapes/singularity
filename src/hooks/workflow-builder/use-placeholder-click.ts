@@ -1,4 +1,4 @@
-import { NodeProps, useReactFlow } from "reactflow";
+import { NodeProps, useReactFlow } from "@xyflow/react";
 import { v4 as uuid } from "uuid";
 
 // this hook implements the logic for clicking a placeholder node

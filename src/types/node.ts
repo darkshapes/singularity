@@ -1,4 +1,4 @@
-import { Node, XYPosition } from "reactflow";
+import { Node, XYPosition } from "@xyflow/react";
 import { NodeId, PropertyKey, NodeFunctionKey } from "@/types";
 import { NodeFunction } from "@/types/function";
 

@@ -1,4 +1,4 @@
-import { Position } from "reactflow";
+import { Position } from "@xyflow/react";
 import styled, { css } from "styled-components";
 
 export const GroupCard = styled.div<{ active: 1 | 0; title?: React.ReactNode }>`

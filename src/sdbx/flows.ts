@@ -1,4 +1,4 @@
-import type { ReactFlowJsonObject } from "reactflow";
+import type { ReactFlowJsonObject } from "@xyflow/react";
 
 import config from "@/config";
 

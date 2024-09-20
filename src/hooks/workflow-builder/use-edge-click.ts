@@ -1,4 +1,4 @@
-import { EdgeProps, useReactFlow } from "reactflow";
+import { EdgeProps, useReactFlow } from "@xyflow/react";
 import { v4 as uuid } from "uuid";
 
 // this hook implements the logic for clicking the button on a workflow edge

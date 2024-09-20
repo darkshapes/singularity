@@ -1,7 +1,7 @@
 import React from "react";
 import { WidgetInputNecessity } from "@/types";
 import { NodeHandle } from "@/components/node/sd-node/node-handle";
-import { Position } from "reactflow";
+import { Position } from "@xyflow/react";
 import { InputParams } from "./input-param";
 
 interface NodeParamsProps {

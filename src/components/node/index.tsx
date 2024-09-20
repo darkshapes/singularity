@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useShallow } from "zustand/react/shallow";
-import { NodeResizer, type NodeProps } from "reactflow";
+import { NodeResizer, type NodeProps } from "@xyflow/react";
 
 import { useAppStore } from "@/store";
 import { NodeFunction } from "@/types";

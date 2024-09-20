@@ -8,7 +8,7 @@ import {
   SimulationNodeDatum,
   SimulationLinkDatum,
 } from "d3-force";
-import { useReactFlow, ReactFlowState, useStore, Node } from "reactflow";
+import { useReactFlow, ReactFlowState, useStore, Node } from "@xyflow/react";
 
 type UseForceLayoutOptions = {
   strength: number;

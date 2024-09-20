@@ -1,4 +1,4 @@
-import { NodeProps, NodeResizeControl, ResizeControlVariant } from "reactflow";
+import { NodeProps, NodeResizeControl, ResizeControlVariant } from "@xyflow/react";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 

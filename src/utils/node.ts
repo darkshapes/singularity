@@ -1,5 +1,5 @@
 import { AppState, NodeItem, NodePosition, NodeData } from "@/types";
-import { Node, ReactFlowJsonObject, applyNodeChanges } from "reactflow";
+import { Node, ReactFlowJsonObject, applyNodeChanges } from "@xyflow/react";
 import { v4 as uuid } from "uuid";
 
 /**

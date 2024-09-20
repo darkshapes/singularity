@@ -1,4 +1,4 @@
-import { Edge, Node, ReactFlowInstance, ReactFlowJsonObject, applyEdgeChanges, applyNodeChanges } from "reactflow";
+import { Edge, Node, ReactFlowInstance, ReactFlowJsonObject, applyEdgeChanges, applyNodeChanges } from "@xyflow/react";
 import { v4 as uuid } from "uuid";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
@@ -40,6 +40,8 @@ export const useAppStore = create<AppState>()(
 
       nodes: [],
       edges: [],
+
+      theme: "dark",
 
       edgeType: defaultEdge,
       nodeInProgress: undefined,

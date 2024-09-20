@@ -1,7 +1,7 @@
 import { AppState } from "@/app/store";
 import { Connection } from "@/types";
-import { Connection as FlowConnection } from "reactflow";
-import { addEdge } from "reactflow";
+import { Connection as FlowConnection } from "@xyflow/react";
+import { addEdge } from "@xyflow/react";
 
 /**
  * @title Add Connection

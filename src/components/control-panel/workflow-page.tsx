@@ -2,7 +2,7 @@ import { useAppStore } from "@/store";
 import { getFlowTree } from "@/sdbx";
 
 import React, { useCallback, useEffect, useState } from "react";
-import type { ReactFlowJsonObject } from "reactflow";
+import type { ReactFlowJsonObject } from "@xyflow/react";
 import { useShallow } from "zustand/react/shallow";
 import { toast } from "sonner";
 import { Tree } from "react-arborist";

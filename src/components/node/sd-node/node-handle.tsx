@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Connection, Handle, HandleType, Node, Position } from "reactflow";
+import { Connection, Handle, HandleType, Node, Position } from "@xyflow/react";
 import { isArray, startCase } from "lodash-es";
 import { useShallow } from "zustand/react/shallow";
 

@@ -1,5 +1,5 @@
 import { createStore } from 'zustand';
-import { Edge, ReactFlowInstance, ReactFlowJsonObject, OnConnect, OnEdgesChange, OnNodesChange } from "reactflow";
+import { Edge, ReactFlowInstance, ReactFlowJsonObject, OnConnect, OnEdgesChange, OnNodesChange } from "@xyflow/react";
 import type {
   AppEdge,
   AppNode,
@@ -36,6 +36,8 @@ export type AppState = {
 
   nodes: AppNode[];
   edges: Edge[];
+
+  theme: "system" | "light" | "dark";
 
   edgeType: EdgeType;
   nodeInProgress?: NodeInProgress;
