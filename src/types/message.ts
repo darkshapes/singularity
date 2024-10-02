@@ -1,4 +1,4 @@
-import { NodeId } from "./base";
+import { NodeId } from ".";
 
 export interface MessageType {
   status: { status: { exec_info: { queue_remaining: number } }; sid?: string };

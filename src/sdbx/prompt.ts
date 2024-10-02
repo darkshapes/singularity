@@ -1,6 +1,6 @@
 import config from "@/config";
 
-import type { AppState, Graph } from "@/types";
+import type { Graph } from "@/types";
 
 type PromptResult =
   | { error: string; task_id?: never }
@@ -22,74 +22,6 @@ export const sendPrompt = async (
   // TODO: error handling here
   // return response.status !== 200 ? await response.text() : undefined;
   return await response.json();
-};
-
-export const createPrompt = ({
-  state,
-}: {
-  state: AppState;
-}): Graph => {
-  const multigraph: Graph = {
-    directed: true,
-    multigraph: true,
-    graph: {},
-    nodes: state.nodes.map((node) => {
-      const id = node.id;
-
-      const fn = state.functions[node.type!];
-      const fname = node.data.fn.fname;
-  
-      const outputs = Object.keys(fn.outputs);
-
-      const inputs = Object.values(fn.inputs.required).map(n => n.fname);
-      console.log(node.data);
-      const widget_inputs = Object.keys(fn.inputs.optional).reduce((a, v) => (
-        { 
-          ...a, 
-          [fn.inputs.optional[v].fname]: node.data.fields[v]
-        }
-      ), {}) 
-
-      // console.log(widget_inputs);
-      // console.log(node);
-      
-      return {
-        id,
-        fname,
-        outputs,
-        inputs,
-        widget_inputs,
-      }
-    }),
-    links: state.getEdges()!.map((edge, index: number) => {
-      const key = index.toString();
-
-      const source = edge.source;
-      const target = edge.target;
-
-      // console.log(source);
-      // console.log(target);
-
-      const sourceNode = state.functions[state.getNode(source)?.type!];
-      const targetNode = state.functions[state.getNode(target)?.type!];
-
-      // console.log(sourceNode);
-      // console.log(targetNode);
-
-      const sourceHandle = Object.keys(sourceNode.outputs).findIndex(n => n === edge.sourceHandle);
-      const targetHandle = targetNode.inputs.required[edge.targetHandle!].fname;
-
-      return {
-        source,
-        target,
-        source_handle: sourceHandle,
-        target_handle: targetHandle,
-        key,
-      }
-    })
-  };
-
-  return multigraph;
 };
 
 type TaskSubscriptionResult = { task_id: string; }

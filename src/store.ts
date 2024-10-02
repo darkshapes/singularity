@@ -1,11 +1,10 @@
-import { Connection, Edge, Node, ReactFlowInstance, ReactFlowJsonObject, addEdge, applyEdgeChanges, applyNodeChanges } from "@xyflow/react";
+import { ReactFlowInstance, addEdge, applyEdgeChanges, applyNodeChanges } from "@xyflow/react";
 import { v4 as uuid } from "uuid";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
 import {
   readyServer,
-  createPrompt,
   getNodeFunctions,
   sendPrompt,
   subscribeToTask,
@@ -71,10 +70,7 @@ export const useAppStore = create<AppState>()(
         id ??= uuid();
         fields = fn.inputs.optional
 
-        const zIndex = nodes
-                        .map((n) => n.zIndex ?? 0)
-                        .concat([0])
-                        .reduce((a, b) => Math.max(a, b)) + 1;
+        const zIndex = Math.max(...nodes.map(n => n.zIndex ?? 0), 0) + 1;
         
         const item: AppNode = {
           id,
@@ -112,8 +108,65 @@ export const useAppStore = create<AppState>()(
       deleteElements: createInstanceMethod('deleteElements'),
 
       toObject: createInstanceMethod('toObject'),
+      toNetworkX: () => {
+        const { functions, nodes, edges, getNode } = get();
+
+        return {
+          directed: true,
+          multigraph: true,
+          graph: {},
+          nodes: nodes.map((node) => {
+            const id = node.id;
+      
+            const fn = functions[node.type!];
+            const fname = node.data.fn.fname;
+        
+            const outputs = Object.keys(fn.outputs);
+      
+            const inputs = Object.values(fn.inputs.required).map(n => n.fname);
+            const widget_inputs = Object.keys(fn.inputs.optional).reduce((a, v) => (
+              { 
+                ...a, 
+                [fn.inputs.optional[v].fname]: node.data.fields[v]
+              }
+            ), {}) 
+      
+            // console.log(widget_inputs);
+            // console.log(node);
+            
+            return {
+              id,
+              fname,
+              outputs,
+              inputs,
+              widget_inputs,
+            }
+          }),
+          links: edges.map((edge, index: number) => {
+            const key = index.toString();
+      
+            const source = edge.source;
+            const target = edge.target;
+      
+            const sourceNode = functions[getNode(source)?.type!];
+            const targetNode = functions[getNode(target)?.type!];
+      
+            const sourceHandle = Object.keys(sourceNode.outputs).findIndex(n => n === edge.sourceHandle);
+            const targetHandle = targetNode.inputs.required[edge.targetHandle!].fname;
+      
+            return {
+              source,
+              target,
+              source_handle: sourceHandle,
+              target_handle: targetHandle,
+              key,
+            }
+          })
+        }
+      },
 
       onNodesChange: (changes) => {
+        // https://reactflow.dev/api-reference/utils/apply-node-changes
         set(
           (st) => ({ nodes: applyNodeChanges(changes, st.nodes) }),
           false,
@@ -122,6 +175,7 @@ export const useAppStore = create<AppState>()(
       },
 
       onEdgesChange: (changes) => {
+        // https://reactflow.dev/api-reference/utils/apply-edge-changes
         set(
           (st) => ({ edges: applyEdgeChanges(changes, st.edges) }),
           false,
@@ -133,6 +187,7 @@ export const useAppStore = create<AppState>()(
         const oneConnectionPerInput: (item: AppEdge) => boolean = (item) => 
           !(item.targetHandle === connection.targetHandle && item.target === connection.target);
 
+        // https://reactflow.dev/api-reference/utils/add-edge
         set(
           (st) => ({ edges: addEdge(connection, st.edges.filter(oneConnectionPerInput)) }),
           false,
@@ -437,16 +492,14 @@ export const useAppStore = create<AppState>()(
   
       onSubmit: async () => {
         const state = get();
-        const res = await sendPrompt(
-          createPrompt({ state })
-        );
+        const res = await sendPrompt(state.toNetworkX());
         if (res.task_id) {
           subscribeToTask(res.task_id, state.onTaskUpdate);
-          set(
-            { counter: state.counter + 1 },
-            false,
-            "onSubmit"
-          );
+          // set(
+          //   { counter: state.counter + 1 },
+          //   false,
+          //   "onSubmit"
+          // );
         } else {
           state.onError(res.error ?? "Server didn't report an error. Please check server logs.");
         }

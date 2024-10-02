@@ -4,6 +4,7 @@ import type {
   AppEdge,
   AppNode,
   EdgeType,
+  Graph,
   NodeConstructor,
   NodeFunction,
   NodeFunctionKey,
@@ -47,6 +48,8 @@ export type AppState = {
   initialize: (instance: AppInstance) => Promise<void>;
 
   constructNode: (item: NodeConstructor) => AppNode;
+
+  toNetworkX: () => Graph;
 
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
