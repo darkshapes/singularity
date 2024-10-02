@@ -48,9 +48,6 @@ export const NodeHandle = ({
       const sourceType = sourceNode.data.fn.outputs[String(connection.sourceHandle)].type;
       
       return targetType === sourceType;
-      // } catch {
-        // return true;
-      // }
     },
     [nodes]
   );

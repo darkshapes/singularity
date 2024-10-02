@@ -1,4 +1,4 @@
-import { Edge, Node, ReactFlowInstance, ReactFlowJsonObject, applyEdgeChanges, applyNodeChanges } from "@xyflow/react";
+import { Connection, Edge, Node, ReactFlowInstance, ReactFlowJsonObject, addEdge, applyEdgeChanges, applyNodeChanges } from "@xyflow/react";
 import { v4 as uuid } from "uuid";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
@@ -10,16 +10,16 @@ import {
   sendPrompt,
   subscribeToTask,
 } from "@/sdbx";
-import { Connection, edgeTypeList, defaultEdge } from "@/types";
+import { AppNode, AppEdge, edgeTypeList, defaultEdge } from "@/types";
 import { AppState, AppInstance, AppInstanceMethodKeys } from "@/types/store";
-import {
-  addConnection,
-  addNode,
-  copyConnections,
-  copyNodes,
-  getTopLeftPoint,
-  updateNode,
-} from "@/utils";
+// import {
+//   addConnection,
+//   addNode,
+//   copyConnections,
+//   copyNodes,
+//   getTopLeftPoint,
+//   updateNode,
+// } from "@/utils";
 
 export const useAppStore = create<AppState>()(
   devtools((set, get) => {
@@ -121,6 +121,25 @@ export const useAppStore = create<AppState>()(
           (st) => ({ nodes: applyNodeChanges(changes, st.nodes) }),
           false,
           "onNodesChange"
+        );
+      },
+
+      onEdgesChange: (changes) => {
+        set(
+          (st) => ({ edges: applyEdgeChanges(changes, st.edges) }),
+          false,
+          "onEdgesChange"
+        );
+      },
+
+      onConnect: (connection) => {
+        const oneConnectionPerInput: (item: AppEdge) => boolean = (item) => 
+          !(item.targetHandle === connection.targetHandle && item.target === connection.target);
+
+        set(
+          (st) => ({ edges: addEdge(connection, st.edges.filter(oneConnectionPerInput)) }),
+          false,
+          "onConnect"
         );
       },
       
@@ -383,14 +402,6 @@ export const useAppStore = create<AppState>()(
        *********************** Edges *************************
        ******************************************************/
   
-      onEdgesChange: (changes) => {
-        // set(
-        //   (st) => ({ edges: applyEdgeChanges(changes, st.edges) }),
-        //   false,
-        //   "onEdgesChange"
-        // );
-      },
-  
       onEdgesAnimate: (animated) => {
         // set(
         //   (st) => ({
@@ -421,14 +432,6 @@ export const useAppStore = create<AppState>()(
         //   "onEdgesType"
         // );
         // if (send) await sendSetting("Comfy.LinkRenderMode", edgeTypeList.indexOf(edgeType));
-      },
-  
-      /******************************************************
-       ********************* Connection ***********************
-       ******************************************************/
-      onConnect: (connection) => {
-        console.log("onConnect", connection);
-        set((st) => addConnection(st, connection), false, "onConnect");
       },
   
       /******************************************************

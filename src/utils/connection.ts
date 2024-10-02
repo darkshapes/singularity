@@ -1,6 +1,5 @@
 import { AppState } from "@/app/store";
-import { Connection } from "@/types";
-import { Connection as FlowConnection } from "@xyflow/react";
+import { Connection } from "@xyflow/react";
 import { addEdge } from "@xyflow/react";
 
 /**
@@ -11,19 +10,19 @@ import { addEdge } from "@xyflow/react";
  */
 export const addConnection = (
   state: AppState,
-  connection: FlowConnection
+  connection: Connection
 ): AppState => {
   const { edges } = state;
   const { targetHandle, target } = connection;
+
+  const oneConnectionPerInput: (item: Connection) => boolean = (item) => 
+    !(item.targetHandle === connection.targetHandle && item.target === connection.target);
 
   return {
     ...state,
     edges: addEdge(
       connection,
-      edges.filter(
-        (item) =>
-          !(item.targetHandle === targetHandle && item.target === target)
-      )
+      edges.filter(oneConnectionPerInput)
     ),
   };
 };

@@ -25,11 +25,11 @@ import { useShallow } from "zustand/react/shallow";
 
 import { useAppStore } from "@/store";
 
-import { getPostion, getPostionCenter } from "@/utils";
+// import { getPostion, getPostionCenter } from "@/utils";
 
-import { Node as RenderableNode } from "@/components/node";
+import { Node as NodeComponent } from "@/components/node";
 
-import { AppInstance } from "@/types";
+import { AppInstance, AppNode } from "@/types";
 
 import useUndoRedo from "@/hooks/use-undo-redo";
 
@@ -55,6 +55,8 @@ export const FlowEditor = () => {
     edges,
 
     onNodesChange,
+    onEdgesChange,
+    onConnect,
 
     theme,
   } = useAppStore(useShallow((s) => ({ 
@@ -66,6 +68,8 @@ export const FlowEditor = () => {
     edges: s.edges,
 
     onNodesChange: s.onNodesChange,
+    onEdgesChange: s.onEdgesChange,
+    onConnect: s.onConnect,
 
     theme: s.theme,
   })));
@@ -100,9 +104,9 @@ export const FlowEditor = () => {
 
   const nodeTypes = useMemo(() => 
     Object.keys(functions).reduce((acc, name) => {
-      acc[name] = RenderableNode;
+      acc[name] = NodeComponent;
       return acc;
-    }, {} as Record<string, React.FC<NodeProps>>), 
+    }, {} as Record<string, React.FC<NodeProps<AppNode>>>), 
   [functions])
 
   // const onEdgeUpdateStart = useCallback(() => {
@@ -226,12 +230,13 @@ export const FlowEditor = () => {
       nodeTypes={nodeTypes}
 
       onNodesChange={onNodesChange}
+      onEdgesChange={onEdgesChange}
       // onNodesDelete={n => n.forEach((node: any) => onDeleteNode(node.id))}
       // onEdgesChange={onEdgesChange}
       // onEdgeUpdate={onEdgeUpdate}
       // onEdgeUpdateStart={onEdgeUpdateStart}
       // onEdgeUpdateEnd={onEdgeUpdateEnd}
-      // onConnect={onConnect}
+      onConnect={onConnect}
       // onNodeDragStart={onNodeDrag}
       // onDrop={onDrop}
       // onDragOver={onDragOver}

@@ -34,7 +34,7 @@ export type AppState = {
   results: Record<NodeId, any>;
 
   nodes: AppNode[];
-  edges: Edge[];
+  edges: AppEdge[];
 
   theme: "dark" | "light";
   toggleTheme: () => void; 
@@ -48,6 +48,10 @@ export type AppState = {
 
   constructNode: (item: NodeData) => AppNode;
 
+  onNodesChange: OnNodesChange;
+  onEdgesChange: OnEdgesChange;
+  onConnect: OnConnect;
+
   onError: (error: string) => Promise<void>;
   onRefresh: () => Promise<void>;
 
@@ -57,7 +61,6 @@ export type AppState = {
   onSetNodesGroup: (childIds: NodeId[], groupNode: Node) => void;
   onDetachNodesGroup: (childIds: NodeId[], groupNode: Node) => void;
   onDetachGroup: (node: Node) => Node;
-  onNodesChange: OnNodesChange;
   onDuplicateNode: (id: NodeId) => void;
   onNodeInProgress: (id: NodeId, progress: number) => void;
   onPropChange: OnPropChange;
@@ -71,13 +74,10 @@ export type AppState = {
   expanded: string[];
   onExpand: (id?: string) => void;
 
-  onEdgesChange: OnEdgesChange;
   onEdgesAnimate: (animated: boolean) => void;
 
   onUpdateFrontend: () => Promise<void>;
   onEdgesType: (type: EdgeType, send?: boolean) => Promise<void>;
-
-  onConnect: OnConnect;
 
   onSubmit: () => Promise<void>;
   onTaskUpdate: (update: any) => void;

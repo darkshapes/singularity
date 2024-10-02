@@ -1,4 +1,4 @@
-import { PropertyKey } from "./base";
+import { PropertyKey } from ".";
 import { InputData } from "./input";
 import { OutputData } from "./output";
 
