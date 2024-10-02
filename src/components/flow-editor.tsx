@@ -25,8 +25,6 @@ import { useShallow } from "zustand/react/shallow";
 
 import { useAppStore } from "@/store";
 
-// import { getPostion, getPostionCenter } from "@/utils";
-
 import { Node as NodeComponent } from "@/components/node";
 
 import { AppInstance, AppNode } from "@/types";

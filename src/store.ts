@@ -12,14 +12,6 @@ import {
 } from "@/sdbx";
 import { AppNode, AppEdge, edgeTypeList, defaultEdge } from "@/types";
 import { AppState, AppInstance, AppInstanceMethodKeys } from "@/types/store";
-// import {
-//   addConnection,
-//   addNode,
-//   copyConnections,
-//   copyNodes,
-//   getTopLeftPoint,
-//   updateNode,
-// } from "@/utils";
 
 export const useAppStore = create<AppState>()(
   devtools((set, get) => {
