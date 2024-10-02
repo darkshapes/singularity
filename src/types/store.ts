@@ -4,7 +4,7 @@ import type {
   AppEdge,
   AppNode,
   EdgeType,
-  NodeData,
+  NodeConstructor,
   NodeFunction,
   NodeFunctionKey,
   NodeId,
@@ -46,7 +46,7 @@ export type AppState = {
   
   initialize: (instance: AppInstance) => Promise<void>;
 
-  constructNode: (item: NodeData) => AppNode;
+  constructNode: (item: NodeConstructor) => AppNode;
 
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;

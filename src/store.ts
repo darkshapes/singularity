@@ -65,27 +65,32 @@ export const useAppStore = create<AppState>()(
       setInstance: (instance) => set({ instance }),
 
       constructNode: ({
+        id,
         name,
         fn,
+        fields,
+        modify,
         position = { x: 0, y: 0 },
         width,
         height,
-        key,
       }) => {
         const { nodes } = get();
 
-        const id = String(key ?? uuid());
+        id ??= uuid();
+        fields = fn.inputs.optional
 
         const zIndex = nodes
                         .map((n) => n.zIndex ?? 0)
                         .concat([0])
                         .reduce((a, b) => Math.max(a, b)) + 1;
         
-        const item: Node = {
+        const item: AppNode = {
           id,
           type: name,
           data: {
-            fn
+            fn,
+            fields,
+            modify,
           },
           dragHandle: ".drag-handle",
           position,

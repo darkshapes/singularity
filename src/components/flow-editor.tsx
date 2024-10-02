@@ -103,10 +103,10 @@ export const FlowEditor = () => {
   // );
 
   const nodeTypes = useMemo(() => 
-    Object.keys(functions).reduce((acc, name) => {
-      acc[name] = NodeComponent;
-      return acc;
-    }, {} as Record<string, React.FC<NodeProps<AppNode>>>), 
+    Object.keys(functions).reduce((acc, name) => ({
+      ...acc,
+      [name]: NodeComponent,
+    }), {} as Record<string, React.FC<NodeProps<AppNode>>>), 
   [functions])
 
   // const onEdgeUpdateStart = useCallback(() => {
@@ -231,12 +231,12 @@ export const FlowEditor = () => {
 
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
+      onConnect={onConnect}
+
       // onNodesDelete={n => n.forEach((node: any) => onDeleteNode(node.id))}
-      // onEdgesChange={onEdgesChange}
       // onEdgeUpdate={onEdgeUpdate}
       // onEdgeUpdateStart={onEdgeUpdateStart}
       // onEdgeUpdateEnd={onEdgeUpdateEnd}
-      onConnect={onConnect}
       // onNodeDragStart={onNodeDrag}
       // onDrop={onDrop}
       // onDragOver={onDragOver}

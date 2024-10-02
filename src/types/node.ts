@@ -13,17 +13,19 @@ export type NodeModifyData = {
 }
 
 /**
- * Instantiated node data
+ * Node object
+ * @property fn - Node function object
  * @property fields - Property fields
  * @property modify - Modify properties
  */
-export type InstantiatedNodeData = {
+export type NodeData = {
+  fn: NodeFunction;
   fields: Record<PropertyKey, any>;
   modify?: NodeModifyData;
 }
 
 /**
- * Node object
+ * Node construction
  * @property name - Name
  * @property fn - Node function object
  * @property node - Instantiated node object
@@ -32,14 +34,13 @@ export type InstantiatedNodeData = {
  * @property width - Node width
  * @property height - Node height
  */
-export type NodeData = {
+export type NodeConstructor = {
+  id?: string;
   name: string;
-  fn: NodeFunction;
   position?: XYPosition;
-  key?: string;
   width?: number;
   height?: number;
-} & InstantiatedNodeData;
+} & NodeData;
 
 /**
  * Node execution progress object

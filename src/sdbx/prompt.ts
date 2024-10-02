@@ -42,6 +42,7 @@ export const createPrompt = ({
       const outputs = Object.keys(fn.outputs);
 
       const inputs = Object.values(fn.inputs.required).map(n => n.fname);
+      console.log(node.data);
       const widget_inputs = Object.keys(fn.inputs.optional).reduce((a, v) => (
         { 
           ...a, 
@@ -69,8 +70,8 @@ export const createPrompt = ({
       // console.log(source);
       // console.log(target);
 
-      const sourceNode = state.functions[state.getNode(source)?.data.fkey!];
-      const targetNode = state.functions[state.getNode(target)?.data.fkey!];
+      const sourceNode = state.functions[state.getNode(source)?.type!];
+      const targetNode = state.functions[state.getNode(target)?.type!];
 
       // console.log(sourceNode);
       // console.log(targetNode);
