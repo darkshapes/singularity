@@ -1,7 +1,7 @@
 import { ReactFlowInstance, addEdge, applyEdgeChanges, applyNodeChanges } from "@xyflow/react";
 import { v4 as uuid } from "uuid";
 import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { devtools, persist } from "zustand/middleware";
 
 import {
   readyServer,
@@ -13,7 +13,7 @@ import { AppNode, AppEdge, edgeTypeList, defaultEdge } from "@/types";
 import { AppState, AppInstance, AppInstanceMethodKeys } from "@/types/store";
 
 export const useAppStore = create<AppState>()(
-  devtools((set, get) => {
+  persist(devtools((set, get) => {
     const createInstanceMethod = <T extends AppInstanceMethodKeys>(methodName: T) => {
       return (...args: Parameters<ReactFlowInstance[T]>): ReturnType<ReactFlowInstance[T]> | undefined => {
         const { instance } = get();
@@ -621,5 +621,9 @@ export const useAppStore = create<AppState>()(
       onDownloadWorkflow: () => {
         // writeWorkflowToFile(toPersisted(get()));
       },
-    }})
+    }}),
+    {
+      name: "singularity-graph"
+    }
+  )
 )
