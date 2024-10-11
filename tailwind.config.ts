@@ -7,17 +7,17 @@ const {
 
 const addVariablesForColors = ({ addBase, theme }: any) => {
   const allColors = flattenColorPalette(theme("colors"));
-  const newVars = Object.fromEntries(
+  const nv = Object.fromEntries(
     Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
   );
 
   addBase({
-    ":root": newVars,
+    ":root": nv,
   });
 };
 
 const config: Config = {
-  darkMode: ["class"],
+  darkMode: "selector",
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}", // Adjusted to Vite's src/ directory

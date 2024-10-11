@@ -4,6 +4,8 @@
 
 @layer base {
   :root {
+    --font-sans: "Inter Light";
+
     --background: 0 0% 88%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 88%;
@@ -38,7 +40,7 @@
     );
   }
 
-  .dark {
+  :root.dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
     --card: 0, 0%, 2%;
@@ -99,7 +101,8 @@
 .react-flow__handle {
   width: 20px;
   height: 20px;
-  border-radius: 4px;
+  background-color: black;
+  /* border-radius: 4px; */
 }
 
 .react-flow__pane {

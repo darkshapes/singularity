@@ -69,7 +69,7 @@ export const SettingsModal = ({ open, setOpen }: any) => {
                     <SelectTrigger className="w-32">
                         <SelectValue placeholder={
                             <div className="flex flex-row justify-start gap-2 items-center w-full">
-                                {<edgeType.icon />}
+                                {edgeType.icon}
                                 {startCase(edgeType.name)}
                             </div>
                         } />
@@ -78,7 +78,7 @@ export const SettingsModal = ({ open, setOpen }: any) => {
                         {options.map((option) => (
                             <SelectItem className="w-full" key={option.name} value={option.name}>
                                 <div className="flex flex-row justify-start gap-2 items-center w-full">
-                                    {<option.icon />}
+                                    {option.icon}
                                     {startCase(option.name)}
                                 </div>
                             </SelectItem>

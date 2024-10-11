@@ -1,26 +1,27 @@
+import { FunctionComponentElement, createElement } from "react";
 import { Edge } from "@xyflow/react";
 import {
   BorderSolidIcon,
   CornerBottomRightIcon,
-  DividerVerticalIcon
+  DividerVerticalIcon,
 } from "@radix-ui/react-icons";
 
 export type EdgeType = {
-  icon: typeof BorderSolidIcon | typeof CornerBottomRightIcon | typeof DividerVerticalIcon;
+  icon: FunctionComponentElement<any>;
   name: string;
 }
 
 export const edgeTypeList: EdgeType[] = [
   {
-    icon: BorderSolidIcon,
+    icon: createElement(BorderSolidIcon),
     name: "smoothstep", // or "step"
   },
   {
-    icon: DividerVerticalIcon,
+    icon: createElement(DividerVerticalIcon),
     name: "straight",
   },
   {
-    icon: CornerBottomRightIcon,
+    icon: createElement(CornerBottomRightIcon),
     name: "spline",
   },
 ];
