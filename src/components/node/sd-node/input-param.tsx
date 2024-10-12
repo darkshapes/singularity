@@ -68,10 +68,10 @@ const InputParamsComponent = ({ name, input, update }: InputParamsProps) => {
     );
   }
 
-  if (input.type == "Int" || input.type == "Float") {
+  if (input.type === "Int" || input.type === "Float") {
     const usi = input as InputDataNumerical | InputDataSlider;
 
-    if (usi.display == "numerical") {
+    if (usi.display === "numerical") {
       const i = input as InputDataNumerical;
 
       return ( 
@@ -85,7 +85,7 @@ const InputParamsComponent = ({ name, input, update }: InputParamsProps) => {
           onChange={(v: number) => onChange(v)}
         />
       );
-    } else if (usi.display == "slider") {
+    } else if (usi.display === "slider") {
       const i = input as InputDataSlider
 
       return (
@@ -101,7 +101,7 @@ const InputParamsComponent = ({ name, input, update }: InputParamsProps) => {
     }
   }
 
-  if (input.type = "Str") {
+  if (input.type === "Str") {
     const i = input as InputDataStr;
 
     return (

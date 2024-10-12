@@ -61,6 +61,7 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<AppNode>) => {
         </div>
         <NodeOutputs data={data.fn.outputs} selected={selected ?? false} />
       </div>
+      { Object.keys(data.fn.inputs.optional).length > 0 &&
         <Accordion
           type="multiple"
           value={data.modifiable?.expanded ? [id] : []}
@@ -73,6 +74,7 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<AppNode>) => {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
+      }
       { data.fn.display && <NodeDataDisplay id={id} /> }
     </>
   );

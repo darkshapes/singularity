@@ -30,7 +30,11 @@ export const useAppStore = create<AppState>()(
       set((state) => {
         const node = state.nodes.find(n => n.id === id);
         if (node) {
-          Object.assign(node.data[path]!, value);
+          if (node.data[path]) {
+            Object.assign(node.data[path], value);
+          } else {
+            node.data[path] = value;
+          }
         }
       });
 
