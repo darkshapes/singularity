@@ -47,7 +47,7 @@ export const FlowEditor = () => {
   const { 
     initialize,
 
-    functions,
+    library,
 
     nodes,
     edges,
@@ -60,7 +60,7 @@ export const FlowEditor = () => {
   } = useAppStore(useShallow((s) => ({ 
     initialize: s.initialize,
 
-    functions: s.functions,
+    library: s.library,
 
     nodes: s.nodes,
     edges: s.edges,
@@ -101,11 +101,11 @@ export const FlowEditor = () => {
   // );
 
   const nodeTypes = useMemo(() => 
-    Object.keys(functions).reduce((acc, name) => ({
+    Object.keys(library).reduce((acc, name) => ({
       ...acc,
       [name]: NodeComponent,
     }), {} as Record<string, React.FC<NodeProps<AppNode>>>), 
-  [functions])
+  [library])
 
   // const onEdgeUpdateStart = useCallback(() => {
   //   edgeUpdateSuccessful.current = false;

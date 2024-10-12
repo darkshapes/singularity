@@ -86,7 +86,7 @@ export const NodeHandle = ({
           "mb-1 text-sm text-muted-foreground",
           clickable && "group-hover:underline group-hover:text-white transition duration-200 ease-in-out",
         )}
-        title={Array.isArray(slotType) ? "STRING" : slotType}
+        title={slotType}
       >
         {label}
       </a>

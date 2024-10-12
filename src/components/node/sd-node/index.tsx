@@ -14,7 +14,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import { useAppStore } from "@/store";
 import { AppNode, NodeFunctionInputNecessity } from "@/types";
 
 const SdNodeComponent = ({ id, data, selected }: NodeProps<AppNode>) => {
@@ -22,7 +21,6 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<AppNode>) => {
   const [swappedParams, setSwappedParams] = useState<any[]>([]);
   
   const updateNodeInternals = useUpdateNodeInternals();
-  const { getNode } = useAppStore(useShallow((s) => ({ getNode: s.getNode })));
 
   useEffect(() => {
     const enabledParamsList = Object.entries(data.fn.inputs.optional).filter(([k, param]) => {
@@ -32,7 +30,7 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<AppNode>) => {
         ([name, input]) => input.fname == param.dependent?.on
       )?.[0] as string;
 
-      return getNode(id)?.data.fields[dependentOn] == param.dependent.when
+      return data.fields?.[dependentOn]  == param.dependent.when
     });
 
     setEnabledParams(enabledParamsList.reduce((acc, [k, v]) => {
@@ -50,13 +48,9 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<AppNode>) => {
     updateNodeInternals(id);
   }
 
-  const { expanded, onExpand } = useAppStore((s) => ({
-    expanded: s.expanded,
-    onExpand: s.onExpand,
-  }));
-  // Determine if the current node's accordion should be expanded
-  const isExpanded = expanded.includes(id);
-  const handleAccordionChange = () => onExpand(id);
+  const handleAccordionChange = () => {
+    data.modify({ expanded: !data.modifiable?.expanded });
+  };
 
   return (
     <>
@@ -69,13 +63,13 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<AppNode>) => {
       </div>
         <Accordion
           type="multiple"
-          value={isExpanded ? [id] : []}
+          value={data.modifiable?.expanded ? [id] : []}
           onValueChange={handleAccordionChange}
         >
           <AccordionItem value={id}>
             <AccordionTrigger />
             <AccordionContent className="m-0.5">
-              <NodeParams data={enabledParams} nodeId={id} selected={selected ?? false} swapItem={swapItem} />
+              <NodeParams data={enabledParams} selected={selected ?? false} update={data.update} />
             </AccordionContent>
           </AccordionItem>
         </Accordion>

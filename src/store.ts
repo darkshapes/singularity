@@ -2,10 +2,11 @@ import { ReactFlowInstance, addEdge, applyEdgeChanges, applyNodeChanges } from "
 import { v4 as uuid } from "uuid";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
+import { immer } from 'zustand/middleware/immer';
 
 import {
   readyServer,
-  getNodeFunctions,
+  getNodeLibrary,
   sendPrompt,
   subscribeToTask,
 } from "@/sdbx";
@@ -13,7 +14,7 @@ import { AppNode, AppEdge, edgeTypeList, defaultEdge } from "@/types";
 import { AppState, AppInstance, AppInstanceMethodKeys } from "@/types/store";
 
 export const useAppStore = create<AppState>()(
-  persist(devtools((set, get) => {
+  immer(persist(devtools((set, get) => {
     const createInstanceMethod = <T extends AppInstanceMethodKeys>(methodName: T) => {
       return (...args: Parameters<ReactFlowInstance[T]>): ReturnType<ReactFlowInstance[T]> | undefined => {
         const { instance } = get();
@@ -24,16 +25,26 @@ export const useAppStore = create<AppState>()(
         }
       };
     };
+
+    const getNodeUpdater = (id: string, path: 'modifiable' | 'update') => (value: any) =>
+      set((state) => {
+        const node = state.nodes.find(n => n.id === id);
+        if (node) {
+          Object.assign(node.data[path]!, value);
+        }
+      });
+
+    const getNodeMethods = (node: AppNode) => ({ modify: getNodeUpdater(node.id, "modifiable"), update: getNodeUpdater(node.id, "update") })
     
     return {
-      functions: {},
+      library: {},
       results: {},
 
       nodes: [],
       edges: [],
 
       theme: "dark",
-      toggleTheme: () => { set({ theme: get().theme === "dark" ? "light" : "dark" }) },
+      toggleTheme: () => { set(state => state.theme = state.theme === "dark" ? "light" : "dark") },
 
       edgeType: defaultEdge,
       nodeInProgress: undefined,
@@ -45,12 +56,17 @@ export const useAppStore = create<AppState>()(
 
         set({ instance }, false, "initialize");
   
-        const functions = await getNodeFunctions();
-        set({ functions }, false, "initialize");
+        const library = await getNodeLibrary();
+        set({ library }, false, "initialize");
     
         // Initialize settings
         // const edgeType = edgeTypeList[parseInt(settings["Comfy.LinkRenderMode"])];
         // get().onEdgesType(edgeType, false);
+      },
+
+      hydrate: () => {
+        // add modify function back to nodes
+        set(state => { state.nodes.forEach(node => Object.assign(node.data, getNodeMethods(node))) }, false, "hydrate")
       },
 
       setInstance: (instance) => set({ instance }),
@@ -59,8 +75,6 @@ export const useAppStore = create<AppState>()(
         id,
         name,
         fn,
-        fields,
-        modify,
         position = { x: 0, y: 0 },
         width,
         height,
@@ -68,18 +82,13 @@ export const useAppStore = create<AppState>()(
         const { nodes } = get();
 
         id ??= uuid();
-        fields = fn.inputs.optional
-
+        const fields = fn.inputs.optional;
         const zIndex = Math.max(...nodes.map(n => n.zIndex ?? 0), 0) + 1;
         
         const item: AppNode = {
           id,
           type: name,
-          data: {
-            fn,
-            fields,
-            modify,
-          },
+          data: { fn, fields, modify: () => {}, update: () => {} },
           dragHandle: ".drag-handle",
           position,
           zIndex,
@@ -87,6 +96,8 @@ export const useAppStore = create<AppState>()(
           height,
           style: { width, height },
         };
+
+        item.data = { ...item.data, ...getNodeMethods(item) };
 
         return item;
       },
@@ -109,7 +120,7 @@ export const useAppStore = create<AppState>()(
 
       toObject: createInstanceMethod('toObject'),
       toNetworkX: () => {
-        const { functions, nodes, edges, getNode } = get();
+        const { library, nodes, edges, getNode } = get();
 
         return {
           directed: true,
@@ -118,7 +129,7 @@ export const useAppStore = create<AppState>()(
           nodes: nodes.map((node) => {
             const id = node.id;
       
-            const fn = functions[node.type!];
+            const fn = library[node.type!];
             const fname = node.data.fn.fname;
         
             const outputs = Object.keys(fn.outputs);
@@ -127,7 +138,7 @@ export const useAppStore = create<AppState>()(
             const widget_inputs = Object.keys(fn.inputs.optional).reduce((a, v) => (
               { 
                 ...a, 
-                [fn.inputs.optional[v].fname]: node.data.fields[v]
+                [fn.inputs.optional[v].fname]: node.data.fields?.[v]
               }
             ), {}) 
       
@@ -148,8 +159,8 @@ export const useAppStore = create<AppState>()(
             const source = edge.source;
             const target = edge.target;
       
-            const sourceNode = functions[getNode(source)?.type!];
-            const targetNode = functions[getNode(target)?.type!];
+            const sourceNode = library[getNode(source)?.type!];
+            const targetNode = library[getNode(target)?.type!];
       
             const sourceHandle = Object.keys(sourceNode.outputs).findIndex(n => n === edge.sourceHandle);
             const targetHandle = targetNode.inputs.required[edge.targetHandle!].fname;
@@ -168,7 +179,7 @@ export const useAppStore = create<AppState>()(
       onNodesChange: (changes) => {
         // https://reactflow.dev/api-reference/utils/apply-node-changes
         set(
-          (st) => ({ nodes: applyNodeChanges(changes, st.nodes) }),
+          (st) => { st.nodes = applyNodeChanges(changes, st.nodes) as AppNode[] },
           false,
           "onNodesChange"
         );
@@ -177,7 +188,7 @@ export const useAppStore = create<AppState>()(
       onEdgesChange: (changes) => {
         // https://reactflow.dev/api-reference/utils/apply-edge-changes
         set(
-          (st) => ({ edges: applyEdgeChanges(changes, st.edges) }),
+          (st) => { st.edges = applyEdgeChanges(changes, st.edges) as AppEdge[] },
           false,
           "onEdgesChange"
         );
@@ -204,250 +215,12 @@ export const useAppStore = create<AppState>()(
       },
       
       onRefresh: async () => {
-        const functions = await getNodeFunctions();
-        set({ functions }, false, "onRefresh");
+        const library = await getNodeLibrary();
+        set({ library }, false, "onRefresh");
       },
       
       onNewClientId: (id) => {
         set({ clientId: id }, false, "onNewClientId");
-      },
-
-      /******************************************************
-       *********************** Node *************************
-       ******************************************************/
-      onCreateGroup: () => {
-        // const { nodes, onDetachGroup } = get();
-      },
-  
-      onSetNodesGroup: (childIds, groupNode) => {
-        // set((st) => ({
-        //   nodes: st.nodes.map((n) => {
-        //     if (childIds.includes(n.id)) {
-        //       if (n.parentNode === groupNode.id) return n;
-        //       return {
-        //         ...n,
-        //         parentNode: groupNode.id,
-        //         position: {
-        //           x: n.position.x - groupNode.position.x,
-        //           y: n.position.y - groupNode.position.y,
-        //         },
-        //       };
-        //     } else if (n.parentNode === groupNode.id) {
-        //       return {
-        //         ...n,
-        //         parentNode: undefined,
-        //         position: {
-        //           x: n.position.x + groupNode.position.x,
-        //           y: n.position.y + groupNode.position.y,
-        //         },
-        //       };
-        //     }
-        //     return n;
-        //   }),
-        // }));
-      },
-  
-      onDetachGroup: (node) => {
-        // if (!node.parentNode) return node;
-        // const nodes = get().nodes;
-        // const groupNode = nodes.find((n) => n.id === node.parentNode);
-        // return {
-        //   ...node,
-        //   parentNode: undefined,
-        //   position: {
-        //     x: node.position.x + Number(groupNode?.position.x),
-        //     y: node.position.y + Number(groupNode?.position.y),
-        //   },
-        // };
-        return node;
-      },
-  
-      onDetachNodesGroup: (childIds, groupNode) => {
-        // set((st) => ({
-        //   nodes: st.nodes.map((n) => {
-        //     if (childIds.includes(n.id)) {
-        //       return {
-        //         ...n,
-        //         parentNode: undefined,
-        //         position: {
-        //           x: n.position.x + groupNode.position.x,
-        //           y: n.position.y + groupNode.position.y,
-        //         },
-        //       };
-        //     }
-        //     return n;
-        //   }),
-        // }));
-      },
-  
-      onUpdateNodes: (id, data) => {
-        // set(
-        //   (st) => ({ nodes: updateNode(id, data, st.nodes) }),
-        //   false,
-        //   "onUpdateNodes"
-        // );
-      },
-  
-      onDuplicateNode: (id) => {
-        // set(
-        //   (st) => {
-        //     const item = st.getNode(id);
-        //     const node = nodes.find((n) => n.id === id);
-        //     const position = node?.position;
-        //     const moved = position
-        //       ? { ...position, y: position.y + (node.height || 100) + 24 }
-        //       : undefined;
-        //     const nodeData = {
-        //       widget: widgets[item.widget],
-        //       name: item.widget,
-        //       node: item,
-        //       position: moved,
-        //       ...(node?.width && { width: node.width }),
-        //       ...(node?.height && { height: node.height }),
-        //     };
-        //     return addNode(st, nodeData);
-        //   },
-        //   false,
-        //   "onDuplicateNode"
-        // );
-      },
-  
-      onNodeInProgress: (id, progress) => {
-        // set({ nodeInProgress: { id, progress } }, false, "onNodeInProgress");
-      },
-  
-      onPropChange: (id, key, val) => {
-        // set(
-        //   (st) => {
-        //     st.onUpdateNodes(id, { [key]: val });
-        //     const updatedFields = {
-        //       ...st.graph[id]?.fields,
-        //       [key]: val,
-        //     };
-        //     const updatedNode = {
-        //       ...st.graph[id],
-        //       fields: updatedFields,
-        //     };
-        //     const updatedGraph = {
-        //       ...st.graph,
-        //       [id]: updatedNode,
-        //     };
-        //     return {
-        //       ...st,
-        //       graph: updatedGraph,
-        //     };
-        //   },
-        //   false,
-        //   "onPropChange"
-        // );
-      },
-  
-      onModifyChange: (id: string, key: string, value: any) => {
-        // set((state) => {
-        //   const nodes = state.nodes.map((node) => {
-        //     if (node.id === id) {
-        //       return {
-        //         ...node,
-        //         data: {
-        //           ...node.data,
-        //           [key]: value,
-        //         },
-        //       };
-        //     }
-        //     return node;
-        //   });
-        //   return { nodes };
-        // });
-      },
-  
-      onGetNodeFieldsData: (id, key) => {
-        // try {
-        //   return get()?.graph[id]?.fields[key];
-        // } catch (e) {
-        //   console.error(e);
-        // }
-      },
-  
-      onCopyNode: () => {
-        // const { nodes } = get();
-        // const selectedNodes = nodes.filter((n) => n.selected).map((n) => n.id);
-        // const workflow = instance.toObject();
-        // const workflowData = selectedNodes.reduce((data: any, id) => {
-        //   const selectNode = instance.getNode(id);
-        //   if (selectNode.parentNode) {
-        //     const groupNode = nodes.find((n) => n.id === selectNode.parentNode);
-        //     data[id] = {
-        //       ...selectNode,
-        //       parentNode: undefined,
-        //       position: {
-        //         x: selectNode.position.x + Number(groupNode?.position.x),
-        //         y: selectNode.position.y + Number(groupNode?.position.y),
-        //       },
-        //     };
-        //   } else {
-        //     data[id] = selectNode;
-        //   }
-        //   return data;
-        // }, {});
-        // return {
-        //   data: workflowData,
-        //   connections: workflow.e.filter(
-        //     (e) =>
-        //       selectedNodes.includes(e.target) && selectedNodes.includes(e.source)
-        //   ),
-        // };
-      },
-  
-      onPasteNode: (workflow, position) => {
-        // const basePositon = getTopLeftPoint(
-        //   Object.values(workflow.data).map((item) => item.position)
-        // );
-        // const { data, idMap } = copyNodes(workflow, basePositon, position);
-        // const connections = copyConnections(workflow, idMap);
-        // const newWorkflow: ReactFlowJsonObject = { data, ...connections };
-        // set(
-        //   (st) =>
-        //     Object.entries(newWorkflow.data).reduce((state, [key, node]) => {
-        //       const widget = state.widgets[node.value.widget];
-        //       if (widget) {
-        //         return addNode(state, {
-        //           widget,
-        //           name: node.value.widget,
-        //           node: node.value,
-        //           position: node.position,
-        //           width: node.width,
-        //           height: node.height,
-        //           parentNode: node.parentNode,
-        //           key,
-        //         });
-        //       }
-        //       console.warn(`Unknown widget ${node.value.widget}`);
-        //       return state;
-        //     }, connections.connections.reduce(addConnection, st)),
-        //   true,
-        //   "onPasteNode"
-        // );
-      },
-  
-      expanded: [],
-      onExpand: (id?: string) => {
-        // const { expanded, graph } = get();
-        // if (id) {
-        //   // Toggle individual accordion
-        //   const isExpanded = expanded.includes(id);
-        //   set({
-        //     expanded: isExpanded
-        //       ? expanded.filter((itemId) => itemId !== id)
-        //       : [...expanded, id],
-        //   });
-        // } else {
-        //   // Expand all if any are collapsed, otherwise collapse all
-        //   const allNodeIds = Object.keys(graph);
-        //   const shouldExpandAll = expanded.length !== allNodeIds.length;
-        //   set({
-        //     expanded: shouldExpandAll ? allNodeIds : [],
-        //   });
-        // }
       },
   
       /******************************************************
@@ -618,12 +391,14 @@ export const useAppStore = create<AppState>()(
         //   "onLoadWorkflow"
         // );
       },
+
       onDownloadWorkflow: () => {
         // writeWorkflowToFile(toPersisted(get()));
       },
     }}),
     {
-      name: "singularity-graph"
+      name: "singularity-graph",
+      onRehydrateStorage: (state) => { return (state, error) => state?.hydrate() }
     }
-  )
+  ))
 )

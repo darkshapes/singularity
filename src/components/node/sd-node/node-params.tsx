@@ -1,17 +1,16 @@
 import React from "react";
-import { WidgetInputNecessity } from "@/types";
+import { NodeFunctionInputNecessity, NodeUpdate } from "@/types";
 import { NodeHandle } from "@/components/node/sd-node/node-handle";
 import { Position } from "@xyflow/react";
 import { InputParams } from "./input-param";
 
 interface NodeParamsProps {
-  nodeId: string;
-  data: WidgetInputNecessity;
+  data: NodeFunctionInputNecessity;
   selected: boolean;
-  swapItem: (item: any) => void;
+  update: NodeUpdate;
 }
 
-const NodeSwappedParamsComponent = ({ data, selected, swapItem }: Omit<NodeParamsProps, 'nodeId'>) => {
+const NodeSwappedParamsComponent = ({ data, selected, update }: NodeParamsProps) => {
   return (
       Object.entries(data).map(([ name, input ], i) => (
         <NodeHandle
@@ -23,7 +22,7 @@ const NodeSwappedParamsComponent = ({ data, selected, swapItem }: Omit<NodeParam
           required
           selected={selected}
           clickable={true}
-          onClick={() => swapItem({ name, input })}
+          // onClick={() => swapItem({ name, input })}
         />
       ))
   )
@@ -31,7 +30,7 @@ const NodeSwappedParamsComponent = ({ data, selected, swapItem }: Omit<NodeParam
 
 const NodeSwappedParams = React.memo(NodeSwappedParamsComponent);
 
-const NodeParamsComponent = ({ data, nodeId, selected, swapItem }: NodeParamsProps) => {
+const NodeParamsComponent = ({ data, selected, update }: NodeParamsProps) => {
   return (
     <div className="space-y-2">
       {Object.entries(data).map(([ name, input ], i) => (
@@ -51,10 +50,10 @@ const NodeParamsComponent = ({ data, nodeId, selected, swapItem }: NodeParamsPro
               required={false}
               selected={selected}
               clickable={true}
-              onClick={() => swapItem({ name, input })}
+              // onClick={() => swapItem({ name, input })}
             />
           )}
-          <InputParams name={name} id={nodeId} input={input} />
+          <InputParams name={name} input={input} update={update} />
         </div>
       ))}
     </div>

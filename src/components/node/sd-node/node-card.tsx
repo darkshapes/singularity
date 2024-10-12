@@ -14,7 +14,7 @@ interface NodeCardProps {
   className?: string;
   preview?: boolean;
   path?: string;
-  node?: NodeProps<AppNode>;
+  color?: string;
   children: React.ReactNode;
 }
 
@@ -46,7 +46,7 @@ const NodeCardComponent = ({
   title,
   preview = false,
   path = "",
-  node,
+  color,
   children,
 }: NodeCardProps) => {
   // const { theme } = useTheme();
@@ -58,7 +58,6 @@ const NodeCardComponent = ({
 
   // const color = node?.data?.color || "";
   // const bgColor = theme === "light" ? "primary" : "primary";
-  const color = node?.data?.modify?.color || "";
   const bgColor = "primary";
 
   return (

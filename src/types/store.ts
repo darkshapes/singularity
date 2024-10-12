@@ -10,14 +10,9 @@ import type {
   NodeFunctionKey,
   NodeId,
   NodeInProgress,
+  NodeModifyData,
   PropertyKey,
 } from "@/types";
-
-export type OnPropChange = (
-  id: NodeId,
-  property: PropertyKey,
-  value: any
-) => void;
 
 export type AppInstance = ReactFlowInstance<AppNode>;
 
@@ -31,7 +26,7 @@ export type AppState = {
   instance?: AppInstance;
   setInstance: (instance: AppInstance) => void;
 
-  functions: Record<NodeFunctionKey, NodeFunction>;
+  library: Record<NodeFunctionKey, NodeFunction>;
   results: Record<NodeId, any>;
 
   nodes: AppNode[];
@@ -46,6 +41,7 @@ export type AppState = {
   clientId?: string;
   
   initialize: (instance: AppInstance) => Promise<void>;
+  hydrate: () => void;
 
   constructNode: (item: NodeConstructor) => AppNode;
 
@@ -59,23 +55,6 @@ export type AppState = {
   onRefresh: () => Promise<void>;
 
   onNewClientId: (id: string) => void;
-
-  onCreateGroup: () => void;
-  onSetNodesGroup: (childIds: NodeId[], groupNode: Node) => void;
-  onDetachNodesGroup: (childIds: NodeId[], groupNode: Node) => void;
-  onDetachGroup: (node: Node) => Node;
-  onDuplicateNode: (id: NodeId) => void;
-  onNodeInProgress: (id: NodeId, progress: number) => void;
-  onPropChange: OnPropChange;
-  onModifyChange: OnPropChange;
-  onGetNodeFieldsData: (id: NodeId, key: string) => any;
-  onCopyNode: () => void;
-  onPasteNode: (
-    workflow: ReactFlowJsonObject,
-    position: { x: number; y: number }
-  ) => void;
-  expanded: string[];
-  onExpand: (id?: string) => void;
 
   onEdgesAnimate: (animated: boolean) => void;
 

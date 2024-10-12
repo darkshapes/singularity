@@ -27,9 +27,9 @@ const SelectUploadInputComponent: React.FC<SelectUploadInputProps> = ({
   name,
 }) => {
   const [options, setOptions] = useState<any[]>([]);
-  const { functions, onRefresh } = useAppStore(
+  const { library, onRefresh } = useAppStore(
     useShallow((s) => ({
-      functions: s.functions,
+      library: s.library,
       onRefresh: s.onRefresh,
     }))
   );
@@ -57,7 +57,7 @@ const SelectUploadInputComponent: React.FC<SelectUploadInputProps> = ({
       })),
     ];
     setOptions(newOptions);
-  }, [input, name, functions]);
+  }, [input, name, library]);
 
   const handleUploadChange = useCallback(
     (info: any) => {

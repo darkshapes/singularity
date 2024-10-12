@@ -38,7 +38,7 @@ export const NodeFunctionPickerButton = ({ fn, name, setActiveItem, ...props }: 
             )}
             onClick={(e) => {
                 e.preventDefault();
-                addNodes(constructNode({ fn, name }));
+                addNodes(constructNode({ name, fn }));
             }}
             draggable
             onDragStart={(event) => handleDrag(event, fn)}

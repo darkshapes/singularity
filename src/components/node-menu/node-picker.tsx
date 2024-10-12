@@ -18,7 +18,7 @@ export interface NodePickerGroupItems {
 export type NodePickerGroupCategory = Record<string, NodePickerGroupItems>;
 
 const NodePickerComponent = ({ setActiveItem, setShowPath }: any) => {
-  const { functions } = useAppStore((s) => ({ functions: s.functions }));
+  const { library } = useAppStore((s) => ({ library: s.library }));
 
   const [category, setCategory] = useState<any>({});
   const [keywords, setKeywords] = useState<string>("");
@@ -47,7 +47,7 @@ const NodePickerComponent = ({ setActiveItem, setShowPath }: any) => {
     let matchedFunctions: Record<string, NodeFunction>;
 
     if (keywords) {
-      const fuse = new Fuse(Object.entries(functions), {
+      const fuse = new Fuse(Object.entries(library), {
         keys: ["0"], // Search by function name (keys are the names of functions)
         threshold: 0.4, // Adjust to fine-tune fuzzy search sensitivity
       });
@@ -60,7 +60,7 @@ const NodePickerComponent = ({ setActiveItem, setShowPath }: any) => {
           return acc;
         }, {});
     } else {
-      matchedFunctions = { ...functions };
+      matchedFunctions = { ...library };
     }
 
     for (const [name, fn] of Object.entries(matchedFunctions)) {
@@ -70,7 +70,7 @@ const NodePickerComponent = ({ setActiveItem, setShowPath }: any) => {
 
     setFunctionList(matchedFunctions);
     setCategory(byCategory);
-  }, [functions, keywords]);
+  }, [library, keywords]);
 
   const handleKeywordsChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {

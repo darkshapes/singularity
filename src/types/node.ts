@@ -2,12 +2,16 @@ import { Node, XYPosition } from "@xyflow/react";
 import { NodeId, PropertyKey, NodeFunctionKey } from "@/types";
 import { NodeFunction } from "@/types/function";
 
+export type NodeModify = (m: NodeModifiableData) => void;
+export type NodeUpdate = (field: string, v: any) => void;
+
 /**
  * Instantiated node modification properties
  * @property color - Color
  * @property nickname - Nickname
  */
-export type NodeModifyData = {
+export type NodeModifiableData = {
+  expanded?: boolean;
   color?: string;
   nickname?: string;
 }
@@ -20,8 +24,10 @@ export type NodeModifyData = {
  */
 export type NodeData = {
   fn: NodeFunction;
-  fields: Record<PropertyKey, any>;
-  modify?: NodeModifyData;
+  fields?: Record<PropertyKey, any>;
+  modifiable?: NodeModifiableData;
+  modify: NodeModify;
+  update: NodeUpdate;
 }
 
 /**
@@ -37,10 +43,11 @@ export type NodeData = {
 export type NodeConstructor = {
   id?: string;
   name: string;
+  fn: NodeFunction;
   position?: XYPosition;
   width?: number;
   height?: number;
-} & NodeData;
+}
 
 /**
  * Node execution progress object

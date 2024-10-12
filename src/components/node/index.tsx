@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useShallow } from "zustand/react/shallow";
-import { NodeResizer, NodeProps } from "reactflow";
+import { NodeResizer, NodeProps } from "@xyflow/react";
 
 import { useAppStore } from "@/store";
 import { AppNode } from "@/types";
@@ -27,45 +27,42 @@ import {
   TrashIcon,
 } from "@radix-ui/react-icons";
 
-const NodeComponent = (node: NodeProps<AppNode>) => {
+const NodeComponent = (props: NodeProps<AppNode>) => {
+  const { id, data, type, selected } = props;
   const ref = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [nicknameInput, setNicknameInput] = useState(false);
 
-  const { progressBar, onDuplicateNode, onModifyChange } =
+  const { progressBar } =
     useAppStore(
       useShallow((s) => ({
         progressBar:
-          s.nodeInProgress?.id === node.id
-            ? s.nodeInProgress.progress
-            : undefined,
-        onDuplicateNode: s.onDuplicateNode,
-        onModifyChange: s.onModifyChange,
+          s.nodeInProgress?.id === id
+            ? s.nodeInProgress?.progress
+            : undefined
       }))
     );
   const isInProgress = progressBar !== undefined;
   // const isSelected = node.selected;
-  const name = node.type;
-  const isGroup = node.type === "Group";
 
   const handleNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
     const nickname = e.target.value;
-    onModifyChange(node.id, "nickname", nickname);
+    data.modify({ nickname });
     setNicknameInput(false);
   };
 
-  const handleNodeColor = (key: string) => {
-    onModifyChange(node.id, "color", key);
+  const handleNodeColor = (color: string) => {
+    data.modify({ color });
   };
 
   useEffect(() => {
     if (ref.current) {
       const parent = ref.current.parentNode as HTMLElement;
-      parent.setAttribute("type", node.type);
-      ref.current.setAttribute("type", node.type);
+      parent.setAttribute("type", type);
+      ref.current.setAttribute("type", type);
     }
-  }, [node.type]);
+  }, [type]);
 
   useEffect(() => {
     if (nicknameInput && inputRef.current) {
@@ -79,7 +76,7 @@ const NodeComponent = (node: NodeProps<AppNode>) => {
         {nicknameInput ? (
           <Input
             ref={inputRef}
-            defaultValue={name}
+            defaultValue={type}
             onKeyDown={(e) => {
               if (e.key === "Backspace") {
                 e.stopPropagation();
@@ -99,7 +96,7 @@ const NodeComponent = (node: NodeProps<AppNode>) => {
             } text-xl`}
             onDoubleClick={() => setNicknameInput(true)}
           >
-            {name}
+            {type}
           </div>
         )}
 
@@ -118,8 +115,8 @@ const NodeComponent = (node: NodeProps<AppNode>) => {
   return (
     <ContextMenu>
       <ContextMenuTrigger>
-        <NodeCard active={isInProgress} selected={node.selected} title={<Title />} node={node}>
-          <SdNode {...node} />
+        <NodeCard active={isInProgress} selected={selected} color={data?.modifiable?.color || ""} title={<Title />}>
+          <SdNode { ...props } />
         </NodeCard>
       </ContextMenuTrigger>
       <ContextMenuContent className="w-48">

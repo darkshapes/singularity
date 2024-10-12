@@ -87,7 +87,7 @@ const ControlPanelComponent = () => {
   const [isClearDialogOpen, setIsClearDialogOpen] = useState(false);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
 
-  const { theme, toggleTheme } = useAppStore((s) => ({ theme: s.theme, toggleTheme: s.toggleTheme }));
+  const { toggleTheme } = useAppStore((s) => ({ toggleTheme: s.toggleTheme }));
 
   // const { expanded, onExpand } = useAppStore((s) => ({
   //   expanded: s.expanded,

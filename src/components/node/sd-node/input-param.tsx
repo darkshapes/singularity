@@ -7,7 +7,7 @@ import {
   InputDataGeneric,
   InputData,
   
-  NodeId
+  NodeUpdate
 } from "@/types";
 import { Checkbox } from "@/components/ui/checkbox";
 import { debounce } from "lodash-es";
@@ -19,32 +19,18 @@ import { Textarea } from "@/components/ui/textarea";
 import { ModelDrawer } from "../model-drawer";
 
 interface InputParamsProps {
-  id: NodeId;
   name: string;
   input: InputData;
+  update: NodeUpdate;
 }
 
-const InputParamsComponent = ({ id, name, input }: InputParamsProps) => {
-  const { onPropChange } = useAppStore(
-    useShallow((s) => ({
-      onPropChange: s.onPropChange,
-    }))
-  );
-
-  // const onChange = useMemo(
-  //   () =>
-  //     debounce((v: any) => {
-  //       onPropChange(id, name, v)
-  //     }, 100),
-  //   [id, name, onPropChange]
-  // );
-
-    const onChange = useMemo(
+const InputParamsComponent = ({ name, input, update }: InputParamsProps) => {
+  const onChange = useMemo(
     () =>
       (v: any) => {
-        onPropChange(id, name, v)
+        update(name, v) // 100 ms debounce here?
       },
-    [id, name, onPropChange]
+    [name]
   );
 
   const handleChange = (e: any) => onChange(e.target.value)
