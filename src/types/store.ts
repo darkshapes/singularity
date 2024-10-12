@@ -10,7 +10,6 @@ import type {
   NodeFunctionKey,
   NodeId,
   NodeInProgress,
-  NodeModifyData,
   PropertyKey,
 } from "@/types";
 

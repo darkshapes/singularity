@@ -200,7 +200,7 @@ export const useAppStore = create<AppState>()(
 
         // https://reactflow.dev/api-reference/utils/add-edge
         set(
-          (st) => ({ edges: addEdge(connection, st.edges.filter(oneConnectionPerInput)) }),
+          (st) => { st.edges = addEdge(connection, st.edges.filter(oneConnectionPerInput)) },
           false,
           "onConnect"
         );
