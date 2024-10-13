@@ -14,16 +14,16 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import { AppNode, NodeFunctionInputNecessity } from "@/types";
+import { AppNode, NodeFields } from "@/types";
 
 const SdNodeComponent = ({ id, data, selected }: NodeProps<AppNode>) => {
-  const [enabledParams, setEnabledParams] = useState<NodeFunctionInputNecessity>({});
+  const [enabledParams, setEnabledParams] = useState<NodeFields>({});
   const [swappedParams, setSwappedParams] = useState<any[]>([]);
   
   const updateNodeInternals = useUpdateNodeInternals();
 
   useEffect(() => {
-    const enabledParamsList = Object.entries(data.fn.inputs.optional).filter(([k, param]) => {
+    const enabledParamsList = Object.entries(data.fields!).filter(([k, param]) => {
       if (!param.dependent) return true;
 
       const dependentOn = Object.entries({...data.fn.inputs.required, ...data.fn.inputs.optional}).find(
@@ -36,17 +36,8 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<AppNode>) => {
     setEnabledParams(enabledParamsList.reduce((acc, [k, v]) => {
       acc[k] = v;
       return acc;
-    }, {} as NodeFunctionInputNecessity));
+    }, {} as NodeFields));
   }, [data.fields])
-
-  const swapItem = (item: any) => { // swap between params and inputs
-    if (swappedParams.find(e => e.name === item.name)) {
-      setSwappedParams(p => p.filter(e => e.name !== item.name));
-    } else {
-      setSwappedParams(p => [...p, item]);
-    }
-    updateNodeInternals(id);
-  }
 
   const handleAccordionChange = () => {
     data.modify({ expanded: !data.modifiable?.expanded });

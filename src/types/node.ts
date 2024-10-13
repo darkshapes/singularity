@@ -1,9 +1,9 @@
 import { Node, XYPosition } from "@xyflow/react";
-import { NodeId, PropertyKey, NodeFunctionKey } from "@/types";
+import { FieldData, NodeId, PropertyKey } from "@/types";
 import { NodeFunction } from "@/types/function";
 
 export type NodeModify = (m: NodeModifiableData) => void;
-export type NodeUpdate = (field: string, v: any) => void;
+export type NodeUpdate = (v: any) => void;
 
 /**
  * Instantiated node modification properties
@@ -16,6 +16,8 @@ export type NodeModifiableData = {
   nickname?: string;
 }
 
+export type NodeFields = Record<PropertyKey, FieldData>;
+
 /**
  * Node object
  * @property fn - Node function object
@@ -24,7 +26,7 @@ export type NodeModifiableData = {
  */
 export type NodeData = {
   fn: NodeFunction;
-  fields?: Record<PropertyKey, any>;
+  fields?: NodeFields;
   modifiable?: NodeModifiableData;
   modify: NodeModify;
   update: NodeUpdate;

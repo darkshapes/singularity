@@ -44,6 +44,7 @@ export interface SliderConstraint {
 export interface InputBase<A> {
   fname: string; // true name of variable on serverside
   default?: A;
+  value?: A;
   dependent?: DependentProps;
 }
 
@@ -69,3 +70,5 @@ export interface InputDataGeneric<A> extends InputBase<A> {
 }
 
 export type InputData = InputDataStr | InputDataNumerical | InputDataSlider | InputDataLiteral | InputDataGeneric<any>;
+
+export type FieldData = InputData & { value?: any };

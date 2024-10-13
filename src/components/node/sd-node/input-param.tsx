@@ -1,11 +1,12 @@
 import { useAppStore } from "@/store";
 import {
+  FieldData,
+
   InputDataStr,
   InputDataNumerical,
   InputDataSlider,
   InputDataLiteral,
   InputDataGeneric,
-  InputData,
   
   NodeUpdate
 } from "@/types";
@@ -20,27 +21,25 @@ import { ModelDrawer } from "../model-drawer";
 
 interface InputParamsProps {
   name: string;
-  input: InputData;
+  input: FieldData;
   update: NodeUpdate;
 }
 
 const InputParamsComponent = ({ name, input, update }: InputParamsProps) => {
-  const onChange = useMemo(
-    () =>
-      (v: any) => {
-        update(name, v) // 100 ms debounce here?
-      },
-    [name]
-  );
+  const setValue = (v: any) => update({ [name]: { value: v } }); // 100 ms debounce here?
+
+  const onChange = useMemo(() => setValue, [name]);
 
   const handleChange = (e: any) => onChange(e.target.value)
+
+  setValue(input.value ?? input.default);
 
   if (input.type === "OneOf") {
     const i = input as InputDataLiteral;
 
     if (input.fname === "ckpt_name" || input.fname === "lora_name") {
       return <ModelDrawer 
-        value={i.default}
+        value={i.value}
         models={i.choices}
         type={name} 
         onChange={handleChange} 
@@ -49,7 +48,7 @@ const InputParamsComponent = ({ name, input, update }: InputParamsProps) => {
 
     return (
       <SelectUploadInput
-        value={i.default}
+        value={i.value}
         name={name}
         input={i.choices}
         onChange={(v: string) => onChange(v)}
@@ -62,7 +61,7 @@ const InputParamsComponent = ({ name, input, update }: InputParamsProps) => {
 
     return (
       <Checkbox
-        defaultChecked={i.default ?? false}
+        defaultChecked={i.value ?? false}
         onCheckedChange={(v: boolean) => onChange(v)}
       />
     );
@@ -78,7 +77,7 @@ const InputParamsComponent = ({ name, input, update }: InputParamsProps) => {
         <SliderInput // TODO: numerical input
           name={name.toLowerCase()}
           style={{ width: "100%" }}
-          value={Number(i.default)}
+          value={Number(i.value)}
           max={Number(i.constraints?.max)}
           min={Number(i.constraints?.min)}
           randomizable={i.constraints?.randomizable}
@@ -92,7 +91,7 @@ const InputParamsComponent = ({ name, input, update }: InputParamsProps) => {
         <SliderInput
           name={name.toLowerCase()}
           style={{ width: "100%" }}
-          value={Number(i.default)}
+          value={Number(i.value)}
           max={Number(i.constraints?.max)}
           min={Number(i.constraints?.min)}
           onChange={(v: number) => onChange(v)}
@@ -108,7 +107,7 @@ const InputParamsComponent = ({ name, input, update }: InputParamsProps) => {
       <Textarea
         style={{ width: "100%" }}
         multiline={i.constraints?.multiline}
-        defaultValue={i.default}
+        defaultValue={i.value}
         onBlur={handleChange}
         onKeyDown={(e) => e.stopPropagation()}
       />

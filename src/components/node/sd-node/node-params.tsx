@@ -30,7 +30,7 @@ const NodeSwappedParamsComponent = ({ data, selected, update }: NodeParamsProps)
 
 const NodeSwappedParams = React.memo(NodeSwappedParamsComponent);
 
-const NodeParamsComponent = ({ data, selected, update }: NodeParamsProps) => {
+const NodeParamsComponent = ({ data, selected, update }: NodeParamsProps) => {  
   return (
     <div className="space-y-2">
       {Object.entries(data).map(([ name, input ], i) => (

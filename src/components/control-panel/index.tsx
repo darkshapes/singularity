@@ -81,7 +81,7 @@ export const PromptButton = React.memo(PromptButtonComponent);
 const ControlPanelComponent = () => {
   const { nodes, toggleTheme } = useAppStore((s) => ({ nodes: s.nodes, toggleTheme: s.toggleTheme }));
 
-  const checkExpanded = () => nodes.every(node => node.data.modifiable?.expanded ?? true)
+  const checkExpanded = () => nodes.every(node => node.data.modifiable?.expanded ?? true);
 
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(checkExpanded());
@@ -89,7 +89,7 @@ const ControlPanelComponent = () => {
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
 
   useEffect(() => {
-    setIsExpanded(checkExpanded())
+    setIsExpanded(checkExpanded());
   }, [nodes])
 
   const handleExpand = () => {

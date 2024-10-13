@@ -11,7 +11,7 @@ import {
   subscribeToTask,
 } from "@/sdbx";
 import { AppNode, AppEdge, edgeTypeList, defaultEdge } from "@/types";
-import { AppState, AppInstance, AppInstanceMethodKeys } from "@/types/store";
+import { AppState, AppInstance, AppInstanceMethodKeys, deepMerge } from "@/types/store";
 
 export const useAppStore = create<AppState>()(
   immer(persist(devtools((set, get) => {
@@ -26,19 +26,19 @@ export const useAppStore = create<AppState>()(
       };
     };
 
-    const getNodeUpdater = (id: string, path: 'modifiable' | 'update') => (value: any) =>
+    const getNodeUpdater = (id: string, path: 'modifiable' | 'fields') => (v: any) =>
       set((state) => {
         const node = state.nodes.find(n => n.id === id);
         if (node) {
           if (node.data[path]) {
-            Object.assign(node.data[path], value);
+            deepMerge(node.data[path], v);
           } else {
-            node.data[path] = value;
+            node.data[path] = v;
           }
         }
       });
 
-    const getNodeMethods = (node: AppNode) => ({ modify: getNodeUpdater(node.id, "modifiable"), update: getNodeUpdater(node.id, "update") })
+    const getNodeMethods = (node: AppNode) => ({ modify: getNodeUpdater(node.id, "modifiable"), update: getNodeUpdater(node.id, "fields") })
     
     return {
       library: {},

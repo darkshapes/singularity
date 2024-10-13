@@ -74,3 +74,16 @@ export type AppState = {
     ? (...args: P) => R | undefined
     : never;
 };
+
+export const deepMerge = (target: any, source: any) => {
+  for (const key in source) {
+    if (source[key] && typeof source[key] === 'object') {
+      if (!target[key]) {
+        target[key] = {};
+      }
+      deepMerge(target[key], source[key]);
+    } else {
+      target[key] = source[key];
+    }
+  }
+};
