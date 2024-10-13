@@ -35,14 +35,11 @@ const PromptButtonComponent = () => {
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(0);
 
-  const { onSubmit, promptError, onEdgesAnimate, expanded, onExpand } =
-  useAppStore(
+  const { onSubmit, promptError, onEdgesAnimate } = useAppStore(
       useShallow((s) => ({
         onSubmit: s.onSubmit,
         promptError: s.promptError,
         onEdgesAnimate: s.onEdgesAnimate,
-        onExpand: s.onExpand,
-        expanded: s.expanded,
       }))
     );
 
@@ -82,22 +79,23 @@ const PromptButtonComponent = () => {
 export const PromptButton = React.memo(PromptButtonComponent);
 
 const ControlPanelComponent = () => {
+  const { nodes, toggleTheme } = useAppStore((s) => ({ nodes: s.nodes, toggleTheme: s.toggleTheme }));
+
+  const checkExpanded = () => nodes.every(node => node.data.modifiable?.expanded ?? true)
+
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(checkExpanded());
   const [isClearDialogOpen, setIsClearDialogOpen] = useState(false);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
 
-  const { toggleTheme } = useAppStore((s) => ({ toggleTheme: s.toggleTheme }));
+  useEffect(() => {
+    setIsExpanded(checkExpanded())
+  }, [nodes])
 
-  // const { expanded, onExpand } = useAppStore((s) => ({
-  //   expanded: s.expanded,
-  //   onExpand: s.onExpand,
-  // }));
-
-  // const handleExpand = () => {
-  //   setIsExpanded(!isExpanded);
-  //   onExpand();
-  // }
+  const handleExpand = () => {
+    setIsExpanded(!isExpanded);
+    nodes.forEach(node => node.data.modify({ expanded: !isExpanded }))
+  }
 
   return (
     <TooltipProvider delayDuration={0}>
@@ -122,11 +120,11 @@ const ControlPanelComponent = () => {
 
         <TooltipButton content="Show/hide controls">
           <Button
-            // onClick={() => handleExpand()}
+            onClick={() => handleExpand()}
             className="relative rounded-3xl shadow-lg hover:bg-accent hover:rounded-lg transition-all duration-200 h-12 w-12"
             variant="outline"
           >
-            {isExpanded ? <ChevronDownIcon />  : <ChevronUpIcon />}
+            {isExpanded ? <ChevronUpIcon />  : <ChevronDownIcon />}
           </Button>
         </TooltipButton>
         <Dialog open={isClearDialogOpen} onOpenChange={setIsClearDialogOpen}>
