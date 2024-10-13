@@ -1,11 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Node, NodeProps, useUpdateNodeInternals } from "@xyflow/react";
-import { useShallow } from "zustand/react/shallow";
 
 import { NodeDataDisplay } from "./node-data-display";
 import { NodeInputs } from "./node-inputs";
 import { NodeOutputs } from "./node-outputs";
-import { NodeSwappedParams, NodeParams } from "./node-params";
+import { NodeParams } from "./node-params";
 
 import {
   Accordion,
@@ -14,16 +13,15 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import { AppNode, NodeFields } from "@/types";
+import { AppNode, NodeOrderedFields } from "@/types";
 
 const SdNodeComponent = ({ id, data, selected }: NodeProps<AppNode>) => {
-  const [enabledParams, setEnabledParams] = useState<NodeFields>({});
-  const [swappedParams, setSwappedParams] = useState<any[]>([]);
-  
-  const updateNodeInternals = useUpdateNodeInternals();
+  const [enabledParams, setEnabledParams] = useState<NodeOrderedFields>([]);
 
   useEffect(() => {
-    const enabledParamsList = Object.entries(data.fields!).filter(([k, param]) => {
+    if (!data.fields || !data.order) return;
+
+    const enabledParamsList: NodeOrderedFields = Object.entries(data.fields).filter(([k, param]) => {
       if (!param.dependent) return true;
 
       const dependentOn = Object.entries({...data.fn.inputs.required, ...data.fn.inputs.optional}).find(
@@ -33,10 +31,10 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<AppNode>) => {
       return data.fields?.[dependentOn]  == param.dependent.when
     });
 
-    setEnabledParams(enabledParamsList.reduce((acc, [k, v]) => {
-      acc[k] = v;
-      return acc;
-    }, {} as NodeFields));
+    setEnabledParams(data.order
+      .map((key: PropertyKey) => enabledParamsList.find(([enabledKey]) => enabledKey === key))
+      .filter(Boolean) as NodeOrderedFields
+    )
   }, [data.fields])
 
   const handleAccordionChange = () => {
@@ -47,8 +45,7 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<AppNode>) => {
     <>
       <div className="flex items-stretch justify-stretch w-full space-x-6">
         <div className="flex-1">
-          <NodeInputs data={data.fn.inputs.required} selected={selected ?? false} />
-          {/* <NodeSwappedParams data={swappedParams} selected={selected} swapItem={swapItem} /> */}
+          <NodeInputs data={data.fn.inputs.required} selected={selected ?? false} swap={data.swap} />
         </div>
         <NodeOutputs data={data.fn.outputs} selected={selected ?? false} />
       </div>
@@ -61,7 +58,7 @@ const SdNodeComponent = ({ id, data, selected }: NodeProps<AppNode>) => {
           <AccordionItem value={id}>
             <AccordionTrigger />
             <AccordionContent className="m-0.5">
-              <NodeParams data={enabledParams} selected={selected ?? false} update={data.update} />
+              <NodeParams data={enabledParams} selected={selected ?? false} swap={data.swap} update={data.update} />
             </AccordionContent>
           </AccordionItem>
         </Accordion>

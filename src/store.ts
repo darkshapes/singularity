@@ -26,19 +26,52 @@ export const useAppStore = create<AppState>()(
       };
     };
 
-    const getNodeUpdater = (id: string, path: 'modifiable' | 'fields') => (v: any) =>
+    const getNodeSwapper = (id: string) => (name: string) =>
       set((state) => {
         const node = state.nodes.find(n => n.id === id);
-        if (node) {
-          if (node.data[path]) {
-            deepMerge(node.data[path], v);
+
+        if (!node) return;
+
+        const { optional, required } = node.data.fn.inputs;
+        const { order, stored, fields } = node.data;
+
+        if (!order || !stored || !fields) return;
+
+        const index = order.findIndex(n => n === name)
+        const item = optional[name] || required[name];
+        if (item) {
+          if (optional[name]) {
+            delete optional[name];
+            stored[index] = fields[name].value;
+            console.log(stored);
+            delete fields[name];
+            required[name] = { ...item, swapped: true };
           } else {
-            node.data[path] = v;
+            delete required[name];
+            optional[name] = { ...item, swapped: false };
+            fields[name] = { ...item, value: stored[index] };
           }
         }
       });
 
-    const getNodeMethods = (node: AppNode) => ({ modify: getNodeUpdater(node.id, "modifiable"), update: getNodeUpdater(node.id, "fields") })
+    const getNodeUpdater = (id: string, path: 'modifiable' | 'fields') => (v: any) =>
+      set((state) => {
+        const node = state.nodes.find(n => n.id === id);
+
+        if (!node) return;
+
+        if (node.data[path]) {
+          deepMerge(node.data[path], v);
+        } else {
+          node.data[path] = v;
+        }
+      });
+
+    const getNodeMethods = (node: AppNode) => ({
+      swap: getNodeSwapper(node.id),
+      modify: getNodeUpdater(node.id, "modifiable"), 
+      update: getNodeUpdater(node.id, "fields") 
+    })
     
     return {
       library: {},
@@ -48,7 +81,7 @@ export const useAppStore = create<AppState>()(
       edges: [],
 
       theme: "dark",
-      toggleTheme: () => { set(state => state.theme = state.theme === "dark" ? "light" : "dark") },
+      toggleTheme: () => { set(state => { state.theme = state.theme === "dark" ? "light" : "dark" }) },
 
       edgeType: defaultEdge,
       nodeInProgress: undefined,
@@ -86,13 +119,18 @@ export const useAppStore = create<AppState>()(
         const { nodes } = get();
 
         id ??= uuid();
-        const fields = fn.inputs.optional;
+
+        const fields = Object.keys(fn.inputs.optional).length > 0 ? fn.inputs.optional : undefined;
+        const order = fields ? Object.keys(fields) : undefined;
+        const stored = order?.map(p => fields?.[p].default);
+        const emptyNodeMethods = { swap: () => {}, modify: () => {}, update: () => {} };
+
         const zIndex = Math.max(...nodes.map(n => n.zIndex ?? 0), 0) + 1;
         
         const item: AppNode = {
           id,
           type: name,
-          data: { fn, fields, modify: () => {}, update: () => {} },
+          data: { fn, order, stored, fields, ...emptyNodeMethods },
           dragHandle: ".drag-handle",
           position,
           zIndex,

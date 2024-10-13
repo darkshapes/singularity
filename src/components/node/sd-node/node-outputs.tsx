@@ -1,10 +1,10 @@
 import React from "react";
 import { Position } from "@xyflow/react";
-import { WidgetOutputs } from "@/types";
+import { NodeFunctionOutputs } from "@/types";
 import { NodeHandle } from "./node-handle";
 
 interface NodeOutputsProps {
-  data: WidgetOutputs;
+  data: NodeFunctionOutputs;
   selected: boolean;
 }
 

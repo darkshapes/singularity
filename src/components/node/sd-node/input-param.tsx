@@ -27,22 +27,18 @@ interface InputParamsProps {
 
 const InputParamsComponent = ({ name, input, update }: InputParamsProps) => {
   const setValue = (v: any) => update({ [name]: { value: v } }); // 100 ms debounce here?
-
   const onChange = useMemo(() => setValue, [name]);
-
-  const handleChange = (e: any) => onChange(e.target.value)
-
   setValue(input.value ?? input.default);
 
   if (input.type === "OneOf") {
-    const i = input as InputDataLiteral;
+    const i = input as InputDataLiteral & FieldData;
 
     if (input.fname === "ckpt_name" || input.fname === "lora_name") {
       return <ModelDrawer 
         value={i.value}
         models={i.choices}
-        type={name} 
-        onChange={handleChange} 
+        type={name}
+        onChange={(e: any) => onChange(e.target.value)} 
       />;
     }
 
@@ -57,7 +53,7 @@ const InputParamsComponent = ({ name, input, update }: InputParamsProps) => {
   }
 
   if (input.type === "Bool") {
-    const i = input as InputDataGeneric<boolean>;
+    const i = input as InputDataGeneric<boolean> & FieldData;
 
     return (
       <Checkbox
@@ -71,7 +67,7 @@ const InputParamsComponent = ({ name, input, update }: InputParamsProps) => {
     const usi = input as InputDataNumerical | InputDataSlider;
 
     if (usi.display === "numerical") {
-      const i = input as InputDataNumerical;
+      const i = input as InputDataNumerical & FieldData;
 
       return ( 
         <SliderInput // TODO: numerical input
@@ -85,7 +81,7 @@ const InputParamsComponent = ({ name, input, update }: InputParamsProps) => {
         />
       );
     } else if (usi.display === "slider") {
-      const i = input as InputDataSlider
+      const i = input as InputDataSlider & FieldData;
 
       return (
         <SliderInput
@@ -101,14 +97,14 @@ const InputParamsComponent = ({ name, input, update }: InputParamsProps) => {
   }
 
   if (input.type === "Str") {
-    const i = input as InputDataStr;
+    const i = input as InputDataStr & FieldData;
 
     return (
       <Textarea
         style={{ width: "100%" }}
         multiline={i.constraints?.multiline}
         defaultValue={i.value}
-        onBlur={handleChange}
+        onBlur={(e: any) => onChange(e.target.value)}
         onKeyDown={(e) => e.stopPropagation()}
       />
     );

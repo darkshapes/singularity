@@ -1,24 +1,27 @@
 import React from "react";
 import { Position } from "@xyflow/react";
-import { WidgetInputNecessity } from "@/types";
+import { NodeFunctionInputNecessity, NodeSwap } from "@/types";
 import { NodeHandle } from "./node-handle";
 
 interface NodeInputsProps {
-  data: WidgetInputNecessity;
+  data: NodeFunctionInputNecessity;
   selected: boolean;
+  swap: NodeSwap;
 }
 
-const NodeInputsComponent = ({ data, selected }: NodeInputsProps) => {
+const NodeInputsComponent = ({ data, selected, swap }: NodeInputsProps) => {
   return (
-    Object.entries(data).map(([ name, { type } ], i) => (
+    Object.entries(data).map(([ name, input ], i) => (
       <NodeHandle
         key={i}
-        slotType={type}
+        slotType={input.type}
         label={name}
         type="target"
         position={Position.Left}
         required
         selected={selected}
+        clickable={input.swapped ?? false}
+        onClick={() => input.swapped ? swap(name) : {}}
       />
     ))
   );

@@ -3,6 +3,7 @@ import { FieldData, NodeId, PropertyKey } from "@/types";
 import { NodeFunction } from "@/types/function";
 
 export type NodeModify = (m: NodeModifiableData) => void;
+export type NodeSwap = (p: string) => void;
 export type NodeUpdate = (v: any) => void;
 
 /**
@@ -17,18 +18,27 @@ export type NodeModifiableData = {
 }
 
 export type NodeFields = Record<PropertyKey, FieldData>;
+export type NodeOrderedFields = [PropertyKey, FieldData][];
 
 /**
  * Node object
  * @property fn - Node function object
+ * @property order - Optional input (parameter) order
+ * @property stored - Stored parameter values (for swapping)
  * @property fields - Property fields
- * @property modify - Modify properties
+ * @property modifiable - Modifiable properties
+ * @method modify - Modify properties
+ * @method swap - Swap a parameter
+ * @method update - Update a field
  */
 export type NodeData = {
   fn: NodeFunction;
+  order?: PropertyKey[];
+  stored?: any[];
   fields?: NodeFields;
   modifiable?: NodeModifiableData;
   modify: NodeModify;
+  swap: NodeSwap;
   update: NodeUpdate;
 }
 
