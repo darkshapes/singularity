@@ -56,6 +56,8 @@ export const FlowEditor = () => {
     onEdgesChange,
     onConnect,
 
+    onDrop,
+
     theme,
   } = useAppStore(useShallow((s) => ({ 
     initialize: s.initialize,
@@ -68,6 +70,8 @@ export const FlowEditor = () => {
     onNodesChange: s.onNodesChange,
     onEdgesChange: s.onEdgesChange,
     onConnect: s.onConnect,
+
+    onDrop: s.onDrop,
 
     theme: s.theme,
   })));
@@ -107,56 +111,10 @@ export const FlowEditor = () => {
     }), {} as Record<string, React.FC<NodeProps<AppNode>>>), 
   [library])
 
-  // const onEdgeUpdateStart = useCallback(() => {
-  //   edgeUpdateSuccessful.current = false;
-  // }, []);
-
-  // const onEdgeUpdate = useCallback(
-  //   (oldEdge: Edge, newConnection: Connection) => {
-  //     // 👇 make adding edges undoable
-  //     takeSnapshot();
-  //     edgeUpdateSuccessful.current = true;
-  //     onEdgesChange([{ id: oldEdge.id, type: "remove" }]);
-  //     onConnect(newConnection);
-  //   },
-  //   [onEdgesChange, onConnect, takeSnapshot]
-  // );
-
-  // const onEdgeUpdateEnd = useCallback(
-  //   (_: any, edge: Edge) => {
-  //     if (!edgeUpdateSuccessful.current) {
-  //       onEdgesChange([{ id: edge.id, type: "remove" }]);
-  //     }
-  //     edgeUpdateSuccessful.current = true;
-  //   },
-  //   [onEdgesChange]
-  // );
-
-  // const onDragOver = useCallback((event: any) => {
-  //   event.preventDefault();
-  //   event.dataTransfer.dropEffect = "move";
-  // }, []);
-
-  // const onDrop = useCallback(
-  //   (event: any) => {
-  //     event.preventDefault();
-  //     const widget = JSON.parse(
-  //       event.dataTransfer.getData("application/reactflow")
-  //     );
-  //     if (!widget) return;
-  //     const position = getPostion(
-  //       event.clientX,
-  //       event.clientY,
-  //       reactFlowRef,
-  //       instance
-  //     );
-  //     const name = Object.keys(widgets).find(key => widgets[key] === widget) ?? ""; // i hate this so much AUUUGHGNANSDFHAEJHN <- me screaming
-  //     // 👇 make adding nodes undoable
-  //     takeSnapshot();
-  //     onAddNode({ widget, name, position });
-  //   },
-  //   [instance, onAddNode, takeSnapshot]
-  // );
+  const onDragOver = useCallback((event: any) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "move";
+  }, []);
 
   // const onNodeDrag: NodeDragHandler = useCallback(
   //   (_, node, nodes) => {
@@ -236,8 +194,9 @@ export const FlowEditor = () => {
       // onEdgeUpdateStart={onEdgeUpdateStart}
       // onEdgeUpdateEnd={onEdgeUpdateEnd}
       // onNodeDragStart={onNodeDrag}
-      // onDrop={onDrop}
-      // onDragOver={onDragOver}
+
+      onDrop={onDrop}
+      onDragOver={(e) => e.preventDefault()}
 
       colorMode={theme}
 

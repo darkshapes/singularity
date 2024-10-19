@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { startCase } from "lodash-es";
 import { motion } from "framer-motion";
 import Fuse from "fuse.js";
 
 import { useAppStore } from "@/store";
-import { NodeFunction } from "@/types";
+import { NodeConstructor, NodeFunction } from "@/types";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { ContextMenuSeparator } from "@/components/ui/context-menu";
 
@@ -15,15 +16,35 @@ export interface NodePickerGroupItems {
   subcategories: NodePickerGroupCategory;
 };
 
+export type NodePickerButtonCreator = ([name, fn]: [string, NodeFunction]) => JSX.Element;
+
 export type NodePickerGroupCategory = Record<string, NodePickerGroupItems>;
 
-const NodePickerComponent = ({ setActiveItem, setShowPath }: any) => {
-  const { library } = useAppStore((s) => ({ library: s.library }));
+const NodePickerComponent = ({ setDragging, setActiveItem, setShowPath }: any) => {
+  const { library, addNodes, constructNode, setOnDrop, screenToFlowPosition } = useAppStore((s) => ({
+    library: s.library,
+    addNodes: s.addNodes, 
+    constructNode: s.constructNode,
+    setOnDrop: s.setOnDrop,
+    screenToFlowPosition: s.screenToFlowPosition
+  }));
 
   const [category, setCategory] = useState<any>({});
   const [keywords, setKeywords] = useState<string>("");
   const [functionList, setFunctionList] = useState<Record<string, NodeFunction>>({});
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
+
+  const createButton = ([name, fn]: [string, NodeFunction]) => {
+    const cb = (e: React.MouseEvent | React.DragEvent) => addNodes(constructNode({ name, fn, position: screenToFlowPosition({ x: e.clientX, y: e.clientY }) }));
+
+    return <NodeFunctionPickerButton
+      key={name}
+      title={startCase(name)}
+      onClick={cb}
+      onDragStart={() => setOnDrop(cb)}
+      toggleActiveItem={(b: boolean) => setActiveItem(b ? { name, fn } : null)}
+    />
+  }
 
   useEffect(() => {
     const byCategory: NodePickerGroupCategory = {};
@@ -121,20 +142,13 @@ const NodePickerComponent = ({ setActiveItem, setShowPath }: any) => {
                   key={cat}
                   category={cat}
                   items={items}
-                  setActiveItem={setActiveItem}
+                  createButton={createButton}
                   expandedItems={expandedItems}
                   setExpandedItems={setExpandedItems}
                 />
               </motion.div>
             )) :
-            Object.entries(functionList).map(([name, fn]: [string, NodeFunction]) => (
-              <NodeFunctionPickerButton
-                key={name}
-                fn={fn}
-                name={name}
-                setActiveItem={setActiveItem}
-              />
-            ))
+            Object.entries(functionList).map(createButton)
         }
       </div>
     </div>

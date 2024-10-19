@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { XYPosition } from "@xyflow/react";
 import { NodeFunction } from "@/types";
 import {
   ContextMenu,
@@ -46,7 +47,7 @@ export const NodeContextMenu = ({
 
   return (
   <>
-    <ContextMenu>
+    <ContextMenu modal={false}>
       <ContextMenuTrigger>{children}</ContextMenuTrigger>
       <ContextMenuContent className="overflow-auto">
         <NodePicker setActiveItem={setActiveItem} setShowPath={setShowPath} />

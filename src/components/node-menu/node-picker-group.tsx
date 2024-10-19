@@ -1,7 +1,7 @@
 import React from "react";
+import { startCase } from "lodash-es";
 
-import { NodeFunction } from "@/types";
-import { NodePickerGroupItems } from "./node-picker";
+import { NodePickerButtonCreator, NodePickerGroupItems } from "./node-picker";
 import { NodeFunctionPickerButton } from "./node-function-picker-button";
 import {
   ContextMenuSeparator,
@@ -13,7 +13,7 @@ import {
 interface NodePickerGroupProps {
   category: string;
   items: NodePickerGroupItems;
-  setActiveItem: (nodeItem: {name: string; fn: NodeFunction; } | null) => void;
+  createButton: NodePickerButtonCreator;
   expandedItems: string[];
   setExpandedItems: (items: string[]) => void;
 }
@@ -21,7 +21,7 @@ interface NodePickerGroupProps {
 const NodePickerGroupComponent = ({
   category,
   items,
-  setActiveItem,
+  createButton,
   expandedItems,
   setExpandedItems,
 }: NodePickerGroupProps) => {
@@ -38,20 +38,13 @@ const NodePickerGroupComponent = ({
               key={subCat}
               category={subCat}
               items={subItems}
-              setActiveItem={setActiveItem}
+              createButton={createButton}
               expandedItems={expandedItems}
               setExpandedItems={setExpandedItems}
             />
           ))}
           {Object.values(items.subcategories).length > 0 && Object.values(items.functions).length > 0 && <ContextMenuSeparator />}
-          {Object.entries(items.functions).map(([name, e]) => (
-            <NodeFunctionPickerButton 
-              key={name}
-              name={name}
-              fn={e}
-              setActiveItem={setActiveItem}
-            />
-          ))}
+          {Object.entries(items.functions).map(createButton)}
         </div>
       </ContextMenuSubContent>
     </ContextMenuSub>

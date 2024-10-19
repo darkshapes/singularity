@@ -83,6 +83,10 @@
   }
 }
 
+.react-flow {
+  z-index: 100;
+}
+
 .dark .react-flow__background {
   background: black;
   color: black;

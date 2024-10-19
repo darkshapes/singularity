@@ -63,6 +63,9 @@ export type AppState = {
   onSubmit: () => Promise<void>;
   onTaskUpdate: (update: any) => void;
 
+  onDrop: React.DragEventHandler<HTMLDivElement>;
+  setOnDrop: (cb: React.DragEventHandler<HTMLDivElement>) => void;
+
   onSaveLocalWorkFlow: (title?: string) => void;
   onLoadLocalWorkflow: (id: string) => void;
   onUpdateLocalWorkFlowGraph: (id: string) => void;

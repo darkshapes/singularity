@@ -90,15 +90,15 @@ export const useAppStore = create<AppState>()(
 
       initialize: async (instance: AppInstance) => {
         await readyServer(); // Wait for mock
-
-        set({ instance }, false, "initialize");
-  
         const library = await getNodeLibrary();
-        set({ library }, false, "initialize");
+
+        set({ instance, library }, false, "initialize");
     
         // Initialize settings
         // const edgeType = edgeTypeList[parseInt(settings["Comfy.LinkRenderMode"])];
         // get().onEdgesType(edgeType, false);
+
+        set({ onDrop: () => console.log("ondrop") }, false, "initialize")
       },
 
       hydrate: () => {
@@ -247,6 +247,9 @@ export const useAppStore = create<AppState>()(
           "onConnect"
         );
       },
+
+      screenToFlowPosition: createInstanceMethod('screenToFlowPosition'),
+      flowToScreenPosition: createInstanceMethod('flowToScreenPosition'),
       
       /******************************************************
        *********************** Base *************************
@@ -310,11 +313,6 @@ export const useAppStore = create<AppState>()(
         const res = await sendPrompt(state.toNetworkX());
         if (res.task_id) {
           subscribeToTask(res.task_id, state.onTaskUpdate);
-          // set(
-          //   { counter: state.counter + 1 },
-          //   false,
-          //   "onSubmit"
-          // );
         } else {
           state.onError(res.error ?? "Server didn't report an error. Please check server logs.");
         }
@@ -340,6 +338,14 @@ export const useAppStore = create<AppState>()(
       /******************************************************
        ***************** Workflow && Persist *******************
        ******************************************************/
+
+      setOnDrop: (cb) => {
+        set(
+          (st) => { st.onDrop = cb },
+          false,
+          "setOnDrop"
+        )
+      },
   
       onSaveLocalWorkFlow: (title) => {
         // saveLocalWorkflow(toPersisted(get()), title);

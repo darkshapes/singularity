@@ -23,9 +23,9 @@ export type NodeOrderedFields = [PropertyKey, FieldData][];
 /**
  * Node object
  * @property fn - Node function object
- * @property order - Optional input (parameter) order
- * @property stored - Stored parameter values (for swapping)
- * @property fields - Property fields
+ * @property order - Optional input order
+ * @property stored - Stores last widget value while the parameter is swapped
+ * @property fields - Property fields (widget values)
  * @property modifiable - Modifiable properties
  * @method modify - Modify properties
  * @method swap - Swap a parameter
