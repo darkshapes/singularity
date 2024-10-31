@@ -12,6 +12,8 @@
 
 <hr>
 
-![An screenshot of a sophisticated node graph workflow and its result, a shoulder-height portrait of a pale and stoic android woman with far-eastern features depicted in a cyberpunk style. Her bob haircut and synthetic body are black, while the background and light is blue, all accented by orange details such as her orange eye shadow and eyes. A futuristic user interface is projected over half of the composition. ](https://github.com/user-attachments/assets/6e79bd1d-7dfa-4931-bcb9-4386b6d0128c)
+![A screenshot of a sophisticated node graph workflow and its result, a shoulder-height portrait of a pale and stoic android woman with far-eastern features depicted in a cyberpunk style. Her bob haircut and synthetic body are black, while the background and light is blue, all accented by orange details such as her orange eye shadow and eyes. A futuristic user interface is projected over half of the composition. ](https://github.com/user-attachments/assets/6e79bd1d-7dfa-4931-bcb9-4386b6d0128c)
+<hr>
 
+[ [Discord](https://discord.gg/RYaJw9mPPe) | [HuggingFace](https://huggingface.co/darkshapes) | [Maxtretikov](https://github.com/Maxtretikov/) | [EXDYSA](https://github.com/exdysa/) ]
 </div>
