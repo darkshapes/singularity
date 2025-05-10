@@ -11,6 +11,7 @@ import type {
   NodeId,
   NodeInProgress,
   PropertyKey,
+  TaskUpdate,
 } from "@/types";
 
 export type AppInstance = ReactFlowInstance<AppNode>;
@@ -50,7 +51,7 @@ export type AppState = {
   onEdgesChange: OnEdgesChange;
   onConnect: OnConnect;
 
-  onError: (error: string) => Promise<void>;
+  onError: (error?: string) => Promise<void>;
   onRefresh: () => Promise<void>;
 
   onNewClientId: (id: string) => void;
@@ -61,7 +62,7 @@ export type AppState = {
   onEdgesType: (type: EdgeType, send?: boolean) => Promise<void>;
 
   onSubmit: () => Promise<void>;
-  onTaskUpdate: (update: any) => void;
+  onTaskUpdate: (update: TaskUpdate) => void;
 
   onDrop: React.DragEventHandler<HTMLDivElement>;
   setOnDrop: (cb: React.DragEventHandler<HTMLDivElement>) => void;

@@ -13,6 +13,8 @@ const NodeDataDisplayComponent = ({ id }: NodeDataDisplayProps) => {
   const { results } = useAppStore(useShallow((s) => ({ results: s.results })));
   const data = results[id];
 
+  console.log(id, results, data);
+
   if (isBase64Image(data)) {
     return <img src={data} height={500} width={500} />
   }

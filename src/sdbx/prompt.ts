@@ -1,14 +1,10 @@
 import config from "@/config";
 
-import type { Graph } from "@/types";
-
-type PromptResult =
-  | { error: string; task_id?: never }
-  | { task_id: string; error?: never };
+import type { Graph, TaskUpdate } from "@/types";
 
 export const sendPrompt = async (
   prompt: Graph
-): Promise<PromptResult> => {
+): Promise<TaskUpdate> => {
   // console.log(prompt)
   // console.log(JSON.stringify(prompt))
   const response = await fetch(config.getBackendUrl("/prompt"), {
@@ -24,18 +20,14 @@ export const sendPrompt = async (
   return await response.json();
 };
 
-type TaskSubscriptionResult = { task_id: string; }
-  | { results: string; completed?: true; error?: never }
-  | { error: string; results?: never; completed?: never };
-
-export const subscribeToTask = (taskId: string, callback: (data: any) => void): WebSocket => {
-  const ws = new WebSocket(`ws://${config.host}/ws/${taskId}`);
+export const subscribeToTask = (taskId: string, callback: (data: TaskUpdate) => void): WebSocket => {
+  const ws = new WebSocket(`ws://${config.host}/ws/task/${taskId}`);
 
   console.log("subscribed to task")
   console.log(taskId);
 
   ws.onmessage = (event: MessageEvent) => {
-      const data: TaskSubscriptionResult = JSON.parse(event.data);
+      const data: TaskUpdate = JSON.parse(event.data);
       callback(data);  // Invoke the callback with the received data
   };
 

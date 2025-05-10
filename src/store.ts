@@ -13,6 +13,8 @@ import {
 import { AppNode, AppEdge, edgeTypeList, defaultEdge } from "@/types";
 import { AppState, AppInstance, AppInstanceMethodKeys, deepMerge } from "@/types/store";
 
+const persistanceOmit = ["promptError"];
+
 export const useAppStore = create<AppState>()(
   immer(persist(devtools((set, get) => {
     const createInstanceMethod = <T extends AppInstanceMethodKeys>(methodName: T) => {
@@ -256,7 +258,7 @@ export const useAppStore = create<AppState>()(
        ******************************************************/
       
       onError: async (error) => {
-        set({ promptError: error }, false, "onSubmit");
+        set({ promptError: error ?? "No error reported to client. Please check server logs." }, false, "onSubmit");
       },
       
       onRefresh: async () => {
@@ -311,10 +313,10 @@ export const useAppStore = create<AppState>()(
       onSubmit: async () => {
         const state = get();
         const res = await sendPrompt(state.toNetworkX());
-        if (res.task_id) {
-          subscribeToTask(res.task_id, state.onTaskUpdate);
+        if (res.id) {
+          subscribeToTask(res.id, state.onTaskUpdate);
         } else {
-          state.onError(res.error ?? "Server didn't report an error. Please check server logs.");
+          state.onError(res.error);
         }
       },
   
@@ -327,11 +329,11 @@ export const useAppStore = create<AppState>()(
             "onTaskUpdate"
           )
   
-          if (data.completion) {
-            console.log(`${data.task_id} completed`)
+          if (data.completed) {
+            console.log(`${data.id} completed`)
           }
         } else {
-          onError(data.error ?? "Server didn't report an error. Please check server logs.")
+          onError(data.error)
         }
       },
   
@@ -446,6 +448,10 @@ export const useAppStore = create<AppState>()(
     }}),
     {
       name: "singularity-graph",
+      partialize: (state) =>
+        Object.fromEntries(
+          Object.entries(state).filter(([key]) => !persistanceOmit.includes(key)),
+        ),
       onRehydrateStorage: (state) => { return (state, error) => state?.hydrate() }
     }
   ))
