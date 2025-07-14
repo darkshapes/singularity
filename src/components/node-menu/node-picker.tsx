@@ -1,41 +1,41 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { startCase } from "lodash-es";
-import { motion } from "framer-motion";
-import Fuse from "fuse.js";
+import React, { useCallback, useEffect, useState } from "react"
+import { startCase } from "lodash-es"
+import { motion } from "framer-motion"
+import Fuse from "fuse.js"
 
-import { useAppStore } from "@/store";
-import { NodeConstructor, NodeFunction } from "@/types";
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { ContextMenuSeparator } from "@/components/ui/context-menu";
+import { useAppStore } from "@/store"
+import { NodeConstructor, NodeFunction } from "@/types"
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons"
+import { ContextMenuSeparator } from "@/components/ui/context-menu"
 
-import { NodePickerGroup } from "./node-picker-group";
-import { NodeFunctionPickerButton } from "./node-function-picker-button";
+import { NodePickerGroup } from "./node-picker-group"
+import { NodeFunctionPickerButton } from "./node-function-picker-button"
 
 export interface NodePickerGroupItems {
-  functions: Record<string, NodeFunction>;
-  subcategories: NodePickerGroupCategory;
+  functions: Record<string, NodeFunction>
+  subcategories: NodePickerGroupCategory
 };
 
-export type NodePickerButtonCreator = ([name, fn]: [string, NodeFunction]) => JSX.Element;
+export type NodePickerButtonCreator = ([name, fn]: [string, NodeFunction]) => JSX.Element
 
-export type NodePickerGroupCategory = Record<string, NodePickerGroupItems>;
+export type NodePickerGroupCategory = Record<string, NodePickerGroupItems>
 
 const NodePickerComponent = ({ setDragging, setActiveItem, setShowPath }: any) => {
   const { library, addNodes, constructNode, setOnDrop, screenToFlowPosition } = useAppStore((s) => ({
     library: s.library,
-    addNodes: s.addNodes, 
+    addNodes: s.addNodes,
     constructNode: s.constructNode,
     setOnDrop: s.setOnDrop,
     screenToFlowPosition: s.screenToFlowPosition
-  }));
+  }))
 
-  const [category, setCategory] = useState<any>({});
-  const [keywords, setKeywords] = useState<string>("");
-  const [functionList, setFunctionList] = useState<Record<string, NodeFunction>>({});
-  const [expandedItems, setExpandedItems] = useState<string[]>([]);
+  const [category, setCategory] = useState<any>({})
+  const [keywords, setKeywords] = useState<string>("")
+  const [functionList, setFunctionList] = useState<Record<string, NodeFunction>>({})
+  const [expandedItems, setExpandedItems] = useState<string[]>([])
 
   const createButton = ([name, fn]: [string, NodeFunction]) => {
-    const cb = (e: React.MouseEvent | React.DragEvent) => addNodes(constructNode({ name, fn, position: screenToFlowPosition({ x: e.clientX, y: e.clientY }) }));
+    const cb = (e: React.MouseEvent | React.DragEvent) => addNodes(constructNode({ name, fn, position: screenToFlowPosition({ x: e.clientX, y: e.clientY }) }))
 
     return <NodeFunctionPickerButton
       key={name}
@@ -47,57 +47,57 @@ const NodePickerComponent = ({ setDragging, setActiveItem, setShowPath }: any) =
   }
 
   useEffect(() => {
-    const byCategory: NodePickerGroupCategory = {};
+    const byCategory: NodePickerGroupCategory = {}
 
-    setShowPath(keywords !== ""); // show path in node preview when searching
+    setShowPath(keywords !== "") // show path in node preview when searching
 
     const addFunctionToCategory = (categoryPath: string[], name: string, fn: NodeFunction) => {
-      let currentLevel = byCategory;
+      let currentLevel = byCategory
 
       categoryPath.forEach((category, index) => {
         if (!currentLevel[category]) {
-          currentLevel[category] = { functions: {}, subcategories: {} };
+          currentLevel[category] = { functions: {}, subcategories: {} }
         }
         if (index === categoryPath.length - 1) {
           currentLevel[category].functions[name] = fn
         }
-        currentLevel = currentLevel[category].subcategories;
-      });
-    };
+        currentLevel = currentLevel[category].subcategories
+      })
+    }
 
-    let matchedFunctions: Record<string, NodeFunction>;
+    let matchedFunctions: Record<string, NodeFunction>
 
     if (keywords) {
       const fuse = new Fuse(Object.entries(library), {
         keys: ["0"], // Search by function name (keys are the names of functions)
         threshold: 0.4, // Adjust to fine-tune fuzzy search sensitivity
-      });
+      })
 
       matchedFunctions = fuse
         .search(keywords)
         .reduce((acc: Record<string, NodeFunction>, result) => {
-          const [name, fn] = result.item;
-          acc[name] = fn;
-          return acc;
-        }, {});
+          const [name, fn] = result.item
+          acc[name] = fn
+          return acc
+        }, {})
     } else {
-      matchedFunctions = { ...library };
+      matchedFunctions = { ...library }
     }
 
     for (const [name, fn] of Object.entries(matchedFunctions)) {
-      const categoryPath = fn.path.split("/");
-      addFunctionToCategory(categoryPath, name, fn);
+      const categoryPath = fn.path.split("/")
+      addFunctionToCategory(categoryPath, name, fn)
     }
 
-    setFunctionList(matchedFunctions);
-    setCategory(byCategory);
-  }, [library, keywords]);
+    setFunctionList(matchedFunctions)
+    setCategory(byCategory)
+  }, [library, keywords])
 
   const handleKeywordsChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setKeywords(event.target.value);
+      setKeywords(event.target.value)
     }, []
-  );
+  )
 
   return (
     <div className="flex flex-col">
@@ -114,8 +114,8 @@ const NodePickerComponent = ({ setDragging, setActiveItem, setShowPath }: any) =
             autoFocus={true}
           />
           <div
-            className="absolute inset-y-0 left-0 pl-2  
-              flex items-center  
+            className="absolute inset-y-0 left-0 pl-2
+              flex items-center
               pointer-events-none"
           >
             <MagnifyingGlassIcon className="w-4 h-4 text-gray-400" />
@@ -152,7 +152,7 @@ const NodePickerComponent = ({ setDragging, setActiveItem, setShowPath }: any) =
         }
       </div>
     </div>
-  );
-};
+  )
+}
 
-export const NodePicker = React.memo(NodePickerComponent);
+export const NodePicker = React.memo(NodePickerComponent)
