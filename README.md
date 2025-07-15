@@ -6,14 +6,21 @@
 
 ##
 
-<div align="center"> 
-  
- ### [ [Windows](https://github.com/darkshapes/sdbx/wiki/Manual-Installation-%E2%80%90-Windows) | [MacOS](https://github.com/darkshapes/sdbx/wiki/Manual-Installation-%E2%80%90-MacOS) | [Linux](https://github.com/darkshapes/sdbx/wiki/Manual-Installation-%E2%80%90-Linux) ]
+<div align="center">
+
+ ### [ [Windows](https://github.com/darkshapes/sdbx/wiki/Develop) | [MacOS](https://github.com/darkshapes/sdbx/wiki/Develop) | [Linux](https://github.com/darkshapes/sdbx/wiki/Develop) ]
 
 <hr>
 
 ![A screenshot of a sophisticated node graph workflow and its result, a shoulder-height portrait of a pale and stoic android woman with far-eastern features depicted in a cyberpunk style. Her bob haircut and synthetic body are black, while the background and light is blue, all accented by orange details such as her orange eye shadow and eyes. A futuristic user interface is projected over half of the composition. ](https://github.com/user-attachments/assets/6e79bd1d-7dfa-4931-bcb9-4386b6d0128c)
-<hr>
+<hr></div><br>
 
-[ [Discord](https://discord.gg/RYaJw9mPPe) | [HuggingFace](https://huggingface.co/darkshapes) | [Maxtretikov](https://github.com/Maxtretikov/) | [EXDYSA](https://github.com/exdysa/) ]
-</div>
+<!-- [![Python application test status](https://github.com/darkshapes/singularity/actions/workflows/release.yml/badge.svg)](https://github.com/darkshapes/singularity/actions/workflows/release.yml) <br> -->
+![commits per month](https://img.shields.io/github/commit-activity/m/darkshapes/singularity?color=indigo)<br>
+![code size](https://img.shields.io/github/languages/code-size/darkshapes/singularity?color=navy)<br>
+[<img src="https://img.shields.io/discord/1266757128249675867?color=5865F2">](https://discord.gg/VVn9Ku74Dk)<br>
+[<img src="https://img.shields.io/badge/me-__?logo=kofi&logoColor=white&logoSize=auto&label=feed&labelColor=maroon&color=grey&link=https%3A%2F%2Fko-fi.com%2Fdarkshapes">](https://ko-fi.com/darkshapes)<br>
+<br>
+
+### [installation instructions link](https://github.com/darkshapes/sdbx/wiki/Develop)
+
